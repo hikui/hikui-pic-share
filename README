@@ -1,8 +1,0 @@
-Introduction
-------------
-This is my graduation project. The server end is written in python, with Django framework. And the client is an Android program.
-
-Dependence
-----------
-The server requires Django framework. Plus, I use Piston to build restful API.
-The Android client requires Android 2.3+.

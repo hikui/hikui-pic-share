@@ -1,0 +1,309 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A44E235614F7746600A73307 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44E235514F7746600A73307 /* UIKit.framework */; };
+		A44E235814F7746600A73307 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44E235714F7746600A73307 /* Foundation.framework */; };
+		A44E235A14F7746600A73307 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44E235914F7746600A73307 /* CoreGraphics.framework */; };
+		A44E236014F7746600A73307 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A44E235E14F7746600A73307 /* InfoPlist.strings */; };
+		A44E236214F7746600A73307 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A44E236114F7746600A73307 /* main.m */; };
+		A44E236614F7746600A73307 /* PicShareClient_iOSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A44E236514F7746600A73307 /* PicShareClient_iOSAppDelegate.m */; };
+		A44E236914F7746600A73307 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A44E236714F7746600A73307 /* MainWindow.xib */; };
+		A44E236C14F7746600A73307 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A44E236B14F7746600A73307 /* FirstViewController.m */; };
+		A44E236F14F7746600A73307 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A44E236E14F7746600A73307 /* SecondViewController.m */; };
+		A44E237214F7746600A73307 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A44E237014F7746600A73307 /* FirstView.xib */; };
+		A44E237514F7746600A73307 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A44E237314F7746600A73307 /* SecondView.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A44E235114F7746600A73307 /* PicShareClient_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PicShareClient_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A44E235514F7746600A73307 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A44E235714F7746600A73307 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A44E235914F7746600A73307 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A44E235D14F7746600A73307 /* PicShareClient_iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PicShareClient_iOS-Info.plist"; sourceTree = "<group>"; };
+		A44E235F14F7746600A73307 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A44E236114F7746600A73307 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A44E236314F7746600A73307 /* PicShareClient_iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PicShareClient_iOS-Prefix.pch"; sourceTree = "<group>"; };
+		A44E236414F7746600A73307 /* PicShareClient_iOSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PicShareClient_iOSAppDelegate.h; sourceTree = "<group>"; };
+		A44E236514F7746600A73307 /* PicShareClient_iOSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PicShareClient_iOSAppDelegate.m; sourceTree = "<group>"; };
+		A44E236814F7746600A73307 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		A44E236A14F7746600A73307 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		A44E236B14F7746600A73307 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		A44E236D14F7746600A73307 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		A44E236E14F7746600A73307 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		A44E237114F7746600A73307 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstView.xib; sourceTree = "<group>"; };
+		A44E237414F7746600A73307 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondView.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A44E234E14F7746600A73307 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A44E235614F7746600A73307 /* UIKit.framework in Frameworks */,
+				A44E235814F7746600A73307 /* Foundation.framework in Frameworks */,
+				A44E235A14F7746600A73307 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A44E234614F7746600A73307 = {
+			isa = PBXGroup;
+			children = (
+				A44E235B14F7746600A73307 /* PicShareClient_iOS */,
+				A44E235414F7746600A73307 /* Frameworks */,
+				A44E235214F7746600A73307 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A44E235214F7746600A73307 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A44E235114F7746600A73307 /* PicShareClient_iOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A44E235414F7746600A73307 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A44E235514F7746600A73307 /* UIKit.framework */,
+				A44E235714F7746600A73307 /* Foundation.framework */,
+				A44E235914F7746600A73307 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A44E235B14F7746600A73307 /* PicShareClient_iOS */ = {
+			isa = PBXGroup;
+			children = (
+				A44E236414F7746600A73307 /* PicShareClient_iOSAppDelegate.h */,
+				A44E236514F7746600A73307 /* PicShareClient_iOSAppDelegate.m */,
+				A44E236714F7746600A73307 /* MainWindow.xib */,
+				A44E236A14F7746600A73307 /* FirstViewController.h */,
+				A44E236B14F7746600A73307 /* FirstViewController.m */,
+				A44E236D14F7746600A73307 /* SecondViewController.h */,
+				A44E236E14F7746600A73307 /* SecondViewController.m */,
+				A44E237014F7746600A73307 /* FirstView.xib */,
+				A44E237314F7746600A73307 /* SecondView.xib */,
+				A44E235C14F7746600A73307 /* Supporting Files */,
+			);
+			path = PicShareClient_iOS;
+			sourceTree = "<group>";
+		};
+		A44E235C14F7746600A73307 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A44E235D14F7746600A73307 /* PicShareClient_iOS-Info.plist */,
+				A44E235E14F7746600A73307 /* InfoPlist.strings */,
+				A44E236114F7746600A73307 /* main.m */,
+				A44E236314F7746600A73307 /* PicShareClient_iOS-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A44E235014F7746600A73307 /* PicShareClient_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A44E237814F7746600A73307 /* Build configuration list for PBXNativeTarget "PicShareClient_iOS" */;
+			buildPhases = (
+				A44E234D14F7746600A73307 /* Sources */,
+				A44E234E14F7746600A73307 /* Frameworks */,
+				A44E234F14F7746600A73307 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PicShareClient_iOS;
+			productName = PicShareClient_iOS;
+			productReference = A44E235114F7746600A73307 /* PicShareClient_iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A44E234814F7746600A73307 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Shanghai University";
+			};
+			buildConfigurationList = A44E234B14F7746600A73307 /* Build configuration list for PBXProject "PicShareClient_iOS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A44E234614F7746600A73307;
+			productRefGroup = A44E235214F7746600A73307 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A44E235014F7746600A73307 /* PicShareClient_iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A44E234F14F7746600A73307 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A44E236014F7746600A73307 /* InfoPlist.strings in Resources */,
+				A44E236914F7746600A73307 /* MainWindow.xib in Resources */,
+				A44E237214F7746600A73307 /* FirstView.xib in Resources */,
+				A44E237514F7746600A73307 /* SecondView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A44E234D14F7746600A73307 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A44E236214F7746600A73307 /* main.m in Sources */,
+				A44E236614F7746600A73307 /* PicShareClient_iOSAppDelegate.m in Sources */,
+				A44E236C14F7746600A73307 /* FirstViewController.m in Sources */,
+				A44E236F14F7746600A73307 /* SecondViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A44E235E14F7746600A73307 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A44E235F14F7746600A73307 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A44E236714F7746600A73307 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A44E236814F7746600A73307 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		A44E237014F7746600A73307 /* FirstView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A44E237114F7746600A73307 /* en */,
+			);
+			name = FirstView.xib;
+			sourceTree = "<group>";
+		};
+		A44E237314F7746600A73307 /* SecondView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A44E237414F7746600A73307 /* en */,
+			);
+			name = SecondView.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A44E237614F7746600A73307 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A44E237714F7746600A73307 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A44E237914F7746600A73307 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PicShareClient_iOS/PicShareClient_iOS-Prefix.pch";
+				INFOPLIST_FILE = "PicShareClient_iOS/PicShareClient_iOS-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A44E237A14F7746600A73307 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PicShareClient_iOS/PicShareClient_iOS-Prefix.pch";
+				INFOPLIST_FILE = "PicShareClient_iOS/PicShareClient_iOS-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A44E234B14F7746600A73307 /* Build configuration list for PBXProject "PicShareClient_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A44E237614F7746600A73307 /* Debug */,
+				A44E237714F7746600A73307 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A44E237814F7746600A73307 /* Build configuration list for PBXNativeTarget "PicShareClient_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A44E237914F7746600A73307 /* Debug */,
+				A44E237A14F7746600A73307 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A44E234814F7746600A73307 /* Project object */;
+}
