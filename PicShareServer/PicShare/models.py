@@ -6,8 +6,8 @@ class Tag(models.Model):
     
 class Status(models.Model):
     timestamp = models.DateTimeField()
-    image = models.CharField(max_length=255)
-    text = models.CharField(max_length=140, null=True, blank=True)
+    image = models.CharField(max_length=255) #image url
+    text = models.CharField(max_length=140, null=True, blank=True) #description
     location = models.CharField(max_length=20, null=True, blank=True)
     STATUS_TYPE_CHOICES=(
         (1,u'原创'),
@@ -20,7 +20,7 @@ class Status(models.Model):
     user = models.ForeignKey(User)
     
 class UserAddition(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User,related_name='addition')
     head = models.CharField(max_length=255,null=True, blank=True)
     location = models.CharField(max_length=20, null=True, blank=True)
     introduction = models.TextField()
