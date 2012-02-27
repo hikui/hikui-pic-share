@@ -16,7 +16,7 @@ class Status(models.Model):
         (4,u'被举报'),
     )
     status_type = models.IntegerField(choices=STATUS_TYPE_CHOICES,default=1)
-    tag = models.ForeignKey(Tag, null=True,blank=True)
+    tag = models.ManyToManyField(Tag, null=True,blank=True)
     user = models.ForeignKey(User)
     
 class UserAddition(models.Model):
@@ -25,3 +25,8 @@ class UserAddition(models.Model):
     location = models.CharField(max_length=20, null=True, blank=True)
     introduction = models.TextField()
     
+class Comment(models.Model):
+    status = models.ForeignKey(Status)
+    by = models.ForeignKey(User, related_name='my_comments') #发表评论的用户
+    text = models.CharField(max_length=140, null=True, blank=True)
+    to = models.ForeignKey(User, related_name = 'comments_to_me') #有关用户
