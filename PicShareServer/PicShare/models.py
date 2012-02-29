@@ -6,7 +6,7 @@ class Tag(models.Model):
     
 class Status(models.Model):
     timestamp = models.DateTimeField()
-    image = models.CharField(max_length=255) #image url
+    image = models.CharField(max_length=256) #image url
     text = models.CharField(max_length=140, null=True, blank=True) #description
     location = models.CharField(max_length=20, null=True, blank=True)
     STATUS_TYPE_CHOICES=(
@@ -21,6 +21,7 @@ class Status(models.Model):
     
 class UserAddition(models.Model):
     user = models.OneToOneField(User,related_name='addition')
+    nick = models.CharField(max_length=50)
     head = models.CharField(max_length=255,null=True, blank=True)
     location = models.CharField(max_length=20, null=True, blank=True)
     introduction = models.TextField()

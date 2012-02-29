@@ -17,7 +17,19 @@
 {
     // Override point for customization after application launch.
     // Add the tab bar controller's current view as a subview of the window
-    self.window.rootViewController = self.tabBarController;
+    _tabBarController = [[CustomTabBarController alloc]init];
+    vc1 = [[ViewController1 alloc]init];
+    vc2 = [[ViewController2 alloc]init];
+    vc3 = [[ViewController3 alloc]init];
+    vc4 = [[ViewController4 alloc]init];
+    UIViewController *placehoder = [[UIViewController alloc]init];
+    [vc1.tabBarItem setTitle:@"view1"];
+    [vc2.tabBarItem setTitle:@"view2"];
+    [vc3.tabBarItem setTitle:@"view3"];
+    [vc4.tabBarItem setTitle:@"view4"];
+    [placehoder setTitle:@""];
+    [_tabBarController setViewControllers:[NSArray arrayWithObjects:vc1,vc2,placehoder,vc3,vc4, nil]];
+    self.window.rootViewController = _tabBarController;
     [self.window makeKeyAndVisible];
     return YES;
 }

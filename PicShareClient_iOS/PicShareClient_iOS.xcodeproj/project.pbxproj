@@ -14,10 +14,20 @@
 		A44E236214F7746600A73307 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A44E236114F7746600A73307 /* main.m */; };
 		A44E236614F7746600A73307 /* PicShareClient_iOSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A44E236514F7746600A73307 /* PicShareClient_iOSAppDelegate.m */; };
 		A44E236914F7746600A73307 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A44E236714F7746600A73307 /* MainWindow.xib */; };
-		A44E236C14F7746600A73307 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A44E236B14F7746600A73307 /* FirstViewController.m */; };
-		A44E236F14F7746600A73307 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A44E236E14F7746600A73307 /* SecondViewController.m */; };
-		A44E237214F7746600A73307 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A44E237014F7746600A73307 /* FirstView.xib */; };
-		A44E237514F7746600A73307 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A44E237314F7746600A73307 /* SecondView.xib */; };
+		A4BAB7D914FDE67500E51402 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7D614FDE67500E51402 /* arrow.png */; };
+		A4BAB7DA14FDE67500E51402 /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BAB7D814FDE67500E51402 /* PullRefreshTableViewController.m */; };
+		A4BAB7E414FDE7B800E51402 /* capture-button.png in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7E214FDE7B800E51402 /* capture-button.png */; };
+		A4BAB7E514FDE7B800E51402 /* capture-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7E314FDE7B800E51402 /* capture-button@2x.png */; };
+		A4BAB7E814FDE7E500E51402 /* CustomTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BAB7E714FDE7E500E51402 /* CustomTabBarController.m */; };
+		A4BAB7EF14FDEB9700E51402 /* ViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BAB7ED14FDEB9700E51402 /* ViewController1.m */; };
+		A4BAB7F014FDEB9700E51402 /* ViewController1.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7EE14FDEB9700E51402 /* ViewController1.xib */; };
+		A4BAB7F614FDED0600E51402 /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BAB7F414FDED0600E51402 /* ViewController2.m */; };
+		A4BAB7F714FDED0600E51402 /* ViewController2.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7F514FDED0600E51402 /* ViewController2.xib */; };
+		A4BAB7FB14FDED3800E51402 /* ViewController3.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BAB7F914FDED3800E51402 /* ViewController3.m */; };
+		A4BAB7FC14FDED3800E51402 /* ViewController3.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7FA14FDED3800E51402 /* ViewController3.xib */; };
+		A4BAB80014FDED6C00E51402 /* ViewController4.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BAB7FE14FDED6C00E51402 /* ViewController4.m */; };
+		A4BAB80114FDED6C00E51402 /* ViewController4.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7FF14FDED6C00E51402 /* ViewController4.xib */; };
+		A4BAB80314FDF1F400E51402 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4BAB80214FDF1F400E51402 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,12 +42,26 @@
 		A44E236414F7746600A73307 /* PicShareClient_iOSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PicShareClient_iOSAppDelegate.h; sourceTree = "<group>"; };
 		A44E236514F7746600A73307 /* PicShareClient_iOSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PicShareClient_iOSAppDelegate.m; sourceTree = "<group>"; };
 		A44E236814F7746600A73307 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		A44E236A14F7746600A73307 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		A44E236B14F7746600A73307 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		A44E236D14F7746600A73307 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		A44E236E14F7746600A73307 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
-		A44E237114F7746600A73307 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstView.xib; sourceTree = "<group>"; };
-		A44E237414F7746600A73307 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondView.xib; sourceTree = "<group>"; };
+		A4BAB7D614FDE67500E51402 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		A4BAB7D714FDE67500E51402 /* PullRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullRefreshTableViewController.h; sourceTree = "<group>"; };
+		A4BAB7D814FDE67500E51402 /* PullRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullRefreshTableViewController.m; sourceTree = "<group>"; };
+		A4BAB7E214FDE7B800E51402 /* capture-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "capture-button.png"; sourceTree = "<group>"; };
+		A4BAB7E314FDE7B800E51402 /* capture-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "capture-button@2x.png"; sourceTree = "<group>"; };
+		A4BAB7E614FDE7E500E51402 /* CustomTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBarController.h; sourceTree = "<group>"; };
+		A4BAB7E714FDE7E500E51402 /* CustomTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabBarController.m; sourceTree = "<group>"; };
+		A4BAB7EC14FDEB9700E51402 /* ViewController1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController1.h; sourceTree = "<group>"; };
+		A4BAB7ED14FDEB9700E51402 /* ViewController1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController1.m; sourceTree = "<group>"; };
+		A4BAB7EE14FDEB9700E51402 /* ViewController1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController1.xib; sourceTree = "<group>"; };
+		A4BAB7F314FDED0600E51402 /* ViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController2.h; sourceTree = "<group>"; };
+		A4BAB7F414FDED0600E51402 /* ViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController2.m; sourceTree = "<group>"; };
+		A4BAB7F514FDED0600E51402 /* ViewController2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController2.xib; sourceTree = "<group>"; };
+		A4BAB7F814FDED3800E51402 /* ViewController3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController3.h; sourceTree = "<group>"; };
+		A4BAB7F914FDED3800E51402 /* ViewController3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController3.m; sourceTree = "<group>"; };
+		A4BAB7FA14FDED3800E51402 /* ViewController3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController3.xib; sourceTree = "<group>"; };
+		A4BAB7FD14FDED6C00E51402 /* ViewController4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController4.h; sourceTree = "<group>"; };
+		A4BAB7FE14FDED6C00E51402 /* ViewController4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController4.m; sourceTree = "<group>"; };
+		A4BAB7FF14FDED6C00E51402 /* ViewController4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController4.xib; sourceTree = "<group>"; };
+		A4BAB80214FDF1F400E51402 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4BAB80314FDF1F400E51402 /* QuartzCore.framework in Frameworks */,
 				A44E235614F7746600A73307 /* UIKit.framework in Frameworks */,
 				A44E235814F7746600A73307 /* Foundation.framework in Frameworks */,
 				A44E235A14F7746600A73307 /* CoreGraphics.framework in Frameworks */,
@@ -57,6 +82,7 @@
 		A44E234614F7746600A73307 = {
 			isa = PBXGroup;
 			children = (
+				A4BAB80214FDF1F400E51402 /* QuartzCore.framework */,
 				A44E235B14F7746600A73307 /* PicShareClient_iOS */,
 				A44E235414F7746600A73307 /* Frameworks */,
 				A44E235214F7746600A73307 /* Products */,
@@ -84,15 +110,9 @@
 		A44E235B14F7746600A73307 /* PicShareClient_iOS */ = {
 			isa = PBXGroup;
 			children = (
-				A44E236414F7746600A73307 /* PicShareClient_iOSAppDelegate.h */,
-				A44E236514F7746600A73307 /* PicShareClient_iOSAppDelegate.m */,
-				A44E236714F7746600A73307 /* MainWindow.xib */,
-				A44E236A14F7746600A73307 /* FirstViewController.h */,
-				A44E236B14F7746600A73307 /* FirstViewController.m */,
-				A44E236D14F7746600A73307 /* SecondViewController.h */,
-				A44E236E14F7746600A73307 /* SecondViewController.m */,
-				A44E237014F7746600A73307 /* FirstView.xib */,
-				A44E237314F7746600A73307 /* SecondView.xib */,
+				A4BAB7E914FDEAA100E51402 /* TestViews */,
+				A4BAB7E014FDE74700E51402 /* lib */,
+				A4BAB7D414FDE3FF00E51402 /* Application */,
 				A44E235C14F7746600A73307 /* Supporting Files */,
 			);
 			path = PicShareClient_iOS;
@@ -107,6 +127,66 @@
 				A44E236314F7746600A73307 /* PicShareClient_iOS-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A4BAB7D414FDE3FF00E51402 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				A44E236414F7746600A73307 /* PicShareClient_iOSAppDelegate.h */,
+				A44E236514F7746600A73307 /* PicShareClient_iOSAppDelegate.m */,
+				A44E236714F7746600A73307 /* MainWindow.xib */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		A4BAB7DB14FDE69900E51402 /* PullRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				A4BAB7D614FDE67500E51402 /* arrow.png */,
+				A4BAB7D714FDE67500E51402 /* PullRefreshTableViewController.h */,
+				A4BAB7D814FDE67500E51402 /* PullRefreshTableViewController.m */,
+			);
+			name = PullRefresh;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		A4BAB7E014FDE74700E51402 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				A4BAB7E114FDE75F00E51402 /* CustomTabController */,
+				A4BAB7DB14FDE69900E51402 /* PullRefresh */,
+			);
+			name = lib;
+			sourceTree = "<group>";
+		};
+		A4BAB7E114FDE75F00E51402 /* CustomTabController */ = {
+			isa = PBXGroup;
+			children = (
+				A4BAB7E614FDE7E500E51402 /* CustomTabBarController.h */,
+				A4BAB7E714FDE7E500E51402 /* CustomTabBarController.m */,
+				A4BAB7E214FDE7B800E51402 /* capture-button.png */,
+				A4BAB7E314FDE7B800E51402 /* capture-button@2x.png */,
+			);
+			name = CustomTabController;
+			sourceTree = "<group>";
+		};
+		A4BAB7E914FDEAA100E51402 /* TestViews */ = {
+			isa = PBXGroup;
+			children = (
+				A4BAB7EC14FDEB9700E51402 /* ViewController1.h */,
+				A4BAB7ED14FDEB9700E51402 /* ViewController1.m */,
+				A4BAB7EE14FDEB9700E51402 /* ViewController1.xib */,
+				A4BAB7F314FDED0600E51402 /* ViewController2.h */,
+				A4BAB7F414FDED0600E51402 /* ViewController2.m */,
+				A4BAB7F514FDED0600E51402 /* ViewController2.xib */,
+				A4BAB7F814FDED3800E51402 /* ViewController3.h */,
+				A4BAB7F914FDED3800E51402 /* ViewController3.m */,
+				A4BAB7FA14FDED3800E51402 /* ViewController3.xib */,
+				A4BAB7FD14FDED6C00E51402 /* ViewController4.h */,
+				A4BAB7FE14FDED6C00E51402 /* ViewController4.m */,
+				A4BAB7FF14FDED6C00E51402 /* ViewController4.xib */,
+			);
+			name = TestViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,8 +241,13 @@
 			files = (
 				A44E236014F7746600A73307 /* InfoPlist.strings in Resources */,
 				A44E236914F7746600A73307 /* MainWindow.xib in Resources */,
-				A44E237214F7746600A73307 /* FirstView.xib in Resources */,
-				A44E237514F7746600A73307 /* SecondView.xib in Resources */,
+				A4BAB7D914FDE67500E51402 /* arrow.png in Resources */,
+				A4BAB7E414FDE7B800E51402 /* capture-button.png in Resources */,
+				A4BAB7E514FDE7B800E51402 /* capture-button@2x.png in Resources */,
+				A4BAB7F014FDEB9700E51402 /* ViewController1.xib in Resources */,
+				A4BAB7F714FDED0600E51402 /* ViewController2.xib in Resources */,
+				A4BAB7FC14FDED3800E51402 /* ViewController3.xib in Resources */,
+				A4BAB80114FDED6C00E51402 /* ViewController4.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,8 +260,12 @@
 			files = (
 				A44E236214F7746600A73307 /* main.m in Sources */,
 				A44E236614F7746600A73307 /* PicShareClient_iOSAppDelegate.m in Sources */,
-				A44E236C14F7746600A73307 /* FirstViewController.m in Sources */,
-				A44E236F14F7746600A73307 /* SecondViewController.m in Sources */,
+				A4BAB7DA14FDE67500E51402 /* PullRefreshTableViewController.m in Sources */,
+				A4BAB7E814FDE7E500E51402 /* CustomTabBarController.m in Sources */,
+				A4BAB7EF14FDEB9700E51402 /* ViewController1.m in Sources */,
+				A4BAB7F614FDED0600E51402 /* ViewController2.m in Sources */,
+				A4BAB7FB14FDED3800E51402 /* ViewController3.m in Sources */,
+				A4BAB80014FDED6C00E51402 /* ViewController4.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,22 +286,6 @@
 				A44E236814F7746600A73307 /* en */,
 			);
 			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
-		A44E237014F7746600A73307 /* FirstView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A44E237114F7746600A73307 /* en */,
-			);
-			name = FirstView.xib;
-			sourceTree = "<group>";
-		};
-		A44E237314F7746600A73307 /* SecondView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A44E237414F7746600A73307 /* en */,
-			);
-			name = SecondView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -302,6 +375,7 @@
 				A44E237A14F7746600A73307 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
