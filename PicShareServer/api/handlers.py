@@ -3,14 +3,18 @@ from piston.utils import rc
 from PicShareServer.PicShare.models import *
 
 
-class AnonymousPublicTimelineHandler(AnonymousBaseHandler):
-    def read(self,request):
-        return rc.FORBIDDEN
 
-class PublicTimelineHandler(BaseHandler):
-    anonymous = AnonymousPublicTimelineHandler
+class GetAllCategoriesHandler(BaseHandler):
+    
+    model = Category
     allowed_methods=('GET',)
-    model = Status
+    exclude = ()
     def read(self,request):
-        pass
-
+        categories = Category.objects.all()
+        resultArray = []
+        for aCategory in categories:
+            tempDict = {}
+            tempDict['category_id'] = aCategory.id
+            tempDict['name'] = aCategory.name
+            resultArray.append(tempDict)
+        return {"categories":resultArray}

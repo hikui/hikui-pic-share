@@ -5,10 +5,10 @@ from piston.authentication import HttpBasicAuthentication
 
 
 auth = HttpBasicAuthentication(realm="auth")
-public_timeline_handler = Resource(PublicTimelineHandler,authentication=auth)
+get_all_categories_handler = Resource(GetAllCategoriesHandler)
 
 urlpatterns = patterns('',
 
-    (r'^status/public_timeline/', public_timeline_handler),
+    (r'^category/get_all.json$',get_all_categories_handler),
     
 )
