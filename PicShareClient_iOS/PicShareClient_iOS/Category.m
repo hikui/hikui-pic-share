@@ -17,6 +17,10 @@
 
 -(id)initWithJSONDict:(NSDictionary *)data
 {
+    if (data == nil || (NSNull *)data == [NSNull null]) {
+        [self release];
+        return nil;
+    }
     self = [super init];
     if (self) {
         self.name = [data objectForKey:@"name"];

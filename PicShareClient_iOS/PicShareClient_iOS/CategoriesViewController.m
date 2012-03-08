@@ -140,14 +140,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
     Category *c = [_categories objectAtIndex:indexPath.row ];
     NSInteger categoryId = c.categoryId;
     BoardsListViewController *blvc = [[BoardsListViewController alloc]initWithType:categoryDetail AndId:categoryId];

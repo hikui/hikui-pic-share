@@ -23,7 +23,7 @@ typedef enum Status_type{
 @property (nonatomic,retain) UIImage *picture;
 @property (nonatomic,copy) NSString *description;
 @property (nonatomic,copy) NSString *location;
-@property (readwrite) Status_type status_type;
+@property (readwrite) Status_type statusType;
 @property (readwrite) NSInteger boardId;//所属的board
 @property (nonatomic,retain) User *owner;
 @property (nonatomic,retain) User *via;

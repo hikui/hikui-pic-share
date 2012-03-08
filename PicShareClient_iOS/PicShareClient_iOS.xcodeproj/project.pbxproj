@@ -32,6 +32,7 @@
 		A40B57521504B2640045C9B1 /* BoardsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A40B57511504B2640045C9B1 /* BoardsListCell.m */; };
 		A40B57551504B2B00045C9B1 /* BoardsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A40B57541504B2B00045C9B1 /* BoardsListViewController.m */; };
 		A40B57571504C3280045C9B1 /* Design.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40B57561504C3280045C9B1 /* Design.xib */; };
+		A40B576E1505211C0045C9B1 /* AsyncImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = A40B576D1505211C0045C9B1 /* AsyncImageDownloader.m */; };
 		A44B656914FFCABF005D6588 /* PictureWallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A44B656814FFCABF005D6588 /* PictureWallViewController.m */; };
 		A44E235614F7746600A73307 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44E235514F7746600A73307 /* UIKit.framework */; };
 		A44E235814F7746600A73307 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44E235714F7746600A73307 /* Foundation.framework */; };
@@ -40,6 +41,7 @@
 		A44E236214F7746600A73307 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A44E236114F7746600A73307 /* main.m */; };
 		A44E236614F7746600A73307 /* PicShareClient_iOSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A44E236514F7746600A73307 /* PicShareClient_iOSAppDelegate.m */; };
 		A44E236914F7746600A73307 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A44E236714F7746600A73307 /* MainWindow.xib */; };
+		A46DA5F91505C00600EA9D8B /* UIImageView+AsyncImageContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = A46DA5F81505C00600EA9D8B /* UIImageView+AsyncImageContainer.m */; };
 		A4BAB7D914FDE67500E51402 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7D614FDE67500E51402 /* arrow.png */; };
 		A4BAB7DA14FDE67500E51402 /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BAB7D814FDE67500E51402 /* PullRefreshTableViewController.m */; };
 		A4BAB7E414FDE7B800E51402 /* capture-button.png in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7E214FDE7B800E51402 /* capture-button.png */; };
@@ -105,6 +107,8 @@
 		A40B57531504B2B00045C9B1 /* BoardsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardsListViewController.h; sourceTree = "<group>"; };
 		A40B57541504B2B00045C9B1 /* BoardsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardsListViewController.m; sourceTree = "<group>"; };
 		A40B57561504C3280045C9B1 /* Design.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Design.xib; sourceTree = "<group>"; };
+		A40B576C1505211C0045C9B1 /* AsyncImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageDownloader.h; sourceTree = "<group>"; };
+		A40B576D1505211C0045C9B1 /* AsyncImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageDownloader.m; sourceTree = "<group>"; };
 		A44B656714FFCABF005D6588 /* PictureWallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureWallViewController.h; sourceTree = "<group>"; };
 		A44B656814FFCABF005D6588 /* PictureWallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureWallViewController.m; sourceTree = "<group>"; };
 		A44E235114F7746600A73307 /* PicShareClient_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PicShareClient_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +122,8 @@
 		A44E236414F7746600A73307 /* PicShareClient_iOSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PicShareClient_iOSAppDelegate.h; sourceTree = "<group>"; };
 		A44E236514F7746600A73307 /* PicShareClient_iOSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PicShareClient_iOSAppDelegate.m; sourceTree = "<group>"; };
 		A44E236814F7746600A73307 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		A46DA5F71505C00600EA9D8B /* UIImageView+AsyncImageContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AsyncImageContainer.h"; sourceTree = "<group>"; };
+		A46DA5F81505C00600EA9D8B /* UIImageView+AsyncImageContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AsyncImageContainer.m"; sourceTree = "<group>"; };
 		A4BAB7D614FDE67500E51402 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		A4BAB7D714FDE67500E51402 /* PullRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullRefreshTableViewController.h; sourceTree = "<group>"; };
 		A4BAB7D814FDE67500E51402 /* PullRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullRefreshTableViewController.m; sourceTree = "<group>"; };
@@ -176,13 +182,15 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		A40B56FC15034A3B0045C9B1 /* network */ = {
+		A40B56FC15034A3B0045C9B1 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				A40B56FD15034A510045C9B1 /* PicShareEngine.h */,
 				A40B56FE15034A510045C9B1 /* PicShareEngine.m */,
+				A40B576C1505211C0045C9B1 /* AsyncImageDownloader.h */,
+				A40B576D1505211C0045C9B1 /* AsyncImageDownloader.m */,
 			);
-			name = network;
+			name = Network;
 			sourceTree = "<group>";
 		};
 		A40B570C150473AD0045C9B1 /* Views */ = {
@@ -273,8 +281,10 @@
 		A44E235B14F7746600A73307 /* PicShareClient_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				A46DA5FA1505DAC800EA9D8B /* Resources */,
+				A46DA5F51505BFAC00EA9D8B /* Utils */,
 				A40B570C150473AD0045C9B1 /* Views */,
-				A40B56FC15034A3B0045C9B1 /* network */,
+				A40B56FC15034A3B0045C9B1 /* Network */,
 				A40B56EB15032C8D0045C9B1 /* Models */,
 				A44B656514FFC9B5005D6588 /* ViewControllers */,
 				A4BAB7E914FDEAA100E51402 /* TestViews */,
@@ -294,6 +304,22 @@
 				A44E236314F7746600A73307 /* PicShareClient_iOS-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A46DA5F51505BFAC00EA9D8B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A46DA5F71505C00600EA9D8B /* UIImageView+AsyncImageContainer.h */,
+				A46DA5F81505C00600EA9D8B /* UIImageView+AsyncImageContainer.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		A46DA5FA1505DAC800EA9D8B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		A4BAB7D414FDE3FF00E51402 /* Application */ = {
@@ -459,6 +485,8 @@
 				A40B574615047F880045C9B1 /* JSONKit.m in Sources */,
 				A40B57521504B2640045C9B1 /* BoardsListCell.m in Sources */,
 				A40B57551504B2B00045C9B1 /* BoardsListViewController.m in Sources */,
+				A40B576E1505211C0045C9B1 /* AsyncImageDownloader.m in Sources */,
+				A46DA5F91505C00600EA9D8B /* UIImageView+AsyncImageContainer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

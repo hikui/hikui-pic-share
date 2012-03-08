@@ -19,6 +19,7 @@ typedef enum TheType{
 {
     PicShareEngine *_engine;
     NSOperationQueue *_oprationq;
+    UIActivityIndicatorView *_indicator;
     BOOL isLoadingData;
 }
 

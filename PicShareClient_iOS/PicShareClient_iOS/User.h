@@ -10,7 +10,7 @@
 
 @interface User : NSObject
 
-@property (readonly) NSInteger user_id;
+@property (readonly) NSInteger userId;
 @property (nonatomic,copy) NSString *username;
 @property (nonatomic,copy) NSString *nickname;
 @property (nonatomic,copy) NSString *location;

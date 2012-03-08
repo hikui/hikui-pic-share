@@ -13,7 +13,7 @@
 
 @property (readonly) NSInteger boardId;
 @property (nonatomic,retain) User *owner;
-@property (nonatomic,copy) NSMutableArray *pictureStatus;
+@property (nonatomic,copy) NSMutableArray *pictureStatuses;
 @property (nonatomic,copy) NSString *name;
 @property (readwrite) NSInteger picturesCount;
 @property (readwrite) NSInteger categoryId;//所属的category

@@ -27,8 +27,10 @@ class Category(models.Model):
 class Board(models.Model):
     name = models.TextField(max_length=140)
     owner = models.ForeignKey(User, related_name='my_boards') #User自己建的
-    followers = models.ManyToManyField(User,related_name='following_boards') #关注的用户
+    followers = models.ManyToManyField(User,related_name='following_boards',null=True,blank=True) #关注的用户
     category = models.ForeignKey(Category, null=True,blank=True, related_name='boards') #在Explore中使用
+    def __unicode__(self):
+        return "board-name:"+self.name
 
 class Picture(models.Model):
     timestamp = models.DateTimeField()
@@ -40,6 +42,8 @@ class Picture(models.Model):
     )
     status_type = models.IntegerField(choices=STATUS_TYPE_CHOICES,default=1)
     retain_count = models.IntegerField(default=1) #用户repin之后，retain_count+1，当retain_count=0时，删除Pic。创建时，retain_count=1。
+    def __unicode__(self):
+        return "picture:"+self.image+",retain:"+str(self.retain_count)
 
 class PictureStatus(models.Model):
     picture = models.ForeignKey(Picture)
@@ -50,9 +54,11 @@ class PictureStatus(models.Model):
         (3,u'被举报'),
         (4,u'封禁'),
     )
-    board = models.ForeignKey(Board)
+    board = models.ForeignKey(Board,related_name='pictureStatuses')
     via = models.ForeignKey(User, null=True, blank=True) #从哪个用户得到此图片，只在status_type=2时才出现
     status_type = models.IntegerField(choices=STATUS_TYPE_CHOICES,default=1)
+    def __unicode__(self):
+        return "picture:"+unicode(self.picture)
 
 class UserAddition(models.Model):
     user = models.OneToOneField(User,related_name='addition')

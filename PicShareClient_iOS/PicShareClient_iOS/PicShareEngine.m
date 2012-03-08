@@ -31,7 +31,6 @@ static PicShareEngine *instance = NULL;
 
 -(NSArray *)getAllCategories
 {
-    [NSThread sleepForTimeInterval:1];
     NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingFormat:@"api/category/get_all.json"]];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [request startSynchronous];
@@ -51,10 +50,11 @@ static PicShareEngine *instance = NULL;
         NSMutableArray *resultArray = [[[NSMutableArray alloc]init]autorelease];
         for(NSDictionary *aCategoryData in categoryDataArray){
             Category *c = [[Category alloc]initWithJSONDict:aCategoryData];
-            [resultArray addObject:c];
+            if (c != nil) {
+                [resultArray addObject:c];
+            }
             [c release];
         }
-        NSLog(@"result:%@",resultArray);
         return resultArray;
     }
     return nil;
@@ -70,10 +70,13 @@ static PicShareEngine *instance = NULL;
     return [self getBoardsOfCategoryId:categoryId page:page countPerPage:10];
 }
 
+/**
+ 返回第一个元素为hasnext
+ */
 -(NSArray *)getBoardsOfCategoryId:(NSInteger)categoryId page:(NSInteger)page countPerPage:(NSInteger)count
 {
     
-    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingFormat:@"api/board/get_category_boards.json/page=%d&count=%d&category_id=%d",page,count,categoryId]];
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingFormat:@"api/board/get_category_boards.json?page=%d&count=%d&category_id=%d",page,count,categoryId]];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [request startSynchronous];
     NSError *error = [request error];
@@ -87,7 +90,19 @@ static PicShareEngine *instance = NULL;
         return nil;
     }
     if (response != nil) {
-        NSLog(@"getBoardsOfCategoryId response:%@",response);
+        NSDictionary *dictFromJson = [response objectFromJSONString];
+        NSNumber *hasnext = [dictFromJson objectForKey:@"hasnext"];
+        NSArray *boardsDataArray = [dictFromJson objectForKey:@"boards"];
+        NSMutableArray *resultArray = [[[NSMutableArray alloc]init]autorelease];
+        [resultArray addObject:hasnext];
+        for (NSDictionary *aBoardData in boardsDataArray) {
+            Board *b = [[Board alloc]initWithJSONDict:aBoardData];
+            if (b != nil) {
+                [resultArray addObject:b];
+            }
+            [b release];
+        }
+        return resultArray;
     }
     return nil;
 }

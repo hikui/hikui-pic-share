@@ -8,6 +8,7 @@
 
 #import "BoardsListViewController.h"
 #import "PicShareEngine.h"
+#import "BoardsListCell.h"
 
 @interface BoardsListViewController ()
 
@@ -46,7 +47,13 @@
     NSInvocationOperation *downloadOperation = [[NSInvocationOperation alloc]initWithTarget:self selector:@selector(loadData) object:nil];
     [_oprationq addOperation:downloadOperation];
     isLoadingData = YES;
-    
+    //show indicator
+    _indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    CGFloat tableWidth = self.tableView.bounds.size.width;
+    _indicator.frame = CGRectMake((tableWidth-20)/2, 10, 20, 20);
+    [_indicator setHidesWhenStopped:YES];
+    [self.tableView addSubview:_indicator];
+    [_indicator startAnimating];
     [downloadOperation release];
 }
 
@@ -66,6 +73,7 @@
 {
     [_boards release];
     [_oprationq release];
+    [_indicator release];
     [super dealloc];
 }
 
@@ -73,42 +81,60 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return _boards.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (isLoadingData) {
-        static NSString *phIdentifier = @"loadingPlaceHolder";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:phIdentifier];
-        if (cell==nil) {
-            cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:phIdentifier]autorelease];
-        }
-        UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        CGFloat tableWidth = self.tableView.bounds.size.width;
-        indicator.frame = CGRectMake((tableWidth-20)/2, 10, 20, 20);
-        [cell addSubview:indicator];
-        [indicator startAnimating];
-        [indicator release];
-        return cell;
+    static NSString *normalCellIdentifier = @"normalCell";
+    static NSString *moreCellIdentifier = @"moreCell";
+    NSString *CellIdentifier;
+    Board *b = [_boards objectAtIndex:indexPath.row];
+    NSArray *pictureStatuses = b.pictureStatuses;
+    int imagesCount = pictureStatuses.count;
+    if (imagesCount>8) {
+        CellIdentifier = moreCellIdentifier;
     }
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    else {
+        CellIdentifier = normalCellIdentifier;
+    }
     
-    // Configure the cell...
+    BoardsListCell *cell = (BoardsListCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell==nil) {
+        cell = [[BoardsListCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    cell.boardNameLabel.text = b.name;
+    [cell clearCurrentPictures];
+    if (imagesCount>8) {
+        for (int i=0; i<7; i++) {
+            PictureStatus *ps = [pictureStatuses objectAtIndex:i];
+            [cell addPictureWithUrlStr:ps.pictureUrl];
+        }
+        UIButton *moreButton = [[UIButton alloc]initWithFrame:CGRectMake(244, 125,60, 60)];
+        [moreButton setTitle:@"更多..." forState:UIControlStateNormal];
+        [moreButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [cell.contentView addSubview:moreButton];
+        [moreButton release];
+    }
+    else {
+        for (int i=0; i<imagesCount; i++) {
+            PictureStatus *ps = [pictureStatuses objectAtIndex:i];
+            [cell addPictureWithUrlStr:ps.pictureUrl];
+        }
+    }
     
     return cell;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [BoardsListCell getBoardsListCellHeight:[_boards objectAtIndex:indexPath.row] withSpecifiedOrientation:nil];
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -169,10 +195,14 @@
 {
     _engine = [PicShareEngine sharedEngine];
     if (_type == categoryDetail) {
-       self.boards = [_engine getBoardsOfCategoryId:_contentId];
+        NSArray *returnedArray = [_engine getBoardsOfCategoryId:_contentId];
+        self.boards = [returnedArray subarrayWithRange:NSMakeRange(1, returnedArray.count-1)];
     }else {
        self.boards = [_engine getBoardsOfUserId:_contentId];
     }
+    isLoadingData = NO;
+    [_indicator stopAnimating];
+    [_indicator removeFromSuperview];
     [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO ];
 }
 
