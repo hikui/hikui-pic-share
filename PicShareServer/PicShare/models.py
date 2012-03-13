@@ -1,7 +1,7 @@
 #coding:utf-8
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.db.models.signals import post_save
 
 '''
 每个用户维护自己的一组Board，
@@ -44,6 +44,15 @@ class Picture(models.Model):
     retain_count = models.IntegerField(default=1) #用户repin之后，retain_count+1，当retain_count=0时，删除Pic。创建时，retain_count=1。
     def __unicode__(self):
         return "picture:"+self.image+",retain:"+str(self.retain_count)
+    def retain(self):
+        self.retain_count = self.retain_count+1
+        self.save()
+    def release(self):
+        self.retain_count = self.retain_count-1
+        if self.retain_count == 0:
+            self.delete()
+        else:
+            self.save
 
 class PictureStatus(models.Model):
     picture = models.ForeignKey(Picture)
@@ -66,7 +75,10 @@ class UserAddition(models.Model):
     avatar = models.CharField(max_length=255,null=True, blank=True)
     location = models.CharField(max_length=20, null=True, blank=True)
     introduction = models.TextField()
-
+    def create_user_addition(sender, instance, created, **kwargs):
+        if created:
+            UserAddition.objects.create(user=instance)
+    post_save.connect(create_user_addition, sender=User)
     
 class Comment(models.Model):
 

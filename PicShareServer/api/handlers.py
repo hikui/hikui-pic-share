@@ -1,6 +1,25 @@
 from piston.handler import BaseHandler,AnonymousBaseHandler
 from piston.utils import rc
 from PicShareServer.PicShare.models import *
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User, AnonymousUser
+
+def is_authenticated(request):
+    auth_string = request.META.get('HTTP_AUTHORIZATION', None)
+    if not auth_string:
+        return False
+    try:
+        (authmeth, auth) = auth_string.split(" ", 1)
+        if not authmeth.lower() == 'basic':
+            return False
+        auth = auth.strip().decode('base64')
+        (username, password) = auth.split(':', 1)
+    except (ValueError, binascii.Error):
+        return False
+    request.user = authenticate(username=username, password=password) \
+        or AnonymousUser()       
+    return not request.user in (False, None, AnonymousUser())
+
 
 
 
@@ -18,10 +37,13 @@ class GetAllCategoriesHandler(BaseHandler):
             resultArray.append(tempDict)
         return {"categories":resultArray}
         
+  
 class GetBoardsOfCategoryHandler(BaseHandler):
     allowed_methods=('GET',)
-
     def read(self,request):
+        isAuthenticated = is_authenticated(request) #hava difference between authenticated user and anonymous user
+        print isAuthenticated
+        print request.user
         categoryId = int(request.GET.get('category_id',1))
         page = int(request.GET.get('page',1))
         count = int(request.GET.get('count',3))
@@ -35,7 +57,10 @@ class GetBoardsOfCategoryHandler(BaseHandler):
             resultDict['hasnext'] = 1
         boardsResultArray = []
         for board in boards:
-            
+            owner = board.owner
+            isFollowing = False
+            if isAuthenticated:
+                isFollowing = owner in request.user.relationships.following()
             ownerResultDict = {
                 'user_id':board.owner.id,
                 'username':board.owner.username,
@@ -43,7 +68,7 @@ class GetBoardsOfCategoryHandler(BaseHandler):
                 'avatar':board.owner.addition.avatar,
                 'location':board.owner.addition.location,
                 'introduction':board.owner.addition.introduction,
-                'is_following':False
+                'is_following':isFollowing
                 }
             
             picturesResultArray = []

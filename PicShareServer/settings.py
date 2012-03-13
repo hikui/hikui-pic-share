@@ -4,6 +4,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+IMAGE_DIR = '/Users/hikui/source/hikui-pic-share/static_sample'
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
