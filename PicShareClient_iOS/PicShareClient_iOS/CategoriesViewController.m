@@ -43,7 +43,9 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    self.categories = nil;//release and set nil
 }
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -145,6 +147,7 @@
     BoardsListViewController *blvc = [[BoardsListViewController alloc]initWithType:categoryDetail AndId:categoryId];
     [self.navigationController pushViewController:blvc animated:YES];
     [blvc release];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Async methods
@@ -152,7 +155,8 @@
 -(void)loadCategories
 {
     _engine = [PicShareEngine sharedEngine];
-    self.categories = [_engine getAllCategories];
+    NSArray *loadedCategories = [_engine getAllCategories];
+    [self performSelectorInBackground:@selector(setCategories:) withObject:loadedCategories];
     isLoadingData = NO;
     [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:false];
 }

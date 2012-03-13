@@ -21,7 +21,7 @@
 - (void)setImageWithUrl:(NSURL *)url
 {
     AsyncImageDownloader *downloader = [AsyncImageDownloader sharedAsyncImageDownloader];
-    [downloader loadImageWithUrl:url AndDelegate:self];
+    [downloader loadImageWithUrl:url Delegate:self scaleSize:self.frame.size];
 }
 
 - (void)imageDidFinishLoad:(UIImage *)image

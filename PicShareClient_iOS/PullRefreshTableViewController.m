@@ -35,7 +35,7 @@
 #import "PullRefreshTableViewController.h"
 
 #define REFRESH_HEADER_HEIGHT 52.0f
-
+#define PAGING_FOOTER_HEIGHT 40.0f
 
 @implementation PullRefreshTableViewController
 
@@ -70,6 +70,7 @@
   [self addPullToRefreshHeader];
 }
 
+
 - (void)setupStrings{
   textPull = [[NSString alloc] initWithString:@"下拉可以刷新..."];
   textRelease = [[NSString alloc] initWithString:@"松开可以刷新..."];
@@ -101,15 +102,17 @@
     [self.tableView addSubview:refreshHeaderView];
 }
 
+
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    NSLog(@"scrollViewWillBeginDragging");
+    //NSLog(@"scrollViewWillBeginDragging");
     if (isLoading) return;
     isDragging = YES;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView { //drag过程中产生
-//    NSLog(@"scrollViewDidScroll");
-//    NSLog(@"scrollView.contentOffset.y=%f",scrollView.contentOffset.y);
+    //NSLog(@"scrollViewDidScroll");
+    //NSLog(@"scrollView.contentOffset.y=%f",scrollView.contentOffset.y);
     if (isLoading) {
         // Update the content inset, good for section headers
         if (scrollView.contentOffset.y > 0)
@@ -181,8 +184,10 @@
 - (void)refresh {
     // This is just a demo. Override this method with your custom reload action.
     // Don't forget to call stopLoading at the end.
-    [self performSelector:@selector(stopLoading) withObject:nil afterDelay:2.0];
+    //[self performSelector:@selector(stopLoading) withObject:nil afterDelay:2.0];
 }
+
+
 
 - (void)dealloc {
     [refreshHeaderView release];

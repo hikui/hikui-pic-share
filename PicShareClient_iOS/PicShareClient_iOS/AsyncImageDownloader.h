@@ -21,6 +21,7 @@
 {
     NSOperationQueue *_downloadQ;
     NSMutableDictionary *_downloadInfo;
+    NSMutableDictionary *_thumbnailCache;
 }
 
 @property (nonatomic,assign) id<AsyncImageContainer> asyncImageContainer;
@@ -28,5 +29,8 @@
 + (id)sharedAsyncImageDownloader;
 
 - (void)loadImageWithUrl:(NSURL *)url AndDelegate:(id)delegate;
+- (void)loadImageWithUrl:(NSURL *)url Delegate:(id)delegate scaleSize:(CGSize)size;
 
+//should be called when receive memory warning
+- (void)cleanThumbnailCache;
 @end

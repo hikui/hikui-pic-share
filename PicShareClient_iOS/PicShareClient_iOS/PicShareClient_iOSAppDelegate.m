@@ -7,6 +7,7 @@
 //
 
 #import "PicShareClient_iOSAppDelegate.h"
+#import "AsyncImageDownloader.h"
 
 @implementation PicShareClient_iOSAppDelegate
 
@@ -24,7 +25,7 @@
     vc3 = [[ViewController3 alloc]init];
     vc4 = [[ViewController4 alloc]init];
     UIViewController *placehoder = [[UIViewController alloc]init];
-    [_pictureWallViewController.tabBarItem setTitle:@"广场"];
+    [_pictureWallViewController.tabBarItem setTitle:@"afda"];
     [nCategoriesViewController.tabBarItem setTitle:@"探索"];
     [vc3.tabBarItem setTitle:@"view3"];
     [vc4.tabBarItem setTitle:@"view4"];
@@ -76,6 +77,12 @@
      */
 }
 
+
+-(void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+{
+    [[AsyncImageDownloader sharedAsyncImageDownloader]cleanThumbnailCache];
+}
+
 - (void)dealloc
 {
     [_window release];
@@ -86,6 +93,8 @@
     [_categoriesViewController release];
     [super dealloc];
 }
+
+
 
 /*
 // Optional UITabBarControllerDelegate method.

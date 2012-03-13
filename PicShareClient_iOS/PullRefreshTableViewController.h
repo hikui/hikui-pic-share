@@ -37,6 +37,7 @@
     UIActivityIndicatorView *refreshSpinner;
     BOOL isDragging;
     BOOL isLoading;
+    BOOL isPaging;
     NSString *textPull;
     NSString *textRelease;
     NSString *textLoading;

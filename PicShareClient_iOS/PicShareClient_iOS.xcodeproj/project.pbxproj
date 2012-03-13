@@ -42,6 +42,9 @@
 		A44E236614F7746600A73307 /* PicShareClient_iOSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A44E236514F7746600A73307 /* PicShareClient_iOSAppDelegate.m */; };
 		A44E236914F7746600A73307 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A44E236714F7746600A73307 /* MainWindow.xib */; };
 		A46DA5F91505C00600EA9D8B /* UIImageView+AsyncImageContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = A46DA5F81505C00600EA9D8B /* UIImageView+AsyncImageContainer.m */; };
+		A47FA462150E481A0083CF97 /* PicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A47FA460150E481A0083CF97 /* PicDetailViewController.m */; };
+		A47FA463150E481A0083CF97 /* PicDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A47FA461150E481A0083CF97 /* PicDetailViewController.xib */; };
+		A47FA467150E48690083CF97 /* PSThumbnailImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A47FA466150E48690083CF97 /* PSThumbnailImageView.m */; };
 		A4BAB7D914FDE67500E51402 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7D614FDE67500E51402 /* arrow.png */; };
 		A4BAB7DA14FDE67500E51402 /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BAB7D814FDE67500E51402 /* PullRefreshTableViewController.m */; };
 		A4BAB7E414FDE7B800E51402 /* capture-button.png in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7E214FDE7B800E51402 /* capture-button.png */; };
@@ -124,6 +127,11 @@
 		A44E236814F7746600A73307 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		A46DA5F71505C00600EA9D8B /* UIImageView+AsyncImageContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AsyncImageContainer.h"; sourceTree = "<group>"; };
 		A46DA5F81505C00600EA9D8B /* UIImageView+AsyncImageContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AsyncImageContainer.m"; sourceTree = "<group>"; };
+		A47FA45F150E481A0083CF97 /* PicDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicDetailViewController.h; sourceTree = "<group>"; };
+		A47FA460150E481A0083CF97 /* PicDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicDetailViewController.m; sourceTree = "<group>"; };
+		A47FA461150E481A0083CF97 /* PicDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PicDetailViewController.xib; sourceTree = "<group>"; };
+		A47FA465150E48690083CF97 /* PSThumbnailImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSThumbnailImageView.h; sourceTree = "<group>"; };
+		A47FA466150E48690083CF97 /* PSThumbnailImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSThumbnailImageView.m; sourceTree = "<group>"; };
 		A4BAB7D614FDE67500E51402 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		A4BAB7D714FDE67500E51402 /* PullRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullRefreshTableViewController.h; sourceTree = "<group>"; };
 		A4BAB7D814FDE67500E51402 /* PullRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullRefreshTableViewController.m; sourceTree = "<group>"; };
@@ -199,6 +207,8 @@
 				A40B57501504B2640045C9B1 /* BoardsListCell.h */,
 				A40B57511504B2640045C9B1 /* BoardsListCell.m */,
 				A40B57561504C3280045C9B1 /* Design.xib */,
+				A47FA465150E48690083CF97 /* PSThumbnailImageView.h */,
+				A47FA466150E48690083CF97 /* PSThumbnailImageView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -242,6 +252,9 @@
 				A40B5714150474200045C9B1 /* CategoriesViewController.m */,
 				A40B57531504B2B00045C9B1 /* BoardsListViewController.h */,
 				A40B57541504B2B00045C9B1 /* BoardsListViewController.m */,
+				A47FA45F150E481A0083CF97 /* PicDetailViewController.h */,
+				A47FA460150E481A0083CF97 /* PicDetailViewController.m */,
+				A47FA461150E481A0083CF97 /* PicDetailViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -447,6 +460,7 @@
 				A4BAB80114FDED6C00E51402 /* ViewController4.xib in Resources */,
 				A40B5717150474200045C9B1 /* CategoriesViewController.xib in Resources */,
 				A40B57571504C3280045C9B1 /* Design.xib in Resources */,
+				A47FA463150E481A0083CF97 /* PicDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,6 +501,8 @@
 				A40B57551504B2B00045C9B1 /* BoardsListViewController.m in Sources */,
 				A40B576E1505211C0045C9B1 /* AsyncImageDownloader.m in Sources */,
 				A46DA5F91505C00600EA9D8B /* UIImageView+AsyncImageContainer.m in Sources */,
+				A47FA462150E481A0083CF97 /* PicDetailViewController.m in Sources */,
+				A47FA467150E48690083CF97 /* PSThumbnailImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

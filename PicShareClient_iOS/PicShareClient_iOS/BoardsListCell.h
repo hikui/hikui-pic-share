@@ -18,14 +18,17 @@
 @interface BoardsListCell : UITableViewCell
 {
     NSArray *_imageViews;
+    NSMutableArray *_frames;
 }
 
 @property (readonly) int imageCount;
 @property (nonatomic,retain) UILabel *boardNameLabel;
+@property (nonatomic,retain) UILabel *picCountLabel;
+@property (nonatomic,retain) UIScrollView *scrollView;
 
 + (CGFloat)getBoardsListCellHeight:(Board *)board withSpecifiedOrientation:(UIDeviceOrientation *)orientation;
 
-- (void) addPictureWithUrlStr:(NSString *)urlStr;
+- (void) addPictureWithUrlStr:(NSString *)urlStr eventDelegate:(id)delegate;
 - (void) clearCurrentPictures;
 
 @end

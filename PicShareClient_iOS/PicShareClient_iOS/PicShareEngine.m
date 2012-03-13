@@ -40,8 +40,10 @@ static PicShareEngine *instance = NULL;
         response = [request responseString];
     }
     else {
-        NSLog(@"error! %@",[error code]);
+        NSLog(@"error! %d",request.responseStatusCode);
         //do something in ui
+        //use notification center???
+#warning not implement yet
         return nil;
     }
     if (response != nil) {
@@ -67,7 +69,7 @@ static PicShareEngine *instance = NULL;
 
 -(NSArray *)getBoardsOfCategoryId:(NSInteger)categoryId page:(NSInteger)page
 {
-    return [self getBoardsOfCategoryId:categoryId page:page countPerPage:10];
+    return [self getBoardsOfCategoryId:categoryId page:page countPerPage:5];
 }
 
 /**
