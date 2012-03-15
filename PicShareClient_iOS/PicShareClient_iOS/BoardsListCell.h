@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Board.h"
+#import "PSThumbnailImageView.h"
+
+
 
 
 /**
@@ -22,13 +25,14 @@
 }
 
 @property (readonly) int imageCount;
+@property (nonatomic,retain) id<PSThumbnailImageViewEventsDelegate> eventDelegate;
 @property (nonatomic,retain) UILabel *boardNameLabel;
 @property (nonatomic,retain) UILabel *picCountLabel;
 @property (nonatomic,retain) UIScrollView *scrollView;
 
 + (CGFloat)getBoardsListCellHeight:(Board *)board withSpecifiedOrientation:(UIDeviceOrientation *)orientation;
 
-- (void) addPictureWithUrlStr:(NSString *)urlStr eventDelegate:(id)delegate;
+- (void) addPictureWithUrlStr:(NSString *)urlStr;
 - (void) clearCurrentPictures;
-
+- (NSInteger) offsetOfaThumbnail:(PSThumbnailImageView *)thumbnailImageView;
 @end

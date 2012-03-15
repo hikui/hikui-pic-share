@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PictureStatus.h"
 
 @interface PicDetailViewController : UIViewController
+{
+    UIView *loadingView;
+    UIActivityIndicatorView *loadingIndicator;
+}
+
+@property (readwrite) NSInteger picId;
+@property (nonatomic,retain) PictureStatus *pictureStatus;
+
+- (id)initWithPicId:(NSInteger)picId;
 
 @end

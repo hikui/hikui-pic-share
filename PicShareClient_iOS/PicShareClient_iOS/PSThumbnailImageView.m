@@ -12,7 +12,6 @@
 
 @implementation PSThumbnailImageView
 
-@synthesize delegate = _delegate;
 @synthesize innerImageView = _innerImageView;
 
 -(id)initWithFrame:(CGRect)frame
@@ -56,15 +55,10 @@
     _innerImageView.image = nil;
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    NSLog(@"touch begin");
-    NSLog(@"taps%d",[[touches anyObject]tapCount]);
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    NSLog(@"touch end");
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesEnded:touches withEvent:event];
+    NSLog(@"Touches Ended");
+    [self sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 
 @end

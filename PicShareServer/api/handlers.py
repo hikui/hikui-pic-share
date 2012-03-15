@@ -82,6 +82,7 @@ class GetBoardsOfCategoryHandler(BaseHandler):
                     "status_type":ps.status_type,
                     "comments_count":0,
                     "board_id":board.id,
+                    'board_name':board.name,
                     "owner":ownerResultDict,
                     "via":ps.via,
                 }
@@ -100,4 +101,49 @@ class GetBoardsOfCategoryHandler(BaseHandler):
             
         return resultDict
         
-        
+class GetPictureHandler(BaseHandler):
+    allowed_methods=('GET',)
+    def read(self,request):
+        psId = int(request.GET.get('ps_id',1))
+        aPicStatus = PictureStatus.objects.get(pk=psId)
+        owner = aPicStatus.board.owner
+        via = aPicStatus.via
+        isFollowOwner = False
+        isFollowVia = False
+        if is_authenticated(request):
+            isFollowOwner = owner in request.user.relationships.following()
+            isFollowVia = via in request.user.relationships.following()
+        ownerDict = {
+            'user_id':owner.id,
+            'username':owner.username,
+            'avatar':owner.addition.avatar,
+            'nick':owner.addition.nick,
+            'location':owner.addition.location,
+            'introduction':owner.addition.introduction,
+            'is_following':isFollowOwner,
+        }
+        viaDict = None
+        if via is not None:
+            viaDict = {
+                'user_id':via.id,
+                'username':via.username,
+                'avatar':via.addition.avatar,
+                'nick':via.addition.nick,
+                'location':via.addition.location,
+                'introduction':via.addition.introduction,
+                'is_following':isFollowVia,
+            }
+        resultDict = {
+            'ps_id':psId,
+            'timestamp':aPicStatus.picture.timestamp,
+            'image':aPicStatus.picture.image,
+            'location':aPicStatus.picture.location,
+            'description':aPicStatus.description,
+            'status_type':aPicStatus.status_type,
+            'comments_count':0,
+            'board_id':aPicStatus.board.id,
+            'board_name':aPicStatus.board.name,
+            'owner':ownerDict,
+            'via':viaDict,
+        }
+        return resultDict

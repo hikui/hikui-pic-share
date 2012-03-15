@@ -41,9 +41,12 @@
 		A44E236214F7746600A73307 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A44E236114F7746600A73307 /* main.m */; };
 		A44E236614F7746600A73307 /* PicShareClient_iOSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A44E236514F7746600A73307 /* PicShareClient_iOSAppDelegate.m */; };
 		A44E236914F7746600A73307 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A44E236714F7746600A73307 /* MainWindow.xib */; };
+		A45702441510A410005BC6FF /* anonymous.png in Resources */ = {isa = PBXBuildFile; fileRef = A45702431510A410005BC6FF /* anonymous.png */; };
+		A45702471510A437005BC6FF /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A45702461510A437005BC6FF /* 3.jpg */; };
+		A457024A15119D2B005BC6FF /* PicDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = A457024915119D2B005BC6FF /* PicDetailView.m */; };
+		A457024D1511ADDC005BC6FF /* UIImageView+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A457024C1511ADDC005BC6FF /* UIImageView+Resize.m */; };
 		A46DA5F91505C00600EA9D8B /* UIImageView+AsyncImageContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = A46DA5F81505C00600EA9D8B /* UIImageView+AsyncImageContainer.m */; };
 		A47FA462150E481A0083CF97 /* PicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A47FA460150E481A0083CF97 /* PicDetailViewController.m */; };
-		A47FA463150E481A0083CF97 /* PicDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A47FA461150E481A0083CF97 /* PicDetailViewController.xib */; };
 		A47FA467150E48690083CF97 /* PSThumbnailImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A47FA466150E48690083CF97 /* PSThumbnailImageView.m */; };
 		A4BAB7D914FDE67500E51402 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7D614FDE67500E51402 /* arrow.png */; };
 		A4BAB7DA14FDE67500E51402 /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BAB7D814FDE67500E51402 /* PullRefreshTableViewController.m */; };
@@ -125,11 +128,16 @@
 		A44E236414F7746600A73307 /* PicShareClient_iOSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PicShareClient_iOSAppDelegate.h; sourceTree = "<group>"; };
 		A44E236514F7746600A73307 /* PicShareClient_iOSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PicShareClient_iOSAppDelegate.m; sourceTree = "<group>"; };
 		A44E236814F7746600A73307 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		A45702431510A410005BC6FF /* anonymous.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = anonymous.png; path = "../../../hikui-ios-sample/simple_weibo_test/simple_weibo_test/anonymous.png"; sourceTree = "<group>"; };
+		A45702461510A437005BC6FF /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 3.jpg; path = ../../static_sample/picture/3.jpg; sourceTree = "<group>"; };
+		A457024815119D2B005BC6FF /* PicDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicDetailView.h; sourceTree = "<group>"; };
+		A457024915119D2B005BC6FF /* PicDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicDetailView.m; sourceTree = "<group>"; };
+		A457024B1511ADDC005BC6FF /* UIImageView+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Resize.h"; sourceTree = "<group>"; };
+		A457024C1511ADDC005BC6FF /* UIImageView+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Resize.m"; sourceTree = "<group>"; };
 		A46DA5F71505C00600EA9D8B /* UIImageView+AsyncImageContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AsyncImageContainer.h"; sourceTree = "<group>"; };
 		A46DA5F81505C00600EA9D8B /* UIImageView+AsyncImageContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AsyncImageContainer.m"; sourceTree = "<group>"; };
 		A47FA45F150E481A0083CF97 /* PicDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicDetailViewController.h; sourceTree = "<group>"; };
 		A47FA460150E481A0083CF97 /* PicDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicDetailViewController.m; sourceTree = "<group>"; };
-		A47FA461150E481A0083CF97 /* PicDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PicDetailViewController.xib; sourceTree = "<group>"; };
 		A47FA465150E48690083CF97 /* PSThumbnailImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSThumbnailImageView.h; sourceTree = "<group>"; };
 		A47FA466150E48690083CF97 /* PSThumbnailImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSThumbnailImageView.m; sourceTree = "<group>"; };
 		A4BAB7D614FDE67500E51402 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
@@ -209,6 +217,8 @@
 				A40B57561504C3280045C9B1 /* Design.xib */,
 				A47FA465150E48690083CF97 /* PSThumbnailImageView.h */,
 				A47FA466150E48690083CF97 /* PSThumbnailImageView.m */,
+				A457024815119D2B005BC6FF /* PicDetailView.h */,
+				A457024915119D2B005BC6FF /* PicDetailView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -254,7 +264,6 @@
 				A40B57541504B2B00045C9B1 /* BoardsListViewController.m */,
 				A47FA45F150E481A0083CF97 /* PicDetailViewController.h */,
 				A47FA460150E481A0083CF97 /* PicDetailViewController.m */,
-				A47FA461150E481A0083CF97 /* PicDetailViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -324,6 +333,8 @@
 			children = (
 				A46DA5F71505C00600EA9D8B /* UIImageView+AsyncImageContainer.h */,
 				A46DA5F81505C00600EA9D8B /* UIImageView+AsyncImageContainer.m */,
+				A457024B1511ADDC005BC6FF /* UIImageView+Resize.h */,
+				A457024C1511ADDC005BC6FF /* UIImageView+Resize.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -331,6 +342,8 @@
 		A46DA5FA1505DAC800EA9D8B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A45702461510A437005BC6FF /* 3.jpg */,
+				A45702431510A410005BC6FF /* anonymous.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -460,7 +473,8 @@
 				A4BAB80114FDED6C00E51402 /* ViewController4.xib in Resources */,
 				A40B5717150474200045C9B1 /* CategoriesViewController.xib in Resources */,
 				A40B57571504C3280045C9B1 /* Design.xib in Resources */,
-				A47FA463150E481A0083CF97 /* PicDetailViewController.xib in Resources */,
+				A45702441510A410005BC6FF /* anonymous.png in Resources */,
+				A45702471510A437005BC6FF /* 3.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,6 +517,8 @@
 				A46DA5F91505C00600EA9D8B /* UIImageView+AsyncImageContainer.m in Sources */,
 				A47FA462150E481A0083CF97 /* PicDetailViewController.m in Sources */,
 				A47FA467150E48690083CF97 /* PSThumbnailImageView.m in Sources */,
+				A457024A15119D2B005BC6FF /* PicDetailView.m in Sources */,
+				A457024D1511ADDC005BC6FF /* UIImageView+Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

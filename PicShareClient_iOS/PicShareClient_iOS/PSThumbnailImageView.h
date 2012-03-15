@@ -10,7 +10,7 @@
 
 @protocol PSThumbnailImageViewEventsDelegate <NSObject>
 
-- (void)didReceiveTouchEventOfSender:(id)sender;
+- (void)didReceiveTouchEvent:(id)sender;
 
 @end
 
@@ -18,9 +18,8 @@
  PSThumbnailImageView is not UIImageView!!!
  This kind of ImageView has round corner with shardow. Will send touch event to delegate.
  */
-@interface PSThumbnailImageView : UIView
+@interface PSThumbnailImageView : UIControl
 
-@property (nonatomic,retain) id<PSThumbnailImageViewEventsDelegate> delegate;
 @property (nonatomic,retain) UIImageView *innerImageView;
 
 - (void)clearImage;

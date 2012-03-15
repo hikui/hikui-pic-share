@@ -109,6 +109,29 @@ static PicShareEngine *instance = NULL;
     return nil;
 }
 
+-(PictureStatus *)getPictureStatus:(NSInteger)psId
+{
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingFormat:@"api/picture/get.json?ps_id=%d",psId]];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error) {
+        response = [request responseString];
+    }
+    else {
+        NSLog(@"error! %@",[error code]);
+        //do something in ui
+        return nil;
+    }
+    if (response != nil) {
+        NSDictionary *dictFromJson = [response objectFromJSONString];
+        PictureStatus *pictureStatus = [[[PictureStatus alloc]initWithJSONDict:dictFromJson]autorelease];
+        return pictureStatus;
+    }
+    return nil;
+}
+
 -(void)dealloc{
     [_password release];
     [_username release];

@@ -14,14 +14,19 @@
 - (void)setImageWithUrl:(NSURL *)url placeholderImage:(UIImage *)placeholder
 {
     self.image = placeholder;
-    AsyncImageDownloader *downloader = [AsyncImageDownloader sharedAsyncImageDownloader];
-    [downloader loadImageWithUrl:url AndDelegate:self];
+    if (url != nil) {
+        AsyncImageDownloader *downloader = [AsyncImageDownloader sharedAsyncImageDownloader];
+        [downloader loadImageWithUrl:url AndDelegate:self];
+    }
 }
 
 - (void)setImageWithUrl:(NSURL *)url
 {
-    AsyncImageDownloader *downloader = [AsyncImageDownloader sharedAsyncImageDownloader];
-    [downloader loadImageWithUrl:url Delegate:self scaleSize:self.frame.size];
+    if (url!=nil) {
+        AsyncImageDownloader *downloader = [AsyncImageDownloader sharedAsyncImageDownloader];
+        [downloader loadImageWithUrl:url Delegate:self scaleSize:self.frame.size];
+    }
+    
 }
 
 - (void)imageDidFinishLoad:(UIImage *)image

@@ -8,9 +8,15 @@
 
 #import "BoardsListCell.h"
 #import <QuartzCore/QuartzCore.h>
-#import "PSThumbnailImageView.h"
+
 
 #define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+
+@interface BoardsListCell()
+
+- (void)didReceiveTouchEvent:(id)sender;
+
+@end
 
 @implementation BoardsListCell
 
@@ -18,6 +24,7 @@
 @synthesize boardNameLabel = _boardNameLabel;
 @synthesize scrollView = _scrollView;
 @synthesize picCountLabel = _picCountLabel;
+@synthesize eventDelegate = _eventDelegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -58,7 +65,7 @@
     [super setSelected:selected animated:animated];
 }
 
--(void)addPictureWithUrlStr:(NSString *)urlStr eventDelegate:(id)delegate
+-(void)addPictureWithUrlStr:(NSString *)urlStr
 {
     if (_imageCount>=8) {
         [[_imageViews objectAtIndex:7]setImage:nil];//hide last image in order to show "more"
@@ -66,8 +73,8 @@
     }
     PSThumbnailImageView *theThumbnail = [_imageViews objectAtIndex:_imageCount];
     [theThumbnail setImageWithUrl:[NSURL URLWithString:urlStr]];
+    [theThumbnail addTarget:self action:@selector(didReceiveTouchEvent:) forControlEvents:UIControlEventTouchUpInside];
     [_scrollView addSubview:theThumbnail];
-    theThumbnail.delegate = delegate;
     CGSize scrollViewContentSize = _scrollView.contentSize;
     scrollViewContentSize.width += 84;
     _scrollView.contentSize = scrollViewContentSize;
@@ -80,7 +87,14 @@
     _scrollView.contentSize = CGSizeMake(84, 76);
     for (PSThumbnailImageView *aView in _imageViews) {
         [aView clearImage];
+        //also clear target-action
+        [aView removeTarget:self action:@selector(didReceiveTouchEvent:) forControlEvents:UIControlEventTouchUpInside];
     }
+}
+
+- (NSInteger) offsetOfaThumbnail:(PSThumbnailImageView *)thumbnailImageView
+{
+    return [_imageViews indexOfObject:thumbnailImageView];
 }
 
 - (void)dealloc
@@ -88,12 +102,23 @@
     [_boardNameLabel release];
     [_imageViews release];
     [_scrollView release];
+    [_eventDelegate release];
     [super dealloc];
 }
 
 + (CGFloat)getBoardsListCellHeight:(Board *)board withSpecifiedOrientation:(UIDeviceOrientation *)orientation
 {
     return 128;
+}
+
+
+#pragma mark - delegate methods
+
+/**
+ */
+- (void)didReceiveTouchEvent:(id)sender
+{
+    [_eventDelegate didReceiveTouchEvent:sender];
 }
 
 @end

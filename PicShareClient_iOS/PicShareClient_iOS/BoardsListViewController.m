@@ -9,6 +9,7 @@
 #import "BoardsListViewController.h"
 #import "PicShareEngine.h"
 #import "BoardsListCell.h"
+#import "PicDetailViewController.h"
 
 @interface BoardsListViewController ()
 
@@ -136,11 +137,12 @@
     }
     cell.boardNameLabel.text = b.name;
     cell.picCountLabel.text = [[[NSString alloc]initWithFormat:@"%d张图片",b.picturesCount]autorelease];
+    cell.eventDelegate = self;
     [cell clearCurrentPictures];
     if (imagesCount>8) {
         for (int i=0; i<7; i++) {
             PictureStatus *ps = [pictureStatuses objectAtIndex:i];
-            [cell addPictureWithUrlStr:ps.pictureUrl eventDelegate:self];
+            [cell addPictureWithUrlStr:ps.pictureUrl];
         }
 //        UIButton *moreButton = [[UIButton alloc]initWithFrame:CGRectMake(244, 125,60, 60)];
 //        [moreButton setTitle:@"更多..." forState:UIControlStateNormal];
@@ -152,7 +154,7 @@
     else {
         for (int i=0; i<imagesCount; i++) {
             PictureStatus *ps = [pictureStatuses objectAtIndex:i];
-            [cell addPictureWithUrlStr:ps.pictureUrl eventDelegate:self];
+            [cell addPictureWithUrlStr:ps.pictureUrl];
         }
     }
     
@@ -258,11 +260,17 @@
 }
 
 #pragma mark - PSThumbnailImageViewDelegate
-- (void)didReceiveTouchEventOfSender:(id)sender
+- (void)didReceiveTouchEvent:(id)sender
 {
-    PSThumbnailImageView *_sender = (PSThumbnailImageView *)sender;
-    UITableViewCell *cell = (UITableViewCell *)_sender.superview.superview;
-    [self.tableView indexPathForCell:cell];
+    PSThumbnailImageView *iv = (PSThumbnailImageView *)sender;
+    BoardsListCell *cell = (BoardsListCell *)iv.superview.superview.superview;//Imageview->scrollview->contentview->cell
+    NSIndexPath *index = [self.tableView indexPathForCell:(UITableViewCell *)cell];
+    NSInteger offset = [cell offsetOfaThumbnail:iv];
+    //NSLog(@"iv at row %d, offset: %d",index.row,offset);
+    //PicDetailViewController *picDetailViewController = [[PicDetailViewController alloc]initWithNibName:@"PicDetailViewController" bundle:[NSBundle mainBundle]];
+    PicDetailViewController *picDetailViewController = [[PicDetailViewController alloc]init];
+    [self.navigationController pushViewController:picDetailViewController animated:YES];
+    [picDetailViewController release];
 }
 
 @end

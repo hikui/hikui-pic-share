@@ -20,7 +20,9 @@
     }
     self = [super init];
     if(self){
-        avatarUrl = [[data objectForKey:@"avatar"]copy];
+        if ([data objectForKey:@"avatar"]!=[NSNull null]) {
+            avatarUrl = [[data objectForKey:@"avatar"]copy];
+        }
         userId = [[data objectForKey:@"user_id"]intValue];
         location = [[data objectForKey:@"location"]copy];
         nickname = [[data objectForKey:@"nick"]copy];

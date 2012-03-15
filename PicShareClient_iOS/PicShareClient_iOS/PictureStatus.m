@@ -10,7 +10,7 @@
 
 @implementation PictureStatus
 
-@synthesize location,via,psId,owner,boardId,picture,timestamp,pictureUrl,description,statusType,commentsCount;
+@synthesize location,via,psId,owner,boardId,picture,timestamp,pictureUrl,description,statusType,commentsCount,boardName;
 
 -(id)initWithJSONDict:(NSDictionary *)data
 {
@@ -33,6 +33,7 @@
         [df setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
         timestamp = [df dateFromString:[data objectForKey:@"timestamp"]];
         [df release];
+        boardName = [[data objectForKey:@"board_name"]copy];
     }
     return self;
 }
