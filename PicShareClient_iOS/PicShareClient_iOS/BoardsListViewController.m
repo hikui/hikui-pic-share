@@ -207,12 +207,13 @@
 -(void)loadData
 {
     _engine = [PicShareEngine sharedEngine];
+    NSArray *returnedArray = nil;
     if (_type == categoryDetail) {
-        NSArray *returnedArray = [_engine getBoardsOfCategoryId:_contentId];
-        [self performSelectorOnMainThread:@selector(loadDataDidFinish:) withObject:returnedArray waitUntilDone:NO];
+        returnedArray = [_engine getBoardsOfCategoryId:_contentId];
     }else {
-#warning not implement yet
+        returnedArray = [_engine getBoardsOfUserId:_contentId];
     }
+    [self performSelectorOnMainThread:@selector(loadDataDidFinish:) withObject:returnedArray waitUntilDone:NO];
 }
 
 -(void)loadDataDidFinish:(NSArray *)data
@@ -235,12 +236,13 @@
 - (void)pageData
 {
     _engine = [PicShareEngine sharedEngine];
+    NSArray *returnedArray = nil;
     if (_type == categoryDetail) {
-        NSArray *returnedArray = [_engine getBoardsOfCategoryId:_contentId page:++_currPage];
-        [self performSelectorOnMainThread:@selector(pageDataDidFinish:) withObject:returnedArray waitUntilDone:NO];
+       returnedArray = [_engine getBoardsOfCategoryId:_contentId page:++_currPage];
     }else{
-        
+        returnedArray = [_engine getBoardsOfUserId:_contentId page:++_currPage];
     }
+    [self performSelectorOnMainThread:@selector(pageDataDidFinish:) withObject:returnedArray waitUntilDone:NO];
 }
 
 - (void)pageDataDidFinish:(NSArray *)data
@@ -266,9 +268,11 @@
     BoardsListCell *cell = (BoardsListCell *)iv.superview.superview.superview;//Imageview->scrollview->contentview->cell
     NSIndexPath *index = [self.tableView indexPathForCell:(UITableViewCell *)cell];
     NSInteger offset = [cell offsetOfaThumbnail:iv];
+    Board *b = [_boards objectAtIndex:index.row];
+    PictureStatus *ps = [b.pictureStatuses objectAtIndex:offset];
     //NSLog(@"iv at row %d, offset: %d",index.row,offset);
     //PicDetailViewController *picDetailViewController = [[PicDetailViewController alloc]initWithNibName:@"PicDetailViewController" bundle:[NSBundle mainBundle]];
-    PicDetailViewController *picDetailViewController = [[PicDetailViewController alloc]init];
+    PicDetailViewController *picDetailViewController = [[PicDetailViewController alloc]initWithPicId:ps.psId];
     [self.navigationController pushViewController:picDetailViewController animated:YES];
     [picDetailViewController release];
 }

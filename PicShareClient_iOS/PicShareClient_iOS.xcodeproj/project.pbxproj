@@ -33,7 +33,29 @@
 		A40B57551504B2B00045C9B1 /* BoardsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A40B57541504B2B00045C9B1 /* BoardsListViewController.m */; };
 		A40B57571504C3280045C9B1 /* Design.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40B57561504C3280045C9B1 /* Design.xib */; };
 		A40B576E1505211C0045C9B1 /* AsyncImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = A40B576D1505211C0045C9B1 /* AsyncImageDownloader.m */; };
+		A4462BC31516EF75003E5F9F /* followButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BC11516EF75003E5F9F /* followButton.png */; };
+		A4462BC41516EF75003E5F9F /* followButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BC21516EF75003E5F9F /* followButton@2x.png */; };
+		A4462BD01516F726003E5F9F /* followButton-press.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BCE1516F726003E5F9F /* followButton-press.png */; };
+		A4462BD11516F726003E5F9F /* followButton-press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BCF1516F726003E5F9F /* followButton-press@2x.png */; };
+		A4462BD61516FAB4003E5F9F /* unfoButton-press.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BD21516FAB4003E5F9F /* unfoButton-press.png */; };
+		A4462BD71516FAB4003E5F9F /* unfoButton-press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BD31516FAB4003E5F9F /* unfoButton-press@2x.png */; };
+		A4462BD81516FAB4003E5F9F /* unfoButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BD41516FAB4003E5F9F /* unfoButton.png */; };
+		A4462BD91516FAB4003E5F9F /* unfoButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BD51516FAB4003E5F9F /* unfoButton@2x.png */; };
+		A4462BF01517145F003E5F9F /* house.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BEC1517145E003E5F9F /* house.png */; };
+		A4462BF11517145F003E5F9F /* glass.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BED1517145E003E5F9F /* glass.png */; };
+		A4462BF21517145F003E5F9F /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BEE1517145F003E5F9F /* mail.png */; };
+		A4462BF31517145F003E5F9F /* man.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BEF1517145F003E5F9F /* man.png */; };
+		A4462BF8151714B1003E5F9F /* house@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BF4151714B0003E5F9F /* house@2x.png */; };
+		A4462BF9151714B1003E5F9F /* glass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BF5151714B1003E5F9F /* glass@2x.png */; };
+		A4462BFA151714B1003E5F9F /* mail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BF6151714B1003E5F9F /* mail@2x.png */; };
+		A4462BFB151714B1003E5F9F /* man@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BF7151714B1003E5F9F /* man@2x.png */; };
 		A44B656914FFCABF005D6588 /* PictureWallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A44B656814FFCABF005D6588 /* PictureWallViewController.m */; };
+		A44DE73D1515960F0048681E /* button-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = A44DE7391515960F0048681E /* button-hover.png */; };
+		A44DE73E1515960F0048681E /* button-hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A44DE73A1515960F0048681E /* button-hover@2x.png */; };
+		A44DE73F1515960F0048681E /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = A44DE73B1515960F0048681E /* button.png */; };
+		A44DE7401515960F0048681E /* button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A44DE73C1515960F0048681E /* button@2x.png */; };
+		A44DE7811515F1AE0048681E /* UsersListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A44DE77F1515F1AE0048681E /* UsersListViewController.m */; };
+		A44DE7821515F1AE0048681E /* UsersListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A44DE7801515F1AE0048681E /* UsersListViewController.xib */; };
 		A44E235614F7746600A73307 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44E235514F7746600A73307 /* UIKit.framework */; };
 		A44E235814F7746600A73307 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44E235714F7746600A73307 /* Foundation.framework */; };
 		A44E235A14F7746600A73307 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44E235914F7746600A73307 /* CoreGraphics.framework */; };
@@ -45,6 +67,8 @@
 		A45702471510A437005BC6FF /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A45702461510A437005BC6FF /* 3.jpg */; };
 		A457024A15119D2B005BC6FF /* PicDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = A457024915119D2B005BC6FF /* PicDetailView.m */; };
 		A457024D1511ADDC005BC6FF /* UIImageView+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A457024C1511ADDC005BC6FF /* UIImageView+Resize.m */; };
+		A45702B51514809F005BC6FF /* UserDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45702B31514809F005BC6FF /* UserDetailViewController.m */; };
+		A45702B61514809F005BC6FF /* UserDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A45702B41514809F005BC6FF /* UserDetailViewController.xib */; };
 		A46DA5F91505C00600EA9D8B /* UIImageView+AsyncImageContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = A46DA5F81505C00600EA9D8B /* UIImageView+AsyncImageContainer.m */; };
 		A47FA462150E481A0083CF97 /* PicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A47FA460150E481A0083CF97 /* PicDetailViewController.m */; };
 		A47FA467150E48690083CF97 /* PSThumbnailImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A47FA466150E48690083CF97 /* PSThumbnailImageView.m */; };
@@ -115,8 +139,31 @@
 		A40B57561504C3280045C9B1 /* Design.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Design.xib; sourceTree = "<group>"; };
 		A40B576C1505211C0045C9B1 /* AsyncImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageDownloader.h; sourceTree = "<group>"; };
 		A40B576D1505211C0045C9B1 /* AsyncImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageDownloader.m; sourceTree = "<group>"; };
+		A4462BC11516EF75003E5F9F /* followButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = followButton.png; sourceTree = "<group>"; };
+		A4462BC21516EF75003E5F9F /* followButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "followButton@2x.png"; sourceTree = "<group>"; };
+		A4462BCE1516F726003E5F9F /* followButton-press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "followButton-press.png"; sourceTree = "<group>"; };
+		A4462BCF1516F726003E5F9F /* followButton-press@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "followButton-press@2x.png"; sourceTree = "<group>"; };
+		A4462BD21516FAB4003E5F9F /* unfoButton-press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unfoButton-press.png"; sourceTree = "<group>"; };
+		A4462BD31516FAB4003E5F9F /* unfoButton-press@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unfoButton-press@2x.png"; sourceTree = "<group>"; };
+		A4462BD41516FAB4003E5F9F /* unfoButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unfoButton.png; sourceTree = "<group>"; };
+		A4462BD51516FAB4003E5F9F /* unfoButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unfoButton@2x.png"; sourceTree = "<group>"; };
+		A4462BEC1517145E003E5F9F /* house.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = house.png; sourceTree = "<group>"; };
+		A4462BED1517145E003E5F9F /* glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glass.png; sourceTree = "<group>"; };
+		A4462BEE1517145F003E5F9F /* mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail.png; sourceTree = "<group>"; };
+		A4462BEF1517145F003E5F9F /* man.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = man.png; sourceTree = "<group>"; };
+		A4462BF4151714B0003E5F9F /* house@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "house@2x.png"; sourceTree = "<group>"; };
+		A4462BF5151714B1003E5F9F /* glass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "glass@2x.png"; sourceTree = "<group>"; };
+		A4462BF6151714B1003E5F9F /* mail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mail@2x.png"; sourceTree = "<group>"; };
+		A4462BF7151714B1003E5F9F /* man@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "man@2x.png"; sourceTree = "<group>"; };
 		A44B656714FFCABF005D6588 /* PictureWallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureWallViewController.h; sourceTree = "<group>"; };
 		A44B656814FFCABF005D6588 /* PictureWallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureWallViewController.m; sourceTree = "<group>"; };
+		A44DE7391515960F0048681E /* button-hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-hover.png"; sourceTree = "<group>"; };
+		A44DE73A1515960F0048681E /* button-hover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-hover@2x.png"; sourceTree = "<group>"; };
+		A44DE73B1515960F0048681E /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
+		A44DE73C1515960F0048681E /* button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button@2x.png"; sourceTree = "<group>"; };
+		A44DE77E1515F1AE0048681E /* UsersListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsersListViewController.h; sourceTree = "<group>"; };
+		A44DE77F1515F1AE0048681E /* UsersListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsersListViewController.m; sourceTree = "<group>"; };
+		A44DE7801515F1AE0048681E /* UsersListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UsersListViewController.xib; sourceTree = "<group>"; };
 		A44E235114F7746600A73307 /* PicShareClient_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PicShareClient_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44E235514F7746600A73307 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A44E235714F7746600A73307 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -134,6 +181,9 @@
 		A457024915119D2B005BC6FF /* PicDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicDetailView.m; sourceTree = "<group>"; };
 		A457024B1511ADDC005BC6FF /* UIImageView+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Resize.h"; sourceTree = "<group>"; };
 		A457024C1511ADDC005BC6FF /* UIImageView+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Resize.m"; sourceTree = "<group>"; };
+		A45702B21514809F005BC6FF /* UserDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailViewController.h; sourceTree = "<group>"; };
+		A45702B31514809F005BC6FF /* UserDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailViewController.m; sourceTree = "<group>"; };
+		A45702B41514809F005BC6FF /* UserDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserDetailViewController.xib; sourceTree = "<group>"; };
 		A46DA5F71505C00600EA9D8B /* UIImageView+AsyncImageContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AsyncImageContainer.h"; sourceTree = "<group>"; };
 		A46DA5F81505C00600EA9D8B /* UIImageView+AsyncImageContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AsyncImageContainer.m"; sourceTree = "<group>"; };
 		A47FA45F150E481A0083CF97 /* PicDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicDetailViewController.h; sourceTree = "<group>"; };
@@ -264,6 +314,12 @@
 				A40B57541504B2B00045C9B1 /* BoardsListViewController.m */,
 				A47FA45F150E481A0083CF97 /* PicDetailViewController.h */,
 				A47FA460150E481A0083CF97 /* PicDetailViewController.m */,
+				A45702B21514809F005BC6FF /* UserDetailViewController.h */,
+				A45702B31514809F005BC6FF /* UserDetailViewController.m */,
+				A45702B41514809F005BC6FF /* UserDetailViewController.xib */,
+				A44DE77E1515F1AE0048681E /* UsersListViewController.h */,
+				A44DE77F1515F1AE0048681E /* UsersListViewController.m */,
+				A44DE7801515F1AE0048681E /* UsersListViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -342,6 +398,26 @@
 		A46DA5FA1505DAC800EA9D8B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A4462BF4151714B0003E5F9F /* house@2x.png */,
+				A4462BF5151714B1003E5F9F /* glass@2x.png */,
+				A4462BF6151714B1003E5F9F /* mail@2x.png */,
+				A4462BF7151714B1003E5F9F /* man@2x.png */,
+				A4462BEC1517145E003E5F9F /* house.png */,
+				A4462BED1517145E003E5F9F /* glass.png */,
+				A4462BEE1517145F003E5F9F /* mail.png */,
+				A4462BEF1517145F003E5F9F /* man.png */,
+				A4462BD21516FAB4003E5F9F /* unfoButton-press.png */,
+				A4462BD31516FAB4003E5F9F /* unfoButton-press@2x.png */,
+				A4462BD41516FAB4003E5F9F /* unfoButton.png */,
+				A4462BD51516FAB4003E5F9F /* unfoButton@2x.png */,
+				A4462BCE1516F726003E5F9F /* followButton-press.png */,
+				A4462BCF1516F726003E5F9F /* followButton-press@2x.png */,
+				A4462BC11516EF75003E5F9F /* followButton.png */,
+				A4462BC21516EF75003E5F9F /* followButton@2x.png */,
+				A44DE7391515960F0048681E /* button-hover.png */,
+				A44DE73A1515960F0048681E /* button-hover@2x.png */,
+				A44DE73B1515960F0048681E /* button.png */,
+				A44DE73C1515960F0048681E /* button@2x.png */,
 				A45702461510A437005BC6FF /* 3.jpg */,
 				A45702431510A410005BC6FF /* anonymous.png */,
 			);
@@ -475,6 +551,28 @@
 				A40B57571504C3280045C9B1 /* Design.xib in Resources */,
 				A45702441510A410005BC6FF /* anonymous.png in Resources */,
 				A45702471510A437005BC6FF /* 3.jpg in Resources */,
+				A45702B61514809F005BC6FF /* UserDetailViewController.xib in Resources */,
+				A44DE73D1515960F0048681E /* button-hover.png in Resources */,
+				A44DE73E1515960F0048681E /* button-hover@2x.png in Resources */,
+				A44DE73F1515960F0048681E /* button.png in Resources */,
+				A44DE7401515960F0048681E /* button@2x.png in Resources */,
+				A44DE7821515F1AE0048681E /* UsersListViewController.xib in Resources */,
+				A4462BC31516EF75003E5F9F /* followButton.png in Resources */,
+				A4462BC41516EF75003E5F9F /* followButton@2x.png in Resources */,
+				A4462BD01516F726003E5F9F /* followButton-press.png in Resources */,
+				A4462BD11516F726003E5F9F /* followButton-press@2x.png in Resources */,
+				A4462BD61516FAB4003E5F9F /* unfoButton-press.png in Resources */,
+				A4462BD71516FAB4003E5F9F /* unfoButton-press@2x.png in Resources */,
+				A4462BD81516FAB4003E5F9F /* unfoButton.png in Resources */,
+				A4462BD91516FAB4003E5F9F /* unfoButton@2x.png in Resources */,
+				A4462BF01517145F003E5F9F /* house.png in Resources */,
+				A4462BF11517145F003E5F9F /* glass.png in Resources */,
+				A4462BF21517145F003E5F9F /* mail.png in Resources */,
+				A4462BF31517145F003E5F9F /* man.png in Resources */,
+				A4462BF8151714B1003E5F9F /* house@2x.png in Resources */,
+				A4462BF9151714B1003E5F9F /* glass@2x.png in Resources */,
+				A4462BFA151714B1003E5F9F /* mail@2x.png in Resources */,
+				A4462BFB151714B1003E5F9F /* man@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +617,8 @@
 				A47FA467150E48690083CF97 /* PSThumbnailImageView.m in Sources */,
 				A457024A15119D2B005BC6FF /* PicDetailView.m in Sources */,
 				A457024D1511ADDC005BC6FF /* UIImageView+Resize.m in Sources */,
+				A45702B51514809F005BC6FF /* UserDetailViewController.m in Sources */,
+				A44DE7811515F1AE0048681E /* UsersListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

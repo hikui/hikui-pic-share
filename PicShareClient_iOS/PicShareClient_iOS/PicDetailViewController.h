@@ -18,6 +18,10 @@
 @property (readwrite) NSInteger picId;
 @property (nonatomic,retain) PictureStatus *pictureStatus;
 
-- (id)initWithPicId:(NSInteger)picId;
+- (id)initWithPicId:(NSInteger)aPicId;
+- (void)usernameButtonOnClick:(id)sender;
+- (void)boardNameButtonOnClick:(id)sender;
+- (void)viaButtonOnClick:(id)sender;
+- (void)repinButtonOnClick:(id)sender;
 
 @end

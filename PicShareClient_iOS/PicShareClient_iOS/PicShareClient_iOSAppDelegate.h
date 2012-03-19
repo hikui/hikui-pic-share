@@ -14,6 +14,7 @@
 #import "ViewController4.h"
 #import "PictureWallViewController.h"
 #import "CategoriesViewController.h"
+#import "User.h"
 
 @interface PicShareClient_iOSAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate>
 {

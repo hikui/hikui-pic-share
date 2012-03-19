@@ -10,7 +10,7 @@
 
 @implementation PictureStatus
 
-@synthesize location,via,psId,owner,boardId,picture,timestamp,pictureUrl,description,statusType,commentsCount,boardName;
+@synthesize location,via,psId,owner,boardId,picture,timestamp,pictureUrl,picDescription,statusType,commentsCount,boardName;
 
 -(id)initWithJSONDict:(NSDictionary *)data
 {
@@ -26,7 +26,7 @@
         owner = [[User alloc]initWithJSONDict:[data objectForKey:@"owner"]];
         boardId = [[data objectForKey:@"board_id"]intValue];
         pictureUrl = [[data objectForKey:@"image"]copy];
-        description = [[data objectForKey:@"description"]copy];
+        picDescription = [[data objectForKey:@"description"]copy];
         statusType = [[data objectForKey:@"status_type"]intValue];
         commentsCount = [[data objectForKey:@"comments_count"]intValue];
         NSDateFormatter *df = [[NSDateFormatter alloc]init];
@@ -46,7 +46,7 @@
     [pictureUrl release];
     [picture release];
     [timestamp release];
-    [description release];
+    [picDescription release];
     [super dealloc];
 }
 

@@ -29,5 +29,4 @@
 @property (nonatomic,retain) UIProgressView *progressView;
 
 - (id)initWithPictureStatus:(PictureStatus *)aPictureStatus;
-- (void)updateView;
 @end

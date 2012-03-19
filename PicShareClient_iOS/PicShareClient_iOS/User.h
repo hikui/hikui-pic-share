@@ -18,6 +18,9 @@
 @property (nonatomic,copy) NSString *avatarUrl;
 @property (nonatomic,retain) UIImage *avatar; //async get
 @property (readwrite) BOOL isFollowing;
+@property (readonly) NSInteger followingCount;
+@property (readonly) NSInteger followersCount;
+@property (readonly) NSInteger picturesCount;
 
 -(id)initWithJSONDict:(NSDictionary *)data;
 

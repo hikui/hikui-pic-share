@@ -57,7 +57,7 @@
         boardNameButton = [[UIButton buttonWithType:UIButtonTypeCustom]retain];
         picDescriptionLabel = [[UILabel alloc]init];
         mainImageView = [[UIImageView alloc]init];
-        repinButton = [[UIButton buttonWithType:UIButtonTypeCustom]retain];
+        repinButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect]retain];
         commentTextField = [[UITextField alloc]init];
         viaButton = [[UIButton buttonWithType:UIButtonTypeCustom]retain];
         loadImgComplete = NO;
@@ -77,12 +77,11 @@
     self = [self init];
     if (self) {
         pictureStatus = aPictureStatus;
-        [self updateView];
     }
     return self;
 }
 
--(void)updateView
+-(void)layoutSubviews
 {
     
     if (self.pictureStatus != nil) {
@@ -117,6 +116,7 @@
             UILabel *viaLabel = [[UILabel alloc]initWithFrame:CGRectMake(nameButtonFrame.origin.x, nameButtonFrame.origin.y+nameButtonSize.height, 35, 18)];
             viaLabel.text = @"转自";
             [self addSubview:viaLabel];
+            [viaLabel release];
             
             CGSize viaButtonSize = [pictureStatus.via.username sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(320-8-(viaLabel.frame.origin.x+viaLabel.frame.size.width), 18) lineBreakMode:UILineBreakModeTailTruncation];
             viaButtonFrame = CGRectMake(viaLabel.frame.origin.x+viaLabel.frame.size.width+8, 18, viaButtonSize.width, viaButtonSize.height);
@@ -127,21 +127,13 @@
 
         }
         
-        CGSize picDescriptionLabelSize = [pictureStatus.description sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(300, 2000) lineBreakMode:UILineBreakModeWordWrap];
-        CGRect picDescriptionLabelFrame = CGRectMake(10, nameButtonFrame.origin.y+nameButtonFrame.size.height+viaButtonFrame.size.height+8, picDescriptionLabelSize.width, picDescriptionLabelSize.height);
-        picDescriptionLabel.frame = picDescriptionLabelFrame;
-        picDescriptionLabel.text = pictureStatus.description;
-        picDescriptionLabel.lineBreakMode = UILineBreakModeWordWrap;
-        picDescriptionLabel.font = [UIFont systemFontOfSize:14];
-
-        
-        
+               
         CGSize mainImageViewSize = CGSizeMake(300, 260);
         if (loadImgComplete) {
             mainImageViewSize = CGSizeMake(300, [UIImageView heightWithSpecificWidth:300 ofAnImage:tempImage]);
             mainImageView.image = tempImage;
         }
-        CGRect mainImageViewFrame = CGRectMake(picDescriptionLabelFrame.origin.x, picDescriptionLabelFrame.origin.y+picDescriptionLabelSize.height+8, mainImageViewSize.width, mainImageViewSize.height);
+        CGRect mainImageViewFrame = CGRectMake(avatarImageView.frame.origin.x, avatarImageView.frame.origin.y+avatarImageView.frame.size.height+viaButtonFrame.size.height+8, mainImageViewSize.width, mainImageViewSize.height);
         mainImageView.frame = mainImageViewFrame;
         progressView.frame = CGRectMake((mainImageViewSize.width-150)/2, (mainImageViewSize.height-11)/2, 150, 11);
         if (!loadImgComplete) {
@@ -149,15 +141,33 @@
             [self downloadMainImage];
         }
         
+        
+        CGSize picDescriptionLabelSize = [pictureStatus.picDescription sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(300, 2000) lineBreakMode:UILineBreakModeWordWrap];
+        CGRect picDescriptionLabelFrame = CGRectMake(avatarImageView.frame.origin.x, mainImageViewFrame.origin.y+mainImageViewFrame.size.height+8, picDescriptionLabelSize.width, picDescriptionLabelSize.height);
+        picDescriptionLabel.frame = picDescriptionLabelFrame;
+        picDescriptionLabel.text = pictureStatus.picDescription;
+        picDescriptionLabel.lineBreakMode = UILineBreakModeWordWrap;
+        picDescriptionLabel.numberOfLines = 0;
+        picDescriptionLabel.font = [UIFont systemFontOfSize:14];
+        
+        
+
+        
+        CGRect repinButtonFrame = CGRectMake(picDescriptionLabelFrame.origin.x, picDescriptionLabelFrame.origin.y+picDescriptionLabelFrame.size.height+8, 80, 30);
+        repinButton.frame = repinButtonFrame;
+        [repinButton setTitle:@"转发" forState:UIControlStateNormal];
+        repinButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        
         // to be continued
-        self.contentSize = CGSizeMake(320, mainImageView.frame.origin.y+mainImageView.frame.size.height);
+#warning comments
+        self.contentSize = CGSizeMake(320, repinButton.frame.origin.y+repinButton.frame.size.height+10);
         
     }
 }
 
 -(void)downloadMainImage
 {
-    request = [[ASIHTTPRequest alloc]initWithURL:[NSURL URLWithString:@"http://pp.a.5d6d.com/userdirs/0/8/mtm/attachments/day_100718/1007181733521bb23ef358cdec.jpg"]];
+    request = [[ASIHTTPRequest alloc]initWithURL:[NSURL URLWithString:pictureStatus.pictureUrl]];
     [request setDelegate:self];
     [request setDownloadCache:[ASIDownloadCache sharedCache]];
     [request setCachePolicy:ASIOnlyLoadIfNotCachedCachePolicy];
@@ -170,7 +180,7 @@
     tempImage = [[UIImage imageWithData:[aRequest responseData]]retain];
     [self.progressView removeFromSuperview];
     loadImgComplete = YES;
-    [self updateView];
+    [self layoutSubviews];
 }
 
 

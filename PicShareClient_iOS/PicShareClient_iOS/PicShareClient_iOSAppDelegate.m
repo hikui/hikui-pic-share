@@ -25,10 +25,15 @@
     vc3 = [[ViewController3 alloc]init];
     vc4 = [[ViewController4 alloc]init];
     UIViewController *placehoder = [[UIViewController alloc]init];
-    [_pictureWallViewController.tabBarItem setTitle:@"afda"];
+    [_pictureWallViewController.tabBarItem setTitle:@"主页"];
+    [_pictureWallViewController.tabBarItem setImage:[UIImage imageNamed:@"house.png"]];
     [nCategoriesViewController.tabBarItem setTitle:@"探索"];
-    [vc3.tabBarItem setTitle:@"view3"];
-    [vc4.tabBarItem setTitle:@"view4"];
+    [nCategoriesViewController.tabBarItem setImage:[UIImage imageNamed:@"glass.png"]];
+    [vc3.tabBarItem setTitle:@"消息"];
+    [vc3.tabBarItem setImage:[UIImage imageNamed:@"mail.png"]];
+    
+    [vc4.tabBarItem setTitle:@"个人"];
+    [vc4.tabBarItem setImage:[UIImage imageNamed:@"man.png"]];
     [placehoder setTitle:@""];
     [placehoder.tabBarItem setEnabled:false];
     [_tabBarController setViewControllers:[NSArray arrayWithObjects:_pictureWallViewController,nCategoriesViewController,placehoder,vc3,vc4, nil]];

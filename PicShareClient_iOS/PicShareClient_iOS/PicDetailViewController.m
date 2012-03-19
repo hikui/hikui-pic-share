@@ -9,6 +9,7 @@
 #import "PicDetailViewController.h"
 #import "PicDetailView.h"
 #import "PicShareEngine.h"
+#import "UserDetailViewController.h"
 
 @interface PicDetailViewController ()
 
@@ -31,6 +32,15 @@
 {
     self = [super init];
     if (self) {
+    }
+    return self;
+}
+
+- (id)initWithPicId:(NSInteger)aPicId
+{
+    self = [super init];
+    if (self) {
+        picId = aPicId;
     }
     return self;
 }
@@ -71,7 +81,11 @@
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    // e.g. self.myOutlet = nil;s
+    [loadingView release];
+    loadingView = nil;
+    [loadingIndicator release];
+    loadingIndicator = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -87,7 +101,7 @@
     //调用方法时直接使用了performSelectorInBackground，所以需要手动开一个autoreleasepool
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     PicShareEngine *engine = [PicShareEngine sharedEngine];
-    PictureStatus * returnedStatus = [engine getPictureStatus:1];
+    PictureStatus * returnedStatus = [engine getPictureStatus:picId];
     [self performSelectorOnMainThread:@selector(loadDataDidFinish:) withObject:returnedStatus waitUntilDone:YES];
     [pool release];
 }
@@ -98,8 +112,37 @@
     [loadingIndicator stopAnimating];
     PicDetailView *detailView = [[PicDetailView alloc]initWithPictureStatus:self.pictureStatus];
     self.view = detailView;
+    //set target-actions
+    [detailView.usernameButton addTarget:self action:@selector(usernameButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [detailView.boardNameButton addTarget:self action:@selector(boardNameButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [detailView.viaButton addTarget:self action:@selector(viaButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [detailView.repinButton addTarget:self action:@selector(repinButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     [detailView release];
     
+}
+
+#pragma mark - IBActions
+- (void)usernameButtonOnClick:(id)sender
+{
+    NSLog(@"usernameButtonOnClick");
+    UserDetailViewController *userDetailViewController = [[UserDetailViewController alloc]initWithUser:pictureStatus.owner];
+    [self.navigationController pushViewController:userDetailViewController animated:YES];
+    [userDetailViewController release];
+}
+- (void)boardNameButtonOnClick:(id)sender
+{
+    NSLog(@"boardNameButtonOnClick"); 
+#warning not implement yet
+}
+- (void)viaButtonOnClick:(id)sender
+{
+    NSLog(@"viaButtonOnClick");
+    #warning not implement yet
+}
+- (void)repinButtonOnClick:(id)sender
+{
+    NSLog(@"repinButtonOnClick");
+    #warning not implement yet
 }
 
 @end

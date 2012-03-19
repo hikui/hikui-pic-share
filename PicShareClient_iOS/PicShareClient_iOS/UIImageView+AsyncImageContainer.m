@@ -31,7 +31,10 @@
 
 - (void)imageDidFinishLoad:(UIImage *)image
 {
+    //self.alpha = 0.0f;
     self.image = image;
+    //[UIView animateWithDuration:1 animations:^(void){self.alpha = 1;}];
+    
 }
 
 - (void)imageDidFaildLoad:(NSError *)error

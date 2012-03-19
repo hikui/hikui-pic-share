@@ -54,15 +54,15 @@
 
 //relationship api
 -(void)followBoard:(NSInteger)boardId;
--(void)followBoard:(NSInteger)boardId page:(NSInteger)page;
--(void)followBoard:(NSInteger)boardId page:(NSInteger)page countPerPage:(NSInteger)count;
 -(void)followUser:(NSInteger)userId;
--(void)followUser:(NSInteger)userId page:(NSInteger)page;
--(void)followUser:(NSInteger)userId page:(NSInteger)page countPerPage:(NSInteger)count;
 -(void)unFollowBoard:(NSInteger)boardId;
 -(void)unFollowUser:(NSInteger)userId;
--(NSArray *)getFollower:(NSInteger)userId;
+-(NSArray *)getFollowers:(NSInteger)userId;
+-(NSArray *)getFollowers:(NSInteger)userId page:(NSInteger)page;
+-(NSArray *)getFollowers:(NSInteger)userId page:(NSInteger)page countPerPage:(NSInteger)count;
 -(NSArray *)getFollowing:(NSInteger)userId;
+-(NSArray *)getFollowing:(NSInteger)userId page:(NSInteger)page;
+-(NSArray *)getFollowing:(NSInteger)userId page:(NSInteger)page countPerPage:(NSInteger)count;
 
 //timeline api
 -(NSArray *)getHomeTimeline;

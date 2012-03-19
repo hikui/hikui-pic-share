@@ -8,10 +8,15 @@ auth = HttpBasicAuthentication(realm="auth")
 get_all_categories_handler = Resource(GetAllCategoriesHandler)
 get_boards_of_category_handler = Resource(GetBoardsOfCategoryHandler)
 get_picture_handler = Resource(GetPictureHandler)
-
+get_boards_of_user_handler = Resource(GetBoardsOfUserHandler)
+get_followers_handler = Resource(GetFollowersHandler)
+get_following_handler = Resource(GetFollowingHandler)
 urlpatterns = patterns('',
 
     (r'^category/get_all.json$',get_all_categories_handler),
     (r'^board/get_category_boards.json$',get_boards_of_category_handler),
+    (r'^board/get_user_boards.json$',get_boards_of_user_handler),
     (r'^picture/get.json$',get_picture_handler),
+    (r'^relationship/followers.json$',get_followers_handler),
+    (r'^relationship/following.json$',get_following_handler),
 )

@@ -10,7 +10,7 @@
 
 @implementation User
 
-@synthesize avatar,userId,location,nickname,username,avatarUrl,isFollowing,introduction;
+@synthesize avatar,userId,location,nickname,username,avatarUrl,isFollowing,introduction,picturesCount,followersCount,followingCount;
 
 -(id)initWithJSONDict:(NSDictionary *)data
 {
@@ -24,11 +24,18 @@
             avatarUrl = [[data objectForKey:@"avatar"]copy];
         }
         userId = [[data objectForKey:@"user_id"]intValue];
-        location = [[data objectForKey:@"location"]copy];
+        if ([data objectForKey:@"location"]!=[NSNull null]) {
+            location = [[data objectForKey:@"location"]copy];
+        }else {
+            location = @"未知";
+        }
         nickname = [[data objectForKey:@"nick"]copy];
         username = [[data objectForKey:@"username"]copy];
         isFollowing = [[data objectForKey:@"is_following"]boolValue];
         introduction = [[data objectForKey:@"introduction"]copy];
+        followersCount = [[data objectForKey:@"followers_count"]intValue];
+        followingCount = [[data objectForKey:@"following_count"]intValue];
+        picturesCount = [[data objectForKey:@"pictures_count"]intValue];
     }
     return self;
 }
