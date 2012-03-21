@@ -112,11 +112,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/UserDetailViewController.m"
-         timestampString = "353831801.042908"
+         timestampString = "353857482.01172"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "98"
-         endingLineNumber = "98"
+         startingLineNumber = "133"
+         endingLineNumber = "133"
          landmarkName = "-updateView"
          landmarkType = "5">
       </FileBreakpoint>

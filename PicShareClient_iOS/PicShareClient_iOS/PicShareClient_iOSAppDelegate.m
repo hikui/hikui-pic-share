@@ -8,6 +8,7 @@
 
 #import "PicShareClient_iOSAppDelegate.h"
 #import "AsyncImageDownloader.h"
+#import "PicShareEngine.h"
 
 @implementation PicShareClient_iOSAppDelegate
 
@@ -19,24 +20,30 @@
     // Override point for customization after application launch.
     // Add the tab bar controller's current view as a subview of the window
     _tabBarController = [[CustomTabBarController alloc]init];
+    
     _pictureWallViewController = [[PictureWallViewController alloc]init];
-    _categoriesViewController = [[CategoriesViewController alloc]initWithNibName:@"CategoriesViewController" bundle:nil];
-    UINavigationController *nCategoriesViewController = [[[UINavigationController alloc]initWithRootViewController:_categoriesViewController]autorelease];
-    vc3 = [[ViewController3 alloc]init];
-    vc4 = [[ViewController4 alloc]init];
-    UIViewController *placehoder = [[UIViewController alloc]init];
     [_pictureWallViewController.tabBarItem setTitle:@"主页"];
     [_pictureWallViewController.tabBarItem setImage:[UIImage imageNamed:@"house.png"]];
+    
+    _categoriesViewController = [[CategoriesViewController alloc]initWithNibName:@"CategoriesViewController" bundle:nil];
+    UINavigationController *nCategoriesViewController = [[[UINavigationController alloc]initWithRootViewController:_categoriesViewController]autorelease];
     [nCategoriesViewController.tabBarItem setTitle:@"探索"];
     [nCategoriesViewController.tabBarItem setImage:[UIImage imageNamed:@"glass.png"]];
+    
+    vc3 = [[ViewController3 alloc]init];
     [vc3.tabBarItem setTitle:@"消息"];
     [vc3.tabBarItem setImage:[UIImage imageNamed:@"mail.png"]];
+#warning userId is an example.
+    _userProfileViewController = [[UserDetailViewController alloc]initwithuserId:1];
+    UINavigationController *nUserProfileViewController = [[[UINavigationController alloc]initWithRootViewController:_userProfileViewController]autorelease];
+    [nUserProfileViewController.tabBarItem setTitle:@"我的"];
+    [nUserProfileViewController.tabBarItem setImage:[UIImage imageNamed:@"man"]];
     
-    [vc4.tabBarItem setTitle:@"个人"];
-    [vc4.tabBarItem setImage:[UIImage imageNamed:@"man.png"]];
+    UIViewController *placehoder = [[UIViewController alloc]init];
     [placehoder setTitle:@""];
     [placehoder.tabBarItem setEnabled:false];
-    [_tabBarController setViewControllers:[NSArray arrayWithObjects:_pictureWallViewController,nCategoriesViewController,placehoder,vc3,vc4, nil]];
+    
+    [_tabBarController setViewControllers:[NSArray arrayWithObjects:_pictureWallViewController,nCategoriesViewController,placehoder,vc3,nUserProfileViewController, nil]];
     self.window.rootViewController = _tabBarController;
     [self.window makeKeyAndVisible];
     [placehoder release];

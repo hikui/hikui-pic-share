@@ -3,6 +3,7 @@ from piston.utils import rc
 from PicShareServer.PicShare.models import *
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User, AnonymousUser
+import UploadImage
 
 def is_authenticated(request):
     auth_string = request.META.get('HTTP_AUTHORIZATION', None)
@@ -190,3 +191,16 @@ class GetFollowingHandler(BaseHandler):
             followingsArray.append(getUserDict(request,aFollowing))
         resultDict['following'] = followingsArray
         return resultDict
+
+class GetUserDetailHandler(BaseHandler):
+    allowed_methods=('GET',)
+    def read(self,request):
+        userId = int(request.GET.get('user_id',1))
+        user = User.objects.get(pk = userId)
+        return getUserDict(request,user)
+        
+class UploadPictureHandler(BaseHandler):
+    allowed_methods=('POST',)
+    def create(self,request):
+        UploadImage.handle_upload_image(request.FILES['pic'])
+        return {}

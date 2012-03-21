@@ -282,6 +282,34 @@ static PicShareEngine *instance = NULL;
     return nil;
 }
 
+-(User *)getUser:(NSInteger)userId
+{
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingFormat:@"api/user/detail.json?user_id=%d",userId]];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [self addAuthHeaderForRequest:request];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error && [request responseStatusCode]==200) {
+        response = [request responseString];
+    }
+    else {
+        NSLog(@"error! %@",[error code]);
+        return nil;
+    }
+    if (response != nil) {
+        NSDictionary *dictFromJson = [response objectFromJSONString];
+        User *user = [[[User alloc]initWithJSONDict:dictFromJson]autorelease];
+        return user;
+    }
+    return nil;
+}
+
+-(void)uploadPicture:(UIImage *)picture toBoard:(NSInteger)boardId
+{
+
+}
+
 -(void)dealloc{
     [_password release];
     [_username release];

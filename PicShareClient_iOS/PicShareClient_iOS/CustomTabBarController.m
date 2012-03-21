@@ -27,9 +27,16 @@
 
 #import "CustomTabBarController.h"
 
+@interface CustomTabBarController ()
+
+- (void)cameraButtonOnTouch:(id)sender;
+
+@end
+
 @implementation CustomTabBarController
 
 @synthesize cameraButton = _cameraButton;
+@synthesize editViewController = _editViewController;
 
 // Create a view controller and setup it's tab bar item with a title and image
 -(UIViewController*) viewControllerWithTabTitle:(NSString*) title image:(UIImage*)image
@@ -51,6 +58,7 @@
 -(void) addCenterButtonWithImage:(UIImage*)buttonImage highlightImage:(UIImage*)highlightImage
 {
     UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self action:@selector(cameraButtonOnTouch:) forControlEvents:UIControlEventTouchUpInside];
     button.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
     button.frame = CGRectMake(0.0, 0.0, buttonImage.size.width, buttonImage.size.height);
     [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
@@ -76,9 +84,22 @@
   return YES;
 }
 
+- (void)cameraButtonOnTouch:(id)sender
+{
+    self.editViewController = [[PictureEditViewController alloc]init];
+    UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+    picker.allowsEditing = NO;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.delegate = self.editViewController;
+    [self presentModalViewController:picker animated:YES];
+    [picker release];
+}
+
+
 -(void)dealloc
 {
     [_cameraButton release];
+    [_editViewController release];
     [super dealloc];
 }
 

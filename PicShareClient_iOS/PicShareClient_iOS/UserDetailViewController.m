@@ -17,6 +17,8 @@
 @interface UserDetailViewController ()
 
 - (void)updateView;
+- (void)loadData;
+- (void)loadDataDidFinish:(User *)returnedUser;
 - (IBAction)userBoardsButtonOnClick:(id)sender;
 - (IBAction)userFollowersButtonOnClick:(id)sender;
 - (IBAction)userFollowingButtonOnClick:(id)sender;
@@ -39,6 +41,9 @@
     [avatarImageView release];
     [followButton release];
     [editProfileButton release];
+    [tempView release];
+    [loadingView release];
+    [loadingIndicator release];
     [super dealloc];
 }
 
@@ -58,6 +63,12 @@
     self.picturesButton = nil;
     self.followButton = nil;
     self.editProfileButton = nil;
+    [tempView release];
+    tempView = nil;
+    [loadingView release];
+    loadingView = nil;
+    [loadingIndicator release];
+    loadingIndicator = nil;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -65,6 +76,15 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+    }
+    return self;
+}
+
+- (id)initwithuserId:(NSInteger)anId
+{
+    self = [super init];
+    if (self) {
+        userId = anId;
     }
     return self;
 }
@@ -81,7 +101,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self updateView];
+    if (user!=nil) {
+        [self updateView];
+    }else{
+        tempView = [self.view retain];
+        loadingView = [[UIView alloc]init];
+        CGRect screenBounds = [UIScreen mainScreen].bounds;
+        CGFloat x = screenBounds.size.width/2 - 10;
+        CGFloat y = screenBounds.size.height/2 - 10-50;
+        loadingIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        loadingIndicator.frame = CGRectMake(x, y, 20, 20);
+        loadingIndicator.hidesWhenStopped = YES;
+        [loadingView addSubview:loadingIndicator];
+        self.view = loadingView;
+        [self performSelectorInBackground:@selector(loadData) withObject:nil];
+    }
+    
     
 }
 
@@ -102,7 +137,6 @@
         //the current user's profile
         followButton.hidden = YES;
     }else {
-#warning Some errors here!!!
         editProfileButton.hidden = YES;
         if (!user.isFollowing) {
             UIImage *followButtonImage = [[UIImage imageNamed:@"followButton"]stretchableImageWithLeftCapWidth:5.0 topCapHeight:13.0];
@@ -153,4 +187,20 @@
 
 #warning 修改profile、follow/unfo未做。
 
+#pragma mark - async methods
+- (void)loadData
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc]init];
+    PicShareEngine *engine = [PicShareEngine sharedEngine];
+    User *returnedUser = [engine getUser:userId];
+    [self performSelectorOnMainThread:@selector(loadDataDidFinish:) withObject:returnedUser waitUntilDone:NO];
+    [pool release];
+}
+- (void)loadDataDidFinish:(User *)returnedUser
+{
+    self.user = returnedUser;
+    [self updateView];
+    self.view = tempView;
+    [tempView release];
+}
 @end

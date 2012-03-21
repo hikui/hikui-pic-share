@@ -14,9 +14,11 @@
     UIView *tempView;
     UIView *loadingView;
     UIActivityIndicatorView *loadingIndicator;
+    NSInteger userId;
 }
 
 - (id)initWithUser:(User *)aUser;
+- (id)initwithuserId:(NSInteger)anId;
 
 @property (nonatomic,retain) User *user;
 @property (nonatomic,retain) IBOutlet UIScrollView *scrollView;

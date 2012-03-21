@@ -10,10 +10,16 @@
 
 @implementation UIImageView (Resize)
 
+static bool isRetina()
+{
+    return [[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
+    ([UIScreen mainScreen].scale == 2.0);
+}
+
+
 + (UIImage*)imageWithImage:(UIImage*)sourceImage scaledToSizeWithSameAspectRatio:(CGSize)targetSize
 {
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
-        ([UIScreen mainScreen].scale == 2.0)) {
+    if (isRetina()) {
         // Retina display
         targetSize.width *=2;
         targetSize.height *=2;
@@ -108,6 +114,9 @@
 
 + (UIImage*)imageWithImage:(UIImage*)sourceImage scaledToSizeWithTargetHeight:(CGFloat)targetHeight
 {
+    if (isRetina()) {
+        targetHeight *=2;
+    }
     CGSize imageSize = sourceImage.size;
     CGFloat width = imageSize.width;
     CGFloat height = imageSize.height;
@@ -138,6 +147,9 @@
 
 + (UIImage*)imageWithImage:(UIImage*)sourceImage scaledToSizeWithTargetWidth:(CGFloat)targetWidth
 {
+    if (isRetina()) {
+        targetWidth *=2;
+    }
     CGSize imageSize = sourceImage.size;
     CGFloat width = imageSize.width;
     CGFloat height = imageSize.height;

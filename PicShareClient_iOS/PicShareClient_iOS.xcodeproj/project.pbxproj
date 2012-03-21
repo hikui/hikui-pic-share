@@ -56,6 +56,11 @@
 		A44DE7401515960F0048681E /* button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A44DE73C1515960F0048681E /* button@2x.png */; };
 		A44DE7811515F1AE0048681E /* UsersListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A44DE77F1515F1AE0048681E /* UsersListViewController.m */; };
 		A44DE7821515F1AE0048681E /* UsersListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A44DE7801515F1AE0048681E /* UsersListViewController.xib */; };
+		A44DEBE11519CE5800EAC9C7 /* rc-1.png in Resources */ = {isa = PBXBuildFile; fileRef = A44DEBDD1519CE5800EAC9C7 /* rc-1.png */; };
+		A44DEBE21519CE5800EAC9C7 /* rc-2.png in Resources */ = {isa = PBXBuildFile; fileRef = A44DEBDE1519CE5800EAC9C7 /* rc-2.png */; };
+		A44DEBE31519CE5800EAC9C7 /* rc-3.png in Resources */ = {isa = PBXBuildFile; fileRef = A44DEBDF1519CE5800EAC9C7 /* rc-3.png */; };
+		A44DEBE41519CE5800EAC9C7 /* rc-4.png in Resources */ = {isa = PBXBuildFile; fileRef = A44DEBE01519CE5800EAC9C7 /* rc-4.png */; };
+		A44DEBEB1519CFF100EAC9C7 /* DraggableImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A44DEBEA1519CFF100EAC9C7 /* DraggableImageView.m */; };
 		A44E235614F7746600A73307 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44E235514F7746600A73307 /* UIKit.framework */; };
 		A44E235814F7746600A73307 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44E235714F7746600A73307 /* Foundation.framework */; };
 		A44E235A14F7746600A73307 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44E235914F7746600A73307 /* CoreGraphics.framework */; };
@@ -72,6 +77,8 @@
 		A46DA5F91505C00600EA9D8B /* UIImageView+AsyncImageContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = A46DA5F81505C00600EA9D8B /* UIImageView+AsyncImageContainer.m */; };
 		A47FA462150E481A0083CF97 /* PicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A47FA460150E481A0083CF97 /* PicDetailViewController.m */; };
 		A47FA467150E48690083CF97 /* PSThumbnailImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A47FA466150E48690083CF97 /* PSThumbnailImageView.m */; };
+		A49259691519B01D00936D3A /* PictureEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A49259671519B01D00936D3A /* PictureEditViewController.m */; };
+		A492596A1519B01D00936D3A /* PictureEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A49259681519B01D00936D3A /* PictureEditViewController.xib */; };
 		A4BAB7D914FDE67500E51402 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7D614FDE67500E51402 /* arrow.png */; };
 		A4BAB7DA14FDE67500E51402 /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BAB7D814FDE67500E51402 /* PullRefreshTableViewController.m */; };
 		A4BAB7E414FDE7B800E51402 /* capture-button.png in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7E214FDE7B800E51402 /* capture-button.png */; };
@@ -164,6 +171,12 @@
 		A44DE77E1515F1AE0048681E /* UsersListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsersListViewController.h; sourceTree = "<group>"; };
 		A44DE77F1515F1AE0048681E /* UsersListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsersListViewController.m; sourceTree = "<group>"; };
 		A44DE7801515F1AE0048681E /* UsersListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UsersListViewController.xib; sourceTree = "<group>"; };
+		A44DEBDD1519CE5800EAC9C7 /* rc-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rc-1.png"; sourceTree = "<group>"; };
+		A44DEBDE1519CE5800EAC9C7 /* rc-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rc-2.png"; sourceTree = "<group>"; };
+		A44DEBDF1519CE5800EAC9C7 /* rc-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rc-3.png"; sourceTree = "<group>"; };
+		A44DEBE01519CE5800EAC9C7 /* rc-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rc-4.png"; sourceTree = "<group>"; };
+		A44DEBE91519CFF100EAC9C7 /* DraggableImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggableImageView.h; sourceTree = "<group>"; };
+		A44DEBEA1519CFF100EAC9C7 /* DraggableImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggableImageView.m; sourceTree = "<group>"; };
 		A44E235114F7746600A73307 /* PicShareClient_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PicShareClient_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44E235514F7746600A73307 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A44E235714F7746600A73307 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -190,6 +203,9 @@
 		A47FA460150E481A0083CF97 /* PicDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicDetailViewController.m; sourceTree = "<group>"; };
 		A47FA465150E48690083CF97 /* PSThumbnailImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSThumbnailImageView.h; sourceTree = "<group>"; };
 		A47FA466150E48690083CF97 /* PSThumbnailImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSThumbnailImageView.m; sourceTree = "<group>"; };
+		A49259661519B01D00936D3A /* PictureEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureEditViewController.h; sourceTree = "<group>"; };
+		A49259671519B01D00936D3A /* PictureEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureEditViewController.m; sourceTree = "<group>"; };
+		A49259681519B01D00936D3A /* PictureEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PictureEditViewController.xib; sourceTree = "<group>"; };
 		A4BAB7D614FDE67500E51402 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		A4BAB7D714FDE67500E51402 /* PullRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullRefreshTableViewController.h; sourceTree = "<group>"; };
 		A4BAB7D814FDE67500E51402 /* PullRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullRefreshTableViewController.m; sourceTree = "<group>"; };
@@ -320,8 +336,58 @@
 				A44DE77E1515F1AE0048681E /* UsersListViewController.h */,
 				A44DE77F1515F1AE0048681E /* UsersListViewController.m */,
 				A44DE7801515F1AE0048681E /* UsersListViewController.xib */,
+				A49259661519B01D00936D3A /* PictureEditViewController.h */,
+				A49259671519B01D00936D3A /* PictureEditViewController.m */,
+				A49259681519B01D00936D3A /* PictureEditViewController.xib */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A44DEBDA1519CE1900EAC9C7 /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				A4462BF4151714B0003E5F9F /* house@2x.png */,
+				A4462BF5151714B1003E5F9F /* glass@2x.png */,
+				A4462BF6151714B1003E5F9F /* mail@2x.png */,
+				A4462BF7151714B1003E5F9F /* man@2x.png */,
+				A4462BEC1517145E003E5F9F /* house.png */,
+				A4462BED1517145E003E5F9F /* glass.png */,
+				A4462BEE1517145F003E5F9F /* mail.png */,
+				A4462BEF1517145F003E5F9F /* man.png */,
+			);
+			name = icons;
+			sourceTree = "<group>";
+		};
+		A44DEBDB1519CE2A00EAC9C7 /* buttons */ = {
+			isa = PBXGroup;
+			children = (
+				A4462BD21516FAB4003E5F9F /* unfoButton-press.png */,
+				A4462BD31516FAB4003E5F9F /* unfoButton-press@2x.png */,
+				A4462BD41516FAB4003E5F9F /* unfoButton.png */,
+				A4462BD51516FAB4003E5F9F /* unfoButton@2x.png */,
+				A4462BCE1516F726003E5F9F /* followButton-press.png */,
+				A4462BCF1516F726003E5F9F /* followButton-press@2x.png */,
+				A4462BC11516EF75003E5F9F /* followButton.png */,
+				A4462BC21516EF75003E5F9F /* followButton@2x.png */,
+				A44DE7391515960F0048681E /* button-hover.png */,
+				A44DE73A1515960F0048681E /* button-hover@2x.png */,
+				A44DE73B1515960F0048681E /* button.png */,
+				A44DE73C1515960F0048681E /* button@2x.png */,
+			);
+			name = buttons;
+			sourceTree = "<group>";
+		};
+		A44DEBDC1519CE3900EAC9C7 /* others */ = {
+			isa = PBXGroup;
+			children = (
+				A44DEBDD1519CE5800EAC9C7 /* rc-1.png */,
+				A44DEBDE1519CE5800EAC9C7 /* rc-2.png */,
+				A44DEBDF1519CE5800EAC9C7 /* rc-3.png */,
+				A44DEBE01519CE5800EAC9C7 /* rc-4.png */,
+				A45702461510A437005BC6FF /* 3.jpg */,
+				A45702431510A410005BC6FF /* anonymous.png */,
+			);
+			name = others;
 			sourceTree = "<group>";
 		};
 		A44E234614F7746600A73307 = {
@@ -391,6 +457,8 @@
 				A46DA5F81505C00600EA9D8B /* UIImageView+AsyncImageContainer.m */,
 				A457024B1511ADDC005BC6FF /* UIImageView+Resize.h */,
 				A457024C1511ADDC005BC6FF /* UIImageView+Resize.m */,
+				A44DEBE91519CFF100EAC9C7 /* DraggableImageView.h */,
+				A44DEBEA1519CFF100EAC9C7 /* DraggableImageView.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -398,28 +466,9 @@
 		A46DA5FA1505DAC800EA9D8B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A4462BF4151714B0003E5F9F /* house@2x.png */,
-				A4462BF5151714B1003E5F9F /* glass@2x.png */,
-				A4462BF6151714B1003E5F9F /* mail@2x.png */,
-				A4462BF7151714B1003E5F9F /* man@2x.png */,
-				A4462BEC1517145E003E5F9F /* house.png */,
-				A4462BED1517145E003E5F9F /* glass.png */,
-				A4462BEE1517145F003E5F9F /* mail.png */,
-				A4462BEF1517145F003E5F9F /* man.png */,
-				A4462BD21516FAB4003E5F9F /* unfoButton-press.png */,
-				A4462BD31516FAB4003E5F9F /* unfoButton-press@2x.png */,
-				A4462BD41516FAB4003E5F9F /* unfoButton.png */,
-				A4462BD51516FAB4003E5F9F /* unfoButton@2x.png */,
-				A4462BCE1516F726003E5F9F /* followButton-press.png */,
-				A4462BCF1516F726003E5F9F /* followButton-press@2x.png */,
-				A4462BC11516EF75003E5F9F /* followButton.png */,
-				A4462BC21516EF75003E5F9F /* followButton@2x.png */,
-				A44DE7391515960F0048681E /* button-hover.png */,
-				A44DE73A1515960F0048681E /* button-hover@2x.png */,
-				A44DE73B1515960F0048681E /* button.png */,
-				A44DE73C1515960F0048681E /* button@2x.png */,
-				A45702461510A437005BC6FF /* 3.jpg */,
-				A45702431510A410005BC6FF /* anonymous.png */,
+				A44DEBDC1519CE3900EAC9C7 /* others */,
+				A44DEBDB1519CE2A00EAC9C7 /* buttons */,
+				A44DEBDA1519CE1900EAC9C7 /* icons */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -573,6 +622,11 @@
 				A4462BF9151714B1003E5F9F /* glass@2x.png in Resources */,
 				A4462BFA151714B1003E5F9F /* mail@2x.png in Resources */,
 				A4462BFB151714B1003E5F9F /* man@2x.png in Resources */,
+				A492596A1519B01D00936D3A /* PictureEditViewController.xib in Resources */,
+				A44DEBE11519CE5800EAC9C7 /* rc-1.png in Resources */,
+				A44DEBE21519CE5800EAC9C7 /* rc-2.png in Resources */,
+				A44DEBE31519CE5800EAC9C7 /* rc-3.png in Resources */,
+				A44DEBE41519CE5800EAC9C7 /* rc-4.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -619,6 +673,8 @@
 				A457024D1511ADDC005BC6FF /* UIImageView+Resize.m in Sources */,
 				A45702B51514809F005BC6FF /* UserDetailViewController.m in Sources */,
 				A44DE7811515F1AE0048681E /* UsersListViewController.m in Sources */,
+				A49259691519B01D00936D3A /* PictureEditViewController.m in Sources */,
+				A44DEBEB1519CFF100EAC9C7 /* DraggableImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
