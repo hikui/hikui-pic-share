@@ -12,7 +12,7 @@ get_boards_of_user_handler = Resource(GetBoardsOfUserHandler)
 get_followers_handler = Resource(GetFollowersHandler)
 get_following_handler = Resource(GetFollowingHandler)
 get_user_detail_handler = Resource(GetUserDetailHandler)
-upload_picture_handler = Resource(UploadPictureHandler)
+upload_picture_handler = Resource(UploadPictureHandler,authentication=auth)
 urlpatterns = patterns('',
 
     (r'^category/get_all.json$',get_all_categories_handler),

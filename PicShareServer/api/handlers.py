@@ -222,11 +222,15 @@ class UploadPictureHandler(BaseHandler):
         upload_description = request.POST.get('description')
         board_id = int(request.POST.get('board_id'))
         theBoard = Board.objects.get(pk = board_id)
+        print theBoard
         latitude = float(request.POST.get('latitude',-1))
         longitude = float(request.POST.get('longitude',-1))
         if theBoard.owner.id == request.user.id:
             # have permission to upload
             if request.FILES.get('pic') == None:
+                # here is a bug in piston that the form validation can't validate
+                # file type, such as FileField and ImageField.
+                # I have to do this all by myself.
                 errorDict = {
                     'ret':1,
                     'errorcode':0,
@@ -237,11 +241,11 @@ class UploadPictureHandler(BaseHandler):
                 return resp
             filename = UploadImage.handle_upload_image(request.FILES['pic'])
             host = request.get_host()
-            imageUrl = 'http://'+host+'/media/pictures'+filename
+            imageUrl = 'http://'+host+'/media/pictures/'+filename
             thePicture = Picture.objects.create(image=imageUrl,timestamp = datetime.datetime.now())
-            thePicture.save()
-            pictureStatus = PictureStatus.objects.create(picture=thePicture,description = upload_description,baord = theBoard)
-            pictureStatus.save()
+            print thePicture
+            pictureStatus = PictureStatus.objects.create(picture=thePicture,description = upload_description,board = theBoard)
+            print pictureStatus
             return getPictureStatusDict(request,pictureStatus)
         else :
             errorDict = {
