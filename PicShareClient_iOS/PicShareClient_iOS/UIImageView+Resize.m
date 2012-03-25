@@ -128,20 +128,10 @@ static bool isRetina()
         scaledWidth  = width * scaleFactor;
         scaledHeight = height * scaleFactor;
     }
-    CGImageRef imageRef = [sourceImage CGImage];
-    CGBitmapInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
-    CGColorSpaceRef colorSpaceInfo = CGImageGetColorSpace(imageRef);
-    
-    if (bitmapInfo == kCGImageAlphaNone) {
-        bitmapInfo = kCGImageAlphaNoneSkipLast;
-    }
-    CGContextRef bitmap;
-    bitmap = CGBitmapContextCreate(NULL, scaledWidth, scaledHeight, CGImageGetBitsPerComponent(imageRef), CGImageGetBytesPerRow(imageRef), colorSpaceInfo, bitmapInfo);
-    CGContextDrawImage(bitmap, CGRectMake(0,0,scaledWidth, scaledHeight), imageRef);
-    CGImageRef ref = CGBitmapContextCreateImage(bitmap);
-    UIImage* newImage = [UIImage imageWithCGImage:ref];
-    CGContextRelease(bitmap);
-    CGImageRelease(ref);
+    CGSize newImageSize = CGSizeMake(scaledWidth, scaledHeight);
+    UIGraphicsBeginImageContext(newImageSize);
+    [sourceImage drawInRect:CGRectMake(0,0,scaledWidth,scaledHeight)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     return newImage;
 }
 
@@ -161,20 +151,10 @@ static bool isRetina()
         scaledWidth  = width * scaleFactor;
         scaledHeight = height * scaleFactor;
     }
-    CGImageRef imageRef = [sourceImage CGImage];
-    CGBitmapInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
-    CGColorSpaceRef colorSpaceInfo = CGImageGetColorSpace(imageRef);
-    
-    if (bitmapInfo == kCGImageAlphaNone) {
-        bitmapInfo = kCGImageAlphaNoneSkipLast;
-    }
-    CGContextRef bitmap;
-    bitmap = CGBitmapContextCreate(NULL, scaledWidth, scaledHeight, CGImageGetBitsPerComponent(imageRef), CGImageGetBytesPerRow(imageRef), colorSpaceInfo, bitmapInfo);
-    CGContextDrawImage(bitmap, CGRectMake(0,0,scaledWidth, scaledHeight), imageRef);
-    CGImageRef ref = CGBitmapContextCreateImage(bitmap);
-    UIImage* newImage = [UIImage imageWithCGImage:ref];
-    CGContextRelease(bitmap);
-    CGImageRelease(ref);
+    CGSize newImageSize = CGSizeMake(scaledWidth, scaledHeight);
+    UIGraphicsBeginImageContext(newImageSize);
+    [sourceImage drawInRect:CGRectMake(0,0,scaledWidth,scaledHeight)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     return newImage;
 }
 

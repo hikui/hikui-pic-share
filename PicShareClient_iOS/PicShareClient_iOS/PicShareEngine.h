@@ -18,6 +18,8 @@
 
 @property (nonatomic,copy) NSString *username;
 @property (nonatomic,copy) NSString *password;
+@property (readwrite) NSInteger userId;
+@property (nonatomic,retain) NSOperationQueue *uploadQ;
 
 +(id)sharedEngine;
 -(void)setUsername:(NSString *)username andPassword:(NSString *)password;
@@ -39,7 +41,7 @@
 
 //picture api
 -(PictureStatus *)getPictureStatus:(NSInteger)psId;
--(void)uploadPicture:(UIImage *)picture toBoard:(NSInteger)boardId;
+-(void)uploadPicture:(UIImage *)picture toBoard:(NSInteger)boardId withLatitude:(float)latitude longitude:(float)longitude description:(NSString *)description;
 -(void)repin:(NSInteger)ps_id toBoard:(NSInteger)boardId;
 -(void)updatePictureStatus:(PictureStatus *)aPictureStatus;
 -(void)releasePictureStatus:(NSInteger)psId;

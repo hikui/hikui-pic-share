@@ -9,6 +9,7 @@
 #import "PictureEditViewController.h"
 #import "UIImageView+Resize.h"
 #import "DraggableImageView.h"
+#import "PictureInfoEditViewController.h"
 
 @interface PictureEditViewController ()
 
@@ -34,9 +35,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     decoratorImages = [[NSArray alloc]initWithObjects:[UIImage imageNamed:@"rc-1.png"],[UIImage imageNamed:@"rc-2.png"],[UIImage imageNamed:@"rc-3.png"],[UIImage imageNamed:@"rc-4.png"], nil];
-    self.onBoardDecoratorImages = [[NSMutableArray alloc]init];
+    onBoardDecoratorImages = [[NSMutableArray alloc]init];
     self.imageView.backgroundColor = [UIColor blackColor];
     self.scrollView.contentSize = CGSizeMake(320, self.scrollView.frame.size.height);
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    self.imageView = nil;
+    self.scrollView = nil;
+    self.onBoardDecoratorImages = nil;
+    self.decoratorImages = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -54,12 +64,7 @@
     [super dealloc];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -68,19 +73,16 @@
 
 - (void)finishButtonOnTouch
 {
-    [self.navigationController dismissModalViewControllerAnimated:YES];
+    PictureInfoEditViewController *pievc = [[PictureInfoEditViewController alloc]initWithNibName:@"PictureInfoEditViewController" bundle:nil];
+    [self.navigationController pushViewController:pievc animated:YES];
+    [pievc release];
 }
 
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [picker dismissModalViewControllerAnimated:YES];
-}
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [picker pushViewController:self animated:YES];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(finishButtonOnTouch)];
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(finishButtonOnTouch)]autorelease];
     UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     UIImage *editedImage = nil;
     if (originalImage.size.width>originalImage.size.height) {

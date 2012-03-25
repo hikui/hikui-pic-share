@@ -29,13 +29,17 @@
     UINavigationController *nCategoriesViewController = [[[UINavigationController alloc]initWithRootViewController:_categoriesViewController]autorelease];
     [nCategoriesViewController.tabBarItem setTitle:@"探索"];
     [nCategoriesViewController.tabBarItem setImage:[UIImage imageNamed:@"glass.png"]];
+    [_categoriesViewController release];
     
     vc3 = [[ViewController3 alloc]init];
     [vc3.tabBarItem setTitle:@"消息"];
     [vc3.tabBarItem setImage:[UIImage imageNamed:@"mail.png"]];
-#warning userId is an example.
+    
+
     _userProfileViewController = [[UserDetailViewController alloc]initwithuserId:1];
     UINavigationController *nUserProfileViewController = [[[UINavigationController alloc]initWithRootViewController:_userProfileViewController]autorelease];
+    [_userProfileViewController release];
+    
     [nUserProfileViewController.tabBarItem setTitle:@"我的"];
     [nUserProfileViewController.tabBarItem setImage:[UIImage imageNamed:@"man"]];
     
@@ -102,7 +106,6 @@
     [vc3 release];
     [vc4 release];
     [_pictureWallViewController release];
-    [_categoriesViewController release];
     [super dealloc];
 }
 

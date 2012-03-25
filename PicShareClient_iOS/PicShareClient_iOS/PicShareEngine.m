@@ -8,13 +8,18 @@
 
 #import "PicShareEngine.h"
 #import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
 #import "JSONKit.h"
 
-NSString *picshareDomain = @"http://localhost:8000/";
+#define UPLOAD_IMAGE 0
+
+NSString *picshareDomain = @"http://picshare.herkuang.info:8000/";
 
 @interface PicShareEngine ()
 
 - (void)addAuthHeaderForRequest:(ASIHTTPRequest *) request;
+- (void)uploadImageDidFinish:(ASIFormDataRequest *)request;
+- (void)uploadImageError:(ASIFormDataRequest *)request;
 
 @end
 
@@ -23,8 +28,28 @@ NSString *picshareDomain = @"http://localhost:8000/";
 
 @synthesize password = _password;
 @synthesize username = _username;
+@synthesize uploadQ = _uploadQ;
+@synthesize userId = _userId;
 
 static PicShareEngine *instance = NULL;
+
+
+-(void)dealloc{
+    [_password release];
+    [_username release];
+    [_uploadQ release];
+    [super dealloc];
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        _uploadQ = [[NSOperationQueue alloc]init];
+        _uploadQ.maxConcurrentOperationCount = 2;
+    }
+    return self;
+}
 
 +(id)sharedEngine{
     @synchronized(self)
@@ -33,6 +58,7 @@ static PicShareEngine *instance = NULL;
             instance = [[PicShareEngine alloc]init];
             instance.username = @"user1";
             instance.password = @"user1";
+            instance.userId = 1;
         }
         return instance;
     }
@@ -153,7 +179,6 @@ static PicShareEngine *instance = NULL;
         response = [request responseString];
     }
     else {
-        NSLog(@"error! %@",[error code]);
         //do something in ui
         return nil;
     }
@@ -305,15 +330,34 @@ static PicShareEngine *instance = NULL;
     return nil;
 }
 
--(void)uploadPicture:(UIImage *)picture toBoard:(NSInteger)boardId
+-(void)uploadPicture:(UIImage *)picture toBoard:(NSInteger)boardId withLatitude:(float)latitude longitude:(float)longitude description:(NSString *)description
 {
-
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingFormat:@"api/picture/upload.json"]];
+    ASIFormDataRequest *request = [[ASIFormDataRequest alloc]initWithURL:url];
+    NSData *picData = UIImagePNGRepresentation(picture);
+    [request setData:picData withFileName:@"upload.png" andContentType:@"image/png" forKey:@"pic"];
+    [request setValue:[NSNumber numberWithInteger:boardId] forKey:@"board_id"];
+    [request setValue:[NSNumber numberWithFloat:latitude] forKey:@"latitude"];
+    [request setValue:[NSNumber numberWithFloat:longitude] forKey:@"longitude"];
+    [request setValue:description forKey:@"description"];
+    [request setTag:UPLOAD_IMAGE];
+    [request setDelegate:self];
+    [self.uploadQ addOperation:request];
 }
 
--(void)dealloc{
-    [_password release];
-    [_username release];
-    [super dealloc];
+-(void)uploadImageDidFinish:(ASIFormDataRequest *)request
+{
+    UIAlertView *successView = [[UIAlertView alloc]initWithTitle:@"" message:@"上传成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    [successView show];
+    [successView release];
 }
+
+-(void)uploadImageError:(ASIFormDataRequest *)request
+{
+    UIAlertView *successView = [[UIAlertView alloc]initWithTitle:@"" message:@"上传失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    [successView show];
+    [successView release];
+}
+
 
 @end

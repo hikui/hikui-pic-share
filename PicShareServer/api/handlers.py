@@ -1,9 +1,15 @@
+#coding:utf-8
 from piston.handler import BaseHandler,AnonymousBaseHandler
 from piston.utils import rc
+from piston.utils import validate
 from PicShareServer.PicShare.models import *
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User, AnonymousUser
+from django.contrib.sites.models import Site
+from django.http import HttpRequest
+import datetime
 import UploadImage
+from django import forms
 
 def is_authenticated(request):
     auth_string = request.META.get('HTTP_AUTHORIZATION', None)
@@ -199,8 +205,50 @@ class GetUserDetailHandler(BaseHandler):
         user = User.objects.get(pk = userId)
         return getUserDict(request,user)
         
+#################################
+class UploadPictureForm(forms.Form):
+    board_id = forms.IntegerField(min_value=1)
+    description = forms.Textarea()
+    latitude = forms.FloatField(required=False)
+    longitude = forms.FloatField(required=False)
+    #pic = forms.ImageField()
+
+
 class UploadPictureHandler(BaseHandler):
     allowed_methods=('POST',)
+    @validate(UploadPictureForm)
     def create(self,request):
-        UploadImage.handle_upload_image(request.FILES['pic'])
-        return {}
+        # get information
+        upload_description = request.POST.get('description')
+        board_id = int(request.POST.get('board_id'))
+        theBoard = Board.objects.get(pk = board_id)
+        latitude = float(request.POST.get('latitude',-1))
+        longitude = float(request.POST.get('longitude',-1))
+        if theBoard.owner.id == request.user.id:
+            # have permission to upload
+            if request.FILES.get('pic') == None:
+                errorDict = {
+                    'ret':1,
+                    'errorcode':0,
+                    'msg':'请求错误'
+                }
+                resp = rc.BAD_REQUEST
+                resp.content = errorDict
+                return resp
+            filename = UploadImage.handle_upload_image(request.FILES['pic'])
+            host = request.get_host()
+            imageUrl = 'http://'+host+'/media/pictures'+filename
+            thePicture = Picture.objects.create(image=imageUrl,timestamp = datetime.datetime.now())
+            thePicture.save()
+            pictureStatus = PictureStatus.objects.create(picture=thePicture,description = upload_description,baord = theBoard)
+            pictureStatus.save()
+            return getPictureStatusDict(request,pictureStatus)
+        else :
+            errorDict = {
+                'ret':0,
+                'errorcode':2,
+                'msg':'您不拥有该相册！'
+            }
+            resp = rc.FORBIDDEN
+            resp.content = errorDict
+            return resp

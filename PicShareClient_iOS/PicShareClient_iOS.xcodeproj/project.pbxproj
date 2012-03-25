@@ -33,6 +33,8 @@
 		A40B57551504B2B00045C9B1 /* BoardsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A40B57541504B2B00045C9B1 /* BoardsListViewController.m */; };
 		A40B57571504C3280045C9B1 /* Design.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40B57561504C3280045C9B1 /* Design.xib */; };
 		A40B576E1505211C0045C9B1 /* AsyncImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = A40B576D1505211C0045C9B1 /* AsyncImageDownloader.m */; };
+		A4203CE4151D8477008B29A9 /* PictureInfoEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4203CE2151D8477008B29A9 /* PictureInfoEditViewController.m */; };
+		A4203CE5151D8477008B29A9 /* PictureInfoEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4203CE3151D8477008B29A9 /* PictureInfoEditViewController.xib */; };
 		A4462BC31516EF75003E5F9F /* followButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BC11516EF75003E5F9F /* followButton.png */; };
 		A4462BC41516EF75003E5F9F /* followButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BC21516EF75003E5F9F /* followButton@2x.png */; };
 		A4462BD01516F726003E5F9F /* followButton-press.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BCE1516F726003E5F9F /* followButton-press.png */; };
@@ -93,6 +95,9 @@
 		A4BAB80014FDED6C00E51402 /* ViewController4.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BAB7FE14FDED6C00E51402 /* ViewController4.m */; };
 		A4BAB80114FDED6C00E51402 /* ViewController4.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7FF14FDED6C00E51402 /* ViewController4.xib */; };
 		A4BAB80314FDF1F400E51402 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4BAB80214FDF1F400E51402 /* QuartzCore.framework */; };
+		A4FDB342151F01660048C199 /* BoardPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FDB340151F01660048C199 /* BoardPickerViewController.m */; };
+		A4FDB347151F05E30048C199 /* PictureDescriptionComposerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FDB345151F05E30048C199 /* PictureDescriptionComposerViewController.m */; };
+		A4FDB348151F05E30048C199 /* PictureDescriptionComposerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4FDB346151F05E30048C199 /* PictureDescriptionComposerViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +151,9 @@
 		A40B57561504C3280045C9B1 /* Design.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Design.xib; sourceTree = "<group>"; };
 		A40B576C1505211C0045C9B1 /* AsyncImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageDownloader.h; sourceTree = "<group>"; };
 		A40B576D1505211C0045C9B1 /* AsyncImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageDownloader.m; sourceTree = "<group>"; };
+		A4203CE1151D8477008B29A9 /* PictureInfoEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureInfoEditViewController.h; sourceTree = "<group>"; };
+		A4203CE2151D8477008B29A9 /* PictureInfoEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureInfoEditViewController.m; sourceTree = "<group>"; };
+		A4203CE3151D8477008B29A9 /* PictureInfoEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PictureInfoEditViewController.xib; sourceTree = "<group>"; };
 		A4462BC11516EF75003E5F9F /* followButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = followButton.png; sourceTree = "<group>"; };
 		A4462BC21516EF75003E5F9F /* followButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "followButton@2x.png"; sourceTree = "<group>"; };
 		A4462BCE1516F726003E5F9F /* followButton-press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "followButton-press.png"; sourceTree = "<group>"; };
@@ -226,6 +234,11 @@
 		A4BAB7FE14FDED6C00E51402 /* ViewController4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController4.m; sourceTree = "<group>"; };
 		A4BAB7FF14FDED6C00E51402 /* ViewController4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController4.xib; sourceTree = "<group>"; };
 		A4BAB80214FDF1F400E51402 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A4FDB33F151F01660048C199 /* BoardPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardPickerViewController.h; sourceTree = "<group>"; };
+		A4FDB340151F01660048C199 /* BoardPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardPickerViewController.m; sourceTree = "<group>"; };
+		A4FDB344151F05E20048C199 /* PictureDescriptionComposerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureDescriptionComposerViewController.h; sourceTree = "<group>"; };
+		A4FDB345151F05E30048C199 /* PictureDescriptionComposerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureDescriptionComposerViewController.m; sourceTree = "<group>"; };
+		A4FDB346151F05E30048C199 /* PictureDescriptionComposerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PictureDescriptionComposerViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -339,6 +352,14 @@
 				A49259661519B01D00936D3A /* PictureEditViewController.h */,
 				A49259671519B01D00936D3A /* PictureEditViewController.m */,
 				A49259681519B01D00936D3A /* PictureEditViewController.xib */,
+				A4203CE1151D8477008B29A9 /* PictureInfoEditViewController.h */,
+				A4203CE2151D8477008B29A9 /* PictureInfoEditViewController.m */,
+				A4203CE3151D8477008B29A9 /* PictureInfoEditViewController.xib */,
+				A4FDB33F151F01660048C199 /* BoardPickerViewController.h */,
+				A4FDB340151F01660048C199 /* BoardPickerViewController.m */,
+				A4FDB344151F05E20048C199 /* PictureDescriptionComposerViewController.h */,
+				A4FDB345151F05E30048C199 /* PictureDescriptionComposerViewController.m */,
+				A4FDB346151F05E30048C199 /* PictureDescriptionComposerViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -627,6 +648,8 @@
 				A44DEBE21519CE5800EAC9C7 /* rc-2.png in Resources */,
 				A44DEBE31519CE5800EAC9C7 /* rc-3.png in Resources */,
 				A44DEBE41519CE5800EAC9C7 /* rc-4.png in Resources */,
+				A4203CE5151D8477008B29A9 /* PictureInfoEditViewController.xib in Resources */,
+				A4FDB348151F05E30048C199 /* PictureDescriptionComposerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,6 +698,9 @@
 				A44DE7811515F1AE0048681E /* UsersListViewController.m in Sources */,
 				A49259691519B01D00936D3A /* PictureEditViewController.m in Sources */,
 				A44DEBEB1519CFF100EAC9C7 /* DraggableImageView.m in Sources */,
+				A4203CE4151D8477008B29A9 /* PictureInfoEditViewController.m in Sources */,
+				A4FDB342151F01660048C199 /* BoardPickerViewController.m in Sources */,
+				A4FDB347151F05E30048C199 /* PictureDescriptionComposerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -705,7 +731,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xiongxiong Wang (42RW26FPHA)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -720,7 +746,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PROVISIONING_PROFILE = "E2100D4D-CDCA-4429-B390-63E401370478";
 				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
 		};
@@ -729,7 +757,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xiongxiong Wang (42RW26FPHA)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -738,6 +766,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "E2100D4D-CDCA-4429-B390-63E401370478";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

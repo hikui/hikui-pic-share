@@ -63,6 +63,11 @@
     self.usersArray = nil;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [tempView release];
+    tempView = nil;
+    [loadingView release];
+    loadingView = nil;
+    self.usersArray = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -89,11 +94,11 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier]autorelease];
     }
     User *u = [usersArray objectAtIndex:indexPath.row];
     cell.textLabel.text = u.username;
-    cell.detailTextLabel.text = [[NSString alloc]initWithFormat:@"来自 %@",u.location];
+    cell.detailTextLabel.text = [[[NSString alloc]initWithFormat:@"来自 %@",u.location]autorelease];
     [cell.imageView setImageWithUrl:[NSURL URLWithString:u.avatarUrl] placeholderImage:[UIImage imageNamed:@"anonymous.png"]];
     
     UIButton *followButton = [UIButton buttonWithType:UIButtonTypeCustom];
