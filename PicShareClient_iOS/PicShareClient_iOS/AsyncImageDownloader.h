@@ -30,7 +30,7 @@
 
 - (void)loadImageWithUrl:(NSURL *)url AndDelegate:(id)delegate;
 - (void)loadImageWithUrl:(NSURL *)url Delegate:(id)delegate scaleSize:(CGSize)size;
-
+- (void)cancelLoadImageWithUrl:(NSURL *)url andDelegate:(id)delegate;
 //should be called when receive memory warning
 - (void)cleanThumbnailCache;
 @end

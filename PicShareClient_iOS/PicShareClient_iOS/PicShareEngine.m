@@ -212,7 +212,6 @@ static PicShareEngine *instance = NULL;
         response = [request responseString];
     }
     else {
-        NSLog(@"error! %@",[error code]);
         //do something in ui
         return nil;
     }
@@ -286,7 +285,6 @@ static PicShareEngine *instance = NULL;
         response = [request responseString];
     }
     else {
-        NSLog(@"error! %@",[error code]);
         return nil;
     }
     if (response != nil) {
@@ -319,7 +317,6 @@ static PicShareEngine *instance = NULL;
         response = [request responseString];
     }
     else {
-        NSLog(@"error! %@",[error code]);
         return nil;
     }
     if (response != nil) {
@@ -333,15 +330,20 @@ static PicShareEngine *instance = NULL;
 -(void)uploadPicture:(UIImage *)picture toBoard:(NSInteger)boardId withLatitude:(float)latitude longitude:(float)longitude description:(NSString *)description
 {
     NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingFormat:@"api/picture/upload.json"]];
-    ASIFormDataRequest *request = [[ASIFormDataRequest alloc]initWithURL:url];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [self addAuthHeaderForRequest:request];
     NSData *picData = UIImagePNGRepresentation(picture);
     [request setData:picData withFileName:@"upload.png" andContentType:@"image/png" forKey:@"pic"];
-    [request setValue:[NSNumber numberWithInteger:boardId] forKey:@"board_id"];
-    [request setValue:[NSNumber numberWithFloat:latitude] forKey:@"latitude"];
-    [request setValue:[NSNumber numberWithFloat:longitude] forKey:@"longitude"];
-    [request setValue:description forKey:@"description"];
+    [request setPostValue:[NSNumber numberWithInteger:boardId] forKey:@"board_id"];
+    if (latitude!=-1.0f && longitude != -1.0f) {
+        [request setPostValue:[NSNumber numberWithFloat:latitude] forKey:@"latitude"];
+        [request setPostValue:[NSNumber numberWithFloat:longitude] forKey:@"longitude"];
+    }
+    [request setPostValue:description forKey:@"description"];
     [request setTag:UPLOAD_IMAGE];
     [request setDelegate:self];
+    [request setDidFailSelector:@selector(uploadImageError:)];
+    [request setDidFinishSelector:@selector(uploadImageDidFinish:)];
     [self.uploadQ addOperation:request];
 }
 
@@ -359,5 +361,55 @@ static PicShareEngine *instance = NULL;
     [successView release];
 }
 
+-(NSArray *)getHomeTimeline
+{
+    return [self getHomeTimelineOfPage:1 since:-1 max:-1];
+}
+
+-(NSArray *)getHomeTimelineOfPage:(NSInteger)page since:(NSInteger)since_id max:(NSInteger)max_id
+{
+    return [self getHomeTimelineOfPage:page countPerPage:20 since:since_id max:max_id];
+}
+
+-(NSArray *)getHomeTimelineOfPage:(NSInteger)page countPerPage:(NSInteger)count since:(NSInteger)since_id max:(NSInteger)max_id
+{
+    NSMutableString *urlStr = [[NSMutableString alloc]initWithFormat:@"api/timeline/home_timeline.json?page=%d&count=%d",page,count];
+    if (since_id>0) {
+        [urlStr appendFormat:@"&since_id=%d",since_id];
+    }
+    if (max_id>0) {
+        [urlStr appendFormat:@"&max_id=%d",max_id];
+    }
+    
+    NSURL *url =[NSURL URLWithString:[picshareDomain stringByAppendingString:urlStr]];
+    [urlStr release];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [self addAuthHeaderForRequest:request];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error && [request responseStatusCode]==200) {
+        response = [request responseString];
+    }
+    else {
+        return nil;
+    }
+    if (response != nil) {
+        NSDictionary *dictFromJson = [response objectFromJSONString];
+        NSNumber *hasnext = [dictFromJson objectForKey:@"hasnext"];
+        NSArray *psArray = [dictFromJson objectForKey:@"pictures"];
+        NSMutableArray *resultArray = [[[NSMutableArray alloc]init]autorelease];
+        [resultArray addObject:hasnext];
+        for (NSDictionary *aPSData in psArray) {
+            PictureStatus *ps = [[PictureStatus alloc]initWithJSONDict:aPSData];
+            if (ps!=nil) {
+                [resultArray addObject:ps];
+            }
+            [ps release];
+        }
+        return resultArray;
+    }
+    return nil;
+}
 
 @end

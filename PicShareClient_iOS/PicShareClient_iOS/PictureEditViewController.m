@@ -10,6 +10,7 @@
 #import "UIImageView+Resize.h"
 #import "DraggableImageView.h"
 #import "PictureInfoEditViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface PictureEditViewController ()
 
@@ -52,6 +53,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
     [self clearOnBoardDraggableImages];
 }
 
@@ -74,6 +76,11 @@
 - (void)finishButtonOnTouch
 {
     PictureInfoEditViewController *pievc = [[PictureInfoEditViewController alloc]initWithNibName:@"PictureInfoEditViewController" bundle:nil];
+    UIGraphicsBeginImageContext(self.imageView.frame.size);
+    [self.imageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    pievc.uploadImage = image;
     [self.navigationController pushViewController:pievc animated:YES];
     [pievc release];
 }
@@ -82,14 +89,14 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [picker pushViewController:self animated:YES];
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(finishButtonOnTouch)]autorelease];
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]initWithTitle:@"下一步" style:UIBarButtonSystemItemDone target:self action:@selector(finishButtonOnTouch)]autorelease];
     UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     UIImage *editedImage = nil;
     if (originalImage.size.width>originalImage.size.height) {
-        editedImage = [UIImageView imageWithImage:originalImage scaledToSizeWithTargetWidth:self.imageView.frame.size.width ];
+        editedImage = [UIImageView imageWithImage:originalImage scaledToSizeWithTargetWidth:1000 ];
     }
     else {
-        editedImage  = [UIImageView imageWithImage:originalImage scaledToSizeWithTargetHeight:self.imageView.frame.size.height];
+        editedImage  = [UIImageView imageWithImage:originalImage scaledToSizeWithTargetHeight:1000];
     }
    
     self.imageView.image = editedImage;
@@ -118,5 +125,6 @@
 -(IBAction)clearButtonOnTouch:(id)sender
 {
     [self clearOnBoardDraggableImages];
+    
 }
 @end

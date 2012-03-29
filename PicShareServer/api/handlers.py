@@ -10,6 +10,18 @@ from django.http import HttpRequest
 import datetime
 import UploadImage
 from django import forms
+from django.db.models import Q
+
+def errorResponse(ret,errorcode,message,httpStatus):
+    errorDict = {
+                'ret':ret,
+                'errorcode':errorcode,
+                'msg': message
+    }
+    
+    resp = httpStatus
+    resp.content = errorDict
+    return resp
 
 def is_authenticated(request):
     auth_string = request.META.get('HTTP_AUTHORIZATION', None)
@@ -231,14 +243,8 @@ class UploadPictureHandler(BaseHandler):
                 # here is a bug in piston that the form validation can't validate
                 # file type, such as FileField and ImageField.
                 # I have to do this all by myself.
-                errorDict = {
-                    'ret':1,
-                    'errorcode':0,
-                    'msg':'请求错误'
-                }
-                resp = rc.BAD_REQUEST
-                resp.content = errorDict
-                return resp
+                return errorResponse(1,0,'请求错误',rc.BAD_REQUEST)
+    
             filename = UploadImage.handle_upload_image(request.FILES['pic'])
             host = request.get_host()
             imageUrl = 'http://'+host+'/media/pictures/'+filename
@@ -248,11 +254,41 @@ class UploadPictureHandler(BaseHandler):
             print pictureStatus
             return getPictureStatusDict(request,pictureStatus)
         else :
-            errorDict = {
-                'ret':0,
-                'errorcode':2,
-                'msg':'您不拥有该相册！'
-            }
-            resp = rc.FORBIDDEN
-            resp.content = errorDict
-            return resp
+            return errorResponse(0,2,'您不拥有该相册！',rc.FORBIDDEN)
+          
+class GetHomeTimelineHandler(BaseHandler):
+    allowed_methods = ('GET',)
+    def read(self,request):
+        
+        user = request.user
+        page = int(request.GET.get('page',1))
+        count = int(request.GET.get('count',4))
+        sinceIdStr = request.GET.get('since_id')
+        maxIdStr = request.GET.get('max_id')
+        followingBoards = user.following_boards.all()
+        
+        q1 = Q()
+        q2 = Q()
+        
+        if sinceIdStr is not None:
+            sinceId = int(sinceIdStr)
+            q1 = Q(id__gt = sinceId)
+        if maxIdStr is not None:
+            maxId = int(maxIdStr)
+            q2 = Q(id__lte = maxIdStr)
+        
+        totalCount = PictureStatus.objects.filter(Q(board__in=followingBoards)&q1&q2).count()
+        pictureStatuses = PictureStatus.objects.filter(Q(board__in=followingBoards)&q1&q2)[(page-1)*count:page*count]
+        
+        psArray = []
+        for aPS in pictureStatuses:
+            psArray.append(getPictureStatusDict(request,aPS))
+            
+        resultDict = {}
+        resultDict['pictures']=psArray
+        if page*count >= totalCount:
+            resultDict['hasnext'] = 0
+        else:
+            resultDict['hasnext'] = 1
+        return resultDict
+        

@@ -68,8 +68,8 @@
 
 //timeline api
 -(NSArray *)getHomeTimeline;
--(NSArray *)getHomeTimelineOfPage:(NSInteger)page;
--(NSArray *)getHomeTimelineOfPage:(NSInteger)page countPerPage:(NSInteger)count;
+-(NSArray *)getHomeTimelineOfPage:(NSInteger)page since:(NSInteger)since_id max:(NSInteger)max_id;
+-(NSArray *)getHomeTimelineOfPage:(NSInteger)page countPerPage:(NSInteger)count since:(NSInteger)since_id max:(NSInteger)max_id;
 
 
 //comment api

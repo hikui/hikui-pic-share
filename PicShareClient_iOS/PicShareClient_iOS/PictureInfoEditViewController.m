@@ -7,13 +7,16 @@
 //
 
 #import "PictureInfoEditViewController.h"
+#import "PicShareEngine.h"
 
 @interface PictureInfoEditViewController ()
+
+-(void)uploadButtonOnTouch;
 
 @end
 
 @implementation PictureInfoEditViewController
-@synthesize board,descriptionText,locationPoint;
+@synthesize board,descriptionText,locationPoint,uploadImage;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -27,12 +30,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]initWithTitle:@"上传" style:UIBarButtonItemStyleDone target:self action:@selector(uploadButtonOnTouch)]autorelease];
+    locationPoint = CGPointMake(-1, -1);
 }
 
 - (void)viewDidUnload
@@ -137,5 +136,21 @@
     cell.detailTextLabel.textColor = [UIColor darkGrayColor];
     cell.detailTextLabel.text = aBoard.name;
     NSLog(@"selected:%@",aBoard.name);
+}
+
+-(void)uploadButtonOnTouch
+{
+    NSLog(@"upload start");
+    if (uploadImage == nil) {
+        NSLog(@"you should specify one uploadImage!");
+        return;
+    }
+    if (board == nil) {
+        UIAlertView *alertView = [[[UIAlertView alloc]initWithTitle:@"错误！" message:@"必须指定相册！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil]autorelease];
+        [alertView show];
+        return;
+    }
+    PicShareEngine *engine = [PicShareEngine sharedEngine];
+    [engine uploadPicture:uploadImage toBoard:self.board.boardId withLatitude:locationPoint.x  longitude:locationPoint.y description:descriptionText];
 }
 @end

@@ -1,8 +1,8 @@
 //
-//  PicDetailView.h
+//  TimelineCell.h
 //  PicShareClient_iOS
 //
-//  Created by 和光 缪 on 12-3-15.
+//  Created by 缪和光 on 12-3-28.
 //  Copyright (c) 2012年 Shanghai University. All rights reserved.
 //
 
@@ -10,10 +10,9 @@
 #import "PictureStatus.h"
 #import "ASIHTTPRequest.h"
 
-@interface PicDetailView : UIScrollView
+@interface TimelineCell : UITableViewCell
 {
     BOOL loadImgComplete;
-    UIImage *tempImage;
 }
 
 @property (nonatomic,assign) PictureStatus *pictureStatus;
@@ -28,6 +27,11 @@
 @property (nonatomic,retain) UIProgressView *progressView;
 @property (nonatomic,retain) ASIHTTPRequest *request;
 
-- (id)initWithPictureStatus:(PictureStatus *)aPictureStatus;
+- (void)refreshWithPictureStatus:(PictureStatus *)aPictureStatus;
+
+//需要手动call这个方法，在cellForRowAtIndexPath的最后。
 - (void)layout;
+- (void)setPictureStatusThenRefresh:(PictureStatus *)aPictureStatus;
++ (CGFloat)calculateCellHeightWithPictureStatus:(PictureStatus *)aPictureStatus;
+
 @end

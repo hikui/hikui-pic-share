@@ -35,4 +35,6 @@
 - (void) addPictureWithUrlStr:(NSString *)urlStr;
 - (void) clearCurrentPictures;
 - (NSInteger) offsetOfaThumbnail:(PSThumbnailImageView *)thumbnailImageView;
+- (void) cancelImageLoading;
+- (void) resumeImageLoading;
 @end

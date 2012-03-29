@@ -57,6 +57,35 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    for (NSInteger j = 0; j < [self.tableView numberOfSections]; ++j)
+    {
+        // important!!! should -1 here!!! the last one is more button
+        for (NSInteger i = 0; i < [self.tableView numberOfRowsInSection:j]; ++i)
+        {
+            BoardsListCell *c = (BoardsListCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]];
+            if ([c isKindOfClass:[BoardsListCell class]]) {
+                [c cancelImageLoading];
+            }
+        }
+    }
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    //resume loading if hasn't done
+    NSArray *indexPathes = [self.tableView indexPathsForVisibleRows];
+    for (NSIndexPath *aIndex in indexPathes) {
+        BoardsListCell *c = (BoardsListCell *)[self.tableView cellForRowAtIndexPath:aIndex];
+        if ([c isKindOfClass:[BoardsListCell class]]) {
+            [c resumeImageLoading];
+        }
+    }
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -194,7 +223,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == _boards.count) {
         //add more
-        if (!isLoadingData) {
+        if (!isLoadingData && _hasNext) {
             NSInvocationOperation *pageOpreration = [[NSInvocationOperation alloc]initWithTarget:self selector:@selector(pageData) object:nil];
             [_oprationq addOperation:pageOpreration];
             [pageOpreration release];

@@ -14,7 +14,7 @@
     UIView *tempView;
     UIView *loadingView;
     UIActivityIndicatorView *loadingIndicator;
-    NSInteger userId;
+    NSNumber *userId;
 }
 
 - (id)initWithUser:(User *)aUser;

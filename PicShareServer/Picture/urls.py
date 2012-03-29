@@ -2,5 +2,5 @@ from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
 
-    (r'^(?P<picId>\d+)/(?P<picSize>\d+)$','Picture.views.getPicture'),
+    (r'^pictures/(?P<picPath>\w+\.(jpg|png|gif))$','Picture.views.getPicture'),
 )

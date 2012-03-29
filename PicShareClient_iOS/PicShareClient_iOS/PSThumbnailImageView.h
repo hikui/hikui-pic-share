@@ -1,28 +1,29 @@
 //
-//  PSThumbnailImageView.h
+//  PSThumbnailImageView2.h
 //  PicShareClient_iOS
 //
-//  Created by 和光 缪 on 12-3-12.
+//  Created by 缪和光 on 12-3-26.
 //  Copyright (c) 2012年 Shanghai University. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ASIHTTPRequest.h"
 @protocol PSThumbnailImageViewEventsDelegate <NSObject>
 
 - (void)didReceiveTouchEvent:(id)sender;
 
 @end
 
-/**
- PSThumbnailImageView is not UIImageView!!!
- This kind of ImageView has round corner with shardow. Will send touch event to delegate.
- */
-@interface PSThumbnailImageView : UIControl
+@interface PSThumbnailImageView : UIControl <ASIHTTPRequestDelegate>
 
-@property (nonatomic,retain) UIImageView *innerImageView;
+@property (nonatomic,retain) NSURL *theUrl;
+@property (nonatomic,retain) ASIHTTPRequest *theRequest;
+@property (nonatomic,retain) UIImageView *imageView;
 
 - (void)clearImage;
 - (void)setImageWithUrl:(NSURL *)url;
 - (void)setImageWithUrl:(NSURL *)url placeholderImage:(UIImage *)placeholder;
+
+- (void)icancelImageLoading;
+- (void)iResumeImageLoading;
 @end

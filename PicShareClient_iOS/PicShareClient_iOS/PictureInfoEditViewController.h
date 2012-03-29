@@ -16,5 +16,6 @@
 @property (nonatomic,retain) Board *board;
 @property (nonatomic,copy) NSString *descriptionText;
 @property (readwrite) CGPoint locationPoint;
+@property (nonatomic,retain) UIImage *uploadImage;
 
 @end

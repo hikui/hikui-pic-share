@@ -11,7 +11,8 @@
 
 @interface CategoriesViewController (Private)
 
--(void)loadCategories;
+- (void)prepareLoad;
+- (void)loadCategories;
 
 @end
 
@@ -32,11 +33,9 @@
 {
     [super viewDidLoad];
     oprationq = [[NSOperationQueue alloc]init];
-    NSInvocationOperation *downloadOperation = [[NSInvocationOperation alloc]initWithTarget:self selector:@selector(loadCategories) object:nil];
-    [oprationq addOperation:downloadOperation];
-    isLoadingData = YES;
+    [self prepareLoad];
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(prepareLoad)]autorelease];
     
-    [downloadOperation release];
     
 }
 
@@ -152,6 +151,14 @@
 
 #pragma mark - Async methods
 
+- (void)prepareLoad
+{
+    NSInvocationOperation *downloadOperation = [[NSInvocationOperation alloc]initWithTarget:self selector:@selector(loadCategories) object:nil];
+    [oprationq addOperation:downloadOperation];
+    isLoadingData = YES;
+    [downloadOperation release];
+}
+
 -(void)loadCategories
 {
     _engine = [PicShareEngine sharedEngine];
@@ -159,6 +166,7 @@
     [self performSelectorInBackground:@selector(setCategories:) withObject:loadedCategories];
     isLoadingData = NO;
     [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:false];
+   
 }
 
 @end

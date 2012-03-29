@@ -9,48 +9,17 @@
 #import "PicShareClient_iOSAppDelegate.h"
 #import "AsyncImageDownloader.h"
 #import "PicShareEngine.h"
+#import "Common.h"
 
 @implementation PicShareClient_iOSAppDelegate
 
 @synthesize window = _window;
-@synthesize tabBarController = _tabBarController;
-
+@synthesize tabBarController;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    // Add the tab bar controller's current view as a subview of the window
-    _tabBarController = [[CustomTabBarController alloc]init];
     
-    _pictureWallViewController = [[PictureWallViewController alloc]init];
-    [_pictureWallViewController.tabBarItem setTitle:@"主页"];
-    [_pictureWallViewController.tabBarItem setImage:[UIImage imageNamed:@"house.png"]];
-    
-    _categoriesViewController = [[CategoriesViewController alloc]initWithNibName:@"CategoriesViewController" bundle:nil];
-    UINavigationController *nCategoriesViewController = [[[UINavigationController alloc]initWithRootViewController:_categoriesViewController]autorelease];
-    [nCategoriesViewController.tabBarItem setTitle:@"探索"];
-    [nCategoriesViewController.tabBarItem setImage:[UIImage imageNamed:@"glass.png"]];
-    [_categoriesViewController release];
-    
-    vc3 = [[ViewController3 alloc]init];
-    [vc3.tabBarItem setTitle:@"消息"];
-    [vc3.tabBarItem setImage:[UIImage imageNamed:@"mail.png"]];
-    
-
-    _userProfileViewController = [[UserDetailViewController alloc]initwithuserId:1];
-    UINavigationController *nUserProfileViewController = [[[UINavigationController alloc]initWithRootViewController:_userProfileViewController]autorelease];
-    [_userProfileViewController release];
-    
-    [nUserProfileViewController.tabBarItem setTitle:@"我的"];
-    [nUserProfileViewController.tabBarItem setImage:[UIImage imageNamed:@"man"]];
-    
-    UIViewController *placehoder = [[UIViewController alloc]init];
-    [placehoder setTitle:@""];
-    [placehoder.tabBarItem setEnabled:false];
-    
-    [_tabBarController setViewControllers:[NSArray arrayWithObjects:_pictureWallViewController,nCategoriesViewController,placehoder,vc3,nUserProfileViewController, nil]];
-    self.window.rootViewController = _tabBarController;
+    self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
-    [placehoder release];
     return YES;
 }
 
@@ -97,15 +66,14 @@
 -(void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
     [[AsyncImageDownloader sharedAsyncImageDownloader]cleanThumbnailCache];
+    Common *common = [Common sharedCommon];
+    [common receiveMemoryWarning];
 }
 
 - (void)dealloc
 {
     [_window release];
-    [_tabBarController release];
-    [vc3 release];
-    [vc4 release];
-    [_pictureWallViewController release];
+    [tabBarController release];
     [super dealloc];
 }
 

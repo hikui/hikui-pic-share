@@ -16,5 +16,5 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
     (r'^api/', include('PicShareServer.api.urls')),
-    (r'^picture/',include('PicShareServer.Picture.urls')), #handle different image size
+    (r'^media/',include('PicShareServer.Picture.urls')), #handle different image size
 )

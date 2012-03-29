@@ -110,6 +110,10 @@ static AsyncImageDownloader *instance = NULL;
     [_downloadInfo removeObjectForKey:request.url];
 }
 
+- (void)cancelLoadImageWithUrl:(NSURL *)url andDelegate:(id)delegate
+{
+    
+}
 
 - (void)cleanThumbnailCache
 {

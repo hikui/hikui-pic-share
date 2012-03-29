@@ -1,9 +1,25 @@
 # Create your views here.
 from django.http import HttpResponse
 from PicShareServer import settings
+import os
 
-def getPicture(request,picId,picSize):
-    print picId
-    print picSize
-    test = {'a':'aa','b':'bb','c':['aaa','bbb','ccc']}
-    return HttpResponse(test)
+def getPicture(request,picPath):
+    picSize = int(request.GET.get('size',120))
+    MIME_type_mapping = {
+        '.jpg':'image/jpeg',
+        '.png':'image/png',
+        '.gif':'image/gif'
+    }
+    size_path_mapping = {
+        120:'X120',
+        320:'X320',
+        640:'X640'
+    }
+    filename,extension = os.path.splitext(picPath)
+    mime_type = MIME_type_mapping.get(extension)
+    localpath = size_path_mapping.get(picSize)
+    if mime_type is not None and localpath is not None:
+        image_path = os.path.join(settings.MEDIA_ROOT,'picture',localpath,picPath)
+        image = open(image_path, "rb").read()
+        return HttpResponse(image,mimetype=mime_type)
+    return HttpResponse()

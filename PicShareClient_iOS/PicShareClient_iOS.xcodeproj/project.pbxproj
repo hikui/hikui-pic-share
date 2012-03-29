@@ -77,8 +77,12 @@
 		A45702B51514809F005BC6FF /* UserDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45702B31514809F005BC6FF /* UserDetailViewController.m */; };
 		A45702B61514809F005BC6FF /* UserDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A45702B41514809F005BC6FF /* UserDetailViewController.xib */; };
 		A46DA5F91505C00600EA9D8B /* UIImageView+AsyncImageContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = A46DA5F81505C00600EA9D8B /* UIImageView+AsyncImageContainer.m */; };
+		A47D9C8A1520959B00ADACF6 /* PSThumbnailImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A47D9C891520959B00ADACF6 /* PSThumbnailImageView.m */; };
+		A47D9C8E1520968500ADACF6 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A47D9C8D1520968500ADACF6 /* Common.m */; };
+		A47D9C9B152308A900ADACF6 /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A47D9C9A152308A900ADACF6 /* TimelineViewController.m */; };
+		A47D9C9E1523099300ADACF6 /* TimelineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A47D9C9D1523099200ADACF6 /* TimelineCell.m */; };
 		A47FA462150E481A0083CF97 /* PicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A47FA460150E481A0083CF97 /* PicDetailViewController.m */; };
-		A47FA467150E48690083CF97 /* PSThumbnailImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A47FA466150E48690083CF97 /* PSThumbnailImageView.m */; };
+		A47FA467150E48690083CF97 /* _PSThumbnailImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A47FA466150E48690083CF97 /* _PSThumbnailImageView.m */; };
 		A49259691519B01D00936D3A /* PictureEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A49259671519B01D00936D3A /* PictureEditViewController.m */; };
 		A492596A1519B01D00936D3A /* PictureEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A49259681519B01D00936D3A /* PictureEditViewController.xib */; };
 		A4BAB7D914FDE67500E51402 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7D614FDE67500E51402 /* arrow.png */; };
@@ -207,10 +211,18 @@
 		A45702B41514809F005BC6FF /* UserDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserDetailViewController.xib; sourceTree = "<group>"; };
 		A46DA5F71505C00600EA9D8B /* UIImageView+AsyncImageContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AsyncImageContainer.h"; sourceTree = "<group>"; };
 		A46DA5F81505C00600EA9D8B /* UIImageView+AsyncImageContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AsyncImageContainer.m"; sourceTree = "<group>"; };
+		A47D9C881520959B00ADACF6 /* PSThumbnailImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSThumbnailImageView.h; sourceTree = "<group>"; };
+		A47D9C891520959B00ADACF6 /* PSThumbnailImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSThumbnailImageView.m; sourceTree = "<group>"; };
+		A47D9C8C1520968500ADACF6 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		A47D9C8D1520968500ADACF6 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
+		A47D9C99152308A700ADACF6 /* TimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
+		A47D9C9A152308A900ADACF6 /* TimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
+		A47D9C9C1523099200ADACF6 /* TimelineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineCell.h; sourceTree = "<group>"; };
+		A47D9C9D1523099200ADACF6 /* TimelineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineCell.m; sourceTree = "<group>"; };
 		A47FA45F150E481A0083CF97 /* PicDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicDetailViewController.h; sourceTree = "<group>"; };
 		A47FA460150E481A0083CF97 /* PicDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicDetailViewController.m; sourceTree = "<group>"; };
-		A47FA465150E48690083CF97 /* PSThumbnailImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSThumbnailImageView.h; sourceTree = "<group>"; };
-		A47FA466150E48690083CF97 /* PSThumbnailImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSThumbnailImageView.m; sourceTree = "<group>"; };
+		A47FA465150E48690083CF97 /* _PSThumbnailImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _PSThumbnailImageView.h; sourceTree = "<group>"; };
+		A47FA466150E48690083CF97 /* _PSThumbnailImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _PSThumbnailImageView.m; sourceTree = "<group>"; };
 		A49259661519B01D00936D3A /* PictureEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureEditViewController.h; sourceTree = "<group>"; };
 		A49259671519B01D00936D3A /* PictureEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureEditViewController.m; sourceTree = "<group>"; };
 		A49259681519B01D00936D3A /* PictureEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PictureEditViewController.xib; sourceTree = "<group>"; };
@@ -294,10 +306,14 @@
 				A40B57501504B2640045C9B1 /* BoardsListCell.h */,
 				A40B57511504B2640045C9B1 /* BoardsListCell.m */,
 				A40B57561504C3280045C9B1 /* Design.xib */,
-				A47FA465150E48690083CF97 /* PSThumbnailImageView.h */,
-				A47FA466150E48690083CF97 /* PSThumbnailImageView.m */,
+				A47FA465150E48690083CF97 /* _PSThumbnailImageView.h */,
+				A47FA466150E48690083CF97 /* _PSThumbnailImageView.m */,
 				A457024815119D2B005BC6FF /* PicDetailView.h */,
 				A457024915119D2B005BC6FF /* PicDetailView.m */,
+				A47D9C881520959B00ADACF6 /* PSThumbnailImageView.h */,
+				A47D9C891520959B00ADACF6 /* PSThumbnailImageView.m */,
+				A47D9C9C1523099200ADACF6 /* TimelineCell.h */,
+				A47D9C9D1523099200ADACF6 /* TimelineCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -360,6 +376,8 @@
 				A4FDB344151F05E20048C199 /* PictureDescriptionComposerViewController.h */,
 				A4FDB345151F05E30048C199 /* PictureDescriptionComposerViewController.m */,
 				A4FDB346151F05E30048C199 /* PictureDescriptionComposerViewController.xib */,
+				A47D9C99152308A700ADACF6 /* TimelineViewController.h */,
+				A47D9C9A152308A900ADACF6 /* TimelineViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -500,6 +518,8 @@
 				A44E236414F7746600A73307 /* PicShareClient_iOSAppDelegate.h */,
 				A44E236514F7746600A73307 /* PicShareClient_iOSAppDelegate.m */,
 				A44E236714F7746600A73307 /* MainWindow.xib */,
+				A47D9C8C1520968500ADACF6 /* Common.h */,
+				A47D9C8D1520968500ADACF6 /* Common.m */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -691,7 +711,7 @@
 				A40B576E1505211C0045C9B1 /* AsyncImageDownloader.m in Sources */,
 				A46DA5F91505C00600EA9D8B /* UIImageView+AsyncImageContainer.m in Sources */,
 				A47FA462150E481A0083CF97 /* PicDetailViewController.m in Sources */,
-				A47FA467150E48690083CF97 /* PSThumbnailImageView.m in Sources */,
+				A47FA467150E48690083CF97 /* _PSThumbnailImageView.m in Sources */,
 				A457024A15119D2B005BC6FF /* PicDetailView.m in Sources */,
 				A457024D1511ADDC005BC6FF /* UIImageView+Resize.m in Sources */,
 				A45702B51514809F005BC6FF /* UserDetailViewController.m in Sources */,
@@ -701,6 +721,10 @@
 				A4203CE4151D8477008B29A9 /* PictureInfoEditViewController.m in Sources */,
 				A4FDB342151F01660048C199 /* BoardPickerViewController.m in Sources */,
 				A4FDB347151F05E30048C199 /* PictureDescriptionComposerViewController.m in Sources */,
+				A47D9C8A1520959B00ADACF6 /* PSThumbnailImageView.m in Sources */,
+				A47D9C8E1520968500ADACF6 /* Common.m in Sources */,
+				A47D9C9B152308A900ADACF6 /* TimelineViewController.m in Sources */,
+				A47D9C9E1523099300ADACF6 /* TimelineCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

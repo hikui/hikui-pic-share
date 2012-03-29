@@ -89,7 +89,12 @@
     self.editViewController = [[[PictureEditViewController alloc]init]autorelease];
     UIImagePickerController *picker = [[UIImagePickerController alloc]init];
     picker.allowsEditing = NO;
-    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }else {
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    
     picker.delegate = self.editViewController;
     [self presentModalViewController:picker animated:YES];
     [picker release];

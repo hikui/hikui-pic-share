@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "BoardsListViewController.h"
 #import "UsersListViewController.h"
+#import "Common.h"
 #define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 
 @interface UserDetailViewController ()
@@ -84,7 +85,7 @@
 {
     self = [super init];
     if (self) {
-        userId = anId;
+        userId = [[NSNumber numberWithInt:anId]retain];
     }
     return self;
 }
@@ -103,21 +104,23 @@
     [super viewDidLoad];
     if (user!=nil) {
         [self updateView];
-    }else{
-        tempView = [self.view retain];
-        loadingView = [[UIView alloc]init];
-        CGRect screenBounds = [UIScreen mainScreen].bounds;
-        CGFloat x = screenBounds.size.width/2 - 10;
-        CGFloat y = screenBounds.size.height/2 - 10-50;
-        loadingIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        loadingIndicator.frame = CGRectMake(x, y, 20, 20);
-        loadingIndicator.hidesWhenStopped = YES;
-        [loadingView addSubview:loadingIndicator];
-        self.view = loadingView;
-        [self performSelectorInBackground:@selector(loadData) withObject:nil];
+        return;
+    }else if(userId == nil){
+        PicShareEngine *engine = [PicShareEngine sharedEngine];
+        userId = [[NSNumber numberWithInt:engine.userId]retain];
     }
     
-    
+    tempView = [self.view retain];
+    loadingView = [[UIView alloc]init];
+    CGRect screenBounds = [UIScreen mainScreen].bounds;
+    CGFloat x = screenBounds.size.width/2 - 10;
+    CGFloat y = screenBounds.size.height/2 - 10-50;
+    loadingIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    loadingIndicator.frame = CGRectMake(x, y, 20, 20);
+    loadingIndicator.hidesWhenStopped = YES;
+    [loadingView addSubview:loadingIndicator];
+    self.view = loadingView;
+    [self performSelectorInBackground:@selector(loadData) withObject:nil];
 }
 
 
@@ -192,13 +195,14 @@
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc]init];
     PicShareEngine *engine = [PicShareEngine sharedEngine];
-    User *returnedUser = [engine getUser:userId];
+    User *returnedUser = [engine getUser:[userId intValue]];
     [self performSelectorOnMainThread:@selector(loadDataDidFinish:) withObject:returnedUser waitUntilDone:NO];
     [pool release];
 }
 - (void)loadDataDidFinish:(User *)returnedUser
 {
     self.user = returnedUser;
+    [userId release];
     [self updateView];
     self.view = tempView;
     [tempView release];

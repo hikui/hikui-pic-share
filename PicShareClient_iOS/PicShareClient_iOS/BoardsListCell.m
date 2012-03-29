@@ -111,6 +111,19 @@
     return 128;
 }
 
+- (void) cancelImageLoading
+{
+    for (PSThumbnailImageView *imageview in _imageViews) {
+        [imageview icancelImageLoading];
+    }
+}
+
+- (void) resumeImageLoading
+{
+    for (PSThumbnailImageView *imageview in _imageViews) {
+        [imageview iResumeImageLoading];
+    }
+}
 
 #pragma mark - delegate methods
 
