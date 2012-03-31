@@ -9,6 +9,8 @@
 #import "TimelineViewController.h"
 #import "PicShareEngine.h"
 #import "TimelineCell.h"
+#import "ASIDownloadCache.h"
+#import "UIImageView+Resize.h"
 
 @interface TimelineViewController ()
 
@@ -16,11 +18,26 @@
 - (void)loadDataDidFinish:(NSArray *)resultArray;
 - (void)pageData;
 - (void)pageDataDidFinish:(NSArray *)resultArray;
+- (void)loadImage:(NSURL *)imageUrl WithProgressDelegate:(UIProgressView *)progressView atIndexPath:(NSIndexPath *)path;
+- (void)loadImageDidFinish:(ASIHTTPRequest *)request;
+- (void)loadImageDidFailed:(ASIHTTPRequest *)request;
 
 @end
 
 @implementation TimelineViewController
-@synthesize timeline,hasnext,currentPage;
+@synthesize timeline,hasnext,currentPage,pictures,progressViews,aliveRequest;
+
+- (void)dealloc
+{
+    [timeline release];
+    [pictures release];
+    [progressViews release];
+    for (ASIHTTPRequest *aRequest in aliveRequest) {
+        [aRequest clearDelegatesAndCancel];
+    }
+    [aliveRequest release];
+    [super dealloc];
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,6 +51,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    aliveRequest = [[NSMutableArray alloc]init];
     [self startLoading];
 }
 
@@ -91,8 +109,30 @@
     if (cell==nil) {
         cell = [[[TimelineCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier]autorelease];
     }
+    [cell clearImage];
     PictureStatus *ps = [timeline objectAtIndex:indexPath.row];
-    [cell setPictureStatusThenRefresh:ps];
+    [cell setPictureStatus:ps];
+    [cell layout];
+    if ([self.pictures objectAtIndex:indexPath.row]==[NSNull null]){
+        if ([self.progressViews objectAtIndex:indexPath.row]!=[NSNull null]) { // is already start loading
+            [cell.mainImageView addSubview:[self.progressViews objectAtIndex:indexPath.row]];
+        }else if(self.tableView.dragging == NO && self.tableView.decelerating == NO){
+            UIProgressView *progressView = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleBar];
+            CGSize mainImageViewSize = cell.mainImageView.frame.size;
+            progressView.frame = CGRectMake((mainImageViewSize.width-100)/2, mainImageViewSize.height/2, 100, 20);
+            [cell.mainImageView addSubview:progressView];
+            [self.progressViews replaceObjectAtIndex:indexPath.row withObject:progressView];
+            NSURL *url = [NSURL URLWithString:ps.pictureUrl];
+            [self loadImage:url WithProgressDelegate:progressView atIndexPath:indexPath];
+            [progressView release];
+
+        }
+    }
+    else {
+        cell.mainImageView.image = [self.pictures objectAtIndex:indexPath.row];
+        NSLog(@"aaaaa");
+    }
+        
     return cell;
 }
 
@@ -125,6 +165,43 @@
 }
 
 
+- (void)loadImagesForOnscreenRows
+{
+    NSLog(@"loadImagesForOnscreenRows");
+    NSArray *visiblePaths = [self.tableView indexPathsForVisibleRows];
+    for (NSIndexPath *indexPath in visiblePaths)
+    {
+        if (indexPath.row>=self.timeline.count) {
+            break;
+        }
+        if ([self.pictures objectAtIndex:indexPath.row]==[NSNull null]) {
+            TimelineCell *cell =(TimelineCell *) [self.tableView cellForRowAtIndexPath:indexPath];
+            PictureStatus *ps = [timeline objectAtIndex:indexPath.row];
+            UIProgressView *progressView = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleBar];
+            CGSize mainImageViewSize = cell.mainImageView.frame.size;
+            progressView.frame = CGRectMake((mainImageViewSize.width-100)/2, mainImageViewSize.height/2, 100, 20);
+            [cell.mainImageView addSubview:progressView];
+            [self.progressViews replaceObjectAtIndex:indexPath.row withObject:progressView];
+            NSURL *url = [NSURL URLWithString:ps.pictureUrl];
+            [self loadImage:url WithProgressDelegate:progressView atIndexPath:indexPath];
+            [progressView release];
+        }
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (!decelerate)
+	{
+        [self loadImagesForOnscreenRows];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self loadImagesForOnscreenRows];
+}
+
 #pragma mark - async methods
 - (void)loadData
 {
@@ -147,6 +224,12 @@
     else {
         self.hasnext = NO;
     }
+    self.progressViews = [[[NSMutableArray alloc]init]autorelease];
+    self.pictures = [[[NSMutableArray alloc]init]autorelease];
+    for (int i = 0; i<self.timeline.count; i++) {
+        [progressViews addObject:[NSNull null]];
+        [pictures addObject:[NSNull null]];
+    }
     currentPage = 1;
     [self stopLoading];
     [self.tableView reloadData];
@@ -166,7 +249,10 @@
     NSArray *psData = [resultArray subarrayWithRange:NSMakeRange(1, resultArray.count-1)];
     int originPSCount = timeline.count;
     for (PictureStatus *aPs in psData) {
-        [self.timeline insertObject:aPs atIndex:originPSCount++];
+        [self.timeline insertObject:aPs atIndex:originPSCount];
+        [self.pictures insertObject:[NSNull null] atIndex:originPSCount];
+        [self.progressViews insertObject:[NSNull null] atIndex:originPSCount];
+        originPSCount++;
     }
     if ([[resultArray objectAtIndex:0] intValue] == 1) {
         self.hasnext = YES;
@@ -175,5 +261,52 @@
         self.hasnext = NO;
     }
     [self.tableView reloadData];
+}
+
+- (void)loadImage:(NSURL *)imageUrl WithProgressDelegate:(UIProgressView *)progressView atIndexPath:(NSIndexPath *)path
+{
+    ASIHTTPRequest *request = [[ASIHTTPRequest alloc]initWithURL:imageUrl];
+    [request setDelegate:self];
+    [request setTimeOutSeconds:30];
+    [request setDownloadProgressDelegate:progressView];
+    [request setDownloadCache:[ASIDownloadCache sharedCache]];
+    [request setCachePolicy:ASICacheForSessionDurationCacheStoragePolicy];
+    [request setNumberOfTimesToRetryOnTimeout:1];
+    [request setDidFinishSelector:@selector(loadImageDidFinish:)];
+    [request setDidFailSelector:@selector(loadImageDidFailed:)];
+    request.userInfo = [[[NSDictionary alloc]initWithObjectsAndKeys:path,@"indexPath", nil]autorelease];
+    @synchronized(self.aliveRequest)
+    {
+        [self.aliveRequest addObject:request];
+    }
+    [request startAsynchronous];
+    
+    
+}
+- (void)loadImageDidFinish:(ASIHTTPRequest *)request
+{
+    NSLog(@"loadImageDidFinish");
+    @synchronized(self.aliveRequest)
+    {
+         [self.aliveRequest removeObject:request];
+    }
+    [request.downloadProgressDelegate removeFromSuperview];
+    //NSLog(@"path:%@",[request.userInfo objectForKey:@"indexPath"]);
+    NSIndexPath *indexPath = [request.userInfo objectForKey:@"indexPath"];
+    [self.progressViews replaceObjectAtIndex:indexPath.row withObject:[NSNull null]];
+    UIImage *image = [UIImage imageWithData:[request responseData]];
+    //裁剪
+    UIImage *scaledImage = [UIImageView imageWithImage:image scaledToSizeWithSameAspectRatio:CGSizeMake(MAIN_IMAGE_WIDTH, MAIN_IMAGE_HEIGHT)];
+    [self.pictures replaceObjectAtIndex:indexPath.row withObject:scaledImage];
+    TimelineCell *cell = (TimelineCell *) [self.tableView cellForRowAtIndexPath:indexPath];
+    [cell setPicture:scaledImage WillAnimated:YES];
+}
+
+- (void)loadImageDidFailed:(ASIHTTPRequest *)request
+{
+    NSLog(@"loadImageDidFaild");
+    [self.aliveRequest removeObject:request];
+    [request.downloadProgressDelegate removeFromSuperview];
+    [self.progressViews removeObject:request.downloadProgressDelegate];
 }
 @end

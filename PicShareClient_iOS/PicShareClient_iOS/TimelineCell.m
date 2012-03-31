@@ -14,13 +14,12 @@
 
 @interface TimelineCell ()
 
-- (void)downloadMainImage;
 
 @end
 
 @implementation TimelineCell
 
-@synthesize avatarImageView,usernameButton,boardNameButton,picDescriptionLabel,mainImageView,repinButton,commentTextField,pictureStatus,viaButton,progressView,request;
+@synthesize avatarImageView,usernameButton,boardNameButton,picDescriptionLabel,mainImageView,repinButton,commentTextField,pictureStatus,viaButton,request;
 
 - (void)dealloc
 {
@@ -34,7 +33,6 @@
     [repinButton release];
     [commentTextField release];
     [viaButton release];
-    [progressView release];
     [super dealloc];
 }
 
@@ -51,14 +49,12 @@
         repinButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect]retain];
         commentTextField = [[UITextField alloc]init];
         viaButton = [[UIButton buttonWithType:UIButtonTypeCustom]retain];
-        progressView = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleBar];
         [self.contentView addSubview:avatarImageView];
         [self.contentView addSubview:usernameButton];
         [self.contentView addSubview:boardNameButton];
         [self.contentView addSubview:picDescriptionLabel];
         [self.contentView addSubview:mainImageView];
         [self.contentView addSubview:repinButton];
-        loadImgComplete = NO;
     }
     return self;
 }
@@ -73,9 +69,7 @@
 
 - (void)layout
 {
-    NSLog(@"layoutSubviews");
     if (self.pictureStatus != nil) {
-        NSLog(@"updateview");
         avatarImageView.frame = CGRectMake(10, 20, 30, 30);
         [avatarImageView setImageWithUrl:[NSURL URLWithString:pictureStatus.owner.avatarUrl] placeholderImage:[UIImage imageNamed:@"anonymous.png"]];
         
@@ -118,15 +112,10 @@
         }
         
         
-        CGSize mainImageViewSize = CGSizeMake(300, 255);
+        CGSize mainImageViewSize = CGSizeMake(MAIN_IMAGE_WIDTH, MAIN_IMAGE_HEIGHT);
         CGRect mainImageViewFrame = CGRectMake(avatarImageView.frame.origin.x, avatarImageView.frame.origin.y+avatarImageView.frame.size.height+viaButtonFrame.size.height+8, mainImageViewSize.width, mainImageViewSize.height);
         mainImageView.frame = mainImageViewFrame;
-        progressView.frame = CGRectMake((mainImageViewSize.width-150)/2, (mainImageViewSize.height-11)/2, 150, 11);
-        if (!loadImgComplete) {
-            mainImageView.image = nil;
-            [mainImageView addSubview:progressView];
-            [self downloadMainImage];
-        }
+
         
         
         CGSize picDescriptionLabelSize = [pictureStatus.picDescription sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(300, 2000) lineBreakMode:UILineBreakModeWordWrap];
@@ -138,8 +127,6 @@
         picDescriptionLabel.font = [UIFont systemFontOfSize:14];
         
         
-        
-        
         CGRect repinButtonFrame = CGRectMake(picDescriptionLabelFrame.origin.x, picDescriptionLabelFrame.origin.y+picDescriptionLabelFrame.size.height+8, 80, 30);
         repinButton.frame = repinButtonFrame;
         [repinButton setTitle:@"转发" forState:UIControlStateNormal];
@@ -149,32 +136,23 @@
     }
 }
 
--(void)downloadMainImage
+- (void)clearImage
 {
-    self.request = [[[ASIHTTPRequest alloc]initWithURL:[NSURL URLWithString:pictureStatus.pictureUrl]]autorelease];
-    [self.request setDelegate:self];
-    [self.request setNumberOfTimesToRetryOnTimeout:1];
-    [self.request setTimeOutSeconds:10]; // 10 seconds
-    [self.request setDownloadCache:[ASIDownloadCache sharedCache]];
-    [self.request setCachePolicy:ASIOnlyLoadIfNotCachedCachePolicy];
-    [self.request setDownloadProgressDelegate:self.progressView];
-    [self.request startAsynchronous];
+    self.mainImageView.image = nil;
+    for (UIView *aSubView in self.mainImageView.subviews) {
+        [aSubView removeFromSuperview];
+    }
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)aRequest
+- (void)setPicture:(UIImage *)image WillAnimated:(BOOL)animated
 {
-    UIImage *tempImage = [UIImage imageWithData:[aRequest responseData]];
-    [self.progressView removeFromSuperview];
-    loadImgComplete = YES;
-    tempImage = [UIImageView imageWithImage:tempImage scaledToSizeWithSameAspectRatio:self.mainImageView.frame.size];
-    self.mainImageView.image = tempImage;
-}
-
-- (void)setPictureStatusThenRefresh:(PictureStatus *)aPictureStatus
-{
-    self.pictureStatus = aPictureStatus;
-    loadImgComplete = NO;
-    [self layout];
+    self.mainImageView.image = image;
+    if (animated) {
+        self.mainImageView.alpha = 0;
+        [UIView animateWithDuration:0.4 animations:^{
+            self.mainImageView.alpha = 1;
+        }];
+    }
 }
 
 + (CGFloat)calculateCellHeightWithPictureStatus:(PictureStatus *)aPictureStatus
@@ -187,5 +165,6 @@
     height += picDescriptionLabelSize.height;
     return  height;
 }
+
 
 @end
