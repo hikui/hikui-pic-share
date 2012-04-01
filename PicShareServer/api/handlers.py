@@ -103,6 +103,25 @@ def getBoardDict(request,board):
     }
     return boardResultDict
 
+def getBoardDictFull(request,board):
+    if board is None:
+        return None
+    owner = board.owner
+    ownerResultDict = getUserDict(request,owner)
+    picturesResultArray = []
+    for ps in board.pictureStatuses.all():
+        psResultDict = getPictureStatusDict(request,ps)
+        picturesResultArray.append(psResultDict)        
+    boardResultDict = {
+        'board_id':board.id,
+        'board_name':board.name,
+        'category_id':board.category.id,
+        'pictures_count':board.pictureStatuses.count(),
+        'owner':ownerResultDict,
+        'pictures':picturesResultArray
+    }
+    return boardResultDict
+
 class GetAllCategoriesHandler(BaseHandler):
     model = Category
     allowed_methods=('GET',)
@@ -291,4 +310,16 @@ class GetHomeTimelineHandler(BaseHandler):
         else:
             resultDict['hasnext'] = 1
         return resultDict
+        
+class GetBoardHandler(BaseHandler):
+    allowed_methods = ('GET',)
+    def read(self,request):
+        boardId = request.GET.get('board_id')
+        if boardId is not None:
+            boardId = int(boardId)
+            board = Board.objects.get(pk=boardId)
+            boardDict = getBoardDictFull(request,board)
+            return boardDict;
+        else:
+            return errorResponse(1,0,"参数错误",rc.BAD_REQUEST)
         

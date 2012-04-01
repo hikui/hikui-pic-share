@@ -11,6 +11,9 @@
 #import "TimelineCell.h"
 #import "ASIDownloadCache.h"
 #import "UIImageView+Resize.h"
+#import "PicDetailViewController.h"
+#import "UserDetailViewController.h"
+#import "BoardDetailViewController.h"
 
 @interface TimelineViewController ()
 
@@ -21,6 +24,9 @@
 - (void)loadImage:(NSURL *)imageUrl WithProgressDelegate:(UIProgressView *)progressView atIndexPath:(NSIndexPath *)path;
 - (void)loadImageDidFinish:(ASIHTTPRequest *)request;
 - (void)loadImageDidFailed:(ASIHTTPRequest *)request;
+- (void)userNameButtonOnTouch:(id)sender;
+- (void)boardButtonOnTouch:(id)sender;
+- (void)repinButtonOnTouch:(id)sender;
 
 @end
 
@@ -60,6 +66,9 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    self.timeline = nil;
+    self.pictures = nil;
+    self.progressViews = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -108,6 +117,9 @@
     TimelineCell *cell = (TimelineCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell==nil) {
         cell = [[[TimelineCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier]autorelease];
+        [cell.usernameButton addTarget:self action:@selector(userNameButtonOnTouch:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.boardNameButton addTarget:self action:@selector(boardButtonOnTouch:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.repinButton addTarget:self action:@selector(repinButtonOnTouch:) forControlEvents:UIControlEventTouchUpInside];
     }
     [cell clearImage];
     PictureStatus *ps = [timeline objectAtIndex:indexPath.row];
@@ -130,7 +142,6 @@
     }
     else {
         cell.mainImageView.image = [self.pictures objectAtIndex:indexPath.row];
-        NSLog(@"aaaaa");
     }
         
     return cell;
@@ -149,14 +160,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    PictureStatus *ps = [self.timeline objectAtIndex:indexPath.row];
+    PicDetailViewController *pdvc = [[PicDetailViewController alloc]initWithPicId:ps.psId];
+    [self.navigationController pushViewController:pdvc animated:YES];
+    [pdvc release];
 }
 
 -(void)refresh
@@ -167,7 +175,6 @@
 
 - (void)loadImagesForOnscreenRows
 {
-    NSLog(@"loadImagesForOnscreenRows");
     NSArray *visiblePaths = [self.tableView indexPathsForVisibleRows];
     for (NSIndexPath *indexPath in visiblePaths)
     {
@@ -188,6 +195,7 @@
         }
     }
 }
+
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
@@ -285,7 +293,6 @@
 }
 - (void)loadImageDidFinish:(ASIHTTPRequest *)request
 {
-    NSLog(@"loadImageDidFinish");
     @synchronized(self.aliveRequest)
     {
          [self.aliveRequest removeObject:request];
@@ -304,9 +311,37 @@
 
 - (void)loadImageDidFailed:(ASIHTTPRequest *)request
 {
-    NSLog(@"loadImageDidFaild");
     [self.aliveRequest removeObject:request];
     [request.downloadProgressDelegate removeFromSuperview];
     [self.progressViews removeObject:request.downloadProgressDelegate];
+}
+
+#pragma mark - TimelineCellEventsDelegate
+- (void)userNameButtonOnTouch:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    TimelineCell *cell = (TimelineCell *)button.superview;
+    NSIndexPath *path = [self.tableView indexPathForCell:cell];
+    PictureStatus *ps = [self.timeline objectAtIndex:path.row];
+    UserDetailViewController *udvc = [[UserDetailViewController alloc]initWithUser:ps.owner];
+    [self.navigationController pushViewController:udvc animated:YES];
+    [udvc release];
+}
+- (void)boardButtonOnTouch:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    TimelineCell *cell = (TimelineCell *)button.superview;
+    NSIndexPath *path = [self.tableView indexPathForCell:cell];
+    PictureStatus *ps = [self.timeline objectAtIndex:path.row];
+    BoardDetailViewController *bdvc = [[BoardDetailViewController alloc]initWithNibName:@"BoardDetailViewController" bundle:nil];
+    bdvc.boardId = ps.boardId;
+    [self.navigationController pushViewController:bdvc animated:YES];
+    [bdvc release];
+    
+#warning not implement yet
+}
+- (void)repinButtonOnTouch:(id)sender
+{
+#warning not implement yet
 }
 @end

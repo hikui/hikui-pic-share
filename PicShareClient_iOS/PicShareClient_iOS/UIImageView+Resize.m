@@ -7,6 +7,7 @@
 //
 
 #import "UIImageView+Resize.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation UIImageView (Resize)
 
@@ -39,10 +40,10 @@ static bool isRetina()
         CGFloat heightFactor = targetHeight / height;
         
         if (widthFactor > heightFactor) {
-            scaleFactor = widthFactor; 
+            scaleFactor = widthFactor; // scale to fit height
         }
         else {
-            scaleFactor = heightFactor; 
+            scaleFactor = heightFactor; // scale to fit width
         }
         
         scaledWidth  = width * scaleFactor;
@@ -56,13 +57,27 @@ static bool isRetina()
             thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
         }
     }     
+    CGImageRef imageRef = [sourceImage CGImage];
+    CGColorSpaceRef colorSpaceInfo = CGColorSpaceCreateDeviceRGB();
     
-    CGSize newImageSize = CGSizeMake(targetWidth, targetHeight);
-    UIGraphicsBeginImageContext(newImageSize);
-    [sourceImage drawInRect:CGRectMake(thumbnailPoint.x,thumbnailPoint.y,scaledWidth,scaledHeight)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    CGContextRef bitmap;
     
-    return newImage;
+    if (sourceImage.imageOrientation == UIImageOrientationUp || sourceImage.imageOrientation == UIImageOrientationDown) {
+        bitmap = CGBitmapContextCreate(NULL, targetWidth, targetHeight, 8, 0, colorSpaceInfo, kCGImageAlphaNoneSkipLast);
+        
+    } else {
+        bitmap = CGBitmapContextCreate(NULL, targetHeight, targetWidth, 8, 0, colorSpaceInfo, kCGImageAlphaNoneSkipLast);
+        
+    }   
+
+    CGContextDrawImage(bitmap, CGRectMake(thumbnailPoint.x, thumbnailPoint.y, scaledWidth, scaledHeight), imageRef);
+    CGImageRef ref = CGBitmapContextCreateImage(bitmap);
+    UIImage* newImage = [UIImage imageWithCGImage:ref];
+    
+    CGContextRelease(bitmap);
+    CGImageRelease(ref);
+    CGColorSpaceRelease(colorSpaceInfo);
+    return newImage; 
 }
 
 + (UIImage*)imageWithImage:(UIImage*)sourceImage scaledToSizeWithTargetHeight:(CGFloat)targetHeight
@@ -81,11 +96,32 @@ static bool isRetina()
         scaledWidth  = width * scaleFactor;
         scaledHeight = height * scaleFactor;
     }
-    CGSize newImageSize = CGSizeMake(scaledWidth, scaledHeight);
-    UIGraphicsBeginImageContext(newImageSize);
-    [sourceImage drawInRect:CGRectMake(0,0,scaledWidth,scaledHeight)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    return newImage;
+//    CGSize newImageSize = CGSizeMake(scaledWidth, scaledHeight);
+//    UIGraphicsBeginImageContext(newImageSize);
+//    [sourceImage drawInRect:CGRectMake(0,0,scaledWidth,scaledHeight)];
+//    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+//    return newImage;
+    CGImageRef imageRef = [sourceImage CGImage];
+    CGColorSpaceRef colorSpaceInfo = CGColorSpaceCreateDeviceRGB();
+    
+    CGContextRef bitmap;
+    
+    if (sourceImage.imageOrientation == UIImageOrientationUp || sourceImage.imageOrientation == UIImageOrientationDown) {
+        bitmap = CGBitmapContextCreate(NULL, scaledWidth, scaledHeight, 8, 0, colorSpaceInfo, kCGImageAlphaNoneSkipLast);
+        
+    } else {
+        bitmap = CGBitmapContextCreate(NULL, scaledHeight, scaledWidth, 8, 0, colorSpaceInfo, kCGImageAlphaNoneSkipLast);
+        
+    }   
+    
+    CGContextDrawImage(bitmap, CGRectMake(0, 0, scaledWidth, scaledHeight), imageRef);
+    CGImageRef ref = CGBitmapContextCreateImage(bitmap);
+    UIImage* newImage = [UIImage imageWithCGImage:ref];
+    
+    CGContextRelease(bitmap);
+    CGImageRelease(ref);
+    CGColorSpaceRelease(colorSpaceInfo);
+    return newImage; 
 }
 
 + (UIImage*)imageWithImage:(UIImage*)sourceImage scaledToSizeWithTargetWidth:(CGFloat)targetWidth
@@ -104,11 +140,33 @@ static bool isRetina()
         scaledWidth  = width * scaleFactor;
         scaledHeight = height * scaleFactor;
     }
-    CGSize newImageSize = CGSizeMake(scaledWidth, scaledHeight);
-    UIGraphicsBeginImageContext(newImageSize);
-    [sourceImage drawInRect:CGRectMake(0,0,scaledWidth,scaledHeight)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+//    CGSize newImageSize = CGSizeMake(scaledWidth, scaledHeight);
+//    UIGraphicsBeginImageContext(newImageSize);
+//    [sourceImage drawInRect:CGRectMake(0,0,scaledWidth,scaledHeight)];
+//    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+//    return newImage;
+    CGImageRef imageRef = [sourceImage CGImage];
+    CGColorSpaceRef colorSpaceInfo = CGColorSpaceCreateDeviceRGB();
+    
+    CGContextRef bitmap;
+    
+    if (sourceImage.imageOrientation == UIImageOrientationUp || sourceImage.imageOrientation == UIImageOrientationDown) {
+        bitmap = CGBitmapContextCreate(NULL, scaledWidth, scaledHeight, 8,0, colorSpaceInfo, kCGImageAlphaNoneSkipLast);
+        
+    } else {
+        bitmap = CGBitmapContextCreate(NULL, scaledHeight, scaledWidth, 8, 0, colorSpaceInfo, kCGImageAlphaNoneSkipLast);
+        
+    }   
+    
+    CGContextDrawImage(bitmap, CGRectMake(0, 0, scaledWidth, scaledHeight), imageRef);
+    CGImageRef ref = CGBitmapContextCreateImage(bitmap);
+    UIImage* newImage = [UIImage imageWithCGImage:ref];
+    
+    CGContextRelease(bitmap);
+    CGImageRelease(ref);
+    CGColorSpaceRelease(colorSpaceInfo);
     return newImage;
+    
 }
 
 + (CGFloat)heightWithSpecificWidth:(CGFloat)targetWidth ofAnImage:(UIImage *)sourceImage

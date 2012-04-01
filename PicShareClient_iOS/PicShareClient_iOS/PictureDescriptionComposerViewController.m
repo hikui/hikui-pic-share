@@ -22,7 +22,6 @@
 {
     [descriptionTextFromParent release];
     [descriptionTextView release];
-    [delegate release];
     [super dealloc];
 }
 

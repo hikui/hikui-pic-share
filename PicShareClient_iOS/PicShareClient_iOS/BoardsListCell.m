@@ -102,7 +102,6 @@
     [_boardNameLabel release];
     [_imageViews release];
     [_scrollView release];
-    [_eventDelegate release];
     [super dealloc];
 }
 

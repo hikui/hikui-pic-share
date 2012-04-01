@@ -25,7 +25,7 @@
 }
 
 @property (readonly) int imageCount;
-@property (nonatomic,retain) id<PSThumbnailImageViewEventsDelegate> eventDelegate;
+@property (nonatomic,assign) id<PSThumbnailImageViewEventsDelegate> eventDelegate;
 @property (nonatomic,retain) UILabel *boardNameLabel;
 @property (nonatomic,retain) UILabel *picCountLabel;
 @property (nonatomic,retain) UIScrollView *scrollView;

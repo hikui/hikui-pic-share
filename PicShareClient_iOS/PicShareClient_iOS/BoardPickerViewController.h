@@ -19,7 +19,7 @@
 @interface BoardPickerViewController : PullRefreshTableViewController
 
 @property (nonatomic,retain) NSArray *boardsArray;
-@property (nonatomic,retain) id<BoardPickerDelegate> delegate;
+@property (nonatomic,assign) id<BoardPickerDelegate> delegate;
 @property (nonatomic,retain) PicShareEngine *engine;
 @property (nonatomic,retain) NSIndexPath *indexSelected;
 

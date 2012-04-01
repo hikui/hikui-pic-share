@@ -18,7 +18,7 @@
 
 @property (nonatomic,retain) IBOutlet UITextView *descriptionTextView;
 @property (nonatomic,copy) NSString *descriptionTextFromParent;
-@property (nonatomic,retain) id<PictureDescriptionComposerDelegate> delegate;
+@property (nonatomic,assign) id<PictureDescriptionComposerDelegate> delegate;
 
 -(id)initWithText:(NSString *)text;
 @end

@@ -22,7 +22,6 @@
 
 - (void)dealloc
 {
-    [delegate release];
     [boardsArray release];
     [indexSelected release];
     [super dealloc];

@@ -13,6 +13,7 @@
 #define MAIN_IMAGE_WIDTH 300.0f
 #define MAIN_IMAGE_HEIGHT 255.0f
 
+
 @interface TimelineCell : UITableViewCell
 
 @property (nonatomic,assign) PictureStatus *pictureStatus;

@@ -8,11 +8,13 @@
 
 #import "CategoriesViewController.h"
 #import "BoardsListViewController.h"
+#import "MBProgressHUD.h"
 
 @interface CategoriesViewController (Private)
 
 - (void)prepareLoad;
 - (void)loadCategories;
+- (void)loadDataDidFinish:(NSArray *)data;
 
 @end
 
@@ -60,28 +62,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (isLoadingData) {
-        return 1;
-    }
     return _categories.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (isLoadingData) {
-        static NSString *phIdentifier = @"loadingPlaceHolder";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:phIdentifier];
-        if (cell==nil) {
-            cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:phIdentifier]autorelease];
-        }
-        UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        CGFloat tableWidth = self.tableView.bounds.size.width;
-        indicator.frame = CGRectMake((tableWidth-20)/2, 10, 20, 20);
-        [cell addSubview:indicator];
-        [indicator startAnimating];
-        [indicator release];
-        return cell;
-    }
     static NSString *CellIdentifier = @"CategoryCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell==nil) {
@@ -155,18 +140,31 @@
 {
     NSInvocationOperation *downloadOperation = [[NSInvocationOperation alloc]initWithTarget:self selector:@selector(loadCategories) object:nil];
     [oprationq addOperation:downloadOperation];
+    [self.tableView setUserInteractionEnabled:NO];
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    [MBProgressHUD showHUDAddedTo:window animated:YES];
     isLoadingData = YES;
     [downloadOperation release];
 }
 
 -(void)loadCategories
 {
+    [NSThread sleepForTimeInterval:2];
     _engine = [PicShareEngine sharedEngine];
     NSArray *loadedCategories = [_engine getAllCategories];
-    [self performSelectorInBackground:@selector(setCategories:) withObject:loadedCategories];
-    isLoadingData = NO;
-    [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:false];
+    [self performSelectorOnMainThread:@selector(loadDataDidFinish:) withObject:loadedCategories waitUntilDone:NO];
+    
    
+}
+
+- (void)loadDataDidFinish:(NSArray *)data
+{
+    self.categories = data;
+    isLoadingData = NO;
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    [MBProgressHUD hideHUDForView:window animated:YES];
+        [self.tableView setUserInteractionEnabled:YES];
+    [self.tableView reloadData];
 }
 
 @end

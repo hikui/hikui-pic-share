@@ -131,7 +131,6 @@ static PicShareEngine *instance = NULL;
         response = [request responseString];
     }
     else {
-        NSLog(@"error! %@",[error code]);
         //do something in ui
         return nil;
     }
@@ -243,7 +242,6 @@ static PicShareEngine *instance = NULL;
         response = [request responseString];
     }
     else {
-        NSLog(@"error! %@",[error code]);
         //do something in ui
         return nil;
     }
@@ -410,6 +408,28 @@ static PicShareEngine *instance = NULL;
         return resultArray;
     }
     return nil;
+}
+
+-(Board *)getBoard:(NSInteger)boardId
+{
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingFormat:@"api/board/get.json"]];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [self addAuthHeaderForRequest:request];
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error && [request responseStatusCode]==200) {
+        response = [request responseString];
+    }
+    else {
+        //do something in ui
+        return nil;
+    }
+    if (response != nil) {
+        NSDictionary *dataDict = [response objectFromJSONString];
+        Board *b = [[[Board alloc]initWithJSONDict:dataDict]autorelease];
+        return b;
+    }
+    return  nil;
 }
 
 @end

@@ -14,6 +14,7 @@ get_following_handler = Resource(GetFollowingHandler)
 get_user_detail_handler = Resource(GetUserDetailHandler)
 upload_picture_handler = Resource(UploadPictureHandler,authentication=auth)
 get_home_timeline_handler = Resource(GetHomeTimelineHandler,authentication=auth)
+get_board_handler = Resource(GetBoardHandler)
 urlpatterns = patterns('',
 
     (r'^category/get_all.json$',get_all_categories_handler),
@@ -24,5 +25,6 @@ urlpatterns = patterns('',
     (r'^relationship/following.json$',get_following_handler),
     (r'^user/detail.json$',get_user_detail_handler),
     (r'^picture/upload.json$',upload_picture_handler),
-    (r'^timeline/home_timeline.json$',get_home_timeline_handler)
+    (r'^timeline/home_timeline.json$',get_home_timeline_handler),
+    (r'^board/get.json$',get_board_handler)
 )

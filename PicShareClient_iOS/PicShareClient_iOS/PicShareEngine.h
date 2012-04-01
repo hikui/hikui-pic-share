@@ -32,9 +32,6 @@
 -(void)deleteBoard:(NSInteger)boardId;
 -(void)updateBoard:(Board *)aBoard;
 -(Board *)getBoard:(NSInteger)boardId;
--(NSArray *)getBoardsOfUserId:(NSInteger)userId;
--(NSArray *)getBoardsOfUserId:(NSInteger)userId page:(NSInteger)page;
--(NSArray *)getBoardsOfUserId:(NSInteger)userId page:(NSInteger)page countPerPage:(NSInteger)count;
 -(NSArray *)getBoardsOfCategoryId:(NSInteger)categoryId;
 -(NSArray *)getBoardsOfCategoryId:(NSInteger)categoryId page:(NSInteger)page;
 -(NSArray *)getBoardsOfCategoryId:(NSInteger)categoryId page:(NSInteger)page countPerPage:(NSInteger)count;

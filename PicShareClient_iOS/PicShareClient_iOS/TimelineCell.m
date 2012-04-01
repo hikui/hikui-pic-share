@@ -73,8 +73,6 @@
         avatarImageView.frame = CGRectMake(10, 20, 30, 30);
         [avatarImageView setImageWithUrl:[NSURL URLWithString:pictureStatus.owner.avatarUrl] placeholderImage:[UIImage imageNamed:@"anonymous.png"]];
         
-        
-        
         CGSize nameButtonSize = [pictureStatus.owner.username sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(147, 18) lineBreakMode:UILineBreakModeTailTruncation];
         CGRect nameButtonFrame = CGRectMake(48, 32, nameButtonSize.width, nameButtonSize.height);
         usernameButton.frame = nameButtonFrame;
@@ -138,7 +136,7 @@
 
 - (void)clearImage
 {
-    self.mainImageView.image = nil;
+    self.mainImageView.image = [UIImage imageNamed:@"PicturePlaceHolder.png"];
     for (UIView *aSubView in self.mainImageView.subviews) {
         [aSubView removeFromSuperview];
     }
@@ -146,12 +144,18 @@
 
 - (void)setPicture:(UIImage *)image WillAnimated:(BOOL)animated
 {
-    self.mainImageView.image = image;
     if (animated) {
-        self.mainImageView.alpha = 0;
-        [UIView animateWithDuration:0.4 animations:^{
-            self.mainImageView.alpha = 1;
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            self.mainImageView.alpha = 0;
+        } completion:^(BOOL finished){
+            self.mainImageView.image = image;
+            [UIView animateWithDuration:1 animations:^{
+                self.mainImageView.alpha = 1;
+            }];
         }];
+    }else {
+        self.mainImageView.image = image;
     }
 }
 

@@ -70,7 +70,23 @@
 }
 - (void)setImageWithUrl:(NSURL *)url placeholderImage:(UIImage *)placeholder
 {
+    self.imageView.image = placeholder;
+    self.theUrl = url;
+    Common *common = [Common sharedCommon];
+    NSMutableDictionary *thumbnailCache = common.thumbnailCache;
+    UIImage *cachedImage = [thumbnailCache objectForKey:url];
+    if (cachedImage!=nil) {
+        self.imageView.image = cachedImage;
+        return;
+    }
     
+    ASIHTTPRequest *request = [[ASIHTTPRequest alloc]initWithURL:url];
+    self.theRequest = request;
+    [request setDelegate:self];
+    [request setNumberOfTimesToRetryOnTimeout:0];
+    [request setDownloadCache:[ASIDownloadCache sharedCache]];
+    NSOperationQueue *globalDownloadQ = common.globalDownloadImageQ;
+    [globalDownloadQ addOperation:request];
 }
 
 -(void)requestFinished:(ASIHTTPRequest *)request
@@ -95,8 +111,10 @@
     UIImage *thumbnail = [UIImageView imageWithImage:image scaledToSizeWithSameAspectRatio:self.frame.size];
     Common *common = [Common sharedCommon];
     NSMutableDictionary *thumbnailCache = common.thumbnailCache;
-    [thumbnailCache setObject:thumbnail forKey:self.theUrl];
-    [self.imageView performSelectorOnMainThread:@selector(setImage:) withObject:image waitUntilDone:NO];
+    if (thumbnail!=nil) {
+        [thumbnailCache setObject:thumbnail forKey:self.theUrl];
+    }
+    [self.imageView performSelectorOnMainThread:@selector(setImage:) withObject:thumbnail waitUntilDone:NO];
     [image release];
     [pool release];
 }
