@@ -16,7 +16,6 @@
 @property (nonatomic,retain) IBOutlet UIButton *followButton;
 @property (nonatomic,retain) IBOutlet UITableView *tableView;
 @property (nonatomic) NSInteger boardId;
-@property (nonatomic,retain) NSMutableArray *pictures;
 @property (nonatomic,retain) Board *board;
 
 @end

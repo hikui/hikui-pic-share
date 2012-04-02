@@ -25,6 +25,13 @@
 @synthesize boards = _boards;
 @synthesize type = _type;
 @synthesize contentId = _contentId;
+
+static bool isRetina()
+{
+    return [[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
+    ([UIScreen mainScreen].scale == 2.0);
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -171,6 +178,7 @@
     if (imagesCount>8) {
         for (int i=0; i<7; i++) {
             PictureStatus *ps = [pictureStatuses objectAtIndex:i];
+            
             [cell addPictureWithUrlStr:ps.pictureUrl];
         }
 //        UIButton *moreButton = [[UIButton alloc]initWithFrame:CGRectMake(244, 125,60, 60)];
@@ -183,7 +191,13 @@
     else {
         for (int i=0; i<imagesCount; i++) {
             PictureStatus *ps = [pictureStatuses objectAtIndex:i];
-            [cell addPictureWithUrlStr:ps.pictureUrl];
+            NSString *urlStr;
+            if (isRetina()) {
+                urlStr = [ps.pictureUrl stringByAppendingString:@"?size=320"];
+            }else {
+                urlStr = [ps.pictureUrl stringByAppendingString:@"?size=120"];
+            }
+            [cell addPictureWithUrlStr:urlStr];
         }
     }
     

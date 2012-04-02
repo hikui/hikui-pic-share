@@ -41,6 +41,12 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
@@ -152,5 +158,7 @@
     }
     PicShareEngine *engine = [PicShareEngine sharedEngine];
     [engine uploadPicture:uploadImage toBoard:self.board.boardId withLatitude:locationPoint.x  longitude:locationPoint.y description:descriptionText];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    [self dismissModalViewControllerAnimated:YES];
 }
 @end

@@ -10,6 +10,7 @@
 #import "PicDetailView.h"
 #import "PicShareEngine.h"
 #import "UserDetailViewController.h"
+#import "Common.h"
 
 //TODO: implement methods
 

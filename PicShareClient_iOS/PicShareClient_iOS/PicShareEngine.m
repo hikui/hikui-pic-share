@@ -412,9 +412,10 @@ static PicShareEngine *instance = NULL;
 
 -(Board *)getBoard:(NSInteger)boardId
 {
-    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingFormat:@"api/board/get.json"]];
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingFormat:@"api/board/get.json?board_id=%d",boardId]];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [self addAuthHeaderForRequest:request];
+    [request startSynchronous];
     NSError *error = [request error];
     NSString *response = nil;
     if (!error && [request responseStatusCode]==200) {

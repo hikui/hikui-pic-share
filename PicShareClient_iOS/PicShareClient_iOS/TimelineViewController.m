@@ -14,8 +14,10 @@
 #import "PicDetailViewController.h"
 #import "UserDetailViewController.h"
 #import "BoardDetailViewController.h"
+#import "Common.h"
 
 @interface TimelineViewController ()
+ 
 
 - (void)loadData;
 - (void)loadDataDidFinish:(NSArray *)resultArray;
@@ -32,6 +34,13 @@
 
 @implementation TimelineViewController
 @synthesize timeline,hasnext,currentPage,pictures,progressViews,aliveRequest;
+
+
+static bool isRetina()
+{
+    return [[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
+    ([UIScreen mainScreen].scale == 2.0);
+}
 
 - (void)dealloc
 {
@@ -125,6 +134,7 @@
     PictureStatus *ps = [timeline objectAtIndex:indexPath.row];
     [cell setPictureStatus:ps];
     [cell layout];
+    cell.tag = indexPath.row;
     if ([self.pictures objectAtIndex:indexPath.row]==[NSNull null]){
         if ([self.progressViews objectAtIndex:indexPath.row]!=[NSNull null]) { // is already start loading
             [cell.mainImageView addSubview:[self.progressViews objectAtIndex:indexPath.row]];
@@ -134,7 +144,13 @@
             progressView.frame = CGRectMake((mainImageViewSize.width-100)/2, mainImageViewSize.height/2, 100, 20);
             [cell.mainImageView addSubview:progressView];
             [self.progressViews replaceObjectAtIndex:indexPath.row withObject:progressView];
-            NSURL *url = [NSURL URLWithString:ps.pictureUrl];
+            NSString *urlStr;
+            if (isRetina()) {
+                urlStr = [ps.pictureUrl stringByAppendingString:@"?size=640"];
+            }else {
+                urlStr = [ps.pictureUrl stringByAppendingString:@"?size=320"];
+            }
+            NSURL *url = [NSURL URLWithString:urlStr];
             [self loadImage:url WithProgressDelegate:progressView atIndexPath:indexPath];
             [progressView release];
 
@@ -169,6 +185,7 @@
 
 -(void)refresh
 {
+    NSLog(@"refresh");
     [self performSelectorInBackground:@selector(loadData) withObject:nil];
 }
 
@@ -189,7 +206,13 @@
             progressView.frame = CGRectMake((mainImageViewSize.width-100)/2, mainImageViewSize.height/2, 100, 20);
             [cell.mainImageView addSubview:progressView];
             [self.progressViews replaceObjectAtIndex:indexPath.row withObject:progressView];
-            NSURL *url = [NSURL URLWithString:ps.pictureUrl];
+            NSString *urlStr;
+            if (isRetina()) {
+                urlStr = [ps.pictureUrl stringByAppendingString:@"?size=640"];
+            }else {
+                urlStr = [ps.pictureUrl stringByAppendingString:@"?size=320"];
+            }
+            NSURL *url = [NSURL URLWithString:urlStr];
             [self loadImage:url WithProgressDelegate:progressView atIndexPath:indexPath];
             [progressView release];
         }
@@ -199,6 +222,7 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
+    [super scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
     if (!decelerate)
 	{
         [self loadImagesForOnscreenRows];
@@ -330,15 +354,14 @@
 - (void)boardButtonOnTouch:(id)sender
 {
     UIButton *button = (UIButton *)sender;
-    TimelineCell *cell = (TimelineCell *)button.superview;
-    NSIndexPath *path = [self.tableView indexPathForCell:cell];
-    PictureStatus *ps = [self.timeline objectAtIndex:path.row];
+    TimelineCell *cell = (TimelineCell *)button.superview.superview;
+    NSLog(@"cell.tag=%d",cell.tag);
+    PictureStatus *ps = [self.timeline objectAtIndex:cell.tag];
     BoardDetailViewController *bdvc = [[BoardDetailViewController alloc]initWithNibName:@"BoardDetailViewController" bundle:nil];
     bdvc.boardId = ps.boardId;
     [self.navigationController pushViewController:bdvc animated:YES];
     [bdvc release];
     
-#warning not implement yet
 }
 - (void)repinButtonOnTouch:(id)sender
 {

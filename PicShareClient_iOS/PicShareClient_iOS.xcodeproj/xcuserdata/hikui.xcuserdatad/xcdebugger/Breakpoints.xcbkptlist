@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/BoardsListViewController.m"
-         timestampString = "354880005.028235"
+         timestampString = "355046861.919668"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "234"
-         endingLineNumber = "234"
+         startingLineNumber = "248"
+         endingLineNumber = "248"
          landmarkName = "-loadData"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/BoardsListViewController.m"
-         timestampString = "354880005.028235"
+         timestampString = "355046861.919668"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "228"
-         endingLineNumber = "228"
+         startingLineNumber = "242"
+         endingLineNumber = "242"
          landmarkName = "-loadData"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/BoardsListViewController.m"
-         timestampString = "353746799.404196"
+         timestampString = "355046861.919668"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "49"
-         endingLineNumber = "49"
+         startingLineNumber = "56"
+         endingLineNumber = "56"
          landmarkName = "@implementation BoardsListViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/BoardsListViewController.m"
-         timestampString = "354468980.260359"
+         timestampString = "355046861.919668"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "126"
-         endingLineNumber = "126"
+         startingLineNumber = "133"
+         endingLineNumber = "133"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -86,11 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/BoardsListViewController.m"
-         timestampString = "354880005.028235"
+         timestampString = "355046861.919668"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "257"
-         endingLineNumber = "257"
+         startingLineNumber = "271"
+         endingLineNumber = "271"
          landmarkName = "-pageData"
          landmarkType = "5">
       </FileBreakpoint>
@@ -112,11 +112,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/UserDetailViewController.m"
-         timestampString = "354715519.988926"
+         timestampString = "355030925.35738"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "136"
-         endingLineNumber = "136"
+         startingLineNumber = "141"
+         endingLineNumber = "141"
          landmarkName = "-updateView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -138,11 +138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/UIImageView+Resize.m"
-         timestampString = "354980108.417758"
+         timestampString = "355043371.653529"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "127"
-         endingLineNumber = "127"
+         startingLineNumber = "117"
+         endingLineNumber = "117"
          landmarkName = "+imageWithImage:scaledToSizeWithTargetWidth:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -151,11 +151,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/UIImageView+Resize.m"
-         timestampString = "354980108.417758"
+         timestampString = "355043371.653529"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "129"
-         endingLineNumber = "129"
+         startingLineNumber = "119"
+         endingLineNumber = "119"
          landmarkName = "+imageWithImage:scaledToSizeWithTargetWidth:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -190,11 +190,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/CustomTabBarController.m"
-         timestampString = "354360428.934323"
+         timestampString = "355045412.714215"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "90"
-         endingLineNumber = "90"
+         startingLineNumber = "91"
+         endingLineNumber = "91"
          landmarkName = "-cameraButtonOnTouch:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -203,11 +203,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/BoardsListViewController.m"
-         timestampString = "354467816.399727"
+         timestampString = "355046861.919668"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "66"
-         endingLineNumber = "66"
+         startingLineNumber = "73"
+         endingLineNumber = "73"
          landmarkName = "-viewWillDisappear:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -216,11 +216,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/BoardsListViewController.m"
-         timestampString = "354467816.399727"
+         timestampString = "355046861.919668"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "67"
-         endingLineNumber = "67"
+         startingLineNumber = "74"
+         endingLineNumber = "74"
          landmarkName = "-viewWillDisappear:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -229,11 +229,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/TimelineViewController.m"
-         timestampString = "354880005.028235"
+         timestampString = "355046524.994762"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "110"
-         endingLineNumber = "110"
+         startingLineNumber = "119"
+         endingLineNumber = "119"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -242,11 +242,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/TimelineViewController.m"
-         timestampString = "354890184.128416"
+         timestampString = "355046524.994762"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "225"
-         endingLineNumber = "225"
+         startingLineNumber = "249"
+         endingLineNumber = "249"
          landmarkName = "-loadDataDidFinish:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -255,11 +255,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/TimelineViewController.m"
-         timestampString = "354890184.128416"
+         timestampString = "355046524.994762"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "227"
-         endingLineNumber = "227"
+         startingLineNumber = "251"
+         endingLineNumber = "251"
          landmarkName = "-loadDataDidFinish:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -268,11 +268,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/TimelineViewController.m"
-         timestampString = "354880005.028235"
+         timestampString = "355046524.994762"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "116"
-         endingLineNumber = "116"
+         startingLineNumber = "125"
+         endingLineNumber = "125"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -294,11 +294,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/UserDetailViewController.m"
-         timestampString = "354790979.821599"
+         timestampString = "355030925.35738"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "196"
-         endingLineNumber = "196"
+         startingLineNumber = "201"
+         endingLineNumber = "201"
          landmarkName = "-loadData"
          landmarkType = "5">
       </FileBreakpoint>
@@ -307,11 +307,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/UserDetailViewController.m"
-         timestampString = "354791209.559378"
+         timestampString = "355030925.35738"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "197"
-         endingLineNumber = "197"
+         startingLineNumber = "202"
+         endingLineNumber = "202"
          landmarkName = "-loadData"
          landmarkType = "5">
       </FileBreakpoint>
@@ -320,11 +320,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/TimelineViewController.m"
-         timestampString = "354880005.028235"
+         timestampString = "355046524.994762"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "146"
-         endingLineNumber = "146"
+         startingLineNumber = "162"
+         endingLineNumber = "162"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -333,11 +333,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/TimelineViewController.m"
-         timestampString = "354890184.128416"
+         timestampString = "355046524.994762"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "308"
-         endingLineNumber = "308"
+         startingLineNumber = "332"
+         endingLineNumber = "332"
          landmarkName = "-loadImageDidFinish:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -346,12 +346,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/UIImageView+Resize.m"
-         timestampString = "354976958.505785"
+         timestampString = "355040799.514108"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "66"
-         endingLineNumber = "66"
+         startingLineNumber = "67"
+         endingLineNumber = "67"
          landmarkName = "+imageWithImage:scaledToSizeWithSameAspectRatio:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PicShareClient_iOS/BoardDetailViewController.m"
+         timestampString = "355036845.901334"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "147"
+         endingLineNumber = "147"
+         landmarkName = "-loadData"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

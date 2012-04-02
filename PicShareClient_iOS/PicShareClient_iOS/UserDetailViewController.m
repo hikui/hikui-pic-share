@@ -102,6 +102,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     if (user!=nil) {
         [self updateView];
         return;
@@ -122,7 +128,6 @@
     self.view = loadingView;
     [self performSelectorInBackground:@selector(loadData) withObject:nil];
 }
-
 
 - (void)updateView
 {

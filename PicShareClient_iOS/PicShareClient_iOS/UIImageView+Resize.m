@@ -17,6 +17,7 @@ static bool isRetina()
     ([UIScreen mainScreen].scale == 2.0);
 }
 
+static inline double radians (double degrees) {return degrees * M_PI/180;}
 
 + (UIImage*)imageWithImage:(UIImage*)sourceImage scaledToSizeWithSameAspectRatio:(CGSize)targetSize
 {
@@ -96,31 +97,20 @@ static bool isRetina()
         scaledWidth  = width * scaleFactor;
         scaledHeight = height * scaleFactor;
     }
-//    CGSize newImageSize = CGSizeMake(scaledWidth, scaledHeight);
-//    UIGraphicsBeginImageContext(newImageSize);
-//    [sourceImage drawInRect:CGRectMake(0,0,scaledWidth,scaledHeight)];
-//    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-//    return newImage;
-    CGImageRef imageRef = [sourceImage CGImage];
-    CGColorSpaceRef colorSpaceInfo = CGColorSpaceCreateDeviceRGB();
+    CGSize newSize = CGSizeMake(scaledWidth, scaledHeight);
+    UIGraphicsBeginImageContext(newSize);
     
-    CGContextRef bitmap;
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [sourceImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
     
-    if (sourceImage.imageOrientation == UIImageOrientationUp || sourceImage.imageOrientation == UIImageOrientationDown) {
-        bitmap = CGBitmapContextCreate(NULL, scaledWidth, scaledHeight, 8, 0, colorSpaceInfo, kCGImageAlphaNoneSkipLast);
-        
-    } else {
-        bitmap = CGBitmapContextCreate(NULL, scaledHeight, scaledWidth, 8, 0, colorSpaceInfo, kCGImageAlphaNoneSkipLast);
-        
-    }   
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     
-    CGContextDrawImage(bitmap, CGRectMake(0, 0, scaledWidth, scaledHeight), imageRef);
-    CGImageRef ref = CGBitmapContextCreateImage(bitmap);
-    UIImage* newImage = [UIImage imageWithCGImage:ref];
+    // End the context
+    UIGraphicsEndImageContext();
     
-    CGContextRelease(bitmap);
-    CGImageRelease(ref);
-    CGColorSpaceRelease(colorSpaceInfo);
+    // Return the new image
     return newImage; 
 }
 
@@ -140,32 +130,21 @@ static bool isRetina()
         scaledWidth  = width * scaleFactor;
         scaledHeight = height * scaleFactor;
     }
-//    CGSize newImageSize = CGSizeMake(scaledWidth, scaledHeight);
-//    UIGraphicsBeginImageContext(newImageSize);
-//    [sourceImage drawInRect:CGRectMake(0,0,scaledWidth,scaledHeight)];
-//    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-//    return newImage;
-    CGImageRef imageRef = [sourceImage CGImage];
-    CGColorSpaceRef colorSpaceInfo = CGColorSpaceCreateDeviceRGB();
+    CGSize newSize = CGSizeMake(scaledWidth, scaledHeight);
+    UIGraphicsBeginImageContext(newSize);
     
-    CGContextRef bitmap;
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [sourceImage drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
     
-    if (sourceImage.imageOrientation == UIImageOrientationUp || sourceImage.imageOrientation == UIImageOrientationDown) {
-        bitmap = CGBitmapContextCreate(NULL, scaledWidth, scaledHeight, 8,0, colorSpaceInfo, kCGImageAlphaNoneSkipLast);
-        
-    } else {
-        bitmap = CGBitmapContextCreate(NULL, scaledHeight, scaledWidth, 8, 0, colorSpaceInfo, kCGImageAlphaNoneSkipLast);
-        
-    }   
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     
-    CGContextDrawImage(bitmap, CGRectMake(0, 0, scaledWidth, scaledHeight), imageRef);
-    CGImageRef ref = CGBitmapContextCreateImage(bitmap);
-    UIImage* newImage = [UIImage imageWithCGImage:ref];
+    // End the context
+    UIGraphicsEndImageContext();
     
-    CGContextRelease(bitmap);
-    CGImageRelease(ref);
-    CGColorSpaceRelease(colorSpaceInfo);
-    return newImage;
+    // Return the new image
+    return newImage; 
     
 }
 

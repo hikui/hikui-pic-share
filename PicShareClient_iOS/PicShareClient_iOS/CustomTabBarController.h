@@ -27,12 +27,11 @@
 
 #import "PictureEditViewController.h"
 
-@interface CustomTabBarController : UITabBarController 
+@interface CustomTabBarController : UITabBarController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
 }
 
 @property (nonatomic, retain) UIButton *cameraButton;
-@property (nonatomic, retain) PictureEditViewController *editViewController;
 
 // Create a view controller and setup it's tab bar item with a title and image
 -(UIViewController*) viewControllerWithTabTitle:(NSString*)title image:(UIImage*)image;

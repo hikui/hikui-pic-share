@@ -284,8 +284,11 @@ class GetHomeTimelineHandler(BaseHandler):
         count = int(request.GET.get('count',4))
         sinceIdStr = request.GET.get('since_id')
         maxIdStr = request.GET.get('max_id')
-        followingBoards = user.following_boards.all()
         
+        followingBoards = user.following_boards.all()
+        myBoards = user.my_boards.all()
+        from itertools import chain
+        followingBoards = list(chain(followingBoards,myBoards))
         q1 = Q()
         q2 = Q()
         
@@ -297,7 +300,7 @@ class GetHomeTimelineHandler(BaseHandler):
             q2 = Q(id__lte = maxIdStr)
         
         totalCount = PictureStatus.objects.filter(Q(board__in=followingBoards)&q1&q2).count()
-        pictureStatuses = PictureStatus.objects.filter(Q(board__in=followingBoards)&q1&q2)[(page-1)*count:page*count]
+        pictureStatuses = PictureStatus.objects.filter(Q(board__in=followingBoards)&q1&q2).order_by('-id')[(page-1)*count:page*count]
         
         psArray = []
         for aPS in pictureStatuses:

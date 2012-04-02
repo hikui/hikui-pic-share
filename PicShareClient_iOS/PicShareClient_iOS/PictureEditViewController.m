@@ -92,8 +92,9 @@
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]initWithTitle:@"下一步" style:UIBarButtonSystemItemDone target:self action:@selector(finishButtonOnTouch)]autorelease];
     UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     UIImage *editedImage = nil;
+    NSLog(@"picwidth:%f;picheight:%f",originalImage.size.width,originalImage.size.height);
     if (originalImage.size.width>originalImage.size.height) {
-        editedImage = [UIImageView imageWithImage:originalImage scaledToSizeWithTargetWidth:1000 ];
+        editedImage = [UIImageView imageWithImage:originalImage scaledToSizeWithTargetWidth:1000];
     }
     else {
         editedImage  = [UIImageView imageWithImage:originalImage scaledToSizeWithTargetHeight:1000];

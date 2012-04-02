@@ -24,6 +24,12 @@
 
 @synthesize avatarImageView,usernameButton,boardNameButton,picDescriptionLabel,mainImageView,repinButton,commentTextField,pictureStatus,viaButton,progressView,request;
 
+static bool isRetina()
+{
+    return [[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
+    ([UIScreen mainScreen].scale == 2.0);
+}
+
 - (void)dealloc
 {
     [request clearDelegatesAndCancel];
@@ -187,7 +193,14 @@
 
 -(void)downloadMainImage
 {
-    self.request = [[[ASIHTTPRequest alloc]initWithURL:[NSURL URLWithString:pictureStatus.pictureUrl]]autorelease];
+    NSString *urlStr;
+    if (isRetina()) {
+        urlStr = [pictureStatus.pictureUrl stringByAppendingString:@"?size=640"];
+    }else {
+        urlStr = [pictureStatus.pictureUrl stringByAppendingString:@"?size=320"];
+    }
+    NSURL *url = [NSURL URLWithString:urlStr];
+    self.request = [ASIHTTPRequest requestWithURL:url];
     [self.request setDelegate:self];
     [self.request setNumberOfTimesToRetryOnTimeout:1];
     [self.request setTimeOutSeconds:10]; // 10 seconds

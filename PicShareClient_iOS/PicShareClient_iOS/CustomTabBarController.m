@@ -26,6 +26,8 @@
 //
 
 #import "CustomTabBarController.h"
+#import "UIImageView+Resize.h"
+#import "PictureInfoEditViewController.h"
 
 @interface CustomTabBarController ()
 
@@ -36,7 +38,6 @@
 @implementation CustomTabBarController
 
 @synthesize cameraButton = _cameraButton;
-@synthesize editViewController = _editViewController;
 
 // Create a view controller and setup it's tab bar item with a title and image
 -(UIViewController*) viewControllerWithTabTitle:(NSString*) title image:(UIImage*)image
@@ -53,6 +54,7 @@
     [self addCenterButtonWithImage:buttonImg highlightImage:nil];
     
 }
+
 
 // Create a custom UIButton and add it to the center of our tab bar
 -(void) addCenterButtonWithImage:(UIImage*)buttonImage highlightImage:(UIImage*)highlightImage
@@ -86,7 +88,6 @@
 
 - (void)cameraButtonOnTouch:(id)sender
 {
-    self.editViewController = [[[PictureEditViewController alloc]init]autorelease];
     UIImagePickerController *picker = [[UIImagePickerController alloc]init];
     picker.allowsEditing = NO;
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
@@ -94,18 +95,39 @@
     }else {
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
-    
-    picker.delegate = self.editViewController;
+    picker.delegate = self;
     [self presentModalViewController:picker animated:YES];
     [picker release];
     
 }
 
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *editedImage = nil;
+    NSLog(@"imageOrientation%d",originalImage.imageOrientation);
+    if (originalImage.size.width>originalImage.size.height) {
+        editedImage = [UIImageView imageWithImage:originalImage scaledToSizeWithTargetWidth:1000];
+    }
+    else {
+        editedImage  = [UIImageView imageWithImage:originalImage scaledToSizeWithTargetHeight:1000];
+    }
+    PictureInfoEditViewController *pievc = [[PictureInfoEditViewController alloc]initWithNibName:@"PictureInfoEditViewController" bundle:nil];
+    pievc.uploadImage = editedImage;
+    [picker pushViewController:pievc animated:YES];
+    [pievc release];
+    
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissModalViewControllerAnimated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+}
 
 -(void)dealloc
 {
     [_cameraButton release];
-    [_editViewController release];
     [super dealloc];
 }
 
