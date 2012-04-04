@@ -10,6 +10,7 @@
 #import "PicShareEngine.h"
 #import "BoardsListCell.h"
 #import "PicDetailViewController.h"
+#import "BoardDetailViewController.h"
 
 @interface BoardsListViewController ()
 
@@ -178,8 +179,13 @@ static bool isRetina()
     if (imagesCount>8) {
         for (int i=0; i<7; i++) {
             PictureStatus *ps = [pictureStatuses objectAtIndex:i];
-            
-            [cell addPictureWithUrlStr:ps.pictureUrl];
+            NSString *urlStr;
+            if (isRetina()) {
+                urlStr = [ps.pictureUrl stringByAppendingString:@"?size=320"];
+            }else {
+                urlStr = [ps.pictureUrl stringByAppendingString:@"?size=120"];
+            }
+            [cell addPictureWithUrlStr:urlStr];
         }
 //        UIButton *moreButton = [[UIButton alloc]initWithFrame:CGRectMake(244, 125,60, 60)];
 //        [moreButton setTitle:@"更多..." forState:UIControlStateNormal];
@@ -234,6 +240,11 @@ static bool isRetina()
             [_oprationq addOperation:pageOpreration];
             [pageOpreration release];
         }
+    }else {
+        BoardDetailViewController *bdvc = [[[BoardDetailViewController alloc]init]autorelease];
+        Board *b = [self.boards objectAtIndex:indexPath.row];
+        bdvc.boardId = b.boardId;
+        [self.navigationController pushViewController:bdvc animated:YES];
     }
 }
 

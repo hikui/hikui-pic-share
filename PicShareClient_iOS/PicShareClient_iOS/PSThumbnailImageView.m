@@ -53,9 +53,15 @@
     self.theUrl = url;
     Common *common = [Common sharedCommon];
     NSMutableDictionary *thumbnailCache = common.thumbnailCache;
-    UIImage *cachedImage = [thumbnailCache objectForKey:url];
-    if (cachedImage!=nil) {
-        self.imageView.image = cachedImage;
+    // thumbnailCache里面是nsdata压缩格式。
+    NSData *cachedImagePNG = [thumbnailCache objectForKey:url];
+    if (cachedImagePNG!=nil) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            UIImage *bmpImage = [UIImage imageWithData:cachedImagePNG];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.imageView.image = bmpImage;
+            });
+        });
         return;
     }
     
@@ -74,9 +80,9 @@
     self.theUrl = url;
     Common *common = [Common sharedCommon];
     NSMutableDictionary *thumbnailCache = common.thumbnailCache;
-    UIImage *cachedImage = [thumbnailCache objectForKey:url];
-    if (cachedImage!=nil) {
-        self.imageView.image = cachedImage;
+    NSData *cachedImagePNG = [thumbnailCache objectForKey:url];
+    if (cachedImagePNG!=nil) {
+        self.imageView.image = [UIImage imageWithData:cachedImagePNG];
         return;
     }
     
@@ -112,11 +118,12 @@
     Common *common = [Common sharedCommon];
     NSMutableDictionary *thumbnailCache = common.thumbnailCache;
     if (thumbnail!=nil) {
-        [thumbnailCache setObject:thumbnail forKey:self.theUrl];
+        NSData *pngThumbnail = UIImagePNGRepresentation(thumbnail);
+        [thumbnailCache setObject:pngThumbnail forKey:self.theUrl];
     }
     [self.imageView performSelectorOnMainThread:@selector(setImage:) withObject:thumbnail waitUntilDone:NO];
     [image release];
-    [pool release];
+    [pool drain];
 }
 
 -(void)icancelImageLoading

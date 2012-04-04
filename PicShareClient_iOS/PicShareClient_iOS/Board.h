@@ -17,6 +17,7 @@
 @property (nonatomic,copy) NSString *name;
 @property (readwrite) NSInteger picturesCount;
 @property (readwrite) NSInteger categoryId;//所属的category
+@property BOOL isFollowing;
 
 -(id)initWithJSONDict:(NSDictionary *)data;
 

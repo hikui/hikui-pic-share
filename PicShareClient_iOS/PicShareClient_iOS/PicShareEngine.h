@@ -12,6 +12,7 @@
 #import "Board.h"
 #import "Category.h"
 #import "Comment.h"
+#import "ErrorMessage.h"
 
 
 @interface PicShareEngine : NSObject
@@ -47,15 +48,15 @@
 
 //user api
 -(User *)getUser:(NSInteger)userId;
--(void)updateUser:(User *)user;
--(void)uploadAvatar:(UIImage *)avatar;
--(void)regUser:(User *)user;
+-(ErrorMessage *)updateUser:(User *)user;
+-(ErrorMessage *)uploadAvatar:(UIImage *)avatar;
+-(ErrorMessage *)regUser:(User *)user;
 
 //relationship api
--(void)followBoard:(NSInteger)boardId;
--(void)followUser:(NSInteger)userId;
--(void)unFollowBoard:(NSInteger)boardId;
--(void)unFollowUser:(NSInteger)userId;
+-(ErrorMessage *)followBoard:(NSInteger)boardId;
+-(ErrorMessage *)followUser:(NSInteger)userId;
+-(ErrorMessage *)unFollowBoard:(NSInteger)boardId;
+-(ErrorMessage *)unFollowUser:(NSInteger)userId;
 -(NSArray *)getFollowers:(NSInteger)userId;
 -(NSArray *)getFollowers:(NSInteger)userId page:(NSInteger)page;
 -(NSArray *)getFollowers:(NSInteger)userId page:(NSInteger)page countPerPage:(NSInteger)count;

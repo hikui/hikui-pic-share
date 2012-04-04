@@ -51,4 +51,10 @@
     [super dealloc];
 }
 
+-(NSString *)description
+{
+    NSString *str = [[[NSString alloc]initWithFormat:@"%d,%@",self.userId,self.username]autorelease];
+    return str;
+}
+
 @end

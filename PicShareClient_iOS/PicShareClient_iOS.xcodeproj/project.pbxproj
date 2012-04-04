@@ -76,6 +76,7 @@
 		A457024D1511ADDC005BC6FF /* UIImageView+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A457024C1511ADDC005BC6FF /* UIImageView+Resize.m */; };
 		A45702B51514809F005BC6FF /* UserDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45702B31514809F005BC6FF /* UserDetailViewController.m */; };
 		A45702B61514809F005BC6FF /* UserDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A45702B41514809F005BC6FF /* UserDetailViewController.xib */; };
+		A468C110152C3CB400D1CE6B /* ErrorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A468C10F152C3CB400D1CE6B /* ErrorMessage.m */; };
 		A46DA5F91505C00600EA9D8B /* UIImageView+AsyncImageContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = A46DA5F81505C00600EA9D8B /* UIImageView+AsyncImageContainer.m */; };
 		A47D9C8A1520959B00ADACF6 /* PSThumbnailImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A47D9C891520959B00ADACF6 /* PSThumbnailImageView.m */; };
 		A47D9C8E1520968500ADACF6 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A47D9C8D1520968500ADACF6 /* Common.m */; };
@@ -216,6 +217,8 @@
 		A45702B21514809F005BC6FF /* UserDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailViewController.h; sourceTree = "<group>"; };
 		A45702B31514809F005BC6FF /* UserDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailViewController.m; sourceTree = "<group>"; };
 		A45702B41514809F005BC6FF /* UserDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserDetailViewController.xib; sourceTree = "<group>"; };
+		A468C10E152C3CB400D1CE6B /* ErrorMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorMessage.h; sourceTree = "<group>"; };
+		A468C10F152C3CB400D1CE6B /* ErrorMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorMessage.m; sourceTree = "<group>"; };
 		A46DA5F71505C00600EA9D8B /* UIImageView+AsyncImageContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AsyncImageContainer.h"; sourceTree = "<group>"; };
 		A46DA5F81505C00600EA9D8B /* UIImageView+AsyncImageContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AsyncImageContainer.m"; sourceTree = "<group>"; };
 		A47D9C881520959B00ADACF6 /* PSThumbnailImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSThumbnailImageView.h; sourceTree = "<group>"; };
@@ -303,6 +306,8 @@
 				A40B56F71503394C0045C9B1 /* Category.m */,
 				A40B56F9150339790045C9B1 /* Comment.h */,
 				A40B56FA150339790045C9B1 /* Comment.m */,
+				A468C10E152C3CB400D1CE6B /* ErrorMessage.h */,
+				A468C10F152C3CB400D1CE6B /* ErrorMessage.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -775,6 +780,7 @@
 				A47D9C9E1523099300ADACF6 /* TimelineCell.m in Sources */,
 				A48FD2C515271200003F0BDD /* BoardDetailViewController.m in Sources */,
 				A48FD2CE15272E67003F0BDD /* MBProgressHUD.m in Sources */,
+				A468C110152C3CB400D1CE6B /* ErrorMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

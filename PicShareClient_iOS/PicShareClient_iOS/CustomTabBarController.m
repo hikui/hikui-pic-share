@@ -83,7 +83,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-  return YES;
+  return NO;
 }
 
 - (void)cameraButtonOnTouch:(id)sender
@@ -105,7 +105,6 @@
 {
     UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     UIImage *editedImage = nil;
-    NSLog(@"imageOrientation%d",originalImage.imageOrientation);
     if (originalImage.size.width>originalImage.size.height) {
         editedImage = [UIImageView imageWithImage:originalImage scaledToSizeWithTargetWidth:1000];
     }

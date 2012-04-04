@@ -60,24 +60,41 @@
 
 - (void)loadView
 {
-    loadingView = [[UIView alloc]init];
-    CGRect screenBounds = [UIScreen mainScreen].bounds;
-    CGFloat x = screenBounds.size.width/2 - 10;
-    CGFloat y = screenBounds.size.height/2 - 10-50;
-    loadingIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    loadingIndicator.frame = CGRectMake(x, y, 20, 20);
-    loadingIndicator.hidesWhenStopped = YES;
-    [loadingView addSubview:loadingIndicator];
-    self.view = loadingView;
+    if (self.pictureStatus == nil) {
+        loadingView = [[UIView alloc]init];
+        CGRect screenBounds = [UIScreen mainScreen].bounds;
+        CGFloat x = screenBounds.size.width/2 - 10;
+        CGFloat y = screenBounds.size.height/2 - 10-50;
+        loadingIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        loadingIndicator.frame = CGRectMake(x, y, 20, 20);
+        loadingIndicator.hidesWhenStopped = YES;
+        [loadingView addSubview:loadingIndicator];
+        self.view = loadingView;
+    }else {
+        PicDetailView *detailView = [[PicDetailView alloc]initWithPictureStatus:self.pictureStatus];
+        self.view = detailView;
+        //set target-actions
+        [detailView.usernameButton addTarget:self action:@selector(usernameButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [detailView.boardNameButton addTarget:self action:@selector(boardNameButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [detailView.viaButton addTarget:self action:@selector(viaButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [detailView.repinButton addTarget:self action:@selector(repinButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [detailView release];
+    }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [loadingIndicator startAnimating];
-    [self performSelectorInBackground:@selector(loadData) withObject:nil];
-    
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (self.pictureStatus == nil) {
+        [loadingIndicator startAnimating];
+        [self performSelectorInBackground:@selector(loadData) withObject:nil];
+    }
 }
 
 - (void)viewDidUnload
@@ -127,26 +144,22 @@
 #pragma mark - IBActions
 - (void)usernameButtonOnClick:(id)sender
 {
-    NSLog(@"usernameButtonOnClick");
     UserDetailViewController *userDetailViewController = [[UserDetailViewController alloc]initWithUser:pictureStatus.owner];
     [self.navigationController pushViewController:userDetailViewController animated:YES];
     [userDetailViewController release];
 }
 - (void)boardNameButtonOnClick:(id)sender
 {
-    NSLog(@"boardNameButtonOnClick"); 
 #warning not implement yet
 }
 - (void)viaButtonOnClick:(id)sender
 {
-    NSLog(@"viaButtonOnClick");
     UserDetailViewController *userDetailViewController = [[UserDetailViewController alloc]initWithUser:pictureStatus.via];
     [self.navigationController pushViewController:userDetailViewController animated:YES];
     [userDetailViewController release];
 }
 - (void)repinButtonOnClick:(id)sender
 {
-    NSLog(@"repinButtonOnClick");
     #warning not implement yet
 }
 

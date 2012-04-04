@@ -15,7 +15,11 @@
 @property (nonatomic,retain) IBOutlet UIButton *avatarButton;
 @property (nonatomic,retain) IBOutlet UIButton *followButton;
 @property (nonatomic,retain) IBOutlet UITableView *tableView;
+@property (nonatomic,retain) IBOutlet UILabel *boardNameLabel;
 @property (nonatomic) NSInteger boardId;
 @property (nonatomic,retain) Board *board;
+
+- (IBAction)avatarButtonOnTouch:(id)sender;
+- (IBAction)followButtonOnTouch:(id)sender;
 
 @end

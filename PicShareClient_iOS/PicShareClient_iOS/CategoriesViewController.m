@@ -149,7 +149,6 @@
 
 -(void)loadCategories
 {
-    [NSThread sleepForTimeInterval:2];
     _engine = [PicShareEngine sharedEngine];
     NSArray *loadedCategories = [_engine getAllCategories];
     [self performSelectorOnMainThread:@selector(loadDataDidFinish:) withObject:loadedCategories waitUntilDone:NO];

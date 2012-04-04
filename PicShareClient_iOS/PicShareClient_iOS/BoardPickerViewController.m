@@ -104,7 +104,7 @@
     NSArray *returnedArray = nil;
     returnedArray = [engine getBoardsOfUserId:engine.userId];
     [self performSelectorOnMainThread:@selector(loadDataDidFinish:) withObject:returnedArray waitUntilDone:NO];
-    [pool release];
+    [pool drain];
 }
 
 -(void)loadDataDidFinish:(NSArray *)data

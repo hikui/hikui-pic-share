@@ -325,4 +325,62 @@ class GetBoardHandler(BaseHandler):
             return boardDict;
         else:
             return errorResponse(1,0,"参数错误",rc.BAD_REQUEST)
+    
+class FollowHandler(BaseHandler):
+    allowed_methods = ('POST',)
+    def create(self,request):
+        boardIdStr = request.POST.get('board_id')
+        userIdStr = request.POST.get('user_id')
+        user = request.user
+        if boardIdStr is not None:
+            boardId = int(boardIdStr)
+            board = None
+            try:
+                board = Board.objects.get(pk=boardId)
+            except:
+                return errorResponse(0,1,'相册不存在',rc.NOT_FOUND)
+            board.followers.add(user)
+            return errorResponse(0,0,'操作成功',rc.ALL_OK)
+        if userIdStr is not None:
+            userId = int(userIdStr)
+            if userId == user.id:
+                return errorResponse(0,2,rc.FORBIDDEN)
+            try:
+                targetUser = User.objects.get(pk=userId)
+            except:
+                return errorResponse(0,1,'用户不存在',rc.NOT_FOUND)
+            user.relationships.add(targetUser)
+            for aBoard in targetUser.my_boards.all():
+                aBoard.followers.add(user)
+            return errorResponse(0,0,'操作成功',rc.ALL_OK)
         
+        return errorResponse(1,0,'参数错误',rc.BAD_REQUEST)
+
+class UnfoHandler(BaseHandler):
+    allowed_methods = ('POST',)
+    def create(self,request):
+        boardIdStr = request.POST.get('board_id')
+        userIdStr = request.POST.get('user_id')
+        user = request.user
+        if boardIdStr is not None:
+            boardId = int(boardIdStr)
+            board = None
+            try:
+                board = Board.objects.get(pk=boardId)
+            except:
+                return errorResponse(0,1,'相册不存在',rc.NOT_FOUND)
+            board.followers.remove(user)
+            return errorResponse(0,0,'操作成功',rc.ALL_OK)
+        if userIdStr is not None:
+            userId = int(userIdStr)
+            if userId == user.id:
+                return errorResponse(0,2,rc.FORBIDDEN)
+            try:
+                targetUser = User.objects.get(pk=userId)
+            except:
+                return errorResponse(0,1,'用户不存在',rc.NOT_FOUND)
+            user.relationships.remove(targetUser)
+            for aBoard in targetUser.my_boards.all():
+                aBoard.followers.remove(user)
+            return errorResponse(0,0,'操作成功',rc.ALL_OK)
+        return errorResponse(1,0,'参数错误',rc.BAD_REQUEST)

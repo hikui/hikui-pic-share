@@ -10,16 +10,18 @@
 #import "MBProgressHUD.h"
 #import "PicShareEngine.h"
 #import "PSThumbnailImageView.h"
+#import "PicDetailViewController.h"
+#import "UserDetailViewController.h"
 
 @interface BoardDetailViewController ()
 
 - (void)loadData;
-- (void)page;
+- (void)picOnTouch:(id)sender;
 
 @end
 
 @implementation BoardDetailViewController
-@synthesize avatarButton,followButton,tableView,boardId,board;
+@synthesize avatarButton,followButton,tableView,boardId,board,boardNameLabel;
 
 - (void)dealloc
 {
@@ -53,14 +55,18 @@
 {
     [super viewDidLoad];
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)]autorelease];
+    self.boardNameLabel.text = nil;
+    self.followButton.hidden = YES;
+    self.boardNameLabel.hidden = YES;
+    [self.view setUserInteractionEnabled:NO];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self loadData];
     // Do any additional setup after loading the view from its nib.
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self loadData];
 }
 
 
@@ -78,11 +84,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     int count = self.board.picturesCount;
-    int result = count/4; //23/4 = 5
-    int temp = result*4; //5*4=20
-    if (count-temp>0) {
-        result++; //23-20>0 5->6
-    }
+    int result = (count%4==0)?count/4:(count/4+1);
     return result;
 }
 
@@ -91,10 +93,10 @@
     return 78;
 }
 
-#define FIRST_IMGVIEW_TAG 1
-#define SECOND_IMGVIEW_TAG 2
-#define THIRD_IMGVIEW_TAG 3
-#define FORTH_IMGVIEW_TAG 4
+#define FIRST_IMGVIEW_TAG 100
+#define SECOND_IMGVIEW_TAG 101
+#define THIRD_IMGVIEW_TAG 102
+#define FORTH_IMGVIEW_TAG 103
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -115,7 +117,18 @@
         [cell.contentView addSubview:imgView2];
         [cell.contentView addSubview:imgView3];
         [cell.contentView addSubview:imgView4];
+        [imgView1 addTarget:self action:@selector(picOnTouch:) forControlEvents:UIControlEventTouchUpInside];
+        [imgView2 addTarget:self action:@selector(picOnTouch:) forControlEvents:UIControlEventTouchUpInside];
+        [imgView3 addTarget:self action:@selector(picOnTouch:) forControlEvents:UIControlEventTouchUpInside];
+        [imgView4 addTarget:self action:@selector(picOnTouch:) forControlEvents:UIControlEventTouchUpInside];
+        cell.selectedBackgroundView.backgroundColor = [UIColor whiteColor];
     }else {
+        do {
+            UIView *tmpView = [cell.contentView viewWithTag:FIRST_IMGVIEW_TAG];
+            if ([tmpView isKindOfClass:[PSThumbnailImageView class]]) {
+                imgView1 = (PSThumbnailImageView *) tmpView;
+            }
+        } while (imgView1 == nil);
         imgView1 = (PSThumbnailImageView *)[cell.contentView viewWithTag:FIRST_IMGVIEW_TAG];
         imgView2 = (PSThumbnailImageView *)[cell.contentView viewWithTag:SECOND_IMGVIEW_TAG];
         imgView3 = (PSThumbnailImageView *)[cell.contentView viewWithTag:THIRD_IMGVIEW_TAG];
@@ -141,13 +154,14 @@
         NSURL *url = [NSURL URLWithString:ps.pictureUrl];
         [imgView4 setImageWithUrl:url placeholderImage:[UIImage imageNamed:@"PicturePlaceHolder.png"]];
     }
+    cell.tag = indexPath.row;
+    
     return cell;
 }
 
 - (void)loadData
 {
     NSInteger _boardId = self.boardId;
-    NSLog(@"boardid:%d",_boardId);
     //try GCD here
     dispatch_queue_t downloadQ = dispatch_queue_create("BoardDetail Download", NULL);
     dispatch_async(downloadQ, ^{
@@ -155,8 +169,27 @@
         Board *b = [engine getBoard:_boardId];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.board = b;
-            NSLog(@"board:%@",b);
             [MBProgressHUD hideHUDForView:self.view animated:YES];
+            self.followButton.hidden = NO;
+            if (!board.isFollowing) {
+                //button = 取消关注
+                UIImage *followButtonImage = [[UIImage imageNamed:@"followButton"]stretchableImageWithLeftCapWidth:5.0 topCapHeight:13.0];
+                UIImage *followButtonImagePressed = [[UIImage imageNamed:@"followButton-press"]stretchableImageWithLeftCapWidth:5.0 topCapHeight:13.0];
+                [followButton setBackgroundImage:followButtonImage forState:UIControlStateNormal];
+                [followButton setBackgroundImage:followButtonImagePressed forState:UIControlStateHighlighted];
+                [followButton setTitle:@"关注" forState:UIControlStateNormal];
+                [followButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            }else {
+                UIImage *unfoButtonImage = [[UIImage imageNamed:@"unfoButton"]stretchableImageWithLeftCapWidth:5.0 topCapHeight:13.0];
+                UIImage *unfoButtonImagePressed = [[UIImage imageNamed:@"unfoButton-press"]stretchableImageWithLeftCapWidth:5.0 topCapHeight:13.0];
+                [followButton setBackgroundImage:unfoButtonImage forState:UIControlStateNormal];
+                [followButton setBackgroundImage:unfoButtonImagePressed forState:UIControlStateHighlighted];
+                [followButton setTitle:@"取消关注" forState:UIControlStateNormal];
+                [followButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            }
+            self.boardNameLabel.text = self.board.name;
+            self.boardNameLabel.hidden = NO;
+            [self.view setUserInteractionEnabled:YES];
             [self.tableView reloadData];
         });
         
@@ -164,4 +197,28 @@
     dispatch_release(downloadQ);
 }
 
+- (void)picOnTouch:(id)sender
+{
+    PSThumbnailImageView *iv = (PSThumbnailImageView *)sender;
+    UITableViewCell *cell = (UITableViewCell *)iv.superview.superview;
+    int row = cell.tag;
+    int col = iv.tag-100;
+    int index = row*4+col;
+    if (index<self.board.pictureStatuses.count) {
+        PictureStatus *ps = [board.pictureStatuses objectAtIndex:index];
+        PicDetailViewController *pdvc = [[PicDetailViewController alloc]init];
+        pdvc.pictureStatus = ps;
+        [self.navigationController pushViewController:pdvc animated:YES];
+        [pdvc release];
+    }
+}
+- (IBAction)avatarButtonOnTouch:(id)sender
+{
+    UserDetailViewController *udvc = [[UserDetailViewController alloc]initWithUser:self.board.owner];
+    [self.navigationController pushViewController:udvc animated:YES];
+}
+- (IBAction)followButtonOnTouch:(id)sender
+{
+    
+}
 @end

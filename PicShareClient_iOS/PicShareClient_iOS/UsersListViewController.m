@@ -14,6 +14,7 @@
 
 - (void)loadData;
 - (void)loadDataDidFinish:(NSArray *)returnedArray;
+- (void)followButtonOnTouch:(id)sender;
 
 @end
 
@@ -123,61 +124,22 @@
         [followButton setTitle:@"取消关注" forState:UIControlStateNormal];
         [followButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
-    cell.accessoryView = followButton;
+    [followButton addTarget:self action:@selector(followButtonOnTouch:) forControlEvents:UIControlEventTouchUpInside];
+    PicShareEngine *engine = [PicShareEngine sharedEngine];
+    int currUserId = engine.userId;
+    if (!(u.userId==currUserId)) {
+        cell.accessoryView = followButton;
+    }
+    cell.tag = indexPath.row;
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - async loading methods
@@ -193,7 +155,7 @@
         returnedArray = [engine getFollowing:userId];
     }
     [self performSelectorOnMainThread:@selector(loadDataDidFinish:) withObject:returnedArray waitUntilDone:NO];
-    [pool release];
+    [pool drain];
 }
 
 - (void)loadDataDidFinish:(NSArray *)returnedArray
@@ -206,11 +168,66 @@
     }
     self.usersArray = [[[NSMutableArray alloc]initWithArray:[returnedArray subarrayWithRange:NSMakeRange(1, returnedArray.count-1)]]autorelease];
     self.view = tempView;
-    NSLog(@"%@",self.usersArray);
     [tempView release];
     [self.tableView reloadData];
 }
+#warning not implement pagination
 
-#warning 翻页未做
+- (void)followButtonOnTouch:(id)sender
+{
+    NSLog(@"touch");
+    UIButton *followButton = (UIButton *)sender;
+    UITableViewCell *cell = (UITableViewCell *)followButton.superview;
+    int index = cell.tag;
+    User *u = [self.usersArray objectAtIndex:index];
+    if (u.isFollowing) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            PicShareEngine *engine = [PicShareEngine sharedEngine];
+            ErrorMessage *eMsg = [engine unFollowUser:u.userId];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (eMsg.ret==0 && eMsg.errorcode==0) {
+                    UIImage *followButtonImage = [[UIImage imageNamed:@"followButton"]stretchableImageWithLeftCapWidth:5.0 topCapHeight:13.0];
+                    UIImage *followButtonImagePressed = [[UIImage imageNamed:@"followButton-press"]stretchableImageWithLeftCapWidth:5.0 topCapHeight:13.0];
+                    [followButton setBackgroundImage:followButtonImage forState:UIControlStateNormal];
+                    [followButton setBackgroundImage:followButtonImagePressed forState:UIControlStateHighlighted];
+                    [followButton setTitle:@"关注" forState:UIControlStateNormal];
+                    [followButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                    cell.accessoryView = followButton;
+                    u.isFollowing = NO;
+                }else {
+                    NSString *eMsgStr = eMsg.errorMsg;
+                    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"错误" message:eMsgStr delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+                    [alertView show];
+                    [alertView release];
+                }
+            });
+        });
+    }else {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            PicShareEngine *engine = [PicShareEngine sharedEngine];
+            ErrorMessage *eMsg = [engine followUser:u.userId];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (eMsg.ret==0 && eMsg.errorcode==0) {
+                    UIImage *unfoButtonImage = [[UIImage imageNamed:@"unfoButton"]stretchableImageWithLeftCapWidth:5.0 topCapHeight:13.0];
+                    UIImage *unfoButtonImagePressed = [[UIImage imageNamed:@"unfoButton-press"]stretchableImageWithLeftCapWidth:5.0 topCapHeight:13.0];
+                    [followButton setBackgroundImage:unfoButtonImage forState:UIControlStateNormal];
+                    [followButton setBackgroundImage:unfoButtonImagePressed forState:UIControlStateHighlighted];
+                    [followButton setTitle:@"取消关注" forState:UIControlStateNormal];
+                    [followButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                    cell.accessoryView = followButton;
+                    u.isFollowing = YES;
+                    
+                }else {
+                    NSString *eMsgStr = eMsg.errorMsg;
+                    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"错误" message:eMsgStr delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+                    [alertView show];
+                    [alertView release];
+                }
+            });
+        });
+    }
+    
+    
+}
 
 @end

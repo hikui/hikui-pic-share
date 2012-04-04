@@ -12,7 +12,7 @@
 
 @implementation Board
 
-@synthesize name,owner,boardId,categoryId,picturesCount,pictureStatuses;
+@synthesize name,owner,boardId,categoryId,picturesCount,pictureStatuses,isFollowing;
 
 -(id)initWithJSONDict:(NSDictionary *)data
 {
@@ -27,6 +27,7 @@
         boardId = [[data objectForKey:@"board_id"]intValue];
         categoryId = [[data objectForKey:@"category_id"]intValue];
         picturesCount = [[data objectForKey:@"pictures_count"]intValue];
+        isFollowing = [[data objectForKey:@"is_following"]boolValue];
         NSArray *psDataArray = [data objectForKey:@"pictures"];
         NSMutableArray *pss = [[NSMutableArray alloc]init];
         for (NSDictionary *aPsData in psDataArray) {

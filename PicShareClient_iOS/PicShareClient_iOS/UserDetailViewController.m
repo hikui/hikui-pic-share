@@ -13,6 +13,7 @@
 #import "BoardsListViewController.h"
 #import "UsersListViewController.h"
 #import "Common.h"
+#import "MBProgressHUD.h"
 #define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 
 @interface UserDetailViewController ()
@@ -23,11 +24,12 @@
 - (IBAction)userBoardsButtonOnClick:(id)sender;
 - (IBAction)userFollowersButtonOnClick:(id)sender;
 - (IBAction)userFollowingButtonOnClick:(id)sender;
+- (IBAction)followButtonOnClick:(id)sender;
 
 @end
 
 @implementation UserDetailViewController
-@synthesize scrollView,nameLabel,locationLabel,introductionText,followerCountLabel,followingCountLabel,picCountLabel,avatarImageView,user,followersButton,followingButton,picturesButton,followButton,editProfileButton;
+@synthesize scrollView,nameLabel,locationLabel,introductionText,followerCountLabel,followingCountLabel,picCountLabel,avatarImageView,user,followersButton,followingButton,picturesButton,followButton,editProfileButton,userId;
 
 
 - (void)dealloc
@@ -42,9 +44,7 @@
     [avatarImageView release];
     [followButton release];
     [editProfileButton release];
-    [tempView release];
-    [loadingView release];
-    [loadingIndicator release];
+    [userId release];
     [super dealloc];
 }
 
@@ -64,12 +64,6 @@
     self.picturesButton = nil;
     self.followButton = nil;
     self.editProfileButton = nil;
-    [tempView release];
-    tempView = nil;
-    [loadingView release];
-    loadingView = nil;
-    [loadingIndicator release];
-    loadingIndicator = nil;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -115,17 +109,7 @@
         PicShareEngine *engine = [PicShareEngine sharedEngine];
         userId = [[NSNumber numberWithInt:engine.userId]retain];
     }
-    
-    tempView = [self.view retain];
-    loadingView = [[UIView alloc]init];
-    CGRect screenBounds = [UIScreen mainScreen].bounds;
-    CGFloat x = screenBounds.size.width/2 - 10;
-    CGFloat y = screenBounds.size.height/2 - 10-50;
-    loadingIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    loadingIndicator.frame = CGRectMake(x, y, 20, 20);
-    loadingIndicator.hidesWhenStopped = YES;
-    [loadingView addSubview:loadingIndicator];
-    self.view = loadingView;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self performSelectorInBackground:@selector(loadData) withObject:nil];
 }
 
@@ -193,6 +177,46 @@
     [followingListViewController release];
 }
 
+- (IBAction)followButtonOnClick:(id)sender
+{
+    NSInteger _userId = self.user.userId;
+    PicShareEngine *engine = [PicShareEngine sharedEngine];
+    if (user.isFollowing){
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            ErrorMessage *errorMsg = [engine unFollowUser:_userId];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (errorMsg.ret==0&&errorMsg.errorcode==0) {
+                    self.userId = [NSNumber numberWithInt:self.user.userId];
+                    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                    [self performSelectorInBackground:@selector(loadData) withObject:nil];
+                }else {
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:errorMsg.errorMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+                    [alert show];
+                    [alert release];
+                }
+                
+            });
+        });
+    }else {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            ErrorMessage *errorMsg = [engine followUser:_userId];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (errorMsg.ret==0&&errorMsg.errorcode==0) {
+                    self.userId = [NSNumber numberWithInt:self.user.userId];
+                    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                    [self performSelectorInBackground:@selector(loadData) withObject:nil];
+                }else {
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:errorMsg.errorMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+                    [alert show];
+                    [alert release];
+                }
+                
+            });
+        });
+    }
+}
+
 #warning 修改profile、follow/unfo未做。
 
 #pragma mark - async methods
@@ -202,14 +226,13 @@
     PicShareEngine *engine = [PicShareEngine sharedEngine];
     User *returnedUser = [engine getUser:[userId intValue]];
     [self performSelectorOnMainThread:@selector(loadDataDidFinish:) withObject:returnedUser waitUntilDone:NO];
-    [pool release];
+    [pool drain];
 }
 - (void)loadDataDidFinish:(User *)returnedUser
 {
     self.user = returnedUser;
     [userId release];
     [self updateView];
-    self.view = tempView;
-    [tempView release];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 @end

@@ -25,7 +25,6 @@
 - (void) touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event
 {
 	// Get active location upon move
-    NSLog(@"draggableImageMoved");
 	CGPoint activePoint = [[touches anyObject] locationInView:self];
     
 	// Determine new point based on where the touch is now located

@@ -176,11 +176,19 @@ static bool isRetina()
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    PictureStatus *ps = [self.timeline objectAtIndex:indexPath.row];
-    PicDetailViewController *pdvc = [[PicDetailViewController alloc]initWithPicId:ps.psId];
-    [self.navigationController pushViewController:pdvc animated:YES];
-    [pdvc release];
+    if (indexPath.row<self.timeline.count) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        PictureStatus *ps = [self.timeline objectAtIndex:indexPath.row];
+        PicDetailViewController *pdvc = [[PicDetailViewController alloc]initWithPicId:ps.psId];
+        [self.navigationController pushViewController:pdvc animated:YES];
+        [pdvc release];
+    }else {
+        //page
+        if (self.hasnext == YES) {
+            [self performSelectorInBackground:@selector(pageData) withObject:nil];
+        }
+    }
+    
 }
 
 -(void)refresh
@@ -242,7 +250,7 @@ static bool isRetina()
     NSArray *resultArray = [engine getHomeTimeline];
     //NSLog(@"timeline:%@",resultArray);
     [self performSelectorOnMainThread:@selector(loadDataDidFinish:) withObject:resultArray waitUntilDone:NO];
-    [pool release];
+    [pool drain];
 }
 - (void)loadDataDidFinish:(NSArray *)resultArray
 {
@@ -274,7 +282,7 @@ static bool isRetina()
     NSArray *resultArray = [engine getHomeTimelineOfPage:++currentPage since:-1 max:theTopOne.psId];
     NSLog(@"timeline:%@",resultArray);
     [self performSelectorOnMainThread:@selector(pageDataDidFinish:) withObject:resultArray waitUntilDone:NO];
-    [pool release];
+    [pool drain];
 }
 - (void)pageDataDidFinish:(NSArray *)resultArray
 {

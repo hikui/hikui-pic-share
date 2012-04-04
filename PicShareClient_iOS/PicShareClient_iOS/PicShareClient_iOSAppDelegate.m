@@ -65,7 +65,7 @@
 
 -(void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
-    NSLog(@"application received mem warning");
+    NSLog(@"application did receive memory warning");
     [[AsyncImageDownloader sharedAsyncImageDownloader]cleanThumbnailCache];
     Common *common = [Common sharedCommon];
     [common receiveMemoryWarning];

@@ -10,16 +10,11 @@
 #import "User.h"
 
 @interface UserDetailViewController : UIViewController
-{
-    UIView *tempView;
-    UIView *loadingView;
-    UIActivityIndicatorView *loadingIndicator;
-    NSNumber *userId;
-}
 
 - (id)initWithUser:(User *)aUser;
 - (id)initwithuserId:(NSInteger)anId;
 
+@property (nonatomic,retain) NSNumber *userId;
 @property (nonatomic,retain) User *user;
 @property (nonatomic,retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic,retain) IBOutlet UILabel *nameLabel;

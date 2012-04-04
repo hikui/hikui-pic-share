@@ -432,5 +432,101 @@ static PicShareEngine *instance = NULL;
     }
     return  nil;
 }
-
+-(ErrorMessage *)followBoard:(NSInteger)boardId
+{
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingString:@"api/relationship/follow.json"]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [self addAuthHeaderForRequest:request];
+    [request setPostValue:[NSNumber numberWithInt:boardId] forKey:@"board_id"];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error) {
+        response = [request responseString];
+    }
+    else {
+        //do something in ui
+        return nil;
+    }
+    if (response != nil) {
+        NSDictionary *dataDict = [response objectFromJSONString];
+        ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+        NSLog(@"errorMessage:%@",em);
+        return em;
+    }
+    return  nil;
+    
+}
+-(ErrorMessage *)followUser:(NSInteger)userId
+{
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingString:@"api/relationship/follow.json"]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [self addAuthHeaderForRequest:request];
+    [request setPostValue:[NSNumber numberWithInt:userId] forKey:@"user_id"];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error) {
+        response = [request responseString];
+    }
+    else {
+        //do something in ui
+        return nil;
+    }
+    if (response != nil) {
+        NSDictionary *dataDict = [response objectFromJSONString];
+        ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+        NSLog(@"errorMessage:%@",em);
+        return em;
+    }
+    return  nil;
+}
+-(ErrorMessage *)unFollowBoard:(NSInteger)boardId
+{
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingString:@"api/relationship/unfollow.json"]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [self addAuthHeaderForRequest:request];
+    [request setPostValue:[NSNumber numberWithInt:boardId] forKey:@"board_id"];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error) {
+        response = [request responseString];
+    }
+    else {
+        //do something in ui
+        return nil;
+    }
+    if (response != nil) {
+        NSDictionary *dataDict = [response objectFromJSONString];
+        ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+        NSLog(@"errorMessage:%@",em);
+        return em;
+    }
+    return  nil;
+}
+-(ErrorMessage *)unFollowUser:(NSInteger)userId
+{
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingString:@"api/relationship/unfollow.json"]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [self addAuthHeaderForRequest:request];
+    [request setPostValue:[NSNumber numberWithInt:userId] forKey:@"user_id"];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error) {
+        response = [request responseString];
+    }
+    else {
+        //do something in ui
+        return nil;
+    }
+    if (response != nil) {
+        NSDictionary *dataDict = [response objectFromJSONString];
+        ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+        NSLog(@"errorMessage:%@",em);
+        return em;
+    }
+    return  nil;
+}
 @end

@@ -111,7 +111,6 @@ static bool isRetina()
 {
     
     if (self.pictureStatus != nil) {
-        NSLog(@"updateview");
         avatarImageView.frame = CGRectMake(10, 20, 30, 30);
         [avatarImageView setImageWithUrl:[NSURL URLWithString:pictureStatus.owner.avatarUrl] placeholderImage:[UIImage imageNamed:@"anonymous.png"]];
 
