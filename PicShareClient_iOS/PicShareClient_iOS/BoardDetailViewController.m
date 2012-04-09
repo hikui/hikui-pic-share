@@ -12,6 +12,7 @@
 #import "PSThumbnailImageView.h"
 #import "PicDetailViewController.h"
 #import "UserDetailViewController.h"
+#import "BoardInfoEditorViewController.h"
 
 @interface BoardDetailViewController ()
 
@@ -21,7 +22,7 @@
 @end
 
 @implementation BoardDetailViewController
-@synthesize avatarButton,followButton,tableView,boardId,board,boardNameLabel;
+@synthesize avatarButton,followButton,tableView,boardId,board,boardNameLabel,editButton;
 
 - (void)dealloc
 {
@@ -29,6 +30,7 @@
     [followButton release];
     [tableView release];
     [board release];
+    [editButton release];
     [super dealloc];
 }
 
@@ -40,6 +42,7 @@
     self.avatarButton = nil;
     self.followButton = nil;
     self.tableView = nil;
+    self.editButton = nil;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -58,6 +61,7 @@
     self.boardNameLabel.text = nil;
     self.followButton.hidden = YES;
     self.boardNameLabel.hidden = YES;
+    self.editButton.hidden = YES;
     [self.view setUserInteractionEnabled:NO];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self loadData];
@@ -170,7 +174,6 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             self.board = b;
             [MBProgressHUD hideHUDForView:self.view animated:YES];
-            self.followButton.hidden = NO;
             if (!board.isFollowing) {
                 //button = 取消关注
                 UIImage *followButtonImage = [[UIImage imageNamed:@"followButton"]stretchableImageWithLeftCapWidth:5.0 topCapHeight:13.0];
@@ -186,6 +189,11 @@
                 [followButton setBackgroundImage:unfoButtonImagePressed forState:UIControlStateHighlighted];
                 [followButton setTitle:@"取消关注" forState:UIControlStateNormal];
                 [followButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            }
+            if (board.owner.userId != engine.userId) {
+                self.followButton.hidden = NO;
+            }else {
+                self.editButton.hidden = NO;
             }
             self.boardNameLabel.text = self.board.name;
             self.boardNameLabel.hidden = NO;
@@ -220,5 +228,55 @@
 - (IBAction)followButtonOnTouch:(id)sender
 {
     
+    NSInteger _boardId = self.boardId;
+    if (self.board.isFollowing) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            PicShareEngine *engine = [PicShareEngine sharedEngine];
+            ErrorMessage *errorMsg = [engine unFollowBoard:_boardId];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (errorMsg.ret==0 && errorMsg.errorcode==0) {
+                    UIImage *followButtonImage = [[UIImage imageNamed:@"followButton"]stretchableImageWithLeftCapWidth:5.0 topCapHeight:13.0];
+                    UIImage *followButtonImagePressed = [[UIImage imageNamed:@"followButton-press"]stretchableImageWithLeftCapWidth:5.0 topCapHeight:13.0];
+                    [followButton setBackgroundImage:followButtonImage forState:UIControlStateNormal];
+                    [followButton setBackgroundImage:followButtonImagePressed forState:UIControlStateHighlighted];
+                    [followButton setTitle:@"关注" forState:UIControlStateNormal];
+                    [followButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                    self.board.isFollowing = NO;
+                }else {
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:errorMsg.errorMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+                    [alert show];
+                    [alert release];
+                }
+            });
+        });
+    }else {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            PicShareEngine *engine = [PicShareEngine sharedEngine];
+            ErrorMessage *errorMsg = [engine followBoard:_boardId];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (errorMsg.ret==0 && errorMsg.errorcode==0) {
+                    UIImage *unfoButtonImage = [[UIImage imageNamed:@"unfoButton"]stretchableImageWithLeftCapWidth:5.0 topCapHeight:13.0];
+                    UIImage *unfoButtonImagePressed = [[UIImage imageNamed:@"unfoButton-press"]stretchableImageWithLeftCapWidth:5.0 topCapHeight:13.0];
+                    [followButton setBackgroundImage:unfoButtonImage forState:UIControlStateNormal];
+                    [followButton setBackgroundImage:unfoButtonImagePressed forState:UIControlStateHighlighted];
+                    [followButton setTitle:@"取消关注" forState:UIControlStateNormal];
+                    [followButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                    self.board.isFollowing = YES;
+                }else {
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:errorMsg.errorMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+                    [alert show];
+                    [alert release];
+                }
+            });
+        });
+    }
+}
+
+- (IBAction)editButtonOnTouch:(id)sender
+{
+    BoardInfoEditorViewController *bievc = [[BoardInfoEditorViewController alloc]initWithNibName:@"BoardInfoEditorViewController" bundle:nil];
+    bievc.board = self.board;
+    [self.navigationController pushViewController:bievc animated:YES];
+    [bievc release];
 }
 @end

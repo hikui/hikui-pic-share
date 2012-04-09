@@ -13,7 +13,7 @@
 
 #define UPLOAD_IMAGE 0
 
-NSString *picshareDomain = @"http://picshare.herkuang.info:8000/";
+NSString *picshareDomain = @"http://localhost:8000/";
 
 @interface PicShareEngine ()
 

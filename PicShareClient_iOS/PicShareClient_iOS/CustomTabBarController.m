@@ -83,7 +83,10 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-  return NO;
+    if (interfaceOrientation == UIInterfaceOrientationPortrait) {
+        return YES;
+    }
+    return NO;
 }
 
 - (void)cameraButtonOnTouch:(id)sender
@@ -121,7 +124,9 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissModalViewControllerAnimated:YES];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    if ([UIApplication sharedApplication].statusBarHidden) {
+        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    }
 }
 
 -(void)dealloc
