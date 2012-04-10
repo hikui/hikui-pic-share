@@ -359,11 +359,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PicShareClient_iOS/BoardDetailViewController.m"
-         timestampString = "355483432.964923"
+         timestampString = "355765033.925634"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "165"
-         endingLineNumber = "165"
+         startingLineNumber = "164"
+         endingLineNumber = "164"
          landmarkName = "@implementation BoardDetailViewController"
          landmarkType = "3">
       </FileBreakpoint>

@@ -20,7 +20,7 @@
 
 @implementation TimelineCell
 
-@synthesize avatarImageView,usernameButton,boardNameButton,picDescriptionLabel,mainImageView,repinButton,commentTextField,pictureStatus,viaButton,request;
+@synthesize avatarImageView,usernameButton,boardNameButton,picDescriptionLabel,mainImageView,repinButton,commentTextField,pictureStatus,viaButton,request,viaLabel;
 
 - (void)dealloc
 {
@@ -34,6 +34,7 @@
     [repinButton release];
     [commentTextField release];
     [viaButton release];
+    [viaLabel release];
     [super dealloc];
 }
 
@@ -50,6 +51,7 @@
         repinButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect]retain];
         commentTextField = [[UITextField alloc]init];
         viaButton = [[UIButton buttonWithType:UIButtonTypeCustom]retain];
+        viaLabel = [[UILabel alloc]init];
         [self.contentView addSubview:avatarImageView];
         [self.contentView addSubview:usernameButton];
         [self.contentView addSubview:boardNameButton];
@@ -57,6 +59,7 @@
         [self.contentView addSubview:mainImageView];
         [self.contentView addSubview:repinButton];
         [self.contentView addSubview:viaButton];
+        [self.contentView addSubview:viaLabel];
     }
     return self;
 }
@@ -97,11 +100,10 @@
         
         CGRect viaButtonFrame = CGRectMake(0, 0, 0, 0);
         if (pictureStatus.via !=nil) {
-            UILabel *viaLabel = [[UILabel alloc]initWithFrame:CGRectMake(nameButtonFrame.origin.x, nameButtonFrame.origin.y+nameButtonSize.height+4, 35, 18)];
+            self.viaLabel.frame = CGRectMake(nameButtonFrame.origin.x, nameButtonFrame.origin.y+nameButtonSize.height+4, 35, 18);
             viaLabel.font = [UIFont systemFontOfSize:14];
             viaLabel.text = @"转自";
-            [self.contentView addSubview:viaLabel];
-            [viaLabel release];
+            [viaLabel setHidden:NO];
             
             CGSize viaButtonSize = [pictureStatus.via.username sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(320-8-(viaLabel.frame.origin.x+viaLabel.frame.size.width), 18) lineBreakMode:UILineBreakModeTailTruncation];
             viaButtonFrame = CGRectMake(viaLabel.frame.origin.x+viaLabel.frame.size.width+8, viaLabel.frame.origin.y, viaButtonSize.width, viaButtonSize.height);
@@ -111,7 +113,11 @@
             [viaButton setTitleColor:RGBA(93, 145, 166, 1) forState:UIControlStateNormal];
             viaButton.titleLabel.font = [UIFont systemFontOfSize:14];
             [viaButton setContentVerticalAlignment:UIControlContentHorizontalAlignmentLeft];
+            [viaButton setHidden:NO];
             
+        }else {
+            [viaButton setHidden:YES];
+            [viaLabel setHidden:YES];
         }
         
         

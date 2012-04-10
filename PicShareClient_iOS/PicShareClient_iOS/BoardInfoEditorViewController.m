@@ -49,7 +49,7 @@
     }else if(type==UPDATE){
         self.boardNameTF.text = self.board.name;
     }
-    UIBarButtonItem *rightItem;
+    UIBarButtonItem *rightItem = nil;
     if (type==CREATE) {
         rightItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createToServer)];
         self.title = @"新建相册";

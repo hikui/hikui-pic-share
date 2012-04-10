@@ -139,6 +139,7 @@
     BoardInfoEditorViewController *bivec = [[BoardInfoEditorViewController alloc]initWithNibName:@"BoardInfoEditorViewController" bundle:nil];
     bivec.type = CREATE;
     [self.navigationController pushViewController:bivec animated:YES];
+    [bivec release];
 }
 
 - (void)setBoardIsSelectedBlock:(BoardIsSelectedBlock)_isSelectedBlock

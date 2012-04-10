@@ -26,6 +26,7 @@
 @property (nonatomic,retain) UIButton *repinButton;
 @property (nonatomic,retain) UITextField *commentTextField;
 @property (nonatomic,retain) ASIHTTPRequest *request;
+@property (nonatomic,retain) UILabel *viaLabel;
 
 - (void)refreshWithPictureStatus:(PictureStatus *)aPictureStatus;
 

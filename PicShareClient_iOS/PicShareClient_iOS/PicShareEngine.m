@@ -13,7 +13,7 @@
 
 #define UPLOAD_IMAGE 0
 
-NSString *picshareDomain = @"http://localhost:8000/";
+NSString *picshareDomain = @"http://picshare.herkuang.info:8000/";
 
 @interface PicShareEngine ()
 
@@ -450,7 +450,7 @@ static PicShareEngine *instance = NULL;
     }
     if (response != nil) {
         NSDictionary *dataDict = [response objectFromJSONString];
-        ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+        ErrorMessage *em = [[[ErrorMessage alloc]initWithJSONDict:dataDict]autorelease];
         NSLog(@"errorMessage:%@",em);
         return em;
     }
@@ -475,7 +475,7 @@ static PicShareEngine *instance = NULL;
     }
     if (response != nil) {
         NSDictionary *dataDict = [response objectFromJSONString];
-        ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+        ErrorMessage *em = [[[ErrorMessage alloc]initWithJSONDict:dataDict]autorelease];
         NSLog(@"errorMessage:%@",em);
         return em;
     }
@@ -499,7 +499,7 @@ static PicShareEngine *instance = NULL;
     }
     if (response != nil) {
         NSDictionary *dataDict = [response objectFromJSONString];
-        ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+        ErrorMessage *em = [[[ErrorMessage alloc]initWithJSONDict:dataDict]autorelease];
         NSLog(@"errorMessage:%@",em);
         return em;
     }
@@ -523,7 +523,7 @@ static PicShareEngine *instance = NULL;
     }
     if (response != nil) {
         NSDictionary *dataDict = [response objectFromJSONString];
-        ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+        ErrorMessage *em = [[[ErrorMessage alloc]initWithJSONDict:dataDict]autorelease];
         NSLog(@"errorMessage:%@",em);
         return em;
     }
@@ -550,7 +550,7 @@ static PicShareEngine *instance = NULL;
     }
     if (response != nil) {
         NSDictionary *dataDict = [response objectFromJSONString];
-        ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+        ErrorMessage *em = [[[ErrorMessage alloc]initWithJSONDict:dataDict]autorelease];
         NSLog(@"errorMessage:%@",em);
         return em;
     }
@@ -611,7 +611,7 @@ static PicShareEngine *instance = NULL;
     }
     if (response != nil) {
         NSDictionary *dataDict = [response objectFromJSONString];
-        PictureStatus *ps = [[PictureStatus alloc]initWithJSONDict:dataDict];
+        PictureStatus *ps = [[[PictureStatus alloc]initWithJSONDict:dataDict]autorelease];
         if (ps!=nil) {
             return ps;
         }else {
@@ -619,6 +619,7 @@ static PicShareEngine *instance = NULL;
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:em.errorMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
             [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
             [alert release];
+            [em release];
         }
     }
     return nil;
