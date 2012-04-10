@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Board.h"
 
+typedef enum Type{
+    CREATE,
+    UPDATE
+}Type;
+
 @interface BoardInfoEditorViewController : UITableViewController <UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 
 @property (nonatomic) NSInteger boardId;  //if new a board, this value should less than 0
@@ -18,6 +23,7 @@
 @property (nonatomic,retain) IBOutlet UITextField *boardNameTF;
 @property (nonatomic,retain) IBOutlet UIPickerView *categoryPicker;
 @property (nonatomic,retain) NSArray *categories;
+@property Type type;
 
 
 

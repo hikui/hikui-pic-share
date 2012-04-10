@@ -29,9 +29,9 @@
 -(NSArray *)getAllCategories;
 
 //board api
--(void)createBoard:(Board *)aBoard;
--(void)deleteBoard:(NSInteger)boardId;
--(void)updateBoard:(Board *)aBoard;
+-(Board *)createBoard:(Board *)aBoard;
+-(ErrorMessage *)deleteBoard:(NSInteger)boardId;
+-(ErrorMessage *)updateBoard:(Board *)aBoard;
 -(Board *)getBoard:(NSInteger)boardId;
 -(NSArray *)getBoardsOfCategoryId:(NSInteger)categoryId;
 -(NSArray *)getBoardsOfCategoryId:(NSInteger)categoryId page:(NSInteger)page;

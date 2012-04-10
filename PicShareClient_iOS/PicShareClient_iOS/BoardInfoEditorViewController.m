@@ -16,11 +16,12 @@
 -(void) loadCategories;
 -(void) deleteBoard;
 -(void) updateToServer;
+-(void) createToServer;
 
 @end
 
 @implementation BoardInfoEditorViewController
-@synthesize boardNameCell,categoryCell,boardId,board,categoryPicker,boardNameTF,categories; 
+@synthesize boardNameCell,categoryCell,boardId,board,categoryPicker,boardNameTF,categories,type; 
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -41,12 +42,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (board == nil && boardId>0) {
+    if (board == nil && boardId>0 && type==UPDATE) {
         //load board info
         [self loadBoard];
-    }else {
+    }else if(type==UPDATE){
         self.boardNameTF.text = self.board.name;
     }
+    UIBarButtonItem *rightItem;
+    if (type==CREATE) {
+        rightItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createToServer)];
+        self.title = @"新建相册";
+    }else if(type==UPDATE) {
+        rightItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(updateToServer)];
+        self.title = @"修改相册";
+    }
+    self.navigationItem.rightBarButtonItem = rightItem;
+    [rightItem release];
     [self loadCategories];
 }
 
@@ -222,7 +233,49 @@
 }
 -(void) updateToServer
 {
+    NSInteger selectedRow = [self.categoryPicker selectedRowInComponent:0];
+    Category *c = [self.categories objectAtIndex:selectedRow];
+    self.board.categoryId = c.categoryId;
+    self.board.name = self.boardNameTF.text;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        PicShareEngine *engine = [PicShareEngine sharedEngine];
+        ErrorMessage *eMsg = [engine updateBoard:self.board];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [NSThread sleepForTimeInterval:2];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            if (eMsg.ret==0 && eMsg.errorcode==0) {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"修改成功" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+                [alert show];
+                [alert release];
+            }else {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"错误" message:eMsg.errorMsg delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+                [alert show];
+                [alert release];
+            }
+        });
+    });
     
+}
+
+-(void) createToServer
+{
+    NSInteger selectedRow = [self.categoryPicker selectedRowInComponent:0];
+    Category *c = [self.categories objectAtIndex:selectedRow];
+    Board *newB = [[Board alloc]init];
+    newB.categoryId = c.categoryId;
+    newB.name = self.boardNameTF.text;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        PicShareEngine *engine = [PicShareEngine sharedEngine];
+        Board *b = [engine createBoard:newB];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (b!=nil) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }else {
+                // error alert view is already shown. see engine.
+            }
+        });
+    });
 }
 
 @end

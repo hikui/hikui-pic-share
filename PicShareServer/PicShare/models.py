@@ -66,6 +66,7 @@ class PictureStatus(models.Model):
     board = models.ForeignKey(Board,related_name='pictureStatuses')
     via = models.ForeignKey(User, null=True, blank=True) #从哪个用户得到此图片，只在status_type=2时才出现
     status_type = models.IntegerField(choices=STATUS_TYPE_CHOICES,default=1)
+
     def __unicode__(self):
         return "picture:"+unicode(self.picture)
 

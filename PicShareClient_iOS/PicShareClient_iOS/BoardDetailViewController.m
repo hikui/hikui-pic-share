@@ -276,6 +276,7 @@
 {
     BoardInfoEditorViewController *bievc = [[BoardInfoEditorViewController alloc]initWithNibName:@"BoardInfoEditorViewController" bundle:nil];
     bievc.board = self.board;
+    bievc.type = UPDATE;
     [self.navigationController pushViewController:bievc animated:YES];
     [bievc release];
 }

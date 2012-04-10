@@ -529,4 +529,64 @@ static PicShareEngine *instance = NULL;
     }
     return  nil;
 }
+
+-(ErrorMessage *)updateBoard:(Board *)aBoard
+{
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingString:@"api/board/update.json"]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [self addAuthHeaderForRequest:request];
+    [request setPostValue:[NSNumber numberWithInteger:aBoard.boardId] forKey:@"board_id"];
+    [request setPostValue:[NSNumber numberWithInteger:aBoard.categoryId] forKey:@"category_id"];
+    [request setPostValue:aBoard.name forKey:@"name"];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error) {
+        response = [request responseString];
+    }
+    else {
+        //do something in ui
+        return nil;
+    }
+    if (response != nil) {
+        NSDictionary *dataDict = [response objectFromJSONString];
+        ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+        NSLog(@"errorMessage:%@",em);
+        return em;
+    }
+    return  nil;
+}
+
+-(Board *)createBoard:(Board *)aBoard
+{
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingString:@"api/board/create.json"]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [self addAuthHeaderForRequest:request];
+    [request setPostValue:[NSNumber numberWithInteger:aBoard.categoryId] forKey:@"category_id"];
+    [request setPostValue:aBoard.name forKey:@"name"];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error) {
+        response = [request responseString];
+    }
+    else {
+        //do something in ui
+        return nil;
+    }
+    if (response != nil) {
+        NSDictionary *dataDict = [response objectFromJSONString];
+        NSLog(@"createBoardReturn:%@",dataDict);
+        Board *b = [[[Board alloc]initWithJSONDict:dataDict]autorelease];
+        if (b == nil) {
+            ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:em.errorMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+            [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
+            [alert release];
+        }
+        return b;
+    }
+    return nil;
+}
+
 @end

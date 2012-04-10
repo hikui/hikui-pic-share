@@ -7,6 +7,7 @@
 //
 
 #import "BoardPickerViewController.h"
+#import "BoardInfoEditorViewController.h"
 
 @interface BoardPickerViewController ()
 
@@ -41,6 +42,11 @@
     [super viewDidLoad];
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonOnTouch)]autorelease];
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonOnTouch)]autorelease];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [self startLoading];
 }
 
@@ -125,6 +131,8 @@
 
 - (void)addButtonOnTouch
 {
-    
+    BoardInfoEditorViewController *bivec = [[BoardInfoEditorViewController alloc]initWithNibName:@"BoardInfoEditorViewController" bundle:nil];
+    bivec.type = CREATE;
+    [self.navigationController pushViewController:bivec animated:YES];
 }
 @end

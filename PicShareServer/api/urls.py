@@ -17,6 +17,8 @@ get_home_timeline_handler = Resource(GetHomeTimelineHandler,authentication=auth)
 get_board_handler = Resource(GetBoardHandler)
 follow_handler = Resource(FollowHandler,authentication=auth)
 unfo_handler = Resource(UnfoHandler,authentication=auth)
+update_board_handler = Resource(UpdateBoardHandler,authentication=auth)
+create_board_handler = Resource(CreateBoardHandler,authentication=auth)
 urlpatterns = patterns('',
 
     (r'^category/get_all.json$',get_all_categories_handler),
@@ -24,6 +26,8 @@ urlpatterns = patterns('',
     (r'^board/get.json$',get_board_handler),
     (r'^board/get_category_boards.json$',get_boards_of_category_handler),
     (r'^board/get_user_boards.json$',get_boards_of_user_handler),
+    (r'^board/update.json$',update_board_handler),
+    (r'^board/create.json$',create_board_handler),
     
     (r'^picture/get.json$',get_picture_handler),
     (r'^picture/upload.json$',upload_picture_handler),

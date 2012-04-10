@@ -25,8 +25,6 @@
 // THE SOFTWARE
 //
 
-#import "PictureEditViewController.h"
-
 @interface CustomTabBarController : UITabBarController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
 }

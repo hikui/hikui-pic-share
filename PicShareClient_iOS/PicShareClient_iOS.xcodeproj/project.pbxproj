@@ -93,8 +93,6 @@
 		A48FD2C515271200003F0BDD /* BoardDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A48FD2C3152711FF003F0BDD /* BoardDetailViewController.m */; };
 		A48FD2C615271200003F0BDD /* BoardDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48FD2C415271200003F0BDD /* BoardDetailViewController.xib */; };
 		A48FD2CE15272E67003F0BDD /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A48FD2CD15272E67003F0BDD /* MBProgressHUD.m */; };
-		A49259691519B01D00936D3A /* PictureEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A49259671519B01D00936D3A /* PictureEditViewController.m */; };
-		A492596A1519B01D00936D3A /* PictureEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A49259681519B01D00936D3A /* PictureEditViewController.xib */; };
 		A4BAB7D914FDE67500E51402 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7D614FDE67500E51402 /* arrow.png */; };
 		A4BAB7DA14FDE67500E51402 /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BAB7D814FDE67500E51402 /* PullRefreshTableViewController.m */; };
 		A4BAB7E414FDE7B800E51402 /* capture-button.png in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7E214FDE7B800E51402 /* capture-button.png */; };
@@ -249,9 +247,6 @@
 		A48FD2C415271200003F0BDD /* BoardDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BoardDetailViewController.xib; sourceTree = "<group>"; };
 		A48FD2CC15272E67003F0BDD /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		A48FD2CD15272E67003F0BDD /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		A49259661519B01D00936D3A /* PictureEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureEditViewController.h; sourceTree = "<group>"; };
-		A49259671519B01D00936D3A /* PictureEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureEditViewController.m; sourceTree = "<group>"; };
-		A49259681519B01D00936D3A /* PictureEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PictureEditViewController.xib; sourceTree = "<group>"; };
 		A4BAB7D614FDE67500E51402 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		A4BAB7D714FDE67500E51402 /* PullRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullRefreshTableViewController.h; sourceTree = "<group>"; };
 		A4BAB7D814FDE67500E51402 /* PullRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullRefreshTableViewController.m; sourceTree = "<group>"; };
@@ -396,9 +391,6 @@
 				A4FDB344151F05E20048C199 /* PictureDescriptionComposerViewController.h */,
 				A4FDB345151F05E30048C199 /* PictureDescriptionComposerViewController.m */,
 				A4FDB346151F05E30048C199 /* PictureDescriptionComposerViewController.xib */,
-				A49259661519B01D00936D3A /* PictureEditViewController.h */,
-				A49259671519B01D00936D3A /* PictureEditViewController.m */,
-				A49259681519B01D00936D3A /* PictureEditViewController.xib */,
 				A4203CE1151D8477008B29A9 /* PictureInfoEditViewController.h */,
 				A4203CE2151D8477008B29A9 /* PictureInfoEditViewController.m */,
 				A4203CE3151D8477008B29A9 /* PictureInfoEditViewController.xib */,
@@ -719,7 +711,6 @@
 				A4462BF9151714B1003E5F9F /* glass@2x.png in Resources */,
 				A4462BFA151714B1003E5F9F /* mail@2x.png in Resources */,
 				A4462BFB151714B1003E5F9F /* man@2x.png in Resources */,
-				A492596A1519B01D00936D3A /* PictureEditViewController.xib in Resources */,
 				A44DEBE11519CE5800EAC9C7 /* rc-1.png in Resources */,
 				A44DEBE21519CE5800EAC9C7 /* rc-2.png in Resources */,
 				A44DEBE31519CE5800EAC9C7 /* rc-3.png in Resources */,
@@ -778,7 +769,6 @@
 				A457024D1511ADDC005BC6FF /* UIImageView+Resize.m in Sources */,
 				A45702B51514809F005BC6FF /* UserDetailViewController.m in Sources */,
 				A44DE7811515F1AE0048681E /* UsersListViewController.m in Sources */,
-				A49259691519B01D00936D3A /* PictureEditViewController.m in Sources */,
 				A44DEBEB1519CFF100EAC9C7 /* DraggableImageView.m in Sources */,
 				A4203CE4151D8477008B29A9 /* PictureInfoEditViewController.m in Sources */,
 				A4FDB342151F01660048C199 /* BoardPickerViewController.m in Sources */,

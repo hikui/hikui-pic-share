@@ -384,3 +384,72 @@ class UnfoHandler(BaseHandler):
                 aBoard.followers.remove(user)
             return errorResponse(0,0,'操作成功',rc.ALL_OK)
         return errorResponse(1,0,'参数错误',rc.BAD_REQUEST)
+
+##################
+class UploadBoardForm(forms.Form):
+    board_id = forms.IntegerField(min_value=1)
+    name = forms.CharField(max_length=140)
+    category_id = forms.IntegerField(min_value=1)
+
+class UpdateBoardHandler(BaseHandler):
+    allowed_methods = ('POST',)
+    @validate(UploadBoardForm)
+    def create(self,request):
+        board_id = request.form.cleaned_data['board_id']
+        name = request.form.cleaned_data['name']
+        category_id = request.form.cleaned_data['category_id']
+        board = None
+        category = None
+        try:
+            board = Board.objects.get(pk=board_id)
+            category = Category.objects.get(pk=category_id)
+        except:
+            return errorResponse(0,1,'目标不存在',rc.NOT_FOUND)
+        if board.owner.id != request.user.id:
+            return errorResponse(0,2,rc.FORBIDDEN)
+        board.name = name
+        board.category = category
+        board.save()
+        return errorResponse(0,0,'操作成功',rc.ALL_OK)
+        
+class DeleteBoardHandler(BaseHandler):
+    allowed_methods = ('POST',)
+    def create(self,request):
+        board_id_str = request.POST.get('board_id') 
+        if board_id_str is not None:
+            board = None
+            board_id = int(board_id_str)
+            try:
+                board = Board.objects.get(board_id)
+            except:
+                return errorResponse(0,1,"目标不存在",rc.NOT_FOUND)
+            board.pictureStatuses.delete()
+            board.delete()
+            return errorResponse(0,0,"操作成功",rc.ALL_OK)
+        else:
+            return errorResponse(1,0,'请求错误',rc.BAD_REQUEST)
+  
+class CreateBoardForm(forms.Form):
+    name = forms.CharField(max_length=140)
+    category_id = forms.IntegerField(min_value=1)          
+class CreateBoardHandler(BaseHandler):
+    allowed_methods = ('POST',)
+    @validate(CreateBoardForm)
+    def create(self,request):
+        the_name = request.form.cleaned_data['name']
+        category_id = request.form.cleaned_data['category_id']
+        the_category = None
+        try:
+            the_category = Category.objects.get(pk=category_id)
+        except:
+            return errorResponse(0,1,"目标不存在",rc.NOT_FOUND)
+        try:
+            exist_board = request.user.my_boards.get(name=the_name)
+            if exist_board is not None:
+                return errorResponse(0,3,"目标已存在",rc.DUPLICATE_ENTRY)
+        except:
+            pass
+        board = Board.objects.create(name=the_name,owner=request.user,category=the_category)
+        board_dict = getBoardDict(request,board)
+        return board_dict
+    
