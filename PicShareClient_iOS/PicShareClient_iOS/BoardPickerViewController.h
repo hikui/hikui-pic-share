@@ -10,6 +10,8 @@
 #import "PicShareEngine.h"
 #import "PullRefreshTableViewController.h"
 
+typedef void (^BoardIsSelectedBlock)(Board *b);
+
 @protocol BoardPickerDelegate <NSObject>
 
 - (void)boardDidSelect:(Board *)aBoard;
@@ -17,10 +19,15 @@
 @end
 
 @interface BoardPickerViewController : PullRefreshTableViewController
+{
+    BoardIsSelectedBlock isSelectedBlock;
+}
 
 @property (nonatomic,retain) NSArray *boardsArray;
 @property (nonatomic,assign) id<BoardPickerDelegate> delegate;
 @property (nonatomic,retain) PicShareEngine *engine;
 @property (nonatomic,retain) NSIndexPath *indexSelected;
+
+- (void)setBoardIsSelectedBlock:(BoardIsSelectedBlock)_isSelectedBlock;
 
 @end

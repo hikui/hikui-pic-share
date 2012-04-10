@@ -10,6 +10,7 @@
 #import "UIImageView+AsyncImageContainer.h"
 #import "UIImageView+Resize.h"
 #import "ASIDownloadCache.h"
+#import "PicShareEngine.h"
 #define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 
 @interface TimelineCell ()
@@ -55,6 +56,7 @@
         [self.contentView addSubview:picDescriptionLabel];
         [self.contentView addSubview:mainImageView];
         [self.contentView addSubview:repinButton];
+        [self.contentView addSubview:viaButton];
     }
     return self;
 }
@@ -96,6 +98,7 @@
         CGRect viaButtonFrame = CGRectMake(0, 0, 0, 0);
         if (pictureStatus.via !=nil) {
             UILabel *viaLabel = [[UILabel alloc]initWithFrame:CGRectMake(nameButtonFrame.origin.x, nameButtonFrame.origin.y+nameButtonSize.height+4, 35, 18)];
+            viaLabel.font = [UIFont systemFontOfSize:14];
             viaLabel.text = @"转自";
             [self.contentView addSubview:viaLabel];
             [viaLabel release];
@@ -103,8 +106,10 @@
             CGSize viaButtonSize = [pictureStatus.via.username sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(320-8-(viaLabel.frame.origin.x+viaLabel.frame.size.width), 18) lineBreakMode:UILineBreakModeTailTruncation];
             viaButtonFrame = CGRectMake(viaLabel.frame.origin.x+viaLabel.frame.size.width+8, viaLabel.frame.origin.y, viaButtonSize.width, viaButtonSize.height);
             viaButton.frame = viaButtonFrame;
+            NSLog(@"viabutton title :%@",pictureStatus.via.username);
             [viaButton setTitle:pictureStatus.via.username forState:UIControlStateNormal];
             [viaButton setTitleColor:RGBA(93, 145, 166, 1) forState:UIControlStateNormal];
+            viaButton.titleLabel.font = [UIFont systemFontOfSize:14];
             [viaButton setContentVerticalAlignment:UIControlContentHorizontalAlignmentLeft];
             
         }
@@ -129,6 +134,12 @@
         repinButton.frame = repinButtonFrame;
         [repinButton setTitle:@"转发" forState:UIControlStateNormal];
         repinButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        PicShareEngine *engine = [PicShareEngine sharedEngine];
+        if (self.pictureStatus.owner.userId == engine.userId) {
+            [repinButton setHidden:YES];
+        }else {
+            [repinButton setHidden:NO];
+        }
         // to be continued
 #warning comments
     }
@@ -167,6 +178,10 @@
     }
     CGSize picDescriptionLabelSize = [aPictureStatus.picDescription sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(300, 2000) lineBreakMode:UILineBreakModeWordWrap];
     height += picDescriptionLabelSize.height;
+    PicShareEngine *engine = [PicShareEngine sharedEngine];
+    if (aPictureStatus.owner.userId == engine.userId) {
+        height -= 30;
+    }
     return  height;
 }
 

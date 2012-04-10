@@ -36,11 +36,14 @@
 -(NSArray *)getBoardsOfCategoryId:(NSInteger)categoryId;
 -(NSArray *)getBoardsOfCategoryId:(NSInteger)categoryId page:(NSInteger)page;
 -(NSArray *)getBoardsOfCategoryId:(NSInteger)categoryId page:(NSInteger)page countPerPage:(NSInteger)count;
+-(NSArray *)getBoardsOfUserId:(NSInteger)userId;
+-(NSArray *)getBoardsOfUserId:(NSInteger)userId page:(NSInteger)page;
+-(NSArray *)getBoardsOfUserId:(NSInteger)userId page:(NSInteger)page countPerPage:(NSInteger)count;
 
 //picture api
 -(PictureStatus *)getPictureStatus:(NSInteger)psId;
 -(void)uploadPicture:(UIImage *)picture toBoard:(NSInteger)boardId withLatitude:(float)latitude longitude:(float)longitude description:(NSString *)description;
--(void)repin:(NSInteger)ps_id toBoard:(NSInteger)boardId;
+-(PictureStatus *)repin:(NSInteger)ps_id toBoard:(NSInteger)boardId withDescription:(NSString *)theDescription;
 -(void)updatePictureStatus:(PictureStatus *)aPictureStatus;
 -(void)releasePictureStatus:(NSInteger)psId;
 -(NSArray *)getCommentsOfPictureStatus:(NSInteger)psId;

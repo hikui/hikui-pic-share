@@ -11,7 +11,7 @@
 
 typedef enum Type{
     CREATE,
-    UPDATE
+    UPDATE,
 }Type;
 
 @interface BoardInfoEditorViewController : UITableViewController <UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
@@ -24,7 +24,6 @@ typedef enum Type{
 @property (nonatomic,retain) IBOutlet UIPickerView *categoryPicker;
 @property (nonatomic,retain) NSArray *categories;
 @property Type type;
-
 
 
 @end

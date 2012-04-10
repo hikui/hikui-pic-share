@@ -14,7 +14,7 @@
 
 -(id)initWithJSONDict:(NSDictionary *)data
 {
-    if (data == nil || (NSNull *)data == [NSNull null]) {
+    if (data == nil || (NSNull *)data == [NSNull null]||[data objectForKey:@"ps_id"]==nil) {
         [self release];
         return nil;
     }

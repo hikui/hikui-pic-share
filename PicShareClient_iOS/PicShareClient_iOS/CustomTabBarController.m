@@ -115,6 +115,7 @@
         editedImage  = [UIImageView imageWithImage:originalImage scaledToSizeWithTargetHeight:1000];
     }
     PictureInfoEditViewController *pievc = [[PictureInfoEditViewController alloc]initWithNibName:@"PictureInfoEditViewController" bundle:nil];
+    pievc.type = CREATE;
     pievc.uploadImage = editedImage;
     [picker pushViewController:pievc animated:YES];
     [pievc release];

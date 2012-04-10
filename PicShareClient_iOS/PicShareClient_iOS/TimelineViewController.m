@@ -14,6 +14,7 @@
 #import "PicDetailViewController.h"
 #import "UserDetailViewController.h"
 #import "BoardDetailViewController.h"
+#import "PictureInfoEditViewController.h"
 #import "Common.h"
 
 @interface TimelineViewController ()
@@ -373,6 +374,14 @@ static bool isRetina()
 }
 - (void)repinButtonOnTouch:(id)sender
 {
-#warning not implement yet
+    UIButton *button = (UIButton *)sender;
+    TimelineCell *cell = (TimelineCell *)button.superview.superview;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    PictureStatus *ps = [self.timeline objectAtIndex:indexPath.row];
+    PictureInfoEditViewController *pievc = [[PictureInfoEditViewController alloc]initWithNibName:@"PictureInfoEditViewController" bundle:nil];
+    pievc.repinPs = ps;
+    pievc.type = REPIN;
+    [self.navigationController pushViewController:pievc animated:YES];
+    [pievc release];
 }
 @end

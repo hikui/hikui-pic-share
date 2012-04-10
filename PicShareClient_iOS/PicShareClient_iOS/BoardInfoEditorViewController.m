@@ -17,6 +17,7 @@
 -(void) deleteBoard;
 -(void) updateToServer;
 -(void) createToServer;
+-(void) repinToServer;
 
 @end
 

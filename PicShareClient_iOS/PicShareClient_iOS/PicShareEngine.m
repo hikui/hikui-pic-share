@@ -589,4 +589,40 @@ static PicShareEngine *instance = NULL;
     return nil;
 }
 
+-(PictureStatus *)repin:(NSInteger)ps_id toBoard:(NSInteger)boardId withDescription:(NSString *)theDescription
+{
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingString:@"api/picture/repin.json"]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setPostValue:[NSNumber numberWithInteger:boardId] forKey:@"board_id"];
+    [request setPostValue:[NSNumber numberWithInteger:ps_id] forKey:@"ps_id"];
+    [request setPostValue:theDescription forKey:@"description"];
+    [self addAuthHeaderForRequest:request];
+    [request startSynchronous];
+    
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error) {
+        response = [request responseString];
+        NSLog(@"%@",response);
+    }
+    else {
+        //do something in ui
+        return nil;
+    }
+    if (response != nil) {
+        NSDictionary *dataDict = [response objectFromJSONString];
+        PictureStatus *ps = [[PictureStatus alloc]initWithJSONDict:dataDict];
+        if (ps!=nil) {
+            return ps;
+        }else {
+            ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:em.errorMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+            [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
+            [alert release];
+        }
+    }
+    return nil;
+}
+
+
 @end

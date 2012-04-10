@@ -452,4 +452,30 @@ class CreateBoardHandler(BaseHandler):
         board = Board.objects.create(name=the_name,owner=request.user,category=the_category)
         board_dict = getBoardDict(request,board)
         return board_dict
+
+class RepinPictureForm(forms.Form):
+    ps_id = forms.IntegerField(min_value=1)
+    description = forms.CharField(max_length=140,required=False)
+    board_id = forms.IntegerField(min_value=1)
     
+class RepinPictureHandler(BaseHandler):
+    allowed_methods = ('POST',)
+    @validate(RepinPictureForm)
+    def create(self,request):
+        the_ps_id = request.form.cleaned_data['ps_id']
+        the_description = request.form.cleaned_data['description']
+        the_board_id = request.form.cleaned_data['board_id']
+        the_board = None
+        source_ps = None
+        user = request.user
+        try:
+            the_board = Board.objects.get(pk=the_board_id)
+            source_ps = PictureStatus.objects.get(pk=the_ps_id)
+        except:
+            return errorResponse(0,1,"目标不存在",rc.NOT_FOUND)
+        if the_board.owner.id != user.id:
+            return errorResponse(0,2,"权限错误",rc.FORBIDDEN)
+        new_ps = PictureStatus.objects.create(picture=source_ps.picture,description=the_description,via=source_ps.board.owner,board=the_board)
+        source_ps.picture.retain()
+        return getPictureStatusDict(request,new_ps)
+        

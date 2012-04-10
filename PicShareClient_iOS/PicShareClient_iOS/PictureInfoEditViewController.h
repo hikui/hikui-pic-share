@@ -10,6 +10,11 @@
 #import "BoardPickerViewController.h"
 #import "PictureDescriptionComposerViewController.h"
 
+typedef enum _Type{
+    REPIN,
+    CREATE,
+}Type;
+
 @interface PictureInfoEditViewController : UITableViewController
     <BoardPickerDelegate,PictureDescriptionComposerDelegate>
 
@@ -17,5 +22,7 @@
 @property (nonatomic,copy) NSString *descriptionText;
 @property (readwrite) CGPoint locationPoint;
 @property (nonatomic,retain) UIImage *uploadImage;
+@property (nonatomic,retain) PictureStatus *repinPs;
+@property Type type;
 
 @end

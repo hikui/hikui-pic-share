@@ -25,6 +25,7 @@
 {
     [boardsArray release];
     [indexSelected release];
+    [isSelectedBlock release];
     [super dealloc];
 }
 
@@ -93,7 +94,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Board *b = [boardsArray objectAtIndex:indexPath.row];
-    [self.delegate boardDidSelect:b];
+    if (isSelectedBlock) {
+        isSelectedBlock(b);
+    }else {
+        [self.delegate boardDidSelect:b];
+    }
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -135,4 +140,11 @@
     bivec.type = CREATE;
     [self.navigationController pushViewController:bivec animated:YES];
 }
+
+- (void)setBoardIsSelectedBlock:(BoardIsSelectedBlock)_isSelectedBlock
+{
+    [isSelectedBlock release];
+    isSelectedBlock = [_isSelectedBlock copy];
+}
+
 @end

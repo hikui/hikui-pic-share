@@ -12,11 +12,12 @@
 @interface PictureInfoEditViewController ()
 
 -(void)uploadButtonOnTouch;
+-(void)repinButtonOnTouch;
 
 @end
 
 @implementation PictureInfoEditViewController
-@synthesize board,descriptionText,locationPoint,uploadImage;
+@synthesize board,descriptionText,locationPoint,uploadImage,repinPs,type;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -30,7 +31,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]initWithTitle:@"上传" style:UIBarButtonItemStyleDone target:self action:@selector(uploadButtonOnTouch)]autorelease];
+    if (type==CREATE) {
+        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]initWithTitle:@"上传" style:UIBarButtonItemStyleDone target:self action:@selector(uploadButtonOnTouch)]autorelease];
+    }else if (type==REPIN) {
+        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]initWithTitle:@"转发" style:UIBarButtonItemStyleDone target:self action:@selector(repinButtonOnTouch)]autorelease];
+    }
     locationPoint = CGPointMake(-1, -1);
 }
 
@@ -160,5 +165,24 @@
     [engine uploadPicture:uploadImage toBoard:self.board.boardId withLatitude:locationPoint.x  longitude:locationPoint.y description:descriptionText];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void)repinButtonOnTouch
+{
+    NSLog(@"pic need repin:%@",repinPs);
+    if (board == nil) {
+        UIAlertView *alertView = [[[UIAlertView alloc]initWithTitle:@"错误！" message:@"必须指定相册！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil]autorelease];
+        [alertView show];
+        return;
+    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        PicShareEngine *engine = [PicShareEngine sharedEngine];
+        [engine repin:self.repinPs.psId toBoard:self.board.boardId withDescription:descriptionText];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+            [self dismissModalViewControllerAnimated:YES];
+        });
+    });
+    
 }
 @end
