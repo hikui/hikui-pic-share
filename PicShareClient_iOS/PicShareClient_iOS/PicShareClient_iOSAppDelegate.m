@@ -7,7 +7,6 @@
 //
 
 #import "PicShareClient_iOSAppDelegate.h"
-#import "AsyncImageDownloader.h"
 #import "PicShareEngine.h"
 #import "Common.h"
 
@@ -66,7 +65,7 @@
 -(void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
     NSLog(@"application did receive memory warning");
-    [[AsyncImageDownloader sharedAsyncImageDownloader]cleanThumbnailCache];
+    //[[AsyncImageDownloader sharedAsyncImageDownloader]cleanThumbnailCache];
     Common *common = [Common sharedCommon];
     [common receiveMemoryWarning];
 }

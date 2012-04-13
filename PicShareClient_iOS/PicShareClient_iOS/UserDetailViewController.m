@@ -8,7 +8,7 @@
 
 #import "UserDetailViewController.h"
 #import "PicShareEngine.h"
-#import "UIImageView+AsyncImageContainer.h"
+#import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
 #import "BoardsListViewController.h"
 #import "UsersListViewController.h"
@@ -123,7 +123,7 @@
     self.picCountLabel.text = [NSString stringWithFormat:@"%d",user.picturesCount];
     self.nameLabel.text = user.username;
     self.locationLabel.text = user.location;
-    [self.avatarImageView setImageWithUrl:[NSURL URLWithString:user.avatarUrl] placeholderImage:[UIImage imageNamed:@"anonymous.png"]];
+    [self.avatarImageView setImageWithURL:[NSURL URLWithString:user.avatarUrl] placeholderImage:[UIImage imageNamed:@"anonymous.png"]];
     PicShareEngine *engine = [PicShareEngine sharedEngine];
     if ([engine.username isEqualToString:user.username]) {
         //the current user's profile

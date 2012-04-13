@@ -7,7 +7,7 @@
 //
 
 #import "TimelineCell.h"
-#import "UIImageView+AsyncImageContainer.h"
+#import "UIImageView+WebCache.h"
 #import "UIImageView+Resize.h"
 #import "ASIDownloadCache.h"
 #import "PicShareEngine.h"
@@ -76,7 +76,7 @@
 {
     if (self.pictureStatus != nil) {
         avatarImageView.frame = CGRectMake(10, 20, 30, 30);
-        [avatarImageView setImageWithUrl:[NSURL URLWithString:pictureStatus.owner.avatarUrl] placeholderImage:[UIImage imageNamed:@"anonymous.png"]];
+        [avatarImageView setImageWithURL:[NSURL URLWithString:pictureStatus.owner.avatarUrl] placeholderImage:[UIImage imageNamed:@"anonymous.png"]];
         
         CGSize nameButtonSize = [pictureStatus.owner.username sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(147, 18) lineBreakMode:UILineBreakModeTailTruncation];
         CGRect nameButtonFrame = CGRectMake(48, 32, nameButtonSize.width, nameButtonSize.height);

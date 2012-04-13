@@ -7,7 +7,7 @@
 //
 
 #import "PicDetailView.h"
-#import "UIImageView+AsyncImageContainer.h"
+
 #import "UIImageView+Resize.h"
 #import "ASIHTTPRequest.h"
 #import "ASIDownloadCache.h"

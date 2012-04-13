@@ -18,6 +18,7 @@
 -(void)loadDataDidFinish:(NSArray *)data;
 -(void)pageData;
 -(void)pageDataDidFinish:(NSArray *)data;
+-(void)clearDelegate;
 
 @end
 
@@ -108,11 +109,23 @@ static bool isRetina()
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+-(void)clearDelegate
+{
+    int rows = [self.tableView numberOfRowsInSection:0];
+    for (int i=0; i<rows; i++) {
+        BoardsListCell *cell =(BoardsListCell *) [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        if ([cell isKindOfClass:[BoardsListCell class]]) {
+            cell.eventDelegate = nil;
+        }
+    }
+}
+
 - (void)dealloc
 {
     [_boards release];
     [_oprationq release];
     [_indicator release];
+    [self clearDelegate];
     [super dealloc];
 }
 

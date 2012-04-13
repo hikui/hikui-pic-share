@@ -17,7 +17,22 @@
 @end
 
 @implementation PictureInfoEditViewController
-@synthesize board,descriptionText,locationPoint,uploadImage,repinPs,type;
+@synthesize board,descriptionText,locationPoint,uploadImage,repinPs,type,pdcvc,bpvc;
+
+- (void)dealloc
+{
+    [board release];
+    [descriptionText release];
+    [uploadImage release];
+    [repinPs release];
+    if (pdcvc.delegate==self) {
+        pdcvc.delegate=nil;
+    }
+    if (bpvc.delegate==self) {
+        bpvc.delegate = nil;
+    }
+    [super dealloc];
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -107,18 +122,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
-        PictureDescriptionComposerViewController *pdcvc = [[PictureDescriptionComposerViewController alloc]initWithText:self.descriptionText];
+        self.pdcvc = [[[PictureDescriptionComposerViewController alloc]initWithText:self.descriptionText]autorelease];
         [pdcvc setDelegate:self];
         UINavigationController *nPdcvc = [[UINavigationController alloc]initWithRootViewController:pdcvc];
         [self presentModalViewController:nPdcvc animated:YES];
-        [pdcvc release];
         [nPdcvc release];
     } else if (indexPath.row == 1) {
-        BoardPickerViewController *bpvc = [[BoardPickerViewController alloc]init];
+        self.bpvc = [[[BoardPickerViewController alloc]init]autorelease];
         [bpvc setDelegate:self];
         UINavigationController *nbpvc = [[UINavigationController alloc]initWithRootViewController:bpvc];
         [self presentModalViewController:nbpvc animated:YES];
-        [bpvc release];
         [nbpvc release];
     }
     

@@ -24,5 +24,9 @@ typedef enum _Type{
 @property (nonatomic,retain) UIImage *uploadImage;
 @property (nonatomic,retain) PictureStatus *repinPs;
 @property Type type;
+@property (nonatomic,retain) PictureDescriptionComposerViewController *pdcvc;
+@property (nonatomic,retain) BoardPickerViewController *bpvc;
+
+
 
 @end

@@ -128,10 +128,6 @@
         cell.selectedBackgroundView.backgroundColor = [UIColor whiteColor];
     }else {
         
-        UIView *tmpView = [cell.contentView viewWithTag:FIRST_IMGVIEW_TAG];
-        if ([tmpView isKindOfClass:[PSThumbnailImageView class]]) {
-            imgView1 = (PSThumbnailImageView *) tmpView;
-        }
         imgView1 = (PSThumbnailImageView *)[cell.contentView viewWithTag:FIRST_IMGVIEW_TAG];
         imgView2 = (PSThumbnailImageView *)[cell.contentView viewWithTag:SECOND_IMGVIEW_TAG];
         imgView3 = (PSThumbnailImageView *)[cell.contentView viewWithTag:THIRD_IMGVIEW_TAG];

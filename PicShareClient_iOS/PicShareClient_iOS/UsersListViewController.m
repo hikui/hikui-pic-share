@@ -8,7 +8,7 @@
 
 #import "UsersListViewController.h"
 #import "PicShareEngine.h"
-#import "UIImageView+AsyncImageContainer.h"
+#import "UIImageView+WebCache.h"
 
 @interface UsersListViewController ()
 
@@ -100,7 +100,7 @@
     User *u = [usersArray objectAtIndex:indexPath.row];
     cell.textLabel.text = u.username;
     cell.detailTextLabel.text = [[[NSString alloc]initWithFormat:@"来自 %@",u.location]autorelease];
-    [cell.imageView setImageWithUrl:[NSURL URLWithString:u.avatarUrl] placeholderImage:[UIImage imageNamed:@"anonymous.png"]];
+    [cell.imageView setImageWithURL:[NSURL URLWithString:u.avatarUrl] placeholderImage:[UIImage imageNamed:@"anonymous.png"]];
     
     UIButton *followButton = [UIButton buttonWithType:UIButtonTypeCustom];
     followButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
