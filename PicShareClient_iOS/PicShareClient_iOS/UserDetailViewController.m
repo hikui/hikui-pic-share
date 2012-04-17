@@ -14,6 +14,7 @@
 #import "UsersListViewController.h"
 #import "Common.h"
 #import "MBProgressHUD.h"
+#import "UserInfoEditorViewController.h"
 #define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 
 @interface UserDetailViewController ()
@@ -25,7 +26,7 @@
 - (IBAction)userFollowersButtonOnClick:(id)sender;
 - (IBAction)userFollowingButtonOnClick:(id)sender;
 - (IBAction)followButtonOnClick:(id)sender;
-
+- (IBAction)updateUserInfoButtonOnTouch:(id)sender;
 @end
 
 @implementation UserDetailViewController
@@ -234,5 +235,13 @@
     [userId release];
     [self updateView];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
+
+- (IBAction)updateUserInfoButtonOnTouch:(id)sender
+{
+    UserInfoEditorViewController *uievc = [[UserInfoEditorViewController alloc]initWithNibName:@"UserInfoEditorViewController" bundle:nil];
+    uievc.user = self.user;
+    [self.navigationController pushViewController:uievc animated:YES];
+    [uievc release];
 }
 @end

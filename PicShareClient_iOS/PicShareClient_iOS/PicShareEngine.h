@@ -51,8 +51,7 @@
 
 //user api
 -(User *)getUser:(NSInteger)userId;
--(ErrorMessage *)updateUser:(User *)user;
--(ErrorMessage *)uploadAvatar:(UIImage *)avatar;
+-(User *)updateUser:(User *)user;
 -(ErrorMessage *)regUser:(User *)user;
 
 //relationship api

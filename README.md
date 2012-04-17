@@ -6,5 +6,7 @@
     - Django-piston
     - Django-relationships
     - MySQL
+    - libjpeg, libjpeg-dev
+    - MySQL-Python
 * 客户端依赖：
-    - iOS 4.3以
+    - iOS 4.3以上

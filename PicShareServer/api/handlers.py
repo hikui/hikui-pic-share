@@ -264,7 +264,7 @@ class UploadPictureHandler(BaseHandler):
                 # I have to do this all by myself.
                 return errorResponse(1,0,'请求错误',rc.BAD_REQUEST)
     
-            filename = UploadImage.handle_upload_image(request.FILES['pic'])
+            filename = UploadImage.handle_upload_image(request.FILES['pic'],UploadImage.ImgType.PICTURE)
             host = request.get_host()
             imageUrl = 'http://'+host+'/media/pictures/'+filename
             thePicture = Picture.objects.create(image=imageUrl,timestamp = datetime.datetime.now())
@@ -478,4 +478,29 @@ class RepinPictureHandler(BaseHandler):
         new_ps = PictureStatus.objects.create(picture=source_ps.picture,description=the_description,via=source_ps.board.owner,board=the_board)
         source_ps.picture.retain()
         return getPictureStatusDict(request,new_ps)
-        
+
+class UpdateUserForm(forms.Form):
+    introduction = forms.CharField(max_length = 140, required = False)
+    location = forms.CharField(max_length = 6, required = False)
+class UpdateUserHandler:
+    allowed_methods = ('POST',)
+    @validate(UpdateUserForm)
+    def create(self,request):
+        the_introduction = request.form.cleaned_data['introduction']
+        the_location = request.form.cleaned_data['location']
+        avatarUrl = None
+        if request.FILES.get('avatar') != None:
+            filename = UploadImage.handle_upload_image(request.FILES['avatar'],UploadImage.ImgType.PICTURE)
+            host = request.get_host()
+            avatarUrl = 'http://'+host+'/media/avatar/'+filename
+        user = request.user
+        user.addition.introduction = the_introduction
+        user.addition.location = the_location
+        if avatarUrl is not None:
+            user.addition.avatar = avatarUrl
+        user.save()
+        return getUserDict(user)
+
+
+
+

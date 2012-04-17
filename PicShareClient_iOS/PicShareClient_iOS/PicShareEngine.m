@@ -625,5 +625,9 @@ static PicShareEngine *instance = NULL;
     return nil;
 }
 
+-(User *)updateUser:(User *)user
+{
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingString:@"api/user/update.json"]];
+}
 
 @end

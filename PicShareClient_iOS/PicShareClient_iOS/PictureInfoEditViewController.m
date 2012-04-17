@@ -122,7 +122,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
-        self.pdcvc = [[[PictureDescriptionComposerViewController alloc]initWithText:self.descriptionText]autorelease];
+        self.pdcvc = [[[SingleTextInputViewController alloc]initWithText:self.descriptionText]autorelease];
         [pdcvc setDelegate:self];
         UINavigationController *nPdcvc = [[UINavigationController alloc]initWithRootViewController:pdcvc];
         [self presentModalViewController:nPdcvc animated:YES];
@@ -141,7 +141,7 @@
 
 #pragma mark - delegate methods
 
-- (void)descriptionDidCompose:(NSString *)theDescription
+-(void)SingleTextInputViewController:(SingleTextInputViewController *)controller textDidCompose:(NSString *)theDescription
 {
     if (theDescription == nil || [theDescription isEqualToString:@""]) {
         return;

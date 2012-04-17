@@ -6,17 +6,17 @@
 //  Copyright (c) 2012年 Shanghai University. All rights reserved.
 //
 
-#import "PictureDescriptionComposerViewController.h"
+#import "SingleTextInputViewController.h"
 
-@interface PictureDescriptionComposerViewController ()
+@interface SingleTextInputViewController ()
 
 - (void)doneButtonOnTouch;
 - (void)cancelButtonOnTouch;
 
 @end
 
-@implementation PictureDescriptionComposerViewController
-@synthesize descriptionTextView,delegate,descriptionTextFromParent;
+@implementation SingleTextInputViewController
+@synthesize descriptionTextView,delegate,descriptionTextFromParent,presentType,tag;
 
 - (void)dealloc
 {
@@ -79,14 +79,24 @@
 - (void)cancelButtonOnTouch
 {
 
-    [self.navigationController dismissModalViewControllerAnimated:YES];
+    if (presentType == MODAL) {
+        [self.navigationController dismissModalViewControllerAnimated:YES];
+    }else if(presentType == NAVIGATION){
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 - (void)doneButtonOnTouch
 {
     [self.descriptionTextView resignFirstResponder];
     NSString *text = self.descriptionTextView.text;
-    [self.delegate descriptionDidCompose:text];
-    [self.navigationController dismissModalViewControllerAnimated:YES];
+    [self.delegate SingleTextInputViewController:self textDidCompose:text];
+    if (presentType == MODAL) {
+        [self.navigationController dismissModalViewControllerAnimated:YES];
+    }else if(presentType == NAVIGATION){
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+    
 }
 
 @end

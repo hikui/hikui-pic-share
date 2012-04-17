@@ -70,8 +70,6 @@
 		A44E236214F7746600A73307 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A44E236114F7746600A73307 /* main.m */; };
 		A44E236614F7746600A73307 /* PicShareClient_iOSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A44E236514F7746600A73307 /* PicShareClient_iOSAppDelegate.m */; };
 		A44E236914F7746600A73307 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A44E236714F7746600A73307 /* MainWindow.xib */; };
-		A45702441510A410005BC6FF /* anonymous.png in Resources */ = {isa = PBXBuildFile; fileRef = A45702431510A410005BC6FF /* anonymous.png */; };
-		A45702471510A437005BC6FF /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A45702461510A437005BC6FF /* 3.jpg */; };
 		A457024A15119D2B005BC6FF /* PicDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = A457024915119D2B005BC6FF /* PicDetailView.m */; };
 		A457024D1511ADDC005BC6FF /* UIImageView+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A457024C1511ADDC005BC6FF /* UIImageView+Resize.m */; };
 		A45702B51514809F005BC6FF /* UserDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A45702B31514809F005BC6FF /* UserDetailViewController.m */; };
@@ -115,8 +113,11 @@
 		A4E5C1AA1537FB59005DB8C1 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E5C1A51537FB59005DB8C1 /* UIButton+WebCache.m */; };
 		A4E5C1AB1537FB59005DB8C1 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E5C1A71537FB59005DB8C1 /* UIImageView+WebCache.m */; };
 		A4FDB342151F01660048C199 /* BoardPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FDB340151F01660048C199 /* BoardPickerViewController.m */; };
-		A4FDB347151F05E30048C199 /* PictureDescriptionComposerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FDB345151F05E30048C199 /* PictureDescriptionComposerViewController.m */; };
-		A4FDB348151F05E30048C199 /* PictureDescriptionComposerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4FDB346151F05E30048C199 /* PictureDescriptionComposerViewController.xib */; };
+		A4FDB347151F05E30048C199 /* SingleTextInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FDB345151F05E30048C199 /* SingleTextInputViewController.m */; };
+		A4FDB348151F05E30048C199 /* SingleTextInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4FDB346151F05E30048C199 /* SingleTextInputViewController.xib */; };
+		E6DCC02A153D0BB10025F70A /* anonymous.png in Resources */ = {isa = PBXBuildFile; fileRef = E6DCC029153D0BB10025F70A /* anonymous.png */; };
+		E6DCC02E153D130F0025F70A /* UserInfoEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DCC02C153D130E0025F70A /* UserInfoEditorViewController.m */; };
+		E6DCC02F153D130F0025F70A /* UserInfoEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6DCC02D153D130E0025F70A /* UserInfoEditorViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -215,8 +216,6 @@
 		A44E236414F7746600A73307 /* PicShareClient_iOSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PicShareClient_iOSAppDelegate.h; sourceTree = "<group>"; };
 		A44E236514F7746600A73307 /* PicShareClient_iOSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PicShareClient_iOSAppDelegate.m; sourceTree = "<group>"; };
 		A44E236814F7746600A73307 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		A45702431510A410005BC6FF /* anonymous.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = anonymous.png; path = "../../../hikui-ios-sample/simple_weibo_test/simple_weibo_test/anonymous.png"; sourceTree = "<group>"; };
-		A45702461510A437005BC6FF /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 3.jpg; path = ../../static_sample/picture/3.jpg; sourceTree = "<group>"; };
 		A457024815119D2B005BC6FF /* PicDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicDetailView.h; sourceTree = "<group>"; };
 		A457024915119D2B005BC6FF /* PicDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicDetailView.m; sourceTree = "<group>"; };
 		A457024B1511ADDC005BC6FF /* UIImageView+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Resize.h"; sourceTree = "<group>"; };
@@ -245,8 +244,6 @@
 		A47FA466150E48690083CF97 /* _PSThumbnailImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _PSThumbnailImageView.m; sourceTree = "<group>"; };
 		A48FD2AF15270073003F0BDD /* PicturePlaceHolder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PicturePlaceHolder.png; sourceTree = "<group>"; };
 		A48FD2B21527028B003F0BDD /* PicturePlaceHolder-error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PicturePlaceHolder-error.png"; sourceTree = "<group>"; };
-		A48FD2B415270E6C003F0BDD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "/Users/hikui/source/hikui-pic-share/PicShareClient_iOS/PicShareClient_iOS/zh-Hans.lproj/MainWindow.xib"; sourceTree = "<absolute>"; };
-		A48FD2B515270E6C003F0BDD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/hikui/source/hikui-pic-share/PicShareClient_iOS/PicShareClient_iOS/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<absolute>"; };
 		A48FD2B81527102D003F0BDD /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		A48FD2C015271131003F0BDD /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		A48FD2C2152711FF003F0BDD /* BoardDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardDetailViewController.h; sourceTree = "<group>"; };
@@ -294,9 +291,13 @@
 		A4E5C1A71537FB59005DB8C1 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		A4FDB33F151F01660048C199 /* BoardPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardPickerViewController.h; sourceTree = "<group>"; };
 		A4FDB340151F01660048C199 /* BoardPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardPickerViewController.m; sourceTree = "<group>"; };
-		A4FDB344151F05E20048C199 /* PictureDescriptionComposerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureDescriptionComposerViewController.h; sourceTree = "<group>"; };
-		A4FDB345151F05E30048C199 /* PictureDescriptionComposerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureDescriptionComposerViewController.m; sourceTree = "<group>"; };
-		A4FDB346151F05E30048C199 /* PictureDescriptionComposerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PictureDescriptionComposerViewController.xib; sourceTree = "<group>"; };
+		A4FDB344151F05E20048C199 /* SingleTextInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SingleTextInputViewController.h; sourceTree = "<group>"; };
+		A4FDB345151F05E30048C199 /* SingleTextInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleTextInputViewController.m; sourceTree = "<group>"; };
+		A4FDB346151F05E30048C199 /* SingleTextInputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleTextInputViewController.xib; sourceTree = "<group>"; };
+		E6DCC029153D0BB10025F70A /* anonymous.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = anonymous.png; sourceTree = "<group>"; };
+		E6DCC02B153D130D0025F70A /* UserInfoEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoEditorViewController.h; sourceTree = "<group>"; };
+		E6DCC02C153D130E0025F70A /* UserInfoEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoEditorViewController.m; sourceTree = "<group>"; };
+		E6DCC02D153D130E0025F70A /* UserInfoEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoEditorViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -413,9 +414,9 @@
 				A40B5715150474200045C9B1 /* CategoriesViewController.xib */,
 				A47FA45F150E481A0083CF97 /* PicDetailViewController.h */,
 				A47FA460150E481A0083CF97 /* PicDetailViewController.m */,
-				A4FDB344151F05E20048C199 /* PictureDescriptionComposerViewController.h */,
-				A4FDB345151F05E30048C199 /* PictureDescriptionComposerViewController.m */,
-				A4FDB346151F05E30048C199 /* PictureDescriptionComposerViewController.xib */,
+				A4FDB344151F05E20048C199 /* SingleTextInputViewController.h */,
+				A4FDB345151F05E30048C199 /* SingleTextInputViewController.m */,
+				A4FDB346151F05E30048C199 /* SingleTextInputViewController.xib */,
 				A4203CE1151D8477008B29A9 /* PictureInfoEditViewController.h */,
 				A4203CE2151D8477008B29A9 /* PictureInfoEditViewController.m */,
 				A4203CE3151D8477008B29A9 /* PictureInfoEditViewController.xib */,
@@ -429,6 +430,9 @@
 				A44DE77E1515F1AE0048681E /* UsersListViewController.h */,
 				A44DE77F1515F1AE0048681E /* UsersListViewController.m */,
 				A44DE7801515F1AE0048681E /* UsersListViewController.xib */,
+				E6DCC02B153D130D0025F70A /* UserInfoEditorViewController.h */,
+				E6DCC02C153D130E0025F70A /* UserInfoEditorViewController.m */,
+				E6DCC02D153D130E0025F70A /* UserInfoEditorViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -471,14 +475,13 @@
 		A44DEBDC1519CE3900EAC9C7 /* others */ = {
 			isa = PBXGroup;
 			children = (
+				E6DCC029153D0BB10025F70A /* anonymous.png */,
 				A48FD2B21527028B003F0BDD /* PicturePlaceHolder-error.png */,
 				A48FD2AF15270073003F0BDD /* PicturePlaceHolder.png */,
 				A44DEBDD1519CE5800EAC9C7 /* rc-1.png */,
 				A44DEBDE1519CE5800EAC9C7 /* rc-2.png */,
 				A44DEBDF1519CE5800EAC9C7 /* rc-3.png */,
 				A44DEBE01519CE5800EAC9C7 /* rc-4.png */,
-				A45702461510A437005BC6FF /* 3.jpg */,
-				A45702431510A410005BC6FF /* anonymous.png */,
 			);
 			name = others;
 			sourceTree = "<group>";
@@ -738,8 +741,6 @@
 				A4BAB80114FDED6C00E51402 /* ViewController4.xib in Resources */,
 				A40B5717150474200045C9B1 /* CategoriesViewController.xib in Resources */,
 				A40B57571504C3280045C9B1 /* Design.xib in Resources */,
-				A45702441510A410005BC6FF /* anonymous.png in Resources */,
-				A45702471510A437005BC6FF /* 3.jpg in Resources */,
 				A45702B61514809F005BC6FF /* UserDetailViewController.xib in Resources */,
 				A44DE73D1515960F0048681E /* button-hover.png in Resources */,
 				A44DE73E1515960F0048681E /* button-hover@2x.png in Resources */,
@@ -767,13 +768,15 @@
 				A44DEBE31519CE5800EAC9C7 /* rc-3.png in Resources */,
 				A44DEBE41519CE5800EAC9C7 /* rc-4.png in Resources */,
 				A4203CE5151D8477008B29A9 /* PictureInfoEditViewController.xib in Resources */,
-				A4FDB348151F05E30048C199 /* PictureDescriptionComposerViewController.xib in Resources */,
+				A4FDB348151F05E30048C199 /* SingleTextInputViewController.xib in Resources */,
 				A48FD2B015270073003F0BDD /* PicturePlaceHolder.png in Resources */,
 				A48FD2B31527028B003F0BDD /* PicturePlaceHolder-error.png in Resources */,
 				A48FD2B91527102D003F0BDD /* icon@2x.png in Resources */,
 				A48FD2C115271131003F0BDD /* icon.png in Resources */,
 				A48FD2C615271200003F0BDD /* BoardDetailViewController.xib in Resources */,
 				A47A276F152DE2C0000ACBEE /* BoardInfoEditorViewController.xib in Resources */,
+				E6DCC02A153D0BB10025F70A /* anonymous.png in Resources */,
+				E6DCC02F153D130F0025F70A /* UserInfoEditorViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -823,7 +826,7 @@
 				A44DEBEB1519CFF100EAC9C7 /* DraggableImageView.m in Sources */,
 				A4203CE4151D8477008B29A9 /* PictureInfoEditViewController.m in Sources */,
 				A4FDB342151F01660048C199 /* BoardPickerViewController.m in Sources */,
-				A4FDB347151F05E30048C199 /* PictureDescriptionComposerViewController.m in Sources */,
+				A4FDB347151F05E30048C199 /* SingleTextInputViewController.m in Sources */,
 				A47D9C8A1520959B00ADACF6 /* PSThumbnailImageView.m in Sources */,
 				A47D9C8E1520968500ADACF6 /* Common.m in Sources */,
 				A47D9C9B152308A900ADACF6 /* TimelineViewController.m in Sources */,
@@ -839,6 +842,7 @@
 				A4E5C1A91537FB59005DB8C1 /* SDWebImagePrefetcher.m in Sources */,
 				A4E5C1AA1537FB59005DB8C1 /* UIButton+WebCache.m in Sources */,
 				A4E5C1AB1537FB59005DB8C1 /* UIImageView+WebCache.m in Sources */,
+				E6DCC02E153D130F0025F70A /* UserInfoEditorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -849,7 +853,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				A44E235F14F7746600A73307 /* en */,
-				A48FD2B515270E6C003F0BDD /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -858,7 +861,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				A44E236814F7746600A73307 /* en */,
-				A48FD2B415270E6C003F0BDD /* zh-Hans */,
 			);
 			name = MainWindow.xib;
 			sourceTree = "<group>";

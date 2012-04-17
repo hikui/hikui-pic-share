@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BoardPickerViewController.h"
-#import "PictureDescriptionComposerViewController.h"
+#import "SingleTextInputViewController.h"
 
 typedef enum _Type{
     REPIN,
@@ -16,7 +16,7 @@ typedef enum _Type{
 }Type;
 
 @interface PictureInfoEditViewController : UITableViewController
-    <BoardPickerDelegate,PictureDescriptionComposerDelegate>
+    <BoardPickerDelegate,SingleTextInputDelegate>
 
 @property (nonatomic,retain) Board *board;
 @property (nonatomic,copy) NSString *descriptionText;
@@ -24,7 +24,7 @@ typedef enum _Type{
 @property (nonatomic,retain) UIImage *uploadImage;
 @property (nonatomic,retain) PictureStatus *repinPs;
 @property Type type;
-@property (nonatomic,retain) PictureDescriptionComposerViewController *pdcvc;
+@property (nonatomic,retain) SingleTextInputViewController *pdcvc;
 @property (nonatomic,retain) BoardPickerViewController *bpvc;
 
 

@@ -43,7 +43,7 @@ for i in range(1,6):
     boardList.append(board)
     boardList.append(board2)
 
-for i in range(1,36):
-    p = Picture.objects.create(timestamp=datetime.datetime.now(),image="http://localhost/picture/"+str(i)+".jpg", location="上海")
-    ps = PictureStatus.objects.create(picture=p,description='ps'+str(i),board=boardList[i%10])
+# for i in range(1,36):
+#     p = Picture.objects.create(timestamp=datetime.datetime.now(),image="http://localhost/picture/"+str(i)+".jpg", location="上海")
+#     ps = PictureStatus.objects.create(picture=p,description='ps'+str(i),board=boardList[i%10])
     
