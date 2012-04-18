@@ -11,7 +11,7 @@ def getPicture(request,picPath,img_type):
         '.gif':'image/gif'
     }
     size_path_mapping = {
-        -1 :'origin',
+        -1:'origin',
          60:'X60',
         120:'X120',
         320:'X320',

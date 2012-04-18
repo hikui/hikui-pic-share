@@ -481,25 +481,31 @@ class RepinPictureHandler(BaseHandler):
 
 class UpdateUserForm(forms.Form):
     introduction = forms.CharField(max_length = 140, required = False)
-    location = forms.CharField(max_length = 6, required = False)
-class UpdateUserHandler:
+    location = forms.CharField(max_length = 20, required = False)
+    nick = forms.CharField(max_length = 50, required = False)
+class UpdateUserHandler(BaseHandler):
     allowed_methods = ('POST',)
     @validate(UpdateUserForm)
     def create(self,request):
         the_introduction = request.form.cleaned_data['introduction']
         the_location = request.form.cleaned_data['location']
+        the_nick = request.form.cleaned_data['nick']
         avatarUrl = None
         if request.FILES.get('avatar') != None:
-            filename = UploadImage.handle_upload_image(request.FILES['avatar'],UploadImage.ImgType.PICTURE)
+            filename = UploadImage.handle_upload_image(request.FILES['avatar'],UploadImage.ImgType.AVATAR)
             host = request.get_host()
             avatarUrl = 'http://'+host+'/media/avatar/'+filename
         user = request.user
-        user.addition.introduction = the_introduction
-        user.addition.location = the_location
+        if the_introduction is not None:
+            user.addition.introduction = the_introduction
+        if the_location is not None:
+            user.addition.location = the_location
+        if the_nick is not None:
+            user.addition.nick = the_nick
         if avatarUrl is not None:
             user.addition.avatar = avatarUrl
         user.save()
-        return getUserDict(user)
+        return getUserDict(request,user)
 
 
 

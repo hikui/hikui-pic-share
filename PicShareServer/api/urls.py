@@ -20,6 +20,7 @@ unfo_handler = Resource(UnfoHandler,authentication=auth)
 update_board_handler = Resource(UpdateBoardHandler,authentication=auth)
 create_board_handler = Resource(CreateBoardHandler,authentication=auth)
 repin_handler = Resource(RepinPictureHandler,authentication=auth)
+update_user_handler = Resource(UpdateUserHandler,authentication=auth)
 urlpatterns = patterns('',
 
     (r'^category/get_all.json$',get_all_categories_handler),
@@ -40,6 +41,7 @@ urlpatterns = patterns('',
     (r'^relationship/unfollow',unfo_handler),
     
     (r'^user/detail.json$',get_user_detail_handler),
+    (r'^user/update.json$',update_user_handler),
     
     (r'^timeline/home_timeline.json$',get_home_timeline_handler),
     

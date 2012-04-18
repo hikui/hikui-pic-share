@@ -6,15 +6,15 @@ from django.core.files import File
 import time
 import random
 
-PICTURE_DIR = 'picture'
-AVATAR_DIR = 'avatar'
+PICTURE_DIR        = 'picture'
+AVATAR_DIR         = 'avatar'
 ORIGINAL_IMAGE_DIR = 'origin'
-IMAGE_60_DIR ='X60'
-IMAGE_100_DIR = 'X100'
-IMAGE_120_DIR = 'X120'
-IMAGE_160_DIR = 'X160'
-IMAGE_320_DIR = 'X320'
-IMAGE_640_DIR = 'X640'
+IMAGE_60_DIR       ='X60'
+IMAGE_100_DIR      = 'X100'
+IMAGE_120_DIR      = 'X120'
+IMAGE_160_DIR      = 'X160'
+IMAGE_320_DIR      = 'X320'
+IMAGE_640_DIR      = 'X640'
 
 class ImgType:
     PICTURE = 0,
@@ -50,6 +50,7 @@ def handle_upload_image(i,imgType):
     timestamp = str(int(time.time()))
     randStr = ''.join(random.sample([chr(i) for i in range(97, 122)], 10))
     filename = timestamp+randStr+'.jpg'
+    origin_image_path = str()
     if imgType == ImgType.PICTURE:
         origin_image_path = os.path.join(settings.MEDIA_ROOT,PICTURE_DIR,ORIGINAL_IMAGE_DIR)
     elif imgType == ImgType.AVATAR:
@@ -60,12 +61,12 @@ def handle_upload_image(i,imgType):
         x120_image_path =  os.path.join(settings.MEDIA_ROOT,PICTURE_DIR,IMAGE_120_DIR)
         x320_image_path = os.path.join(settings.MEDIA_ROOT,PICTURE_DIR,IMAGE_320_DIR)
         x640_image_path = os.path.join(settings.MEDIA_ROOT,PICTURE_DIR,IMAGE_640_DIR)
-        paths = {origin_image_path:None,x120_image_path:120,x320_image_path:320,x640_image_path:640}
+        paths           = {origin_image_path:None,x120_image_path:120,x320_image_path:320,x640_image_path:640}
         
     elif imgType == ImgType.AVATAR:
-        x60_image_path = os.path.join(settings.MEDIA_ROOT,PICTURE_DIR,IMAGE_120_DIR)
-        x120_image_path =  os.path.join(settings.MEDIA_ROOT,PICTURE_DIR,IMAGE_120_DIR)
-        paths = {origin_image_path:None,x60_image_path:60,x120_image_path:120}
+        x60_image_path  = os.path.join(settings.MEDIA_ROOT,AVATAR_DIR,IMAGE_60_DIR)
+        x120_image_path =  os.path.join(settings.MEDIA_ROOT,AVATAR_DIR,IMAGE_120_DIR)
+        paths           = {origin_image_path:None,x60_image_path:60,x120_image_path:120}
 
     for aPath,size in paths.items():
         # do resize

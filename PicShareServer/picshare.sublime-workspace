@@ -63,7 +63,15 @@
 			"file": "api/handlers.py",
 			"settings":
 			{
-				"buffer_size": 18744,
+				"buffer_size": 19020,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Form Tests/upload_user.html",
+			"settings":
+			{
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -103,15 +111,23 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 0.0,
+		"height": 167.0,
 		"selected_items":
 		[
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			]
 		],
-		"width": 0.0
+		"width": 449.0
 	},
 	"console":
 	{
-		"height": 0.0
+		"height": 125.0
 	},
 	"distraction_free":
 	{
@@ -159,7 +175,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -185,7 +201,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 472.0,
+						"translation.y": 437.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -249,7 +265,7 @@
 					"file": "api/handlers.py",
 					"settings":
 					{
-						"buffer_size": 18744,
+						"buffer_size": 19020,
 						"regions":
 						{
 							"mark":
@@ -265,8 +281,8 @@
 						"selection":
 						[
 							[
-								18641,
-								18641
+								17489,
+								17489
 							]
 						],
 						"settings":
@@ -276,13 +292,39 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 6734.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
+					"file": "Form Tests/upload_user.html",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
 					"file": "/Users/zoom/Desktop/uploadImage.html",
 					"settings":
 					{
@@ -308,7 +350,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "api/UploadImage.py",
 					"settings":
 					{
@@ -319,8 +361,8 @@
 						"selection":
 						[
 							[
-								224,
-								230
+								534,
+								534
 							]
 						],
 						"settings":
@@ -330,13 +372,13 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 397.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 7,
 					"file": "Picture/views.py",
 					"settings":
 					{
@@ -364,7 +406,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 8,
 					"file": "Picture/urls.py",
 					"settings":
 					{
