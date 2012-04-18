@@ -15,7 +15,8 @@
 #import "Common.h"
 #import "MBProgressHUD.h"
 #import "UserInfoEditorViewController.h"
-#define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+#import "Common.h"
+
 
 @interface UserDetailViewController ()
 
@@ -115,14 +116,20 @@
 {
     self.scrollView.contentSize = CGSizeMake(320, 360);
     self.introductionText.backgroundColor = RGBA(220, 220, 220, 1);
-    self.introductionText.text = [[[NSString alloc]initWithFormat:@"个人简介：\n",user.introduction]autorelease];
+    self.introductionText.text = [[[NSString alloc]initWithFormat:@"个人简介：\n%@",user.introduction]autorelease];
     self.followerCountLabel.text = [NSString stringWithFormat:@"%d",user.followersCount];
     self.followingCountLabel.text = [NSString stringWithFormat:@"%d",user.followingCount];
     self.picCountLabel.text = [NSString stringWithFormat:@"%d",user.picturesCount];
     self.nameLabel.text = user.username;
     self.locationLabel.text = user.location;
-    NSString *avatarUrl = user.avatarUrl;
-    [self.avatarImageView setImageWithURL:[NSURL URLWithString:user.avatarUrl] placeholderImage:[UIImage imageNamed:@"anonymous.png"]];
+    NSString *avatarUrl;
+    if (IS_RETINA) {
+        avatarUrl = [user.avatarUrl stringByAppendingString:@"?size=240"];
+    }else {
+        avatarUrl = [user.avatarUrl stringByAppendingString:@"?size=120"];
+    }
+    
+    [self.avatarImageView setImageWithURL:[NSURL URLWithString:avatarUrl] placeholderImage:[UIImage imageNamed:@"anonymous.png"]];
     PicShareEngine *engine = [PicShareEngine sharedEngine];
     if ([engine.username isEqualToString:user.username]) {
         //the current user's profile

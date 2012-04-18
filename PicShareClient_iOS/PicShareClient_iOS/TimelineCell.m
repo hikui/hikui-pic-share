@@ -11,7 +11,7 @@
 #import "UIImageView+Resize.h"
 #import "ASIDownloadCache.h"
 #import "PicShareEngine.h"
-#define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+#import "Common.h"
 
 @interface TimelineCell ()
 
@@ -76,7 +76,13 @@
 {
     if (self.pictureStatus != nil) {
         avatarImageView.frame = CGRectMake(10, 20, 30, 30);
-        [avatarImageView setImageWithURL:[NSURL URLWithString:pictureStatus.owner.avatarUrl] placeholderImage:[UIImage imageNamed:@"anonymous.png"]];
+        NSString *avatarUrl;
+        if (IS_RETINA) {
+            avatarUrl = [pictureStatus.owner.avatarUrl stringByAppendingString:@"?size=120"];
+        }else {
+            avatarUrl = [pictureStatus.owner.avatarUrl stringByAppendingString:@"?size=60"];
+        }
+        [avatarImageView setImageWithURL:[NSURL URLWithString:avatarUrl] placeholderImage:[UIImage imageNamed:@"anonymous.png"]];
         
         CGSize nameButtonSize = [pictureStatus.owner.username sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(147, 18) lineBreakMode:UILineBreakModeTailTruncation];
         CGRect nameButtonFrame = CGRectMake(48, 32, nameButtonSize.width, nameButtonSize.height);

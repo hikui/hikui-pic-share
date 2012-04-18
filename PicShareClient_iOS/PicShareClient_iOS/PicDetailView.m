@@ -12,7 +12,8 @@
 #import "ASIHTTPRequest.h"
 #import "ASIDownloadCache.h"
 #import "UIImageView+Resize.h"
-#define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+#import "UIImageView+WebCache.h"
+#import "Common.h"
 
 @interface PicDetailView()
 
@@ -112,7 +113,13 @@ static bool isRetina()
     
     if (self.pictureStatus != nil) {
         avatarImageView.frame = CGRectMake(10, 20, 30, 30);
-        [avatarImageView setImageWithUrl:[NSURL URLWithString:pictureStatus.owner.avatarUrl] placeholderImage:[UIImage imageNamed:@"anonymous.png"]];
+        NSString *avatarUrl;
+        if (IS_RETINA) {
+            avatarUrl = [pictureStatus.owner.avatarUrl stringByAppendingString:@"?size=120"];
+        }else {
+            avatarUrl = [pictureStatus.owner.avatarUrl stringByAppendingString:@"?size=60"];
+        }
+        [avatarImageView setImageWithURL:[NSURL URLWithString:avatarUrl] placeholderImage:[UIImage imageNamed:@"anonymous.png"]];
 
         
         

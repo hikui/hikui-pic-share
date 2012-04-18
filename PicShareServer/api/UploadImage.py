@@ -9,10 +9,11 @@ import random
 PICTURE_DIR        = 'picture'
 AVATAR_DIR         = 'avatar'
 ORIGINAL_IMAGE_DIR = 'origin'
-IMAGE_60_DIR       ='X60'
+IMAGE_60_DIR       = 'X60'
 IMAGE_100_DIR      = 'X100'
 IMAGE_120_DIR      = 'X120'
 IMAGE_160_DIR      = 'X160'
+IMAGE_240_DIR      = 'X240'
 IMAGE_320_DIR      = 'X320'
 IMAGE_640_DIR      = 'X640'
 
@@ -65,8 +66,9 @@ def handle_upload_image(i,imgType):
         
     elif imgType == ImgType.AVATAR:
         x60_image_path  = os.path.join(settings.MEDIA_ROOT,AVATAR_DIR,IMAGE_60_DIR)
-        x120_image_path =  os.path.join(settings.MEDIA_ROOT,AVATAR_DIR,IMAGE_120_DIR)
-        paths           = {origin_image_path:None,x60_image_path:60,x120_image_path:120}
+        x120_image_path = os.path.join(settings.MEDIA_ROOT,AVATAR_DIR,IMAGE_120_DIR)
+        x240_image_path = os.path.join(settings.MEDIA_ROOT,AVATAR_DIR,IMAGE_240_DIR)
+        paths           = {origin_image_path:None,x60_image_path:60,x120_image_path:120,x240_image_path:240}
 
     for aPath,size in paths.items():
         # do resize
