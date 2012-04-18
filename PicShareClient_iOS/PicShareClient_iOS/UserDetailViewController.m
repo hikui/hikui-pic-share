@@ -103,10 +103,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (user!=nil) {
-        [self updateView];
-        return;
-    }else if(userId == nil){
+    if(userId == nil){
         PicShareEngine *engine = [PicShareEngine sharedEngine];
         userId = [[NSNumber numberWithInt:engine.userId]retain];
     }
@@ -124,12 +121,15 @@
     self.picCountLabel.text = [NSString stringWithFormat:@"%d",user.picturesCount];
     self.nameLabel.text = user.username;
     self.locationLabel.text = user.location;
+    NSString *avatarUrl = user.avatarUrl;
     [self.avatarImageView setImageWithURL:[NSURL URLWithString:user.avatarUrl] placeholderImage:[UIImage imageNamed:@"anonymous.png"]];
     PicShareEngine *engine = [PicShareEngine sharedEngine];
     if ([engine.username isEqualToString:user.username]) {
         //the current user's profile
         followButton.hidden = YES;
+        editProfileButton.hidden = NO;
     }else {
+        followButton.hidden = NO;
         editProfileButton.hidden = YES;
         if (!user.isFollowing) {
             UIImage *followButtonImage = [[UIImage imageNamed:@"followButton"]stretchableImageWithLeftCapWidth:5.0 topCapHeight:13.0];

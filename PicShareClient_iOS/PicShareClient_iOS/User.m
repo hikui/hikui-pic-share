@@ -18,6 +18,10 @@
         [self release];
         return nil;
     }
+    if ([data objectForKey:@"user_id"]== nil) {
+        [self release];
+        return nil;
+    }
     self = [super init];
     if(self){
         if ([data objectForKey:@"avatar"]!=[NSNull null]) {

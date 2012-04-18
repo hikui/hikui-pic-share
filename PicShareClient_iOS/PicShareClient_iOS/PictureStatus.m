@@ -18,6 +18,10 @@
         [self release];
         return nil;
     }
+    if ([data objectForKey:@"ps_id"]== nil) {
+        [self release];
+        return nil;
+    }
     self = [super init];
     if (self) {
         location = [[data objectForKey:@"location"]copy];

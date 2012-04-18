@@ -21,6 +21,10 @@
         [self release];
         return nil;
     }
+    if ([data objectForKey:@"category_id"] == nil) {
+        [self release];
+        return nil;
+    }
     self = [super init];
     if (self) {
         self.name = [data objectForKey:@"name"];

@@ -505,6 +505,7 @@ class UpdateUserHandler(BaseHandler):
         if avatarUrl is not None:
             user.addition.avatar = avatarUrl
         user.save()
+        user.addition.save()
         return getUserDict(request,user)
 
 

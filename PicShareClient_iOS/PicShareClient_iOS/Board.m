@@ -20,6 +20,10 @@
         [self release];
         return nil;
     }
+    if ([data objectForKey:@"board_id"]== nil) {
+        [self release];
+        return nil;
+    }
     self = [super init];
     if(self){
         name = [[data objectForKey:@"board_name"]retain];

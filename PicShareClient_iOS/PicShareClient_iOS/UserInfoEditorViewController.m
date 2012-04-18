@@ -8,6 +8,8 @@
 
 #import "UserInfoEditorViewController.h"
 #import "UIImageView+WebCache.h"
+#import "MBProgressHUD.h"
+#import "PicShareEngine.h"
 
 @interface UserInfoEditorViewController()
 
@@ -241,5 +243,17 @@
 - (void)uploadButtonOnTouch
 {
     // to be continued
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    [MBProgressHUD showHUDAddedTo:window animated:YES];
+    [self.view setUserInteractionEnabled:NO];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        PicShareEngine *engine = [PicShareEngine sharedEngine];
+        User *updatedUser = [engine updateUser:self.user];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.user = updatedUser;
+            [MBProgressHUD hideHUDForView:window animated:YES];
+            [self.navigationController popViewControllerAnimated:YES];
+        });
+    });
 }
 @end

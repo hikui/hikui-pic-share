@@ -315,10 +315,12 @@ static PicShareEngine *instance = NULL;
         response = [request responseString];
     }
     else {
+        NSLog(@"error:%@",error);
         return nil;
     }
     if (response != nil) {
         NSDictionary *dictFromJson = [response objectFromJSONString];
+        NSLog(@"get user:%@",dictFromJson);
         User *user = [[[User alloc]initWithJSONDict:dictFromJson]autorelease];
         return user;
     }
@@ -628,6 +630,47 @@ static PicShareEngine *instance = NULL;
 -(User *)updateUser:(User *)user
 {
     NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingString:@"api/user/update.json"]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    if (user.nickname!=nil && ![user.nickname isEqualToString:@""]) {
+        [request setPostValue:user.nickname forKey:@"nick"];
+    }
+    if (user.location!=nil && ![user.nickname isEqualToString:@""]) {
+        [request addPostValue:user.location forKey:@"location"];
+    }
+    if (user.introduction!=nil && ![user.introduction isEqualToString:@""]) {
+        [request addPostValue:user.introduction forKey:@"introduction"];
+    }
+    if (user.avatar!=nil) {
+        NSData *picData = UIImagePNGRepresentation(user.avatar);
+        [request setData:picData withFileName:@"avatar.png" andContentType:@"image/png" forKey:@"avatar"];
+    }
+    [self addAuthHeaderForRequest:request];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error) {
+        response = [request responseString];
+        NSLog(@"%@",response);
+    }
+    else {
+        //do something in ui
+        return nil;
+    }
+    if (response != nil) {
+        NSDictionary *dataDict = [response objectFromJSONString];
+        //NSLog(@"update user result:%@",dataDict);
+        User *user = [[User alloc]initWithJSONDict:dataDict];
+        if (user!=nil) {
+            return [user autorelease];
+        }else {
+            ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:em.errorMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+            [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
+            [alert release];
+            [em release];
+        }
+    }
+    return nil;
 }
 
 @end
