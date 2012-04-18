@@ -121,7 +121,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'PicShare',
-    'relationships', #this is a third part package see:https://github.com/coleifer/django-relationships
+    'relationships',
+    'api',
+    'Picture', #this is a third part package see:https://github.com/coleifer/django-relationships
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
