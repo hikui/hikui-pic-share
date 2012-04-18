@@ -5,3 +5,4 @@ Thumbs.db
 static_sample/
 PicShareServer/testMedia/
 PicShareServer/data.db
+*.pyc
