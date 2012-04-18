@@ -6,3 +6,6 @@ static_sample/
 PicShareServer/testMedia/
 PicShareServer/data.db
 *.pyc
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
