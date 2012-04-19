@@ -21,6 +21,7 @@ update_board_handler = Resource(UpdateBoardHandler,authentication=auth)
 create_board_handler = Resource(CreateBoardHandler,authentication=auth)
 repin_handler = Resource(RepinPictureHandler,authentication=auth)
 update_user_handler = Resource(UpdateUserHandler,authentication=auth)
+create_comment_handler = Resource(CreateCommentHandler,authentication=auth)
 urlpatterns = patterns('',
 
     (r'^category/get_all.json$',get_all_categories_handler),
@@ -45,5 +46,6 @@ urlpatterns = patterns('',
     
     (r'^timeline/home_timeline.json$',get_home_timeline_handler),
     
+    (r'^comment/create.json$',create_comment_handler),
     
 )

@@ -631,15 +631,9 @@ static PicShareEngine *instance = NULL;
 {
     NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingString:@"api/user/update.json"]];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    if (user.nickname!=nil && ![user.nickname isEqualToString:@""]) {
-        [request setPostValue:user.nickname forKey:@"nick"];
-    }
-    if (user.location!=nil && ![user.nickname isEqualToString:@""]) {
-        [request addPostValue:user.location forKey:@"location"];
-    }
-    if (user.introduction!=nil && ![user.introduction isEqualToString:@""]) {
-        [request addPostValue:user.introduction forKey:@"introduction"];
-    }
+    [request setPostValue:user.nickname forKey:@"nick"];
+    [request addPostValue:user.location forKey:@"location"];
+    [request addPostValue:user.introduction forKey:@"introduction"];
     if (user.avatar!=nil) {
         NSData *picData = UIImagePNGRepresentation(user.avatar);
         [request setData:picData withFileName:@"avatar.png" andContentType:@"image/png" forKey:@"avatar"];

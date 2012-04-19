@@ -25,22 +25,22 @@ class Category(models.Model):
     name = models.CharField(max_length=10, unique=True)
 
 class Board(models.Model):
-    name = models.TextField(max_length=140)
-    owner = models.ForeignKey(User, related_name='my_boards') #User自己建的
+    name      = models.TextField(max_length=140)
+    owner     = models.ForeignKey(User, related_name='my_boards') #User自己建的
     followers = models.ManyToManyField(User,related_name='following_boards',null=True,blank=True) #关注的用户
-    category = models.ForeignKey(Category, null=True,blank=True, related_name='boards') #在Explore中使用
+    category  = models.ForeignKey(Category, null=True,blank=True, related_name='boards') #在Explore中使用
     def __unicode__(self):
         return "board-name:"+self.name
 
 class Picture(models.Model):
     timestamp = models.DateTimeField()
-    image = models.CharField(max_length=256) #image url
-    location = models.CharField(max_length=20, null=True, blank=True)
+    image     = models.CharField(max_length=256) #image url
+    location  = models.CharField(max_length=20, null=True, blank=True)
     STATUS_TYPE_CHOICES=(
         (1,u'正常'),
         (2,u'封禁'),
     )
-    status_type = models.IntegerField(choices=STATUS_TYPE_CHOICES,default=1)
+    status_type  = models.IntegerField(choices=STATUS_TYPE_CHOICES,default=1)
     retain_count = models.IntegerField(default=1) #用户repin之后，retain_count+1，当retain_count=0时，删除Pic。创建时，retain_count=1。
     def __unicode__(self):
         return "picture:"+self.image+",retain:"+str(self.retain_count)
@@ -55,7 +55,7 @@ class Picture(models.Model):
             self.save
 
 class PictureStatus(models.Model):
-    picture = models.ForeignKey(Picture)
+    picture     = models.ForeignKey(Picture)
     description = models.CharField(max_length=140, null=True, blank=True)
     STATUS_TYPE_CHOICES=(
         (1,u'原创'),
@@ -63,18 +63,18 @@ class PictureStatus(models.Model):
         (3,u'被举报'),
         (4,u'封禁'),
     )
-    board = models.ForeignKey(Board,related_name='pictureStatuses')
-    via = models.ForeignKey(User, null=True, blank=True) #从哪个用户得到此图片，只在status_type=2时才出现
+    board       = models.ForeignKey(Board,related_name='pictureStatuses')
+    via         = models.ForeignKey(User, null=True, blank=True) #从哪个用户得到此图片，只在status_type=2时才出现
     status_type = models.IntegerField(choices=STATUS_TYPE_CHOICES,default=1)
 
     def __unicode__(self):
         return "picture:"+unicode(self.picture)
 
 class UserAddition(models.Model):
-    user = models.OneToOneField(User,related_name='addition')
-    nick = models.CharField(max_length=50)
-    avatar = models.CharField(max_length=255,null=True, blank=True)
-    location = models.CharField(max_length=20, null=True, blank=True)
+    user         = models.OneToOneField(User,related_name='addition')
+    nick         = models.CharField(max_length=50)
+    avatar       = models.CharField(max_length=255,null=True, blank=True)
+    location     = models.CharField(max_length=20, null=True, blank=True)
     introduction = models.TextField()
     def create_user_addition(sender, instance, created, **kwargs):
         if created:
@@ -82,8 +82,22 @@ class UserAddition(models.Model):
     post_save.connect(create_user_addition, sender=User)
     
 class Comment(models.Model):
+    picture_status = models.ForeignKey(PictureStatus, related_name = 'comments')
+    by             = models.ForeignKey(User, related_name='my_comments') #发表评论的用户
+    text           = models.CharField(max_length=140, null=True, blank=True)
+    to             = models.ForeignKey(User, related_name = 'comments_to_me') #有关用户
 
-    picture_status = models.ForeignKey(PictureStatus)
-    by = models.ForeignKey(User, related_name='my_comments') #发表评论的用户
-    text = models.CharField(max_length=140, null=True, blank=True)
-    to = models.ForeignKey(User, related_name = 'comments_to_me') #有关用户
+class PSMessage(models.Model):
+    '''
+    作为“消息”使用。当有人评论你的ps或者有人follow你的时候，产生消息。
+    客户端可以定时循环请求这个model。
+    '''
+    by   = models.ForeignKey(User)
+    to   = models.ForeignKey(User, related_name = 'messages_to_me') #有关用户
+    text =  models.CharField(max_length=140, null=True, blank=True)
+    PSMESSAGE_TYPES=(
+        (1,u'Someone followed you'),
+        (2,u'Someone commented your picture'),
+    )
+    message_type = models.IntegerField(choices=PSMESSAGE_TYPES)
+    extra        = models.CharField(max_length = 140, null=True, blank=True) #其他信息，比如被评论的psId，用于客户端连接到ps detail。

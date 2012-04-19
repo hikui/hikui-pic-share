@@ -69,6 +69,10 @@ def getUserDict(request,user):
 def getPictureStatusDict(request,ps):
     if ps is None:
         return None
+    commentsArray = []
+    for comment in ps.comments.all().order_by('-id')[:10]:
+        commentDict = getCommentDict(request,comment)
+        commentsArray.append(commentDict)
     psResultDict = {
         "ps_id":ps.id,
         "timestamp":ps.picture.timestamp,
@@ -76,7 +80,7 @@ def getPictureStatusDict(request,ps):
         "location":ps.picture.location,
         "description":ps.description,
         "status_type":ps.status_type,
-        "comments_count":0,
+        "comments":commentsArray,
         "board_id":ps.board.id,
         'board_name':ps.board.name,
         "owner":getUserDict(request,ps.board.owner),
@@ -85,6 +89,9 @@ def getPictureStatusDict(request,ps):
     return psResultDict
 
 def getBoardDict(request,board):
+    '''
+    return limited pictures in a board
+    '''
     if board is None:
         return None
     owner = board.owner
@@ -104,6 +111,9 @@ def getBoardDict(request,board):
     return boardResultDict
 
 def getBoardDictFull(request,board):
+    '''
+    return all pictures in a board
+    '''
     if board is None:
         return None
     owner = board.owner
@@ -121,6 +131,16 @@ def getBoardDictFull(request,board):
         'pictures':picturesResultArray
     }
     return boardResultDict
+
+def getCommentDict(request,comment):
+    if comment is None:
+        return None
+    commentDict = {
+        'comment_id':comment.id,
+        'by': getUserDict(request,comment.by),
+        'text':comment.text
+    }
+    return commentDict
 
 class GetAllCategoriesHandler(BaseHandler):
     model = Category
@@ -490,24 +510,64 @@ class UpdateUserHandler(BaseHandler):
         the_introduction = request.form.cleaned_data['introduction']
         the_location = request.form.cleaned_data['location']
         the_nick = request.form.cleaned_data['nick']
+        print 'the nick:'+the_nick
         avatarUrl = None
         if request.FILES.get('avatar') != None:
             filename = UploadImage.handle_upload_image(request.FILES['avatar'],UploadImage.ImgType.AVATAR)
             host = request.get_host()
             avatarUrl = 'http://'+host+'/media/avatar/'+filename
         user = request.user
-        if the_introduction is not None:
+        if the_introduction != None and the_introduction != '':
             user.addition.introduction = the_introduction
-        if the_location is not None:
+        if the_location != None and the_location != '':
             user.addition.location = the_location
-        if the_nick is not None:
+        if the_nick != None and the_nick != '':
             user.addition.nick = the_nick
-        if avatarUrl is not None:
+        if avatarUrl != None and avatarUrl != '':
             user.addition.avatar = avatarUrl
         user.save()
         user.addition.save()
         return getUserDict(request,user)
 
+class CreateCommentForm(forms.Form):
+    ps_id = forms.IntegerField(min_value=1)
+    text = forms.CharField(max_length=140)
+class CreateCommentHandler(BaseHandler):
+    allowed_methods = ('POST',)
+    @validate(CreateCommentForm)
+    def create(self,request):
+        the_ps_id = request.form.cleaned_data['ps_id']
+        the_text = request.form.cleaned_data['text']
+        #提取the_text中的人名
+        import re
+        pattern = re.compile(r'@\w+ ')
+        mentioned_names = pattern.findall(the_text)
+        fixed_mentioned_names=list()
+        for aName in mentioned_names:
+            aName = aName[1:len(aName)-1] #去掉@和空格
+            fixed_mentioned_names.append(aName)
+        try:
+            ps = PictureStatus.objects.get(pk=the_ps_id)
+        except:
+            return errorResponse(0,1,'目标不存在',rc.NOT_FOUND)
+        
+        new_comment = Comment.objects.create(picture_status=ps,by=request.user,to=ps.board.owner,text=the_text)
 
+        #make messages to this event:
+        #----message to pic owner:
+        if request.user.id == ps.board.owner.id or (request.user.username in fixed_mentioned_names):
+            #如果 被提到的用户列表里面存在相册的主人，则使用“提到了您”代替
+            pass
+        else:
+            PSMessage.objects.create(by=request.user,to=ps.board.owner,text='@'+request.user.username+u' 评论了您的照片',message_type=2)
+        #----message to mentioned users
+
+        for aName in fixed_mentioned_names:
+            try:
+                to_user = User.objects.get(username=aName)
+            except:
+                continue
+            PSMessage.objects.create(by=request.user,to=to_user,text='@'+request.user.username+u'提到了您',message_type=1,extra=str(ps.id))
+        return getCommentDict(request,new_comment)
 
 
