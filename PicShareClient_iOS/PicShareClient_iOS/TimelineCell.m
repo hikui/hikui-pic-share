@@ -118,7 +118,7 @@
             [viaButton setTitle:pictureStatus.via.username forState:UIControlStateNormal];
             [viaButton setTitleColor:RGBA(93, 145, 166, 1) forState:UIControlStateNormal];
             viaButton.titleLabel.font = [UIFont systemFontOfSize:14];
-            [viaButton setContentVerticalAlignment:UIControlContentHorizontalAlignmentLeft];
+            [viaButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
             [viaButton setHidden:NO];
             
         }else {

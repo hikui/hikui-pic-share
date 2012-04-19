@@ -7,10 +7,10 @@
 //
 
 #import "PictureStatus.h"
-
+#import "Comment.h"
 @implementation PictureStatus
 
-@synthesize location,via,psId,owner,boardId,picture,timestamp,pictureUrl,picDescription,statusType,commentsCount,boardName;
+@synthesize location,via,psId,owner,boardId,picture,timestamp,pictureUrl,picDescription,statusType,boardName,sampleComments;
 
 -(id)initWithJSONDict:(NSDictionary *)data
 {
@@ -32,12 +32,18 @@
         pictureUrl = [[data objectForKey:@"image"]copy];
         picDescription = [[data objectForKey:@"description"]copy];
         statusType = [[data objectForKey:@"status_type"]intValue];
-        commentsCount = [[data objectForKey:@"comments_count"]intValue];
         NSDateFormatter *df = [[NSDateFormatter alloc]init];
         [df setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
         timestamp = [df dateFromString:[data objectForKey:@"timestamp"]];
         [df release];
         boardName = [[data objectForKey:@"board_name"]copy];
+        NSArray *commentsDataArray = [data objectForKey:@"comments"];
+        sampleComments = [[NSMutableArray alloc]init];
+        for (NSDictionary *aCommentDict in commentsDataArray) {
+            Comment *comment = [[Comment alloc]initWithJSONDict:aCommentDict];
+            [sampleComments addObject:comment];
+            [comment release];
+        }
     }
     return self;
 }

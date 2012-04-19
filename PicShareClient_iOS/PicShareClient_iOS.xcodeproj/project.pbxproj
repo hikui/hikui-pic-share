@@ -118,6 +118,7 @@
 		E6DCC02A153D0BB10025F70A /* anonymous.png in Resources */ = {isa = PBXBuildFile; fileRef = E6DCC029153D0BB10025F70A /* anonymous.png */; };
 		E6DCC02E153D130F0025F70A /* UserInfoEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DCC02C153D130E0025F70A /* UserInfoEditorViewController.m */; };
 		E6DCC02F153D130F0025F70A /* UserInfoEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6DCC02D153D130E0025F70A /* UserInfoEditorViewController.xib */; };
+		E6E6180215401586005AC1B0 /* CommentLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E6180115401586005AC1B0 /* CommentLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -291,13 +292,15 @@
 		A4E5C1A71537FB59005DB8C1 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		A4FDB33F151F01660048C199 /* BoardPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardPickerViewController.h; sourceTree = "<group>"; };
 		A4FDB340151F01660048C199 /* BoardPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardPickerViewController.m; sourceTree = "<group>"; };
-		A4FDB344151F05E20048C199 /* SingleTextInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SingleTextInputViewController.h; sourceTree = "<group>"; };
+		A4FDB344151F05E20048C199 /* SingleTextInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleTextInputViewController.h; sourceTree = "<group>"; };
 		A4FDB345151F05E30048C199 /* SingleTextInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleTextInputViewController.m; sourceTree = "<group>"; };
 		A4FDB346151F05E30048C199 /* SingleTextInputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleTextInputViewController.xib; sourceTree = "<group>"; };
 		E6DCC029153D0BB10025F70A /* anonymous.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = anonymous.png; sourceTree = "<group>"; };
 		E6DCC02B153D130D0025F70A /* UserInfoEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoEditorViewController.h; sourceTree = "<group>"; };
 		E6DCC02C153D130E0025F70A /* UserInfoEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoEditorViewController.m; sourceTree = "<group>"; };
 		E6DCC02D153D130E0025F70A /* UserInfoEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoEditorViewController.xib; sourceTree = "<group>"; };
+		E6E6180015401586005AC1B0 /* CommentLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentLabel.h; sourceTree = "<group>"; };
+		E6E6180115401586005AC1B0 /* CommentLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentLabel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -363,6 +366,8 @@
 				A47D9C891520959B00ADACF6 /* PSThumbnailImageView.m */,
 				A47D9C9C1523099200ADACF6 /* TimelineCell.h */,
 				A47D9C9D1523099200ADACF6 /* TimelineCell.m */,
+				E6E6180015401586005AC1B0 /* CommentLabel.h */,
+				E6E6180115401586005AC1B0 /* CommentLabel.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -843,6 +848,7 @@
 				A4E5C1AA1537FB59005DB8C1 /* UIButton+WebCache.m in Sources */,
 				A4E5C1AB1537FB59005DB8C1 /* UIImageView+WebCache.m in Sources */,
 				E6DCC02E153D130F0025F70A /* UserInfoEditorViewController.m in Sources */,
+				E6E6180215401586005AC1B0 /* CommentLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

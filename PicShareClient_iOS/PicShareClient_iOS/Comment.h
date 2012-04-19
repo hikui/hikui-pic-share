@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "User.h"
 
 @interface Comment : NSObject
-
+@property (nonatomic) NSInteger commentId;
+@property (nonatomic,retain) User *by;
+@property (nonatomic,copy) NSString *text;
+-(id)initWithJSONDict:(NSDictionary *)data;
 @end

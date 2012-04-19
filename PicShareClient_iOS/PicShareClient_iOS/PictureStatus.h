@@ -29,7 +29,7 @@ typedef enum Status_type{
 @property (nonatomic,retain) User *owner;
 @property (nonatomic,retain) User *via;
 @property (nonatomic,retain) NSDate *timestamp;
-@property (readwrite) NSInteger commentsCount;
+@property (nonatomic,copy) NSMutableArray *sampleComments;
 
 -(id)initWithJSONDict:(NSDictionary *)data;
 

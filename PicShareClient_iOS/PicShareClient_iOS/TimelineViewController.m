@@ -311,7 +311,7 @@ static bool isRetina()
     [request setTimeOutSeconds:30];
     [request setDownloadProgressDelegate:progressView];
     [request setDownloadCache:[ASIDownloadCache sharedCache]];
-    [request setCachePolicy:ASICacheForSessionDurationCacheStoragePolicy];
+    [request setCachePolicy:ASIOnlyLoadIfNotCachedCachePolicy];
     [request setNumberOfTimesToRetryOnTimeout:1];
     [request setDidFinishSelector:@selector(loadImageDidFinish:)];
     [request setDidFailSelector:@selector(loadImageDidFailed:)];

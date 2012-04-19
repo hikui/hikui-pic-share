@@ -567,7 +567,7 @@ class CreateCommentHandler(BaseHandler):
                 to_user = User.objects.get(username=aName)
             except:
                 continue
-            PSMessage.objects.create(by=request.user,to=to_user,text='@'+request.user.username+u'提到了您',message_type=1,extra=str(ps.id))
+            PSMessage.objects.create(by=request.user,to=to_user,text='@'+request.user.username+u'提到了您',message_type=2,extra=str(ps.id))
         return getCommentDict(request,new_comment)
 
 
