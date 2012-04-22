@@ -14,6 +14,7 @@
 {
     BOOL loadImgComplete;
     UIImage *tempImage;
+    BOOL loadCommentsComplete;
 }
 
 @property (nonatomic,assign) PictureStatus *pictureStatus;
@@ -27,7 +28,8 @@
 @property (nonatomic,retain) UITextField *commentTextField;
 @property (nonatomic,retain) UIProgressView *progressView;
 @property (nonatomic,retain) ASIHTTPRequest *request;
-
+@property (nonatomic,retain) UILabel *viaLabel;
+@property (nonatomic,retain) UIButton *showAllCommentsButton;
 - (id)initWithPictureStatus:(PictureStatus *)aPictureStatus;
 - (void)layout;
 @end

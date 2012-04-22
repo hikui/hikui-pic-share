@@ -23,5 +23,5 @@
 - (void)boardNameButtonOnClick:(id)sender;
 - (void)viaButtonOnClick:(id)sender;
 - (void)repinButtonOnClick:(id)sender;
-
+- (void)allCommentsButtonOnClick:(id)sender;
 @end

@@ -2,7 +2,7 @@
 //  CommentLabel.h
 //  PicShareClient_iOS
 //
-//  Created by zoom on 12-4-19.
+//  Created by Hakon Miao on 12-4-19.
 //  Copyright (c) 2012年 Shanghai University. All rights reserved.
 //
 
@@ -13,9 +13,8 @@
 
 @property (nonatomic,copy) NSString *username;
 @property (nonatomic,retain) UIButton *usernameButton;
-@property (nonatomic,copy) NSString *text;
+@property (nonatomic,copy) NSString *content;
 
--(id)initWithFrame:(CGRect)frame username:(NSString *)aUsername text:(NSString *)theText;
--(id)initWithFrame:(CGRect)frame comment:(Comment *)theComment;
++ (CGFloat)calculateHeightWithUsername:(NSString *)aUserName content:(NSString *)aContent constrainedToSize:(CGSize)theSize;
 
 @end

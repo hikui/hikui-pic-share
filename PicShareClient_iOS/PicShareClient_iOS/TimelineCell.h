@@ -13,6 +13,12 @@
 #define MAIN_IMAGE_WIDTH 300.0f
 #define MAIN_IMAGE_HEIGHT 255.0f
 
+@protocol TimelineCellCommentDelegate <NSObject>
+
+- (void)commentUsernameButtonOnTouch:(id)sender;
+
+@end
+
 
 @interface TimelineCell : UITableViewCell
 
@@ -27,6 +33,7 @@
 @property (nonatomic,retain) UITextField *commentTextField;
 @property (nonatomic,retain) ASIHTTPRequest *request;
 @property (nonatomic,retain) UILabel *viaLabel;
+@property (nonatomic,assign) id<TimelineCellCommentDelegate> delegate;
 
 - (void)refreshWithPictureStatus:(PictureStatus *)aPictureStatus;
 

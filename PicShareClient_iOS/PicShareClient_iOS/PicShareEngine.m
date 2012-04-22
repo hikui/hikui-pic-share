@@ -644,7 +644,6 @@ static PicShareEngine *instance = NULL;
     NSString *response = nil;
     if (!error) {
         response = [request responseString];
-        NSLog(@"%@",response);
     }
     else {
         //do something in ui
@@ -656,6 +655,86 @@ static PicShareEngine *instance = NULL;
         User *user = [[User alloc]initWithJSONDict:dataDict];
         if (user!=nil) {
             return [user autorelease];
+        }else {
+            ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:em.errorMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+            [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
+            [alert release];
+            [em release];
+        }
+    }
+    return nil;
+}
+
+-(NSArray *)getCommentsOfPictureStatus:(NSInteger)psId
+{
+    return [self getCommentsOfPictureStatus:psId page:1];
+}
+-(NSArray *)getCommentsOfPictureStatus:(NSInteger)psId page:(NSInteger)page
+{
+    return [self getCommentsOfPictureStatus:psId page:page countPerPage:5];
+}
+-(NSArray *)getCommentsOfPictureStatus:(NSInteger)psId page:(NSInteger)page countPerPage:(NSInteger)count
+{
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingFormat:@"api/picture/get_comments.json?ps_id=%d&page=%d&count=%d",psId,page,count]];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [self addAuthHeaderForRequest:request];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error) {
+        response = [request responseString];
+    }
+    else {
+        //do something in ui
+        return nil;
+    }
+    if (response != nil) {
+        NSDictionary *dataDict = [response objectFromJSONString];
+        NSDictionary *commentsDataArray = [dataDict objectForKey:@"comments"];
+        NSValue *hasNext = [dataDict objectForKey:@"hasnext"];
+        NSMutableArray *resultArray = [[NSMutableArray alloc]init];
+        if (commentsDataArray!=nil) {
+            for (NSDictionary *aCommentData in commentsDataArray) {
+                Comment *c = [[Comment alloc]initWithJSONDict:aCommentData];
+                [resultArray addObject:c];
+                [c release];
+            }
+            [resultArray insertObject:hasNext atIndex:0];
+            return [resultArray autorelease];
+        }else {
+            ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:em.errorMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+            [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
+            [alert release];
+            [em release];
+        }
+    }
+    return nil;
+}
+
+-(Comment *)createComment:(NSString *)commentText toPicture:(NSInteger)psId
+{
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingString:@"api/comment/create.json"]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request addPostValue:commentText forKey:@"text"];
+    [request addPostValue:[NSNumber numberWithInteger:psId] forKey:@"ps_id"];
+    [self addAuthHeaderForRequest:request];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error) {
+        response = [request responseString];
+    }
+    else {
+        //do something in ui
+        return nil;
+    }
+    if (response != nil) {
+        NSDictionary *dataDict = [response objectFromJSONString];
+        Comment *c = [[Comment alloc]initWithJSONDict:dataDict];
+        if (c!=nil) {
+            return c;
         }else {
             ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:em.errorMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];

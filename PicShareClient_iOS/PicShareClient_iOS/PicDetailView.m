@@ -14,6 +14,7 @@
 #import "UIImageView+Resize.h"
 #import "UIImageView+WebCache.h"
 #import "Common.h"
+#import "CommentLabel.h"
 
 @interface PicDetailView()
 
@@ -23,7 +24,7 @@
 
 @implementation PicDetailView
 
-@synthesize avatarImageView,usernameButton,boardNameButton,picDescriptionLabel,mainImageView,repinButton,commentTextField,pictureStatus,viaButton,progressView,request;
+@synthesize avatarImageView,usernameButton,boardNameButton,picDescriptionLabel,mainImageView,repinButton,commentTextField,pictureStatus,viaButton,progressView,request,viaLabel,showAllCommentsButton;
 
 static bool isRetina()
 {
@@ -45,6 +46,8 @@ static bool isRetina()
     [viaButton release];
     [progressView release];
     [tempImage release];
+    [viaLabel release];
+    [showAllCommentsButton release];
     [super dealloc];
 }
 
@@ -69,14 +72,20 @@ static bool isRetina()
         repinButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect]retain];
         commentTextField = [[UITextField alloc]init];
         viaButton = [[UIButton buttonWithType:UIButtonTypeCustom]retain];
+        viaLabel = [[UILabel alloc]init];
         loadImgComplete = NO;
+        loadCommentsComplete = NO;
         progressView = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleBar];
+        showAllCommentsButton = [[UIButton alloc]init];
         [self addSubview:avatarImageView];
         [self addSubview:usernameButton];
         [self addSubview:boardNameButton];
         [self addSubview:picDescriptionLabel];
         [self addSubview:mainImageView];
         [self addSubview:repinButton];
+        [self addSubview:viaButton];
+        [self addSubview:viaLabel];
+        [self addSubview:showAllCommentsButton];
         [self layout];
     }
     return self;
@@ -95,13 +104,19 @@ static bool isRetina()
         commentTextField = [[UITextField alloc]init];
         viaButton = [[UIButton buttonWithType:UIButtonTypeCustom]retain];
         loadImgComplete = NO;
+        loadCommentsComplete = NO;
+        viaLabel = [[UILabel alloc]init];
         progressView = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleBar];
+        showAllCommentsButton = [[UIButton alloc]init];
         [self addSubview:avatarImageView];
         [self addSubview:usernameButton];
         [self addSubview:boardNameButton];
         [self addSubview:picDescriptionLabel];
         [self addSubview:mainImageView];
         [self addSubview:repinButton];
+        [self addSubview:viaLabel];
+        [self addSubview:viaButton];
+        [self addSubview:showAllCommentsButton];
         pictureStatus = aPictureStatus;
         [self layout];
     }
@@ -145,18 +160,24 @@ static bool isRetina()
         
         CGRect viaButtonFrame = CGRectMake(0, 0, 0, 0);
         if (pictureStatus.via !=nil) {
-            UILabel *viaLabel = [[UILabel alloc]initWithFrame:CGRectMake(nameButtonFrame.origin.x, nameButtonFrame.origin.y+nameButtonSize.height+4, 35, 18)];
+            self.viaLabel.frame = CGRectMake(nameButtonFrame.origin.x, nameButtonFrame.origin.y+nameButtonSize.height+4, 35, 18);
+            viaLabel.font = [UIFont systemFontOfSize:14];
             viaLabel.text = @"转自";
-            [self addSubview:viaLabel];
-            [viaLabel release];
+            [viaLabel setHidden:NO];
             
             CGSize viaButtonSize = [pictureStatus.via.username sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(320-8-(viaLabel.frame.origin.x+viaLabel.frame.size.width), 18) lineBreakMode:UILineBreakModeTailTruncation];
             viaButtonFrame = CGRectMake(viaLabel.frame.origin.x+viaLabel.frame.size.width+8, viaLabel.frame.origin.y, viaButtonSize.width, viaButtonSize.height);
             viaButton.frame = viaButtonFrame;
+            NSLog(@"viabutton title :%@",pictureStatus.via.username);
             [viaButton setTitle:pictureStatus.via.username forState:UIControlStateNormal];
             [viaButton setTitleColor:RGBA(93, 145, 166, 1) forState:UIControlStateNormal];
-            [viaButton setContentVerticalAlignment:UIControlContentHorizontalAlignmentLeft];
-
+            viaButton.titleLabel.font = [UIFont systemFontOfSize:14];
+            [viaButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+            [viaButton setHidden:NO];
+            
+        }else {
+            [viaButton setHidden:YES];
+            [viaLabel setHidden:YES];
         }
         
                
@@ -191,8 +212,36 @@ static bool isRetina()
         repinButton.titleLabel.font = [UIFont systemFontOfSize:14];
         
         // to be continued
-#warning comments
-        self.contentSize = CGSizeMake(320, repinButton.frame.origin.y+repinButton.frame.size.height+10);
+        CGFloat currentY = repinButton.frame.origin.y + repinButton.frame.size.height+8;
+        if (loadImgComplete) {
+            for (Comment *aComment in self.pictureStatus.sampleComments) {
+                NSString *username = aComment.by.username;
+                NSString *content = aComment.text;
+                CommentLabel *cLabel = [[CommentLabel alloc]initWithFrame:CGRectMake(16, currentY, 320-16-repinButton.frame.origin.x, 0)];
+                cLabel.username = username;
+                cLabel.content = content;
+                //int userId = aComment.by.userId;
+                cLabel.usernameButton.tag = aComment.by.userId;
+                [cLabel.usernameButton addTarget:self action:@selector(commentUsernameButtonOnTouch:) forControlEvents:UIControlEventTouchUpInside];
+                currentY +=(cLabel.frame.size.height);
+                [self addSubview:cLabel];
+                [cLabel release];
+            }
+            NSLog(@"commentsCount:%d",pictureStatus.commentsCount);
+            if (pictureStatus.sampleComments.count<pictureStatus.commentsCount) {
+                [self.showAllCommentsButton setHidden:NO];
+                self.showAllCommentsButton.frame = CGRectMake(16, currentY, 288, 20);
+                showAllCommentsButton.titleLabel.font = [UIFont systemFontOfSize:12];
+                [showAllCommentsButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+                
+                [showAllCommentsButton setTitle:@"显示全部评论" forState:UIControlStateNormal];
+                [showAllCommentsButton setTitleColor:RGBA(174, 174, 174, 1) forState:UIControlStateNormal];
+                currentY += 14;
+            }else {
+                [self.showAllCommentsButton setHidden:YES];
+            }
+        }
+        self.contentSize = CGSizeMake(320, currentY+10);
         
     }
 }
@@ -222,6 +271,7 @@ static bool isRetina()
     tempImage = [[UIImage imageWithData:[aRequest responseData]]retain];
     [self.progressView removeFromSuperview];
     loadImgComplete = YES;
+    
     [self layout];
 }
 

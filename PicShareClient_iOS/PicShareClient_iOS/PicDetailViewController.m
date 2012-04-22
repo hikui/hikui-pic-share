@@ -11,6 +11,9 @@
 #import "PicShareEngine.h"
 #import "UserDetailViewController.h"
 #import "Common.h"
+#import "BoardDetailViewController.h"
+#import "PictureInfoEditViewController.h"
+#import "CommentsListViewController.h"
 
 //TODO: implement methods
 
@@ -78,6 +81,7 @@
         [detailView.boardNameButton addTarget:self action:@selector(boardNameButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [detailView.viaButton addTarget:self action:@selector(viaButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [detailView.repinButton addTarget:self action:@selector(repinButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [detailView.showAllCommentsButton addTarget:self action:@selector(allCommentsButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [detailView release];
     }
 }
@@ -137,6 +141,7 @@
     [detailView.boardNameButton addTarget:self action:@selector(boardNameButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     [detailView.viaButton addTarget:self action:@selector(viaButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     [detailView.repinButton addTarget:self action:@selector(repinButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [detailView.showAllCommentsButton addTarget:self action:@selector(allCommentsButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     [detailView release];
     
 }
@@ -150,7 +155,10 @@
 }
 - (void)boardNameButtonOnClick:(id)sender
 {
-#warning not implement yet
+    BoardDetailViewController *bdvc = [[BoardDetailViewController alloc]initWithNibName:@"BoardDetailViewController" bundle:nil];
+    bdvc.boardId = self.pictureStatus.boardId;
+    [self.navigationController pushViewController:bdvc animated:YES];
+    [bdvc release];
 }
 - (void)viaButtonOnClick:(id)sender
 {
@@ -160,7 +168,19 @@
 }
 - (void)repinButtonOnClick:(id)sender
 {
-    #warning not implement yet
+    PictureInfoEditViewController *pievc = [[PictureInfoEditViewController alloc]initWithNibName:@"PictureInfoEditViewController" bundle:nil];
+    pievc.repinPs = self.pictureStatus;
+    pievc.type = REPIN;
+    [self.navigationController pushViewController:pievc animated:YES];
+    [pievc release];
+}
+
+- (void)allCommentsButtonOnClick:(id)sender
+{
+    NSLog(@"allCommentsButtonOnClick");
+    CommentsListViewController *clvc = [[CommentsListViewController alloc]initWithPsId:self.pictureStatus.psId];
+    [self.navigationController pushViewController:clvc animated:YES];
+    [clvc release];
 }
 
 @end

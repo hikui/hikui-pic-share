@@ -47,6 +47,8 @@
 -(void)updatePictureStatus:(PictureStatus *)aPictureStatus;
 -(void)releasePictureStatus:(NSInteger)psId;
 -(NSArray *)getCommentsOfPictureStatus:(NSInteger)psId;
+-(NSArray *)getCommentsOfPictureStatus:(NSInteger)psId page:(NSInteger)page;
+-(NSArray *)getCommentsOfPictureStatus:(NSInteger)psId page:(NSInteger)page countPerPage:(NSInteger)count;
 -(NSArray *)getUserPictures:(NSInteger)userId count:(NSInteger)maxPictureCount;
 
 //user api
@@ -73,6 +75,7 @@
 
 
 //comment api
-
+-(Comment *)createComment:(NSString *)commentText toPicture:(NSInteger)psId;
+-(ErrorMessage *)deleteCommentById:(NSInteger)commentId;
 
 @end

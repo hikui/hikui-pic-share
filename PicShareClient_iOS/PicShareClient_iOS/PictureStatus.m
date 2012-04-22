@@ -10,7 +10,7 @@
 #import "Comment.h"
 @implementation PictureStatus
 
-@synthesize location,via,psId,owner,boardId,picture,timestamp,pictureUrl,picDescription,statusType,boardName,sampleComments;
+@synthesize location,via,psId,owner,boardId,picture,timestamp,pictureUrl,picDescription,statusType,boardName,sampleComments,commentsCount;
 
 -(id)initWithJSONDict:(NSDictionary *)data
 {
@@ -44,6 +44,7 @@
             [sampleComments addObject:comment];
             [comment release];
         }
+        commentsCount = [[data objectForKey:@"comments_count"]intValue];
     }
     return self;
 }
@@ -57,6 +58,7 @@
     [picture release];
     [timestamp release];
     [picDescription release];
+    [sampleComments release];
     [super dealloc];
 }
 

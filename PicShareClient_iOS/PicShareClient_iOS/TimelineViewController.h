@@ -11,7 +11,7 @@
 #import "ASIHTTPRequest.h"
 #import "TimelineCell.h"
 
-@interface TimelineViewController : PullRefreshTableViewController 
+@interface TimelineViewController : PullRefreshTableViewController <TimelineCellCommentDelegate>
 
 @property (nonatomic,retain) NSMutableArray *timeline; //it's full with picture statuses
 @property (readwrite) BOOL hasnext;

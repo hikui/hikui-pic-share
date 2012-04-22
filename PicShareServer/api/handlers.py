@@ -70,9 +70,10 @@ def getPictureStatusDict(request,ps):
     if ps is None:
         return None
     commentsArray = []
-    for comment in ps.comments.all().order_by('-id')[:10]:
+    for comment in ps.comments.all().order_by('-id')[:5]:
         commentDict = getCommentDict(request,comment)
         commentsArray.append(commentDict)
+    comments_count = ps.comments.count()
     psResultDict = {
         "ps_id":ps.id,
         "timestamp":ps.picture.timestamp,
@@ -81,6 +82,7 @@ def getPictureStatusDict(request,ps):
         "description":ps.description,
         "status_type":ps.status_type,
         "comments":commentsArray,
+        "comments_count":comments_count,
         "board_id":ps.board.id,
         'board_name':ps.board.name,
         "owner":getUserDict(request,ps.board.owner),
@@ -317,7 +319,7 @@ class GetHomeTimelineHandler(BaseHandler):
             q1 = Q(id__gt = sinceId)
         if maxIdStr is not None:
             maxId = int(maxIdStr)
-            q2 = Q(id__lte = maxIdStr)
+            q2 = Q(id__lte = maxId)
         
         totalCount = PictureStatus.objects.filter(Q(board__in=followingBoards)&q1&q2).count()
         pictureStatuses = PictureStatus.objects.filter(Q(board__in=followingBoards)&q1&q2).order_by('-id')[(page-1)*count:page*count]
@@ -569,5 +571,44 @@ class CreateCommentHandler(BaseHandler):
                 continue
             PSMessage.objects.create(by=request.user,to=to_user,text='@'+request.user.username+u'提到了您',message_type=2,extra=str(ps.id))
         return getCommentDict(request,new_comment)
+
+class GetCommentsOfAPictureStatusForm(forms.Form):
+    since_id = forms.IntegerField(min_value = 1, required = False)
+    max_id   = forms.IntegerField(min_value = 1, required = False)
+    count    = forms.IntegerField(min_value = 1, required = False)
+    page     = forms.IntegerField(min_value = 1, required = False)
+    ps_id    = forms.IntegerField(min_value = 1)
+class GetCommentsOfAPictureStatusHandler(BaseHandler):
+    allowed_methods = ('GET',)
+    @validate(GetCommentsOfAPictureStatusForm,'GET')
+    def read(self,request):
+        the_ps_id = request.form.cleaned_data['ps_id']
+        the_since_id = request.form.cleaned_data['since_id']
+        the_max_id = request.form.cleaned_data['max_id']
+        count = request.form.cleaned_data['count'] or 5
+        page = request.form.cleaned_data['page'] or 1
+        try:
+            ps = PictureStatus.objects.get(pk=the_ps_id)
+        except Exception, e:
+            return errorResponse(0,1,'目标不存在',rc.NOT_FOUND)
+        q1 = Q()
+        q2 = Q()
+
+        if the_max_id is not None:
+            q1 = Q(id__lte = the_max_id)
+        if the_since_id is not None:
+            q2 = Q(id__gt = the_since_id)
+        totalCount = ps.comments.filter(q1&q2).count()
+        comments = ps.comments.filter(q1&q2).order_by('-id')[(page-1)*count:page*count]
+        comments_list = list()
+        for aComment in comments:
+            comments_list.append(getCommentDict(request,aComment))
+        resultDict = dict()
+        resultDict['comments']=comments_list
+        if page*count >= totalCount:
+            resultDict['hasnext'] = 0
+        else:
+            resultDict['hasnext'] = 1
+        return resultDict
 
 

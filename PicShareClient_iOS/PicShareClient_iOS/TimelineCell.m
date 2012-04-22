@@ -12,15 +12,17 @@
 #import "ASIDownloadCache.h"
 #import "PicShareEngine.h"
 #import "Common.h"
+#import "CommentLabel.h"
 
 @interface TimelineCell ()
 
+- (void)commentUsernameButtonOnTouch:(id)sender;
 
 @end
 
 @implementation TimelineCell
 
-@synthesize avatarImageView,usernameButton,boardNameButton,picDescriptionLabel,mainImageView,repinButton,commentTextField,pictureStatus,viaButton,request,viaLabel;
+@synthesize avatarImageView,usernameButton,boardNameButton,picDescriptionLabel,mainImageView,repinButton,commentTextField,pictureStatus,viaButton,request,viaLabel,delegate;
 
 - (void)dealloc
 {
@@ -146,14 +148,23 @@
         repinButton.frame = repinButtonFrame;
         [repinButton setTitle:@"转发" forState:UIControlStateNormal];
         repinButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        PicShareEngine *engine = [PicShareEngine sharedEngine];
-        if (self.pictureStatus.owner.userId == engine.userId) {
-            [repinButton setHidden:YES];
-        }else {
-            [repinButton setHidden:NO];
-        }
         // to be continued
-#warning comments
+        
+        CGFloat currentY = repinButton.frame.origin.y + repinButton.frame.size.height+8;
+        for (Comment *aComment in self.pictureStatus.sampleComments) {
+            NSString *username = aComment.by.username;
+            NSString *content = aComment.text;
+            CommentLabel *cLabel = [[CommentLabel alloc]initWithFrame:CGRectMake(16, currentY, 320-16-repinButton.frame.origin.x, 0)];
+            cLabel.username = username;
+            cLabel.content = content;
+            //int userId = aComment.by.userId;
+            cLabel.usernameButton.tag = aComment.by.userId;
+            [cLabel.usernameButton addTarget:self action:@selector(commentUsernameButtonOnTouch:) forControlEvents:UIControlEventTouchUpInside];
+            currentY +=(cLabel.frame.size.height);
+            [self.contentView addSubview:cLabel];
+            [cLabel release];
+        }
+        
     }
 }
 
@@ -162,6 +173,12 @@
     self.mainImageView.image = [UIImage imageNamed:@"PicturePlaceHolder.png"];
     for (UIView *aSubView in self.mainImageView.subviews) {
         [aSubView removeFromSuperview];
+    }
+    // remove all comments:
+    for (UIView *aSubView in self.contentView.subviews) {
+        if ([aSubView isKindOfClass:[CommentLabel class]]) {
+            [aSubView removeFromSuperview];
+        }
     }
 }
 
@@ -182,6 +199,12 @@
     }
 }
 
+- (void)commentUsernameButtonOnTouch:(id)sender
+{
+    //NSLog(@"inTimelineCell, commentUsernameButtonOnTouch");
+    [delegate commentUsernameButtonOnTouch:sender];
+}
+
 + (CGFloat)calculateCellHeightWithPictureStatus:(PictureStatus *)aPictureStatus
 {
     CGFloat height = 403.0f;
@@ -190,9 +213,10 @@
     }
     CGSize picDescriptionLabelSize = [aPictureStatus.picDescription sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(300, 2000) lineBreakMode:UILineBreakModeWordWrap];
     height += picDescriptionLabelSize.height;
-    PicShareEngine *engine = [PicShareEngine sharedEngine];
-    if (aPictureStatus.owner.userId == engine.userId) {
-        height -= 30;
+    
+    for (Comment* c in aPictureStatus.sampleComments) {
+        CGFloat labelHeight = [CommentLabel calculateHeightWithUsername:c.by.username content:c.text constrainedToSize:CGSizeMake(300, 9999)];
+        height += (labelHeight);
     }
     return  height;
 }

@@ -51,6 +51,15 @@ static bool isRetina()
     for (ASIHTTPRequest *aRequest in aliveRequest) {
         [aRequest clearDelegatesAndCancel];
     }
+    
+    NSUInteger rows = [self.tableView numberOfRowsInSection:0];
+    for (int i=0; i<rows; i++) {
+        TimelineCell *cell = (TimelineCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        if ([cell isKindOfClass:[timeline class]]) {
+            cell.delegate = nil;
+        }
+    }
+    
     [aliveRequest release];
     [super dealloc];
 }
@@ -130,6 +139,7 @@ static bool isRetina()
         [cell.usernameButton addTarget:self action:@selector(userNameButtonOnTouch:) forControlEvents:UIControlEventTouchUpInside];
         [cell.boardNameButton addTarget:self action:@selector(boardButtonOnTouch:) forControlEvents:UIControlEventTouchUpInside];
         [cell.repinButton addTarget:self action:@selector(repinButtonOnTouch:) forControlEvents:UIControlEventTouchUpInside];
+        cell.delegate = self;
     }
     [cell clearImage];
     PictureStatus *ps = [timeline objectAtIndex:indexPath.row];
@@ -280,7 +290,7 @@ static bool isRetina()
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc]init];
     PicShareEngine *engine = [PicShareEngine sharedEngine];
     PictureStatus *theTopOne = [self.timeline objectAtIndex:0];
-    NSArray *resultArray = [engine getHomeTimelineOfPage:++currentPage since:-1 max:theTopOne.psId];
+    NSArray *resultArray = [engine getHomeTimelineOfPage:currentPage+1 since:-1 max:theTopOne.psId];
     NSLog(@"timeline:%@",resultArray);
     [self performSelectorOnMainThread:@selector(pageDataDidFinish:) withObject:resultArray waitUntilDone:NO];
     [pool drain];
@@ -301,6 +311,7 @@ static bool isRetina()
     else {
         self.hasnext = NO;
     }
+    self.currentPage++;
     [self.tableView reloadData];
 }
 
@@ -383,5 +394,15 @@ static bool isRetina()
     pievc.type = REPIN;
     [self.navigationController pushViewController:pievc animated:YES];
     [pievc release];
+}
+
+#pragma mark - TimlineCellDelegate
+-(void)commentUsernameButtonOnTouch:(id)sender
+{
+    UIButton *b = (UIButton *)sender;
+    int userId = b.tag;
+    UserDetailViewController *udvc = [[UserDetailViewController alloc]initwithuserId:userId];
+    [self.navigationController pushViewController:udvc animated:YES];
+    [udvc release];
 }
 @end
