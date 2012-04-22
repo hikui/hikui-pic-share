@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PictureStatus.h"
 
 @interface CommentsListViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
@@ -17,6 +18,7 @@
 
 @property (nonatomic,retain) NSMutableArray *comments;
 @property (nonatomic) NSInteger psId;
+@property (nonatomic,retain) PictureStatus *ps;
 
 @property (nonatomic) BOOL hasNext;
 @property (nonatomic) NSInteger currentPage;

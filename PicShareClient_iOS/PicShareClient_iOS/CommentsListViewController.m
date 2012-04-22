@@ -16,11 +16,12 @@
 - (void)loadData;
 - (void)addComment:(NSString *)text;
 - (void)pageData;
+- (void)toggleEdit;
 
 @end
 
 @implementation CommentsListViewController
-@synthesize tableView,commentTF,commentCell,comments,psId,hasNext,currentPage;
+@synthesize tableView,commentTF,commentCell,comments,psId,hasNext,currentPage,ps;
 
 - (void)dealloc
 {
@@ -53,6 +54,7 @@
 {
     [super viewDidLoad];
     [self loadData];
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEdit)]autorelease];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -67,6 +69,11 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)toggleEdit
+{
+    [self.tableView setEditing:!self.tableView.editing animated:YES];
 }
 
 #pragma mark - tableview delegate and datasource
@@ -148,6 +155,27 @@
     }
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == self.comments.count) {
+        return NO;
+    }
+    PicShareEngine *engine = [PicShareEngine sharedEngine];
+    if (self.ps.owner.userId == engine.userId) {
+        return YES;
+    }
+    Comment *c = [self.comments objectAtIndex:indexPath.row];
+    if (c.by.userId == engine.userId) {
+        return YES;
+    }
+    return NO;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
 #pragma mark - TF delegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -190,11 +218,13 @@
         NSArray *resultArray = [engine getCommentsOfPictureStatus:psId];
         NSArray *resultComments = [resultArray subarrayWithRange:NSMakeRange(1, resultArray.count-1)];
         BOOL _hasNext = [[resultArray objectAtIndex:0]boolValue];
+        PictureStatus *thePs = [engine getPictureStatus:self.psId];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.comments = [[NSMutableArray alloc]initWithArray:resultComments];
             [self.tableView reloadData];
             self.hasNext = _hasNext;
             self.currentPage = 1;
+            self.ps = thePs;
             [MBProgressHUD hideHUDForView:window animated:YES];
         });
     });
