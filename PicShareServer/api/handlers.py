@@ -611,4 +611,24 @@ class GetCommentsOfAPictureStatusHandler(BaseHandler):
             resultDict['hasnext'] = 1
         return resultDict
 
+class DeleteCommentForm(forms.Form):
+    comment_id = forms.IntegerField(min_value=1)
+class DeleteCommentHandler(BaseHandler):
+    allowed_methods = ('POST',)
+    @validate(DeleteCommentForm)
+    def create(self,request):
+        the_comment_id = request.form.cleaned_data['comment_id']
+        try:
+            comment = Comment.objects.get(pk=the_comment_id)
+        except:
+            return errorResponse(0,1,'目标不存在',rc.NOT_FOUND)
+        if comment.by.id == request.user.id or comment.picture_status.board.owner.id == request.user.id:
+            comment.delete()
+            return errorResponse(0,0,'操作成功',rc.ALL_OK)
+        return errorResponse(0,2,"权限错误",rc.FORBIDDEN)
+        
+
+
+
+
 

@@ -22,6 +22,8 @@
 
 @property (nonatomic) BOOL hasNext;
 @property (nonatomic) NSInteger currentPage;
+
+@property (nonatomic) NSInteger flagId;
 - (id)initWithPsId:(NSInteger)thePsId;
 
 @end

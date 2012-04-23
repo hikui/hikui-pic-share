@@ -17,11 +17,12 @@
 - (void)addComment:(NSString *)text;
 - (void)pageData;
 - (void)toggleEdit;
+- (void)deleteComment:(Comment *)comment;
 
 @end
 
 @implementation CommentsListViewController
-@synthesize tableView,commentTF,commentCell,comments,psId,hasNext,currentPage,ps;
+@synthesize tableView,commentTF,commentCell,comments,psId,hasNext,currentPage,ps,flagId;
 
 - (void)dealloc
 {
@@ -150,7 +151,7 @@
 {
     [self.commentTF resignFirstResponder];
     [theTableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == self.comments.count) {
+    if (indexPath.row == self.comments.count && self.hasNext) {
         [self pageData];
     }
 }
@@ -174,6 +175,20 @@
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewCellEditingStyleDelete;
+}
+
+
+- (void)tableView:(UITableView *)tv commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    // If row is deleted, remove it from the list.
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        Comment *commnetToDelete = [self.comments objectAtIndex:indexPath.row];
+        [self deleteComment:commnetToDelete];
+        NSArray *paths = [[NSArray alloc]initWithObjects:indexPath, nil];
+        [self.comments removeObjectAtIndex:indexPath.row];
+        self.flagId = ((Comment *)[self.comments objectAtIndex:0]).commentId;
+        [self.tableView deleteRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationLeft];
+        [paths release];
+    }
 }
 
 #pragma mark - TF delegate
@@ -221,6 +236,7 @@
         PictureStatus *thePs = [engine getPictureStatus:self.psId];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.comments = [[NSMutableArray alloc]initWithArray:resultComments];
+            self.flagId = ((Comment *)[self.comments objectAtIndex:0]).commentId;
             [self.tableView reloadData];
             self.hasNext = _hasNext;
             self.currentPage = 1;
@@ -240,6 +256,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             if (newComment!=nil) {
                 [self.comments insertObject:newComment atIndex:0];
+                //NSLog(@"addcomment: %@",self.comments);
                 NSArray *indexPaths = [[NSArray alloc]initWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil];
                 [self.tableView beginUpdates];
                 [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationBottom];
@@ -255,13 +272,13 @@
     [MBProgressHUD showHUDAddedTo:window animated:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         PicShareEngine *engine = [PicShareEngine sharedEngine];
-        NSArray *resultArray = [engine getCommentsOfPictureStatus:psId page:currentPage+1];
-        NSArray *resultComments = [resultArray subarrayWithRange:NSMakeRange(1, resultArray.count-1)];
+        NSArray *resultArray = [engine getCommentsOfPictureStatus:psId page:currentPage+1 countPerPage:5 max:flagId since:-1];
+        NSLog(@"flagId:%d",self.flagId);
+        NSArray *resultComments = [resultArray subarrayWithRange:NSMakeRange(1, resultArray.count-1)];//第0个为hasnext
         BOOL _hasNext = [[resultArray objectAtIndex:0]boolValue];
         dispatch_async(dispatch_get_main_queue(), ^{
             
             NSMutableArray *indexPaths = [[NSMutableArray alloc]init];
-            
             NSInteger originCommentsCount = self.comments.count;
             for (Comment *c in resultComments) {
                 NSIndexPath *path = [NSIndexPath indexPathForRow:originCommentsCount inSection:0];
@@ -279,4 +296,13 @@
         });
     });
 }
+
+- (void)deleteComment:(Comment *)comment
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        PicShareEngine *engine = [PicShareEngine sharedEngine];
+        [engine deleteCommentById:comment.commentId];
+    });
+}
+
 @end

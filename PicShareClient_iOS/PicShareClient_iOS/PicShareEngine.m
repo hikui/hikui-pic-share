@@ -676,7 +676,20 @@ static PicShareEngine *instance = NULL;
 }
 -(NSArray *)getCommentsOfPictureStatus:(NSInteger)psId page:(NSInteger)page countPerPage:(NSInteger)count
 {
-    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingFormat:@"api/picture/get_comments.json?ps_id=%d&page=%d&count=%d",psId,page,count]];
+    
+    return [self getCommentsOfPictureStatus:psId page:page countPerPage:count max:-1 since:-1];
+}
+
+-(NSArray *)getCommentsOfPictureStatus:(NSInteger)psId page:(NSInteger)page countPerPage:(NSInteger)count max:(NSInteger)maxId since:(NSInteger)sinceId
+{
+    NSString *urlStr = [picshareDomain stringByAppendingFormat:@"api/picture/get_comments.json?ps_id=%d&page=%d&count=%d",psId,page,count];
+    if (maxId>0) {
+        urlStr = [urlStr stringByAppendingFormat:@"&max_id=%d",maxId];
+    }
+    if (sinceId>0) {
+        urlStr = [urlStr stringByAppendingFormat:@"&since_id=%d",sinceId];
+    }
+    NSURL *url = [NSURL URLWithString:urlStr];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [self addAuthHeaderForRequest:request];
     [request startSynchronous];
@@ -742,6 +755,35 @@ static PicShareEngine *instance = NULL;
             [alert release];
             [em release];
         }
+    }
+    return nil;
+}
+
+-(ErrorMessage *)deleteCommentById:(NSInteger)commentId
+{
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingString:@"api/comment/delete.json"]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request addPostValue:[NSNumber numberWithInteger:commentId] forKey:@"comment_id"];
+    [self addAuthHeaderForRequest:request];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error) {
+        response = [request responseString];
+    }
+    else {
+        //do something in ui
+        return nil;
+    }
+    if (response != nil) {
+        NSDictionary *dataDict = [response objectFromJSONString];
+        ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+        if (request.responseStatusCode != 200) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:em.errorMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+            [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
+            [alert release];
+        }
+        return [em autorelease];
     }
     return nil;
 }
