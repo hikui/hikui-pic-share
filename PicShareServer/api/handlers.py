@@ -387,6 +387,8 @@ class FollowHandler(BaseHandler):
             except:
                 return errorResponse(0,1,'用户不存在',rc.NOT_FOUND)
             user.relationships.add(targetUser)
+            # create a message 
+            PSMessage.objects.create(by=request.user,to=targetUser,text=u'关注了您',message_type=1)
             for aBoard in targetUser.my_boards.all():
                 aBoard.followers.add(user)
             return errorResponse(0,0,'操作成功',rc.ALL_OK)
@@ -576,7 +578,7 @@ class CreateCommentHandler(BaseHandler):
             #如果 被提到的用户列表里面存在相册的主人，则使用“提到了您”代替
             pass
         else:
-            PSMessage.objects.create(by=request.user,to=ps.board.owner,text='@'+request.user.username+u' 评论了您的照片',message_type=2,extra=str(ps.id))
+            PSMessage.objects.create(by=request.user,to=ps.board.owner,text=u'评论了您的照片',message_type=2,extra=str(ps.id))
         #----message to mentioned users
 
         for aName in fixed_mentioned_names:
@@ -584,7 +586,7 @@ class CreateCommentHandler(BaseHandler):
                 to_user = User.objects.get(username=aName)
             except:
                 continue
-            PSMessage.objects.create(by=request.user,to=to_user,text='@'+request.user.username+u'提到了您',message_type=3,extra=str(ps.id))
+            PSMessage.objects.create(by=request.user,to=to_user,text=u'提到了您',message_type=3,extra=str(ps.id))
         return getCommentDict(request,new_comment)
 
 class GetCommentsOfAPictureStatusForm(forms.Form):

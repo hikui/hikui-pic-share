@@ -14,11 +14,15 @@
 #import "CategoriesViewController.h"
 #import "UserDetailViewController.h"
 #import "TimelineViewController.h"
+#import "ASIHTTPRequest.h"
 
 @interface PicShareClient_iOSAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate>
 
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet CustomTabBarController *tabBarController;
+
+- (void) handleTimer: (NSTimer *) timer;
+- (void) didReceiveUnreadMessageCount:(ASIHTTPRequest *)request;
 
 @end

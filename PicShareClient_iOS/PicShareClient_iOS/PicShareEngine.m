@@ -847,6 +847,7 @@ static PicShareEngine *instance = NULL;
     NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingString:@"api/message/get_unread_messages_count.json"]];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [self addAuthHeaderForRequest:request];
+    [request setTimeOutSeconds:60];
     [request startSynchronous];
     
     NSError *error = [request error];

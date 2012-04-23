@@ -16,6 +16,10 @@
 @synthesize tabBarController;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //set timer to refresh unread messages count
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(handleTimer:) userInfo:@"refresh messages count" repeats:YES];
+    [timer fire];
+    
     
     self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
@@ -77,7 +81,23 @@
     [super dealloc];
 }
 
+- (void) handleTimer: (NSTimer *) timer
+{
+    NSLog(@"timer fired");
+    PicShareEngine *engine = [PicShareEngine sharedEngine];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        NSInteger count = [engine getUnreadMessagesCount];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"unread:%d",count);
+        });
+    });
+    
+}
 
+- (void) didReceiveUnreadMessageCount:(ASIHTTPRequest *)request
+{
+    
+}
 
 /*
 // Optional UITabBarControllerDelegate method.
