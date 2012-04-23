@@ -79,4 +79,9 @@
 -(Comment *)createComment:(NSString *)commentText toPicture:(NSInteger)psId;
 -(ErrorMessage *)deleteCommentById:(NSInteger)commentId;
 
+//messages
+-(NSArray *)getMessagesToMe;
+-(NSArray *)getMessagesToMeWithPage:(NSInteger)page countPerPage:(NSInteger)count since:(NSInteger)sinceId max:(NSInteger)maxId;
+-(NSInteger)getUnreadMessagesCount;
+
 @end

@@ -50,6 +50,7 @@
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -69,12 +70,12 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<bool key="IBUIHorizontal">NO</bool>
-				<object class="IBUINavigationController" key="IBUISelectedViewController" id="865550478">
-					<object class="IBUITabBarItem" key="IBUITabBarItem" id="109288227">
-						<string key="IBUITitle">个人档案</string>
+				<object class="IBUINavigationController" key="IBUISelectedViewController" id="385578244">
+					<object class="IBUITabBarItem" key="IBUITabBarItem" id="761855884">
+						<string key="IBUITitle">消息</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">man.png</string>
+							<string key="NSResourceName">mail.png</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
@@ -86,7 +87,7 @@
 					</object>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					<bool key="IBUIHorizontal">NO</bool>
-					<object class="IBUINavigationBar" key="IBUINavigationBar" id="449837587">
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="300669310">
 						<nil key="NSNextResponder"/>
 						<int key="NSvFlags">256</int>
 						<string key="NSFrameSize">{0, 0}</string>
@@ -98,14 +99,12 @@
 					</object>
 					<object class="NSMutableArray" key="IBUIViewControllers">
 						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="IBUIViewController" id="74297435">
-							<string key="IBUITitle">个人档案</string>
-							<object class="IBUINavigationItem" key="IBUINavigationItem" id="740586492">
-								<string key="IBUITitle">个人档案</string>
+						<object class="IBUIViewController" id="237806034">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="710007971">
+								<string key="IBUITitle">消息</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
-							<reference key="IBUIParentViewController" ref="865550478"/>
-							<string key="IBUINibName">UserDetailViewController</string>
+							<reference key="IBUIParentViewController" ref="385578244"/>
 							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 								<int key="IBUIInterfaceOrientation">1</int>
 								<int key="interfaceOrientation">1</int>
@@ -224,12 +223,13 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBUIHorizontal">NO</bool>
 					</object>
-					<object class="IBUINavigationController" id="385578244">
-						<object class="IBUITabBarItem" key="IBUITabBarItem" id="761855884">
-							<string key="IBUITitle">消息</string>
+					<reference ref="385578244"/>
+					<object class="IBUINavigationController" id="865550478">
+						<object class="IBUITabBarItem" key="IBUITabBarItem" id="109288227">
+							<string key="IBUITitle">个人档案</string>
 							<object class="NSCustomResource" key="IBUIImage">
 								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">mail.png</string>
+								<string key="NSResourceName">man.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
@@ -241,7 +241,7 @@
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBUIHorizontal">NO</bool>
-						<object class="IBUINavigationBar" key="IBUINavigationBar" id="300669310">
+						<object class="IBUINavigationBar" key="IBUINavigationBar" id="449837587">
 							<nil key="NSNextResponder"/>
 							<int key="NSvFlags">256</int>
 							<string key="NSFrameSize">{0, 0}</string>
@@ -253,12 +253,14 @@
 						</object>
 						<object class="NSMutableArray" key="IBUIViewControllers">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIViewController" id="237806034">
-								<object class="IBUINavigationItem" key="IBUINavigationItem" id="710007971">
-									<string key="IBUITitle">消息</string>
+							<object class="IBUIViewController" id="74297435">
+								<string key="IBUITitle">个人档案</string>
+								<object class="IBUINavigationItem" key="IBUINavigationItem" id="740586492">
+									<string key="IBUITitle">个人档案</string>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
-								<reference key="IBUIParentViewController" ref="385578244"/>
+								<reference key="IBUIParentViewController" ref="865550478"/>
+								<string key="IBUINibName">UserDetailViewController</string>
 								<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 									<int key="IBUIInterfaceOrientation">1</int>
 									<int key="interfaceOrientation">1</int>
@@ -268,13 +270,13 @@
 							</object>
 						</object>
 					</object>
-					<reference ref="865550478"/>
 				</object>
 				<object class="IBUITabBar" key="IBUITabBar" id="441541451">
 					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">266</int>
 					<string key="NSFrame">{{0, 431}, {320, 49}}</string>
 					<reference key="NSSuperview"/>
+					<reference key="NSNextKeyView"/>
 					<string key="NSReuseIdentifierKey">_NS:29</string>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">3</int>
@@ -544,6 +546,7 @@
 					<string>135.IBPluginDependency</string>
 					<string>136.IBPluginDependency</string>
 					<string>137.IBPluginDependency</string>
+					<string>138.CustomClassName</string>
 					<string>138.IBPluginDependency</string>
 					<string>139.IBPluginDependency</string>
 					<string>140.IBPluginDependency</string>
@@ -584,6 +587,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>MessagesListViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

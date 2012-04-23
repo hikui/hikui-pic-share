@@ -118,6 +118,9 @@
 		A4FDB342151F01660048C199 /* BoardPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FDB340151F01660048C199 /* BoardPickerViewController.m */; };
 		A4FDB347151F05E30048C199 /* SingleTextInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4FDB345151F05E30048C199 /* SingleTextInputViewController.m */; };
 		A4FDB348151F05E30048C199 /* SingleTextInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4FDB346151F05E30048C199 /* SingleTextInputViewController.xib */; };
+		E65EC76115452ABE00158EA6 /* MessagesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65EC75F15452ABE00158EA6 /* MessagesListViewController.m */; };
+		E65EC76215452ABE00158EA6 /* MessagesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E65EC76015452ABE00158EA6 /* MessagesListViewController.xib */; };
+		E65EC76615452B5200158EA6 /* PSMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = E65EC76515452B5200158EA6 /* PSMessage.m */; };
 		E6DCC02A153D0BB10025F70A /* anonymous.png in Resources */ = {isa = PBXBuildFile; fileRef = E6DCC029153D0BB10025F70A /* anonymous.png */; };
 		E6DCC02E153D130F0025F70A /* UserInfoEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DCC02C153D130E0025F70A /* UserInfoEditorViewController.m */; };
 		E6DCC02F153D130F0025F70A /* UserInfoEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6DCC02D153D130E0025F70A /* UserInfoEditorViewController.xib */; };
@@ -302,6 +305,11 @@
 		A4FDB344151F05E20048C199 /* SingleTextInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleTextInputViewController.h; sourceTree = "<group>"; };
 		A4FDB345151F05E30048C199 /* SingleTextInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleTextInputViewController.m; sourceTree = "<group>"; };
 		A4FDB346151F05E30048C199 /* SingleTextInputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleTextInputViewController.xib; sourceTree = "<group>"; };
+		E65EC75E15452ABE00158EA6 /* MessagesListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesListViewController.h; sourceTree = "<group>"; };
+		E65EC75F15452ABE00158EA6 /* MessagesListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesListViewController.m; sourceTree = "<group>"; };
+		E65EC76015452ABE00158EA6 /* MessagesListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesListViewController.xib; sourceTree = "<group>"; };
+		E65EC76415452B5200158EA6 /* PSMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSMessage.h; sourceTree = "<group>"; };
+		E65EC76515452B5200158EA6 /* PSMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSMessage.m; sourceTree = "<group>"; };
 		E6DCC029153D0BB10025F70A /* anonymous.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = anonymous.png; sourceTree = "<group>"; };
 		E6DCC02B153D130D0025F70A /* UserInfoEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoEditorViewController.h; sourceTree = "<group>"; };
 		E6DCC02C153D130E0025F70A /* UserInfoEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoEditorViewController.m; sourceTree = "<group>"; };
@@ -344,6 +352,8 @@
 				A40B56FA150339790045C9B1 /* Comment.m */,
 				A468C10E152C3CB400D1CE6B /* ErrorMessage.h */,
 				A468C10F152C3CB400D1CE6B /* ErrorMessage.m */,
+				E65EC76415452B5200158EA6 /* PSMessage.h */,
+				E65EC76515452B5200158EA6 /* PSMessage.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -449,6 +459,9 @@
 				E6DCC02C153D130E0025F70A /* UserInfoEditorViewController.m */,
 				A496A1901543E61D004169D1 /* CommentsListViewController.h */,
 				A496A1911543E61D004169D1 /* CommentsListViewController.m */,
+				E65EC75E15452ABE00158EA6 /* MessagesListViewController.h */,
+				E65EC75F15452ABE00158EA6 /* MessagesListViewController.m */,
+				E65EC76015452ABE00158EA6 /* MessagesListViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -795,6 +808,7 @@
 				E6DCC02F153D130F0025F70A /* UserInfoEditorViewController.xib in Resources */,
 				A496A1941543E61D004169D1 /* CommentsListViewController.xib in Resources */,
 				A46D14D6154417C2007859E0 /* CommentCell.xib in Resources */,
+				E65EC76215452ABE00158EA6 /* MessagesListViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -863,6 +877,8 @@
 				E6DCC02E153D130F0025F70A /* UserInfoEditorViewController.m in Sources */,
 				E6E6180215401586005AC1B0 /* CommentLabel.m in Sources */,
 				A496A1931543E61D004169D1 /* CommentsListViewController.m in Sources */,
+				E65EC76115452ABE00158EA6 /* MessagesListViewController.m in Sources */,
+				E65EC76615452B5200158EA6 /* PSMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

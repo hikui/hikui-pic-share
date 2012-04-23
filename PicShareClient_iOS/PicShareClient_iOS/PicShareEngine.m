@@ -10,6 +10,7 @@
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 #import "JSONKit.h"
+#import "PSMessage.h"
 
 #define UPLOAD_IMAGE 0
 
@@ -706,8 +707,8 @@ static PicShareEngine *instance = NULL;
         NSDictionary *dataDict = [response objectFromJSONString];
         NSDictionary *commentsDataArray = [dataDict objectForKey:@"comments"];
         NSValue *hasNext = [dataDict objectForKey:@"hasnext"];
-        NSMutableArray *resultArray = [[NSMutableArray alloc]init];
         if (commentsDataArray!=nil) {
+            NSMutableArray *resultArray = [[NSMutableArray alloc]init];
             for (NSDictionary *aCommentData in commentsDataArray) {
                 Comment *c = [[Comment alloc]initWithJSONDict:aCommentData];
                 [resultArray addObject:c];
@@ -745,7 +746,7 @@ static PicShareEngine *instance = NULL;
     }
     if (response != nil) {
         NSDictionary *dataDict = [response objectFromJSONString];
-        Comment *c = [[Comment alloc]initWithJSONDict:dataDict];
+        Comment *c = [[[Comment alloc]initWithJSONDict:dataDict]autorelease];
         if (c!=nil) {
             return c;
         }else {
@@ -786,6 +787,91 @@ static PicShareEngine *instance = NULL;
         return [em autorelease];
     }
     return nil;
+}
+
+-(NSArray *)getMessagesToMe
+{
+    return [self getMessagesToMeWithPage:1 countPerPage:5 since:-1 max:-1];
+}
+-(NSArray *)getMessagesToMeWithPage:(NSInteger)page countPerPage:(NSInteger)count since:(NSInteger)sinceId max:(NSInteger)maxId
+{
+    NSString *urlStr = [picshareDomain stringByAppendingFormat:@"api/message/get_mine.json?page=%d&count=%d",page,count];
+    if (maxId>0) {
+        urlStr = [urlStr stringByAppendingFormat:@"&max_id=%d",maxId];
+    }
+    if (sinceId>0) {
+        urlStr = [urlStr stringByAppendingFormat:@"&since_id=%d",sinceId];
+    }
+    NSURL *url = [NSURL URLWithString:urlStr];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [self addAuthHeaderForRequest:request];
+    [request startSynchronous];
+    
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error) {
+        response = [request responseString];
+    }
+    else {
+        //do something in ui
+        return nil;
+    }
+    if (response != nil) {
+        NSLog(@"%@",response);
+        NSDictionary *dataDict = [response objectFromJSONString];
+        NSLog(@"datadict:%@",dataDict);
+        NSArray *messagesDataArray = [dataDict objectForKey:@"messages"];
+        NSValue *hasnext = [dataDict objectForKey:@"hasnext"];
+        if (messagesDataArray != nil) {
+            NSMutableArray *resultArray = [[NSMutableArray alloc]init];
+            for (NSDictionary *aMessageDict in messagesDataArray) {
+                PSMessage *msg = [[PSMessage alloc]initWithJSONDict:aMessageDict];
+                [resultArray addObject:msg];
+                [msg release];
+            }
+            [resultArray insertObject:hasnext atIndex:0];
+            return resultArray;
+        }else{
+            ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:em.errorMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+            [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
+            [alert release];
+            [em release];
+        }
+    }
+    return nil;
+
+}
+-(NSInteger)getUnreadMessagesCount
+{
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingString:@"api/message/get_unread_messages_count.json"]];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [self addAuthHeaderForRequest:request];
+    [request startSynchronous];
+    
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error) {
+        response = [request responseString];
+    }
+    else {
+        //do something in ui
+        return 0;
+    }
+    if (response != nil) {
+        NSDictionary *dataDict = [response objectFromJSONString];
+        NSNumber *nResult = [dataDict objectForKey:@"count"];
+        if (nResult != nil) {
+            return [nResult integerValue];
+        }else{
+            ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:em.errorMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+            [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
+            [alert release];
+            [em release];
+        }
+    }
+    return 0;
 }
 
 @end

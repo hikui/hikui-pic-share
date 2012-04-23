@@ -97,7 +97,9 @@ class PSMessage(models.Model):
     text =  models.CharField(max_length=140, null=True, blank=True)
     PSMESSAGE_TYPES=(
         (1,u'Following Message'),
-        (2,u'Commentment Message'),
+        (2,u'Comment Message'),
+        (3,u'Mention Message'),
     )
     message_type = models.IntegerField(choices=PSMESSAGE_TYPES)
     extra        = models.CharField(max_length = 140, null=True, blank=True) #其他信息，比如被评论的psId，用于客户端连接到ps detail。
+    mark_read    = models.IntegerField(default = 0)

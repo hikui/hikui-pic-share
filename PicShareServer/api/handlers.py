@@ -144,6 +144,20 @@ def getCommentDict(request,comment):
     }
     return commentDict
 
+def getPSMessageDict(request,psmsg):
+    if psmsg is None:
+        return None
+    messageDict = {
+        'psmsg_id':psmsg.id,
+        'by':getUserDict(request,psmsg.by),
+        'to':getUserDict(request,psmsg.to),
+        'text':psmsg.text,
+        'extra':psmsg.extra,
+        'type':psmsg.message_type,
+        'mark_read':psmsg.mark_read
+    }
+    return messageDict
+
 class GetAllCategoriesHandler(BaseHandler):
     model = Category
     allowed_methods=('GET',)
@@ -156,7 +170,8 @@ class GetAllCategoriesHandler(BaseHandler):
             tempDict['name'] = aCategory.name
             resultArray.append(tempDict)
         return {"categories":resultArray}
-        
+      
+ 
   
 class GetBoardsOfCategoryHandler(BaseHandler):
     allowed_methods=('GET',)
@@ -556,12 +571,12 @@ class CreateCommentHandler(BaseHandler):
         new_comment = Comment.objects.create(picture_status=ps,by=request.user,to=ps.board.owner,text=the_text)
 
         #make messages to this event:
-        #----message to pic owner:
-        if request.user.id == ps.board.owner.id or (request.user.username in fixed_mentioned_names):
+        #----message to pic owner: 
+        if request.user.id == ps.board.owner.id or (ps.board.owner.username in fixed_mentioned_names):
             #如果 被提到的用户列表里面存在相册的主人，则使用“提到了您”代替
             pass
         else:
-            PSMessage.objects.create(by=request.user,to=ps.board.owner,text='@'+request.user.username+u' 评论了您的照片',message_type=2)
+            PSMessage.objects.create(by=request.user,to=ps.board.owner,text='@'+request.user.username+u' 评论了您的照片',message_type=2,extra=str(ps.id))
         #----message to mentioned users
 
         for aName in fixed_mentioned_names:
@@ -569,7 +584,7 @@ class CreateCommentHandler(BaseHandler):
                 to_user = User.objects.get(username=aName)
             except:
                 continue
-            PSMessage.objects.create(by=request.user,to=to_user,text='@'+request.user.username+u'提到了您',message_type=2,extra=str(ps.id))
+            PSMessage.objects.create(by=request.user,to=to_user,text='@'+request.user.username+u'提到了您',message_type=3,extra=str(ps.id))
         return getCommentDict(request,new_comment)
 
 class GetCommentsOfAPictureStatusForm(forms.Form):
@@ -627,8 +642,43 @@ class DeleteCommentHandler(BaseHandler):
             return errorResponse(0,0,'操作成功',rc.ALL_OK)
         return errorResponse(0,2,"权限错误",rc.FORBIDDEN)
         
+class GetMessagesForm(forms.Form):
+    since_id = forms.IntegerField(min_value = 1, required = False)
+    max_id   = forms.IntegerField(min_value = 1, required = False)
+    count    = forms.IntegerField(min_value = 1, required = False)
+    page     = forms.IntegerField(min_value = 1, required = False)
+class GetMessagesHandler(BaseHandler):
+    allowed_methods = ('GET',)
+    @validate(GetMessagesForm,'GET')
+    def read(self,request):
+        the_since_id = request.form.cleaned_data['since_id']
+        the_max_id = request.form.cleaned_data['max_id']
+        count = request.form.cleaned_data['count'] or 5
+        page = request.form.cleaned_data['page'] or 1
+        print page
+        print count
+        q1 = Q()
+        q2 = Q()
 
+        if the_max_id is not None:
+            q1 = Q(id__lte = the_max_id)
+        if the_since_id is not None:
+            q2 = Q(id__gt = the_since_id)
+        totalCount = request.user.messages_to_me.filter(q1&q2).count()
+        messages = request.user.messages_to_me.filter(q1&q2).order_by('-id')[(page-1)*count:page*count]
+        messages_list = list()
+        for aMessage in messages:
+            messages_list.append(getPSMessageDict(request,aMessage))
+        resultDict = dict()
+        resultDict['messages'] = messages_list
+        if page*count >= totalCount:
+            resultDict['hasnext'] = 0
+        else:
+            resultDict['hasnext'] = 1
+        return resultDict
 
-
-
-
+class GetUnreadMessagesCountHandler(BaseHandler):
+    allowed_methods=('GET')
+    def read(self,request):
+        count = request.user.messages_to_me.filter(mark_read=0).count()
+        return {'count':count}

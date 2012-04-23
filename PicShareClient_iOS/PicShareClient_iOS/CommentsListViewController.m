@@ -107,7 +107,7 @@
 {
     
     if (indexPath.row == self.comments.count) {
-        UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        UITableViewCell *cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil]autorelease];
         cell.textLabel.text = @"更多";
         cell.textLabel.textAlignment = UITextAlignmentCenter;
         cell.textLabel.font = [UIFont systemFontOfSize:14];
@@ -235,7 +235,7 @@
         BOOL _hasNext = [[resultArray objectAtIndex:0]boolValue];
         PictureStatus *thePs = [engine getPictureStatus:self.psId];
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.comments = [[NSMutableArray alloc]initWithArray:resultComments];
+            self.comments = [[[NSMutableArray alloc]initWithArray:resultComments]autorelease];
             self.flagId = ((Comment *)[self.comments objectAtIndex:0]).commentId;
             [self.tableView reloadData];
             self.hasNext = _hasNext;
@@ -261,6 +261,7 @@
                 [self.tableView beginUpdates];
                 [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationBottom];
                 [self.tableView endUpdates];
+                [indexPaths release];
             }
             [MBProgressHUD hideHUDForView:window animated:YES];
         });
