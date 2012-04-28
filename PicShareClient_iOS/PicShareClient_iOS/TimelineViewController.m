@@ -30,6 +30,7 @@
 - (void)userNameButtonOnTouch:(id)sender;
 - (void)boardButtonOnTouch:(id)sender;
 - (void)repinButtonOnTouch:(id)sender;
+- (void)receiveDeletePicNotification:(NSNotification *)notification;
 
 @end
 
@@ -77,6 +78,7 @@ static bool isRetina()
 {
     [super viewDidLoad];
     aliveRequest = [[NSMutableArray alloc]init];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveDeletePicNotification:) name:@"DeletedPic" object:nil];
     [self startLoading];
 }
 
@@ -404,5 +406,10 @@ static bool isRetina()
     UserDetailViewController *udvc = [[UserDetailViewController alloc]initwithuserId:userId];
     [self.navigationController pushViewController:udvc animated:YES];
     [udvc release];
+}
+
+- (void)receiveDeletePicNotification:(NSNotification *)notification
+{
+    
 }
 @end

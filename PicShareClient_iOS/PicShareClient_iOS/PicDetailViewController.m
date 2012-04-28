@@ -14,6 +14,7 @@
 #import "BoardDetailViewController.h"
 #import "PictureInfoEditViewController.h"
 #import "CommentsListViewController.h"
+#import "MBProgressHUD.h"
 
 //TODO: implement methods
 
@@ -21,6 +22,8 @@
 
 - (void)loadData;
 - (void)loadDataDidFinish:(PictureStatus *)returnedStatus;
+- (void)report;
+- (void)deletePicture;
 
 @end
 
@@ -142,8 +145,35 @@
     [detailView.viaButton addTarget:self action:@selector(viaButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     [detailView.repinButton addTarget:self action:@selector(repinButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     [detailView.showAllCommentsButton addTarget:self action:@selector(allCommentsButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [detailView.moreButton addTarget:self action:@selector(moreButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     [detailView release];
     
+}
+
+- (void)report
+{
+    
+}
+- (void)deletePicture
+{
+
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+//        PicShareEngine *engine = [PicShareEngine sharedEngine];
+//        ErrorMessage *em = [engine deletePictureStatus:self.pictureStatus.psId];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            if (em!=nil && em.ret==0 && em.errorcode == 0) {
+//                //send notification
+//                [[NSNotificationCenter defaultCenter]postNotificationName:@"DeletedPic" object:[NSNumber numberWithInt:self.pictureStatus.psId]];
+//                [self.navigationController popViewControllerAnimated:YES];
+//            }else{
+//                [MBProgressHUD hideHUDForView:self.view animated:YES];
+//                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:em.errorMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+//                [alert show];
+//                [alert release];
+//            }
+//        });
+//    });
 }
 
 #pragma mark - IBActions
@@ -181,6 +211,50 @@
     CommentsListViewController *clvc = [[CommentsListViewController alloc]initWithPsId:self.pictureStatus.psId];
     [self.navigationController pushViewController:clvc animated:YES];
     [clvc release];
+}
+
+- (void)moreButtonOnClick:(id)sender
+{
+    UIActionSheet *sheet;
+    NSInteger userId = [[NSUserDefaults standardUserDefaults]integerForKey:@"userid"];
+    if (self.pictureStatus.owner.userId == userId) {
+        sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@"举报", nil];
+    }else{
+        sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"举报" otherButtonTitles:nil];
+    }
+    UIWindow *window = [[UIApplication sharedApplication]keyWindow];
+    [sheet showInView:window];
+    [sheet release];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"%d",buttonIndex);
+    NSInteger userId = [[NSUserDefaults standardUserDefaults]integerForKey:@"userid"];
+    if (self.pictureStatus.owner.userId == userId) {
+        //0：删除 1：举报 2：取消
+        switch (buttonIndex) {
+            case 0:
+                [self deletePicture];
+                break;
+            case 1:
+                break; 
+            case 2:
+                break; 
+            default:
+                break;
+        }
+    }else{
+        //0：举报 1：取消
+        switch (buttonIndex) {
+            case 0:
+                break;
+            case 1:
+                break; 
+            default:
+                break;
+        }
+    }
 }
 
 @end

@@ -70,6 +70,7 @@ static PicShareEngine *instance = NULL;
     if (self.username != nil && self.password !=nil) {
         [request addBasicAuthenticationHeaderWithUsername:self.username andPassword:self.password];
     }
+    [request setTimeOutSeconds:60];
 }
 
 -(NSArray *)getAllCategories
@@ -873,6 +874,30 @@ static PicShareEngine *instance = NULL;
         }
     }
     return 0;
+}
+
+-(ErrorMessage *)deletePictureStatus:(NSInteger)psId
+{
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingString:@"api/picture/delete.json"]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request addPostValue:[NSNumber numberWithInt:psId] forKey:@"ps_id"];
+    [self addAuthHeaderForRequest:request];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error) {
+        response = [request responseString];
+    }
+    else {
+        //do something in ui
+        return nil;
+    }
+    if (response != nil) {
+        NSDictionary *dataDict = [response objectFromJSONString];
+        ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+        return [em autorelease];
+    }
+    return nil;
 }
 
 @end

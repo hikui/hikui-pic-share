@@ -26,6 +26,7 @@ get_comments_of_a_ps              = Resource(GetCommentsOfAPictureStatusHandler)
 delete_comment                    = Resource(DeleteCommentHandler,authentication=auth)
 get_my_messagesHandler            = Resource(GetMessagesHandler,authentication=auth)
 get_unread_messages_count_handler = Resource(GetUnreadMessagesCountHandler,authentication= auth)
+delete_pic_handler                = Resource(DeletePictureStatusHandler,authentication=auth)
 
 urlpatterns = patterns('',
 
@@ -41,6 +42,7 @@ urlpatterns = patterns('',
     (r'^picture/upload.json$',upload_picture_handler),
     (r'^picture/repin.json$',repin_handler),
     (r'^picture/get_comments.json$',get_comments_of_a_ps),
+    (r'^picture/delete.json$',delete_pic_handler),
     
     (r'^relationship/followers.json$',get_followers_handler),
     (r'^relationship/following.json$',get_following_handler),

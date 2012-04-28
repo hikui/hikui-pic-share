@@ -45,7 +45,7 @@
 -(void)uploadPicture:(UIImage *)picture toBoard:(NSInteger)boardId withLatitude:(float)latitude longitude:(float)longitude description:(NSString *)description;
 -(PictureStatus *)repin:(NSInteger)ps_id toBoard:(NSInteger)boardId withDescription:(NSString *)theDescription;
 -(void)updatePictureStatus:(PictureStatus *)aPictureStatus;
--(void)releasePictureStatus:(NSInteger)psId;
+-(ErrorMessage *)deletePictureStatus:(NSInteger)psId;
 -(NSArray *)getCommentsOfPictureStatus:(NSInteger)psId;
 -(NSArray *)getCommentsOfPictureStatus:(NSInteger)psId page:(NSInteger)page;
 -(NSArray *)getCommentsOfPictureStatus:(NSInteger)psId page:(NSInteger)page countPerPage:(NSInteger)count;

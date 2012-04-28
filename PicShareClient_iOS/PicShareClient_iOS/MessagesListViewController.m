@@ -168,9 +168,7 @@
     }
     PSMessage *theMessage = [self.messages objectAtIndex:indexPath.row];
     if (theMessage.type == FollowingMessage) {
-        
-#warning not implement yet!!!!
-        
+        // do nothing, just tap the name button
     }else if(theMessage.type == CommentMessage){
         NSInteger psId = [theMessage.extra integerValue];
         PicDetailViewController *pdvc = [[PicDetailViewController alloc]initWithPicId:psId];

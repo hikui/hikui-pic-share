@@ -30,6 +30,7 @@
 @property (nonatomic,retain) ASIHTTPRequest *request;
 @property (nonatomic,retain) UILabel *viaLabel;
 @property (nonatomic,retain) UIButton *showAllCommentsButton;
+@property (nonatomic,retain) UIButton *moreButton;
 - (id)initWithPictureStatus:(PictureStatus *)aPictureStatus;
 - (void)layout;
 @end

@@ -17,10 +17,21 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //set timer to refresh unread messages count
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(handleTimer:) userInfo:@"refresh messages count" repeats:YES];
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(handleTimer:) userInfo:@"refresh messages count" repeats:YES];
     [timer fire];
-    
-    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSNumber *userId = [userDefault objectForKey:@"userid"];
+    if (userId == nil) {
+        [userDefault setObject:@"user1" forKey:@"username"];
+        [userDefault setObject:@"user1" forKey:@"password"];
+        [userDefault setObject:[NSNumber numberWithInt:1] forKey:@"userid"];
+        [userDefault synchronize];
+    }else{
+        PicShareEngine *engine = [PicShareEngine sharedEngine];
+        engine.userId = [userDefault integerForKey:@"userid"];
+        engine.password = [userDefault stringForKey:@"password"];
+        engine.username = [userDefault stringForKey:@"username"];
+    }
     self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
     return YES;
@@ -88,7 +99,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         NSInteger count = [engine getUnreadMessagesCount];
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"unread:%d",count);
+            [[self.tabBarController.tabBar.items objectAtIndex:3]setBadgeValue:[NSString stringWithFormat:@"%d",count]];
         });
     });
     

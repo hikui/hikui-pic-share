@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "PictureStatus.h"
 
-@interface PicDetailViewController : UIViewController
+
+@interface PicDetailViewController : UIViewController <UIActionSheetDelegate>
 {
     UIView *loadingView;
     UIActivityIndicatorView *loadingIndicator;
@@ -24,4 +25,5 @@
 - (void)viaButtonOnClick:(id)sender;
 - (void)repinButtonOnClick:(id)sender;
 - (void)allCommentsButtonOnClick:(id)sender;
+- (void)moreButtonOnClick:(id)sender;
 @end

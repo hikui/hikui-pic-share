@@ -15,7 +15,7 @@
 #import "UIImageView+WebCache.h"
 #import "Common.h"
 #import "CommentLabel.h"
-
+#import "PicShareEngine.h"
 @interface PicDetailView()
 
 - (void)downloadMainImage;
@@ -24,7 +24,7 @@
 
 @implementation PicDetailView
 
-@synthesize avatarImageView,usernameButton,boardNameButton,picDescriptionLabel,mainImageView,repinButton,commentTextField,pictureStatus,viaButton,progressView,request,viaLabel,showAllCommentsButton;
+@synthesize avatarImageView,usernameButton,boardNameButton,picDescriptionLabel,mainImageView,repinButton,commentTextField,pictureStatus,viaButton,progressView,request,viaLabel,showAllCommentsButton,moreButton;
 
 static bool isRetina()
 {
@@ -48,6 +48,7 @@ static bool isRetina()
     [tempImage release];
     [viaLabel release];
     [showAllCommentsButton release];
+    [moreButton release];
     [super dealloc];
 }
 
@@ -77,6 +78,7 @@ static bool isRetina()
         loadCommentsComplete = NO;
         progressView = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleBar];
         showAllCommentsButton = [[UIButton alloc]init];
+        moreButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect]retain];
         [self addSubview:avatarImageView];
         [self addSubview:usernameButton];
         [self addSubview:boardNameButton];
@@ -86,6 +88,7 @@ static bool isRetina()
         [self addSubview:viaButton];
         [self addSubview:viaLabel];
         [self addSubview:showAllCommentsButton];
+        [self addSubview:moreButton];
         [self layout];
     }
     return self;
@@ -108,6 +111,7 @@ static bool isRetina()
         viaLabel = [[UILabel alloc]init];
         progressView = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleBar];
         showAllCommentsButton = [[UIButton alloc]init];
+        moreButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect]retain];
         [self addSubview:avatarImageView];
         [self addSubview:usernameButton];
         [self addSubview:boardNameButton];
@@ -117,6 +121,7 @@ static bool isRetina()
         [self addSubview:viaLabel];
         [self addSubview:viaButton];
         [self addSubview:showAllCommentsButton];
+        [self addSubview:moreButton];
         pictureStatus = aPictureStatus;
         [self layout];
     }
@@ -211,7 +216,10 @@ static bool isRetina()
         [repinButton setTitle:@"转发" forState:UIControlStateNormal];
         repinButton.titleLabel.font = [UIFont systemFontOfSize:14];
         
-        // to be continued
+        CGRect moreButtonFrame = CGRectMake(262, repinButtonFrame.origin.y, 47, 30);
+        self.moreButton.frame = moreButtonFrame;
+        [moreButton setTitle:@"..." forState:UIControlStateNormal];
+        
         CGFloat currentY = repinButton.frame.origin.y + repinButton.frame.size.height+8;
         if (loadImgComplete) {
             for (Comment *aComment in self.pictureStatus.sampleComments) {

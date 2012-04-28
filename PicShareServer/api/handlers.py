@@ -684,3 +684,25 @@ class GetUnreadMessagesCountHandler(BaseHandler):
     def read(self,request):
         count = request.user.messages_to_me.filter(mark_read=0).count()
         return {'count':count}
+
+class DeletePictureStatusForm(forms.Form):
+    ps_id = forms.IntegerField(min_value = 1)
+class DeletePictureStatusHandler(BaseHandler):
+    allowed_methods=('POST',)
+    @validate(DeletePictureStatusForm)
+    def create(self,request):
+        ps_id = request.form.cleaned_data['ps_id']
+        try:
+            ps = PictureStatus.objects.get(pk=ps_id)
+        except Exception, e:
+            return errorResponse(0,1,'目标不存在',rc.NOT_FOUND)
+        if ps.board.owner.id != request.user.id:
+            errorResponse(0,2,"权限错误",rc.FORBIDDEN)
+        ps.delete()
+        return errorResponse(0,0,'操作成功',rc.ALL_OK)
+
+
+
+
+
+
