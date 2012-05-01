@@ -24,7 +24,7 @@
 
 @implementation PicDetailView
 
-@synthesize avatarImageView,usernameButton,boardNameButton,picDescriptionLabel,mainImageView,repinButton,commentTextField,pictureStatus,viaButton,progressView,request,viaLabel,showAllCommentsButton,moreButton;
+@synthesize avatarImageView,usernameButton,boardNameButton,picDescriptionLabel,mainImageView,repinButton,commentTextField,pictureStatus,viaButton,progressView,request,viaLabel,showAllCommentsButton,moreButton,addCommentButton;
 
 static bool isRetina()
 {
@@ -49,6 +49,7 @@ static bool isRetina()
     [viaLabel release];
     [showAllCommentsButton release];
     [moreButton release];
+    [addCommentButton release];
     [super dealloc];
 }
 
@@ -79,6 +80,7 @@ static bool isRetina()
         progressView = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleBar];
         showAllCommentsButton = [[UIButton alloc]init];
         moreButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect]retain];
+        addCommentButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect]retain];
         [self addSubview:avatarImageView];
         [self addSubview:usernameButton];
         [self addSubview:boardNameButton];
@@ -89,6 +91,7 @@ static bool isRetina()
         [self addSubview:viaLabel];
         [self addSubview:showAllCommentsButton];
         [self addSubview:moreButton];
+        [self addSubview:addCommentButton];
         [self layout];
     }
     return self;
@@ -112,6 +115,7 @@ static bool isRetina()
         progressView = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleBar];
         showAllCommentsButton = [[UIButton alloc]init];
         moreButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect]retain];
+        addCommentButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect]retain];
         [self addSubview:avatarImageView];
         [self addSubview:usernameButton];
         [self addSubview:boardNameButton];
@@ -122,6 +126,7 @@ static bool isRetina()
         [self addSubview:viaButton];
         [self addSubview:showAllCommentsButton];
         [self addSubview:moreButton];
+        [self addSubview:addCommentButton];
         pictureStatus = aPictureStatus;
         [self layout];
     }
@@ -215,6 +220,11 @@ static bool isRetina()
         repinButton.frame = repinButtonFrame;
         [repinButton setTitle:@"转发" forState:UIControlStateNormal];
         repinButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        
+        CGRect addCommentButtonFrame = CGRectMake(repinButtonFrame.origin.x+repinButtonFrame.size.width+20, repinButtonFrame.origin.y, 80, 30);
+        self.addCommentButton.frame = addCommentButtonFrame;
+        [addCommentButton setTitle:@"评论" forState:UIControlStateNormal];
+        addCommentButton.titleLabel.font = [UIFont systemFontOfSize:14];
         
         CGRect moreButtonFrame = CGRectMake(262, repinButtonFrame.origin.y, 47, 30);
         self.moreButton.frame = moreButtonFrame;

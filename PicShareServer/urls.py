@@ -17,4 +17,5 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     (r'^api/', include('PicShareServer.api.urls')),
     (r'^media/',include('PicShareServer.Picture.urls')), #handle different image size
+    (r'^web/',include('PicShareServer.PicShare.urls')),
 )

@@ -18,17 +18,21 @@
 - (void)pageData;
 - (void)toggleEdit;
 - (void)deleteComment:(Comment *)comment;
+- (void)keyboardWillShow:(NSNotification *)notification;
+- (void)keyboardWillHide:(NSNotification *)notification;
 
 @end
 
 @implementation CommentsListViewController
-@synthesize tableView,commentTF,commentCell,comments,psId,hasNext,currentPage,ps,flagId;
+@synthesize tableView,commentTF,commentCell,comments,psId,hasNext,currentPage,ps,flagId,tfBarOriginY;
 
 - (void)dealloc
 {
     [tableView release];
     [commentTF release];
     [comments release];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     [super dealloc];
 }
 
@@ -56,6 +60,10 @@
     [super viewDidLoad];
     [self loadData];
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEdit)]autorelease];
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [nc addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    tfBarOriginY = self.commentTF.superview.frame.origin.y;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -194,13 +202,13 @@
 #pragma mark - TF delegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    NSTimeInterval animationDuration = 0.30f;      
-    CGRect frame = self.commentTF.superview.frame;  
-    frame.origin.y -=166;  
-    [UIView beginAnimations:@"ResizeView" context:nil];  
-    [UIView setAnimationDuration:animationDuration];  
-    self.commentTF.superview.frame = frame;                   
-    [UIView commitAnimations];
+//    NSTimeInterval animationDuration = 0.30f;      
+//    CGRect frame = self.commentTF.superview.frame;  
+//    frame.origin.y -=166;  
+//    [UIView beginAnimations:@"ResizeView" context:nil];  
+//    [UIView setAnimationDuration:animationDuration];  
+//    self.commentTF.superview.frame = frame;                   
+//    [UIView commitAnimations];
 }
 
 
@@ -212,15 +220,45 @@
     return YES;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
+//- (void)textFieldDidEndEditing:(UITextField *)textField
+//{
+//    NSTimeInterval animationDuration = 0.30f;      
+//    CGRect frame = self.commentTF.superview.frame;  
+//    frame.origin.y +=166;  
+//    [UIView beginAnimations:@"ResizeView" context:nil];  
+//    [UIView setAnimationDuration:animationDuration];  
+//    self.commentTF.superview.frame = frame;                   
+//    [UIView commitAnimations];
+//}
+
+#pragma mark - detect keyboard
+
+- (void)keyboardWillShow:(NSNotification *)notification
 {
+    //NSLog(@"keyboard will show");
+    NSDictionary* userInfo = [notification userInfo];
+    // get the size of the keyboard
+    NSValue* boundsValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGSize keyboardSize = [boundsValue CGRectValue].size;
     NSTimeInterval animationDuration = 0.30f;      
     CGRect frame = self.commentTF.superview.frame;  
-    frame.origin.y +=166;  
+    frame.origin.y = self.tfBarOriginY-keyboardSize.height+self.tabBarController.tabBar.frame.size.height;  
     [UIView beginAnimations:@"ResizeView" context:nil];  
     [UIView setAnimationDuration:animationDuration];  
     self.commentTF.superview.frame = frame;                   
     [UIView commitAnimations];
+}
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    //NSLog(@"keyboard will hide");
+    CGRect frame = self.commentTF.superview.frame;  
+    frame.origin.y = self.tfBarOriginY;
+    NSTimeInterval animationDuration = 0.30f;  
+    [UIView beginAnimations:@"ResizeView" context:nil];  
+    [UIView setAnimationDuration:animationDuration];  
+    self.commentTF.superview.frame = frame;                   
+    [UIView commitAnimations];
+    
 }
 
 #pragma mark - network
@@ -236,7 +274,9 @@
         PictureStatus *thePs = [engine getPictureStatus:self.psId];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.comments = [[[NSMutableArray alloc]initWithArray:resultComments]autorelease];
-            self.flagId = ((Comment *)[self.comments objectAtIndex:0]).commentId;
+            if (comments.count>0) {
+                self.flagId = ((Comment *)[self.comments objectAtIndex:0]).commentId;
+            }
             [self.tableView reloadData];
             self.hasNext = _hasNext;
             self.currentPage = 1;

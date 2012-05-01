@@ -26,4 +26,5 @@
 - (void)repinButtonOnClick:(id)sender;
 - (void)allCommentsButtonOnClick:(id)sender;
 - (void)moreButtonOnClick:(id)sender;
+- (void)addCommentButtonOnClick:(id)sender;
 @end

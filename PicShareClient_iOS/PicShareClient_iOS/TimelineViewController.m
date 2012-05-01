@@ -410,6 +410,26 @@ static bool isRetina()
 
 - (void)receiveDeletePicNotification:(NSNotification *)notification
 {
-    
+    int deletedPsId = [[notification.userInfo objectForKey:@"psId"]intValue];
+    NSLog(@"receiveDeletePicNotification, deleted:%d",deletedPsId);
+    int index = -1;
+    for (int i=0; i<self.timeline.count; i++) {
+        PictureStatus *ps = [self.timeline objectAtIndex:i];
+        if (ps.psId == deletedPsId) {
+            index = i;
+            break;
+        }
+    }
+    if (index==-1) {
+        return;
+    }
+    [self.timeline removeObjectAtIndex:index];
+    [self.pictures removeObjectAtIndex:index];
+    //[self.tableView reloadData];
+    NSArray *indexPathsToDelete = [[NSArray alloc]initWithObjects:[NSIndexPath indexPathForRow:index inSection:0], nil];
+    [self.tableView beginUpdates];
+    [self.tableView deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView endUpdates];
+    [indexPathsToDelete release];
 }
 @end

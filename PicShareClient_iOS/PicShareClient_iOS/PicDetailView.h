@@ -31,6 +31,7 @@
 @property (nonatomic,retain) UILabel *viaLabel;
 @property (nonatomic,retain) UIButton *showAllCommentsButton;
 @property (nonatomic,retain) UIButton *moreButton;
+@property (nonatomic,retain) UIButton *addCommentButton;
 - (id)initWithPictureStatus:(PictureStatus *)aPictureStatus;
 - (void)layout;
 @end

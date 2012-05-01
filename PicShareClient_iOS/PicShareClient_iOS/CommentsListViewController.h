@@ -24,6 +24,7 @@
 @property (nonatomic) NSInteger currentPage;
 
 @property (nonatomic) NSInteger flagId;
+@property (nonatomic) CGFloat tfBarOriginY;
 - (id)initWithPsId:(NSInteger)thePsId;
 
 @end

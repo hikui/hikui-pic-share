@@ -85,6 +85,7 @@
         [detailView.viaButton addTarget:self action:@selector(viaButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [detailView.repinButton addTarget:self action:@selector(repinButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [detailView.showAllCommentsButton addTarget:self action:@selector(allCommentsButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [detailView.addCommentButton addTarget:self action:@selector(addCommentButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
         [detailView release];
     }
 }
@@ -146,6 +147,7 @@
     [detailView.repinButton addTarget:self action:@selector(repinButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     [detailView.showAllCommentsButton addTarget:self action:@selector(allCommentsButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     [detailView.moreButton addTarget:self action:@selector(moreButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [detailView.addCommentButton addTarget:self action:@selector(addCommentButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     [detailView release];
     
 }
@@ -157,23 +159,26 @@
 - (void)deletePicture
 {
 
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-//        PicShareEngine *engine = [PicShareEngine sharedEngine];
-//        ErrorMessage *em = [engine deletePictureStatus:self.pictureStatus.psId];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            if (em!=nil && em.ret==0 && em.errorcode == 0) {
-//                //send notification
-//                [[NSNotificationCenter defaultCenter]postNotificationName:@"DeletedPic" object:[NSNumber numberWithInt:self.pictureStatus.psId]];
-//                [self.navigationController popViewControllerAnimated:YES];
-//            }else{
-//                [MBProgressHUD hideHUDForView:self.view animated:YES];
-//                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:em.errorMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-//                [alert show];
-//                [alert release];
-//            }
-//        });
-//    });
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        PicShareEngine *engine = [PicShareEngine sharedEngine];
+        ErrorMessage *em = [engine deletePictureStatus:self.pictureStatus.psId];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (em!=nil && em.ret==0 && em.errorcode == 0) {
+                //send notification
+                
+                NSDictionary *userInfo = [[NSDictionary alloc]initWithObjectsAndKeys:[NSNumber numberWithInt:self.pictureStatus.psId],@"psId", nil];
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"DeletedPic" object:nil userInfo:userInfo];
+                [userInfo release];
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:em.errorMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+                [alert show];
+                [alert release];
+            }
+        });
+    });
 }
 
 #pragma mark - IBActions
@@ -225,6 +230,13 @@
     UIWindow *window = [[UIApplication sharedApplication]keyWindow];
     [sheet showInView:window];
     [sheet release];
+}
+
+- (void)addCommentButtonOnClick:(id)sender
+{
+    CommentsListViewController *clvc = [[CommentsListViewController alloc]initWithPsId:self.pictureStatus.psId];
+    [self.navigationController pushViewController:clvc animated:YES];
+    [clvc release];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
