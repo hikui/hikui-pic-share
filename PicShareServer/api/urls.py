@@ -27,6 +27,8 @@ delete_comment                    = Resource(DeleteCommentHandler,authentication
 get_my_messagesHandler            = Resource(GetMessagesHandler,authentication=auth)
 get_unread_messages_count_handler = Resource(GetUnreadMessagesCountHandler,authentication= auth)
 delete_pic_handler                = Resource(DeletePictureStatusHandler,authentication=auth)
+reg_user_handler                  = Resource(RegNewUserHandler)
+login_handler                     = Resource(LoginHandler,authentication=auth)
 
 urlpatterns = patterns('',
 
@@ -51,6 +53,8 @@ urlpatterns = patterns('',
     
     (r'^user/detail.json$',get_user_detail_handler),
     (r'^user/update.json$',update_user_handler),
+    (r'^user/reg.json$',reg_user_handler),
+    (r'^user/login.json$',login_handler),
     
     (r'^timeline/home_timeline.json$',get_home_timeline_handler),
     

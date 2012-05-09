@@ -15,14 +15,20 @@
 #import "UserDetailViewController.h"
 #import "TimelineViewController.h"
 #import "ASIHTTPRequest.h"
+#import "FirstRunViewController.h"
 
 @interface PicShareClient_iOSAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate>
 
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet CustomTabBarController *tabBarController;
+@property (nonatomic, retain) FirstRunViewController *firstViewController;
 
 - (void) handleTimer: (NSTimer *) timer;
 - (void) didReceiveUnreadMessageCount:(ASIHTTPRequest *)request;
+- (void) logout;
+- (void) showFirstRunViewWithAnimate:(BOOL)animated;
+- (void) schedueMessageTimer;
+- (void) prepareToMainViewController;
 
 @end

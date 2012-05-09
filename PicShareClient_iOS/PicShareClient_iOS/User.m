@@ -10,7 +10,7 @@
 
 @implementation User
 
-@synthesize avatar,userId,location,nickname,username,avatarUrl,isFollowing,introduction,picturesCount,followersCount,followingCount;
+@synthesize avatar,userId,location,nickname,username,avatarUrl,isFollowing,introduction,picturesCount,followersCount,followingCount,password;
 
 -(id)initWithJSONDict:(NSDictionary *)data
 {
@@ -52,6 +52,7 @@
     [introduction release];
     [nickname release];
     [location release];
+    [password release];
     [super dealloc];
 }
 

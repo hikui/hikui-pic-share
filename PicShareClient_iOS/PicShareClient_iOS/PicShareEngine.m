@@ -900,4 +900,29 @@ static PicShareEngine *instance = NULL;
     return nil;
 }
 
+-(User *)login:(User *)user
+{
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingString:@"api/user/login.json"]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request addBasicAuthenticationHeaderWithUsername:user.username andPassword:user.password];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error) {
+        response = [request responseString];
+    }
+    else {
+        //do something in ui
+        return nil;
+    }
+    if (response != nil && request.responseStatusCode==200) {
+        NSDictionary *dataDict = [response objectFromJSONString];
+        User *u = [[[User alloc]initWithJSONDict:dataDict]autorelease];
+        return u;
+    }else {
+        NSLog(@"%@",response);
+        return nil;
+    }
+}
+
 @end

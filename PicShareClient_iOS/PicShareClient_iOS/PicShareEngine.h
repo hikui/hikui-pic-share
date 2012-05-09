@@ -55,7 +55,8 @@
 //user api
 -(User *)getUser:(NSInteger)userId;
 -(User *)updateUser:(User *)user;
--(ErrorMessage *)regUser:(User *)user;
+-(User *)regUser:(User *)user;
+-(User *)login:(User *)user;
 
 //relationship api
 -(ErrorMessage *)followBoard:(NSInteger)boardId;

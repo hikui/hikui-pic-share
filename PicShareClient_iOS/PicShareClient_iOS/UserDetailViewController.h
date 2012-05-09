@@ -29,5 +29,6 @@
 @property (nonatomic,retain) IBOutlet UIButton *picturesButton;
 @property (nonatomic,retain) IBOutlet UIButton *followButton;
 @property (nonatomic,retain) IBOutlet UIButton *editProfileButton;
+@property (nonatomic,retain) IBOutlet UIButton *logoutButton;
 
 @end

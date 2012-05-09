@@ -11,6 +11,7 @@ import datetime
 import UploadImage
 from django import forms
 from django.db.models import Q
+from django.db.utils import *
 
 def errorResponse(ret,errorcode,message,httpStatus):
     errorDict = {
@@ -701,8 +702,28 @@ class DeletePictureStatusHandler(BaseHandler):
         ps.delete()
         return errorResponse(0,0,'操作成功',rc.ALL_OK)
 
+class RegNewUserForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField()
+    email = forms.CharField()
+class RegNewUserHandler(BaseHandler):
+    allowed_methods = ('POST')
+    @validate(RegNewUserForm)
+    def create(self,request):
+        _username = request.form.cleaned_data['username']
+        _password = request.form.cleaned_data['password']
+        _email = request.form.cleaned_data['email']
 
+        try:
+            newUser = User.objects.create(username=_username,password=_password,email=_email)
+        except IntegrityError, e:
+            return errorResponse(0,3,"目标已存在",rc.DUPLICATE_ENTRY)
+        return getUserDict(request,newUser)
 
-
-
+class LoginHandler(BaseHandler):
+    allowed_methods = ('POST')
+    def create(self,request):
+        #use authentication framework.
+        return getUserDict(request,request.user)
+        
 

@@ -21,6 +21,7 @@
 @property (readonly) NSInteger followingCount;
 @property (readonly) NSInteger followersCount;
 @property (readonly) NSInteger picturesCount;
+@property (nonatomic,copy) NSString *password; //this property won't exist in json
 
 -(id)initWithJSONDict:(NSDictionary *)data;
 

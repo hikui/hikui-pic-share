@@ -28,10 +28,11 @@
 - (IBAction)userFollowingButtonOnClick:(id)sender;
 - (IBAction)followButtonOnClick:(id)sender;
 - (IBAction)updateUserInfoButtonOnTouch:(id)sender;
+- (IBAction)logoutButtonOnClick:(id)sender;
 @end
 
 @implementation UserDetailViewController
-@synthesize scrollView,nameLabel,locationLabel,introductionText,followerCountLabel,followingCountLabel,picCountLabel,avatarImageView,user,followersButton,followingButton,picturesButton,followButton,editProfileButton,userId;
+@synthesize scrollView,nameLabel,locationLabel,introductionText,followerCountLabel,followingCountLabel,picCountLabel,avatarImageView,user,followersButton,followingButton,picturesButton,followButton,editProfileButton,userId,logoutButton;
 
 
 - (void)dealloc
@@ -47,6 +48,7 @@
     [followButton release];
     [editProfileButton release];
     [userId release];
+    [logoutButton release];
     [super dealloc];
 }
 
@@ -66,6 +68,7 @@
     self.picturesButton = nil;
     self.followButton = nil;
     self.editProfileButton = nil;
+    self.logoutButton = nil;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -135,9 +138,11 @@
         //the current user's profile
         followButton.hidden = YES;
         editProfileButton.hidden = NO;
+        self.logoutButton.hidden = NO;
     }else {
         followButton.hidden = NO;
         editProfileButton.hidden = YES;
+        self.logoutButton.hidden = YES;
         if (!user.isFollowing) {
             UIImage *followButtonImage = [[UIImage imageNamed:@"followButton"]stretchableImageWithLeftCapWidth:5.0 topCapHeight:13.0];
             UIImage *followButtonImagePressed = [[UIImage imageNamed:@"followButton-press"]stretchableImageWithLeftCapWidth:5.0 topCapHeight:13.0];
@@ -223,6 +228,11 @@
             });
         });
     }
+}
+
+- (IBAction)logoutButtonOnClick:(id)sender
+{
+    [[UIApplication sharedApplication].delegate performSelector:@selector(logout)];
 }
 
 #warning 修改profile、follow/unfo未做。
