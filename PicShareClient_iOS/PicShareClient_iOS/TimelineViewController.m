@@ -46,9 +46,7 @@ static bool isRetina()
 
 - (void)dealloc
 {
-    [timeline release];
-    [pictures release];
-    [progressViews release];
+    
     for (ASIHTTPRequest *aRequest in aliveRequest) {
         [aRequest clearDelegatesAndCancel];
     }
@@ -60,7 +58,9 @@ static bool isRetina()
             cell.delegate = nil;
         }
     }
-    
+    [timeline release];
+    [pictures release];
+    [progressViews release];
     [aliveRequest release];
     [super dealloc];
 }

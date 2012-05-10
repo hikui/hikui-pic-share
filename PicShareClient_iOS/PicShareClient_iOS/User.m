@@ -10,7 +10,7 @@
 
 @implementation User
 
-@synthesize avatar,userId,location,nickname,username,avatarUrl,isFollowing,introduction,picturesCount,followersCount,followingCount,password;
+@synthesize avatar,userId,location,nickname,username,avatarUrl,isFollowing,introduction,picturesCount,followersCount,followingCount,password,email;
 
 -(id)initWithJSONDict:(NSDictionary *)data
 {
@@ -40,6 +40,7 @@
         followersCount = [[data objectForKey:@"followers_count"]intValue];
         followingCount = [[data objectForKey:@"following_count"]intValue];
         picturesCount = [[data objectForKey:@"pictures_count"]intValue];
+        email = [[data objectForKey:@"email"]copy];
     }
     return self;
 }
@@ -53,6 +54,7 @@
     [nickname release];
     [location release];
     [password release];
+    [email release];
     [super dealloc];
 }
 

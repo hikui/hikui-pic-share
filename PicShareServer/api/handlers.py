@@ -715,7 +715,7 @@ class RegNewUserHandler(BaseHandler):
         _email = request.form.cleaned_data['email']
 
         try:
-            newUser = User.objects.create(username=_username,password=_password,email=_email)
+            newUser = User.objects.create_user(username=_username,password=_password,email=_email)
         except IntegrityError, e:
             return errorResponse(0,3,"目标已存在",rc.DUPLICATE_ENTRY)
         return getUserDict(request,newUser)

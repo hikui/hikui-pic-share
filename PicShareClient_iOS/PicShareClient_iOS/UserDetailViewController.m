@@ -94,6 +94,7 @@
     self = [super init];
     if (self) {
         user = [aUser retain];
+        userId = [[NSNumber numberWithInt:aUser.userId]retain];
     }
     return self;
 }

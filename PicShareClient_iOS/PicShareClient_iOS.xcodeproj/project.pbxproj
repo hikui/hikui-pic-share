@@ -40,6 +40,7 @@
 		A4103E67155A573000E06D06 /* rounded_table_cell_top.png in Resources */ = {isa = PBXBuildFile; fileRef = A4103E60155A573000E06D06 /* rounded_table_cell_top.png */; };
 		A4103E68155A573000E06D06 /* rounded_table_cell_top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4103E61155A573000E06D06 /* rounded_table_cell_top@2x.png */; };
 		A4103E69155A573000E06D06 /* rounded_table_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = A4103E62155A573000E06D06 /* rounded_table_cell.png */; };
+		A4103E75155B7AF900E06D06 /* TabbarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4103E74155B7AF900E06D06 /* TabbarViewController.xib */; };
 		A4203CE4151D8477008B29A9 /* PictureInfoEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4203CE2151D8477008B29A9 /* PictureInfoEditViewController.m */; };
 		A4203CE5151D8477008B29A9 /* PictureInfoEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4203CE3151D8477008B29A9 /* PictureInfoEditViewController.xib */; };
 		A4462BC31516EF75003E5F9F /* followButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BC11516EF75003E5F9F /* followButton.png */; };
@@ -195,6 +196,7 @@
 		A4103E61155A573000E06D06 /* rounded_table_cell_top@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rounded_table_cell_top@2x.png"; sourceTree = "<group>"; };
 		A4103E62155A573000E06D06 /* rounded_table_cell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rounded_table_cell.png; sourceTree = "<group>"; };
 		A4103E6B155A5C3700E06D06 /* PSKeySets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSKeySets.h; sourceTree = "<group>"; };
+		A4103E74155B7AF900E06D06 /* TabbarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabbarViewController.xib; sourceTree = "<group>"; };
 		A4203CE1151D8477008B29A9 /* PictureInfoEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureInfoEditViewController.h; sourceTree = "<group>"; };
 		A4203CE2151D8477008B29A9 /* PictureInfoEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureInfoEditViewController.m; sourceTree = "<group>"; };
 		A4203CE3151D8477008B29A9 /* PictureInfoEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PictureInfoEditViewController.xib; sourceTree = "<group>"; };
@@ -656,6 +658,7 @@
 				A464D83B155A4F3A002D5CC7 /* FirstRunViewController.m */,
 				A464D83C155A4F3A002D5CC7 /* FirstRunViewController.xib */,
 				A4103E6B155A5C3700E06D06 /* PSKeySets.h */,
+				A4103E74155B7AF900E06D06 /* TabbarViewController.xib */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -848,6 +851,7 @@
 				A4103E67155A573000E06D06 /* rounded_table_cell_top.png in Resources */,
 				A4103E68155A573000E06D06 /* rounded_table_cell_top@2x.png in Resources */,
 				A4103E69155A573000E06D06 /* rounded_table_cell.png in Resources */,
+				A4103E75155B7AF900E06D06 /* TabbarViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

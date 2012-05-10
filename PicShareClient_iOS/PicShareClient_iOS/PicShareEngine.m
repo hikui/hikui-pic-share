@@ -925,4 +925,35 @@ static PicShareEngine *instance = NULL;
     }
 }
 
+-(User *)regUser:(User *)user
+{
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingString:@"api/user/reg.json"]];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request addPostValue:user.username forKey:@"username"];
+    [request addPostValue:user.password forKey:@"password"];
+    [request addPostValue:user.email forKey:@"email"];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error) {
+        response = [request responseString];
+    }
+    else {
+        //do something in ui
+        return nil;
+    }
+    if (response != nil && request.responseStatusCode==200) {
+        NSDictionary *dataDict = [response objectFromJSONString];
+        User *u = [[[User alloc]initWithJSONDict:dataDict]autorelease];
+        return u;
+    }else {
+        NSDictionary *dataDict = [response objectFromJSONString];
+        ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
+        if (em) {
+            return [em autorelease];
+        }
+    }
+    return nil;
+}
+
 @end

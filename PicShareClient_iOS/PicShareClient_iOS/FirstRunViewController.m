@@ -114,7 +114,49 @@
 }
 - (IBAction)regButtonPressed:(id)sender
 {
-    
+    if (![regUsername.text length] || ![regPassword.text length] || ![regPasswordConfirm.text length] || ![regEmail.text length]) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"必须填写所有字段" delegate:nil cancelButtonTitle:@"奴才知罪" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        return;
+    }
+    if (![regPassword.text isEqualToString:regPasswordConfirm.text]){
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"两次密码输入不一致" delegate:nil cancelButtonTitle:@"奴才知罪" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+        return;
+    }
+    [MBProgressHUD showHUDAddedTo:self.regView animated:YES];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        PicShareEngine *engine = [PicShareEngine sharedEngine];
+        User *u = [[User alloc]init];
+        u.username = self.regUsername.text;
+        u.password = self.regPassword.text;
+        u.email = self.regEmail.text;
+        User *returnedUser = [engine regUser:u];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.regView animated:YES];
+            if (returnedUser == nil) {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"注册失败" delegate:nil cancelButtonTitle:@"奴才知罪" otherButtonTitles:nil];
+                [alert show];
+                [alert release];
+            }else if ([returnedUser isKindOfClass:[ErrorMessage class]]) {
+                ErrorMessage *em = (ErrorMessage *)returnedUser;
+                if (em.errorcode == 3) {
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"此用户名已被他人注册" delegate:nil cancelButtonTitle:@"奴才知罪" otherButtonTitles:nil];
+                    [alert show];
+                    [alert release];
+                }
+            }else if([returnedUser isKindOfClass:[User class]]){
+                [[NSUserDefaults standardUserDefaults]setObject:u.username forKey:kUserDefaultsUsername];
+                [[NSUserDefaults standardUserDefaults]setObject:u.password forKey:kUserDefaultsPassword];
+                [[NSUserDefaults standardUserDefaults]setObject:[NSNumber numberWithInt:returnedUser.userId] forKey:kUserDefaultsUserId];
+                [[NSUserDefaults standardUserDefaults]synchronize];
+                [[UIApplication sharedApplication].delegate performSelector:@selector(prepareToMainViewController)];
+            }
+            [u release];
+        });
+    });
 }
 
 - (IBAction)cancelButtonPressed:(id)sender

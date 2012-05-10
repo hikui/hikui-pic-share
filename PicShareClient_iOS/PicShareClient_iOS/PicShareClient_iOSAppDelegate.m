@@ -107,6 +107,9 @@
 
 - (void) prepareToMainViewController
 {
+    //reload nib
+    self.tabBarController = nil;
+    [[NSBundle mainBundle]loadNibNamed:@"TabbarViewController" owner:self options:nil];
     PicShareEngine *engine = [PicShareEngine sharedEngine];
     engine.userId = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultsUserId];
     engine.password = [[NSUserDefaults standardUserDefaults] stringForKey:kUserDefaultsPassword];
@@ -115,6 +118,8 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:_window cache:YES];
     [UIView setAnimationDuration:0.4];
+    [[_window subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [_window addSubview:tabBarController.view];
     self.window.rootViewController = tabBarController;
     [UIView commitAnimations];
 }
