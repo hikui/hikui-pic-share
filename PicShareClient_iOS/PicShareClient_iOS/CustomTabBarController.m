@@ -108,12 +108,7 @@
 {
     UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     UIImage *editedImage = nil;
-    if (originalImage.size.width>originalImage.size.height) {
-        editedImage = [UIImageView imageWithImage:originalImage scaledToSizeWithTargetWidth:1000];
-    }
-    else {
-        editedImage  = [UIImageView imageWithImage:originalImage scaledToSizeWithTargetHeight:1000];
-    }
+    editedImage = [UIImageView imageWithImage:originalImage scaledToSizeWithTargetWidth:640];
     PictureInfoEditViewController *pievc = [[PictureInfoEditViewController alloc]initWithNibName:@"PictureInfoEditViewController" bundle:nil];
     pievc.type = CREATE;
     pievc.uploadImage = editedImage;

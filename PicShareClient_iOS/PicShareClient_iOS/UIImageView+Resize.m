@@ -83,9 +83,6 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 
 + (UIImage*)imageWithImage:(UIImage*)sourceImage scaledToSizeWithTargetHeight:(CGFloat)targetHeight
 {
-    if (isRetina()) {
-        targetHeight *=2;
-    }
     CGSize imageSize = sourceImage.size;
     CGFloat width = imageSize.width;
     CGFloat height = imageSize.height;
@@ -116,9 +113,6 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
 
 + (UIImage*)imageWithImage:(UIImage*)sourceImage scaledToSizeWithTargetWidth:(CGFloat)targetWidth
 {
-    if (isRetina()) {
-        targetWidth *=2;
-    }
     CGSize imageSize = sourceImage.size;
     CGFloat width = imageSize.width;
     CGFloat height = imageSize.height;
