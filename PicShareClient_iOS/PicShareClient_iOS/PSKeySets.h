@@ -12,6 +12,6 @@
 #define kUserDefaultsUserId @"userid"
 #define kUserDefaultsUsername @"username"
 #define kUserDefaultsPassword @"password"
-
+#define kNotificationMessageRead @"msgread"
 
 #endif

@@ -100,7 +100,7 @@ def getBoardDict(request,board):
     owner = board.owner
     ownerResultDict = getUserDict(request,owner)
     picturesResultArray = []
-    for ps in board.pictureStatuses.all()[:10]:
+    for ps in board.pictureStatuses.filter(~Q(status_type=4))[:10]:
         psResultDict = getPictureStatusDict(request,ps)
         picturesResultArray.append(psResultDict)        
     boardResultDict = {
@@ -122,7 +122,7 @@ def getBoardDictFull(request,board):
     owner = board.owner
     ownerResultDict = getUserDict(request,owner)
     picturesResultArray = []
-    for ps in board.pictureStatuses.all():
+    for ps in board.pictureStatuses.filter(~Q(status_type=4)):
         psResultDict = getPictureStatusDict(request,ps)
         picturesResultArray.append(psResultDict)        
     boardResultDict = {
@@ -131,7 +131,8 @@ def getBoardDictFull(request,board):
         'category_id':board.category.id,
         'pictures_count':board.pictureStatuses.count(),
         'owner':ownerResultDict,
-        'pictures':picturesResultArray
+        'pictures':picturesResultArray,
+        'is_following': (request.user in board.followers.all())
     }
     return boardResultDict
 
@@ -336,9 +337,9 @@ class GetHomeTimelineHandler(BaseHandler):
         if maxIdStr is not None:
             maxId = int(maxIdStr)
             q2 = Q(id__lte = maxId)
-        
-        totalCount = PictureStatus.objects.filter(Q(board__in=followingBoards)&q1&q2).count()
-        pictureStatuses = PictureStatus.objects.filter(Q(board__in=followingBoards)&q1&q2).order_by('-id')[(page-1)*count:page*count]
+        q3 = ~Q(status_type=4)
+        totalCount = PictureStatus.objects.filter(Q(board__in=followingBoards)&q1&q2&q3).count()
+        pictureStatuses = PictureStatus.objects.filter(Q(board__in=followingBoards)&q1&q2&q3).order_by('-id')[(page-1)*count:page*count]
         
         psArray = []
         for aPS in pictureStatuses:
@@ -725,5 +726,30 @@ class LoginHandler(BaseHandler):
     def create(self,request):
         #use authentication framework.
         return getUserDict(request,request.user)
-        
 
+class MarkMsgReadHandler(BaseHandler):
+    allowed_methods = ('GET')
+    def read(self,request):
+        user = request.user
+        messages = user.messages_to_me.filter(mark_read=0)
+        for aMessage in messages:
+            aMessage.mark_read = 1
+            aMessage.save()
+        return errorResponse(0,0,'操作成功',rc.ALL_OK)
+
+
+class ReportHandler(BaseHandler):
+    allowed_methods = ('GET')
+    def read(self,request):
+        reported_ps_id = request.GET.get('ps_id')
+        if reported_ps_id != None:
+            try:
+                ps = PictureStatus.objects.get(pk=reported_ps_id)
+            except Exception, e:
+                return errorResponse(0,1,'目标不存在',rc.NOT_FOUND)
+            ps.status_type = 3
+            ps.save()
+            return errorResponse(0,0,'操作成功',rc.ALL_OK)
+        else :
+            return errorResponse(0,1,'目标不存在',rc.NOT_FOUND)
+            

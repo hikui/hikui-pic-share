@@ -29,6 +29,8 @@ get_unread_messages_count_handler = Resource(GetUnreadMessagesCountHandler,authe
 delete_pic_handler                = Resource(DeletePictureStatusHandler,authentication=auth)
 reg_user_handler                  = Resource(RegNewUserHandler)
 login_handler                     = Resource(LoginHandler,authentication=auth)
+mark_read_handler                 = Resource(MarkMsgReadHandler,authentication=auth)
+report_handler                    = Resource(ReportHandler,authentication=auth)
 
 urlpatterns = patterns('',
 
@@ -45,6 +47,7 @@ urlpatterns = patterns('',
     (r'^picture/repin.json$',repin_handler),
     (r'^picture/get_comments.json$',get_comments_of_a_ps),
     (r'^picture/delete.json$',delete_pic_handler),
+    (r'^picture/report.json$',report_handler),
     
     (r'^relationship/followers.json$',get_followers_handler),
     (r'^relationship/following.json$',get_following_handler),
@@ -63,4 +66,5 @@ urlpatterns = patterns('',
 
     (r'^message/get_mine.json$',get_my_messagesHandler),
     (r'^message/get_unread_messages_count.json$',get_unread_messages_count_handler),
+    (r'^message/mark_read.json$',mark_read_handler),
 )

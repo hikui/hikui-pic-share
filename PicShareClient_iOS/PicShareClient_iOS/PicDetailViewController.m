@@ -154,7 +154,15 @@
 
 - (void)report
 {
-    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        PicShareEngine *engine = [PicShareEngine sharedEngine];
+        ErrorMessage *em = [engine reportPictureStatus:self.pictureStatus.psId];
+        if (em!=nil && em.ret==0 && em.errorcode == 0){
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"举报成功" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+            [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
+            [alert release];
+        }
+    });
 }
 - (void)deletePicture
 {
@@ -250,6 +258,7 @@
                 [self deletePicture];
                 break;
             case 1:
+                [self report];
                 break; 
             case 2:
                 break; 
@@ -260,6 +269,7 @@
         //0：举报 1：取消
         switch (buttonIndex) {
             case 0:
+                [self report];
                 break;
             case 1:
                 break; 

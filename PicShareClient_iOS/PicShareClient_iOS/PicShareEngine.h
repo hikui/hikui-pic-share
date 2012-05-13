@@ -51,6 +51,8 @@
 -(NSArray *)getCommentsOfPictureStatus:(NSInteger)psId page:(NSInteger)page countPerPage:(NSInteger)count;
 -(NSArray *)getCommentsOfPictureStatus:(NSInteger)psId page:(NSInteger)page countPerPage:(NSInteger)count max:(NSInteger)maxId since:(NSInteger)sinceId;
 -(NSArray *)getUserPictures:(NSInteger)userId count:(NSInteger)maxPictureCount;
+-(ErrorMessage *)reportPictureStatus:(NSInteger)psId;
+
 
 //user api
 -(User *)getUser:(NSInteger)userId;
@@ -84,5 +86,6 @@
 -(NSArray *)getMessagesToMe;
 -(NSArray *)getMessagesToMeWithPage:(NSInteger)page countPerPage:(NSInteger)count since:(NSInteger)sinceId max:(NSInteger)maxId;
 -(NSInteger)getUnreadMessagesCount;
+-(ErrorMessage *)markMessageRead;
 
 @end

@@ -876,6 +876,31 @@ static PicShareEngine *instance = NULL;
     return 0;
 }
 
+-(ErrorMessage *)markMessageRead
+{
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingString:@"api/message/mark_read.json"]];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [self addAuthHeaderForRequest:request];
+    [request setTimeOutSeconds:60];
+    [request startSynchronous];
+    
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error) {
+        response = [request responseString];
+    }
+    else {
+        //do something in ui
+        return 0;
+    }
+    if (response != nil) {
+        NSDictionary *dataDict = [response objectFromJSONString];
+        ErrorMessage *em = [[[ErrorMessage alloc]initWithJSONDict:dataDict]autorelease];
+        return em;
+    }
+    return nil;
+}
+
 -(ErrorMessage *)deletePictureStatus:(NSInteger)psId
 {
     NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingString:@"api/picture/delete.json"]];
@@ -896,6 +921,29 @@ static PicShareEngine *instance = NULL;
         NSDictionary *dataDict = [response objectFromJSONString];
         ErrorMessage *em = [[ErrorMessage alloc]initWithJSONDict:dataDict];
         return [em autorelease];
+    }
+    return nil;
+}
+
+-(ErrorMessage *)reportPictureStatus:(NSInteger)psId
+{
+    
+    NSURL *url = [NSURL URLWithString:[picshareDomain stringByAppendingFormat:@"api/picture/report.json?ps_id=%d",psId]];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [self addAuthHeaderForRequest:request];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *response = nil;
+    if (!error) {
+        response = [request responseString];
+    }
+    else {
+        //do something in ui
+        return nil;
+    }
+    if (response != nil && request.responseStatusCode==200) {
+        ErrorMessage *em = [[[ErrorMessage alloc]initWithJSONDict:[response objectFromJSONString]]autorelease];
+        return em;
     }
     return nil;
 }

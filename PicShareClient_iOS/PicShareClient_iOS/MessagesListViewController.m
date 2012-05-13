@@ -14,6 +14,7 @@
 #import "MBProgressHUD.h"
 #import "PicDetailViewController.h"
 #import "UserDetailViewController.h"
+#import "PSKeySets.h"
 #import "CommentsListViewController.h"
 
 @interface MessagesListViewController()
@@ -191,11 +192,14 @@
         NSArray *resultArray = [engine getMessagesToMe];
         NSArray *resultMessages = [resultArray subarrayWithRange:NSMakeRange(1, resultArray.count-1)];
         BOOL _hasNext = [[resultArray objectAtIndex:0]boolValue];
+        // mark as read
+        [engine markMessageRead];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.messages = [[[NSMutableArray alloc]initWithArray:resultMessages]autorelease];
             [self.tableView reloadData];
             self.hasNext = _hasNext;
             self.currentPage = 1;
+            [[NSNotificationCenter defaultCenter]postNotificationName:kNotificationMessageRead object:nil];
             [self stopLoading];
         });
     });

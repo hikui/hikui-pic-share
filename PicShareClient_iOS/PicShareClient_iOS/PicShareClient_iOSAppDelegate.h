@@ -29,6 +29,7 @@
 - (void) logout;
 - (void) showFirstRunViewWithAnimate:(BOOL)animated;
 - (void) schedueMessageTimer;
-- (void) prepareToMainViewController;
+- (void) prepareToMainViewControllerWithAnimate:(BOOL)animate;
+- (void) didReceiveMessageMarkedAsRead;
 
 @end

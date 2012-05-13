@@ -101,7 +101,7 @@
                 [[NSUserDefaults standardUserDefaults]setObject:u.password forKey:kUserDefaultsPassword];
                 [[NSUserDefaults standardUserDefaults]setObject:[NSNumber numberWithInt:returnedU.userId] forKey:kUserDefaultsUserId];
                 [[NSUserDefaults standardUserDefaults]synchronize];
-                [[UIApplication sharedApplication].delegate performSelector:@selector(prepareToMainViewController)];
+                [[UIApplication sharedApplication].delegate performSelector:@selector(prepareToMainViewControllerWithAnimate:) withObject:[NSNumber numberWithBool:YES]];
             }else {
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"登录失败，请检查用户名和密码" delegate:nil cancelButtonTitle:@"奴才知罪" otherButtonTitles:nil];
                 [alert show];
@@ -152,7 +152,7 @@
                 [[NSUserDefaults standardUserDefaults]setObject:u.password forKey:kUserDefaultsPassword];
                 [[NSUserDefaults standardUserDefaults]setObject:[NSNumber numberWithInt:returnedUser.userId] forKey:kUserDefaultsUserId];
                 [[NSUserDefaults standardUserDefaults]synchronize];
-                [[UIApplication sharedApplication].delegate performSelector:@selector(prepareToMainViewController)];
+                [[UIApplication sharedApplication].delegate performSelector:@selector(prepareToMainViewControllerWithAnimate:) withObject:[NSNumber numberWithBool:YES]];
             }
             [u release];
         });

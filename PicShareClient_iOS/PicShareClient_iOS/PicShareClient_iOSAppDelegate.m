@@ -17,13 +17,14 @@
 @synthesize tabBarController,firstViewController;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didReceiveMessageMarkedAsRead) name:kNotificationMessageRead object:nil];
     //set timer to refresh unread messages count
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     NSNumber *userId = [userDefault objectForKey:kUserDefaultsUserId];
-    if (YES) {
+    if (userId == nil) {
         [self showFirstRunViewWithAnimate:NO];
     }else{
-        [self prepareToMainViewController];
+        [self prepareToMainViewControllerWithAnimate:NO];
     }
     //self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
@@ -99,13 +100,20 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         NSInteger count = [engine getUnreadMessagesCount];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[self.tabBarController.tabBar.items objectAtIndex:3]setBadgeValue:[NSString stringWithFormat:@"%d",count]];
+            if (count>0) {
+                [[self.tabBarController.tabBar.items objectAtIndex:3]setBadgeValue:[NSString stringWithFormat:@"%d",count]];
+            }
         });
     });
     
 }
 
-- (void) prepareToMainViewController
+- (void) didReceiveMessageMarkedAsRead
+{
+    [[self.tabBarController.tabBar.items objectAtIndex:3]setBadgeValue:nil];
+}
+
+- (void) prepareToMainViewControllerWithAnimate:(BOOL)animate
 {
     //reload nib
     self.tabBarController = nil;
@@ -115,13 +123,17 @@
     engine.password = [[NSUserDefaults standardUserDefaults] stringForKey:kUserDefaultsPassword];
     engine.username = [[NSUserDefaults standardUserDefaults] stringForKey:kUserDefaultsUsername];
     [self schedueMessageTimer];
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:_window cache:YES];
-    [UIView setAnimationDuration:0.4];
+    if (animate) {
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:_window cache:YES];
+        [UIView setAnimationDuration:0.4];
+    }
     [[_window subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [_window addSubview:tabBarController.view];
     self.window.rootViewController = tabBarController;
-    [UIView commitAnimations];
+    if (animate) {
+        [UIView commitAnimations];
+    }
 }
 
 - (void) didReceiveUnreadMessageCount:(ASIHTTPRequest *)request
