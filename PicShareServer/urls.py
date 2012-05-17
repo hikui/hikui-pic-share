@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
+from PicShareServer import settings
 
 
 # Uncomment the next two lines to enable the admin:
@@ -19,3 +20,10 @@ urlpatterns = patterns('',
     (r'^media/',include('PicShareServer.Picture.urls')), #handle different image size
     (r'^web/',include('PicShareServer.PicShare.urls')),
 )
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        url(r'^local_media/(?P<path>.*)$', 'django.views.static.serve', {
+                'document_root': settings.MEDIA_ROOT,
+            }),
+   )

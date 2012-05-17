@@ -36,9 +36,9 @@
     </div>
 	<div id="container" class="container clearfix">
 		<ul class="media-grid">
-			{% for ps in pictures %}
+			{% for psUrl in pictureInfoList %}
 			<li class="box">
-		    	<a href="#" title="Stanley by Dave DeSandro, on Flickr"><img src="{{ps.picture.image}}?size=640" alt="Stanley" /></a>
+		    	<a href="#" title="Stanley by Dave DeSandro, on Flickr"><img src="{{psUrl}}" alt="Stanley" /></a>
 			</li>
 			{% endfor %}
 		</ul>

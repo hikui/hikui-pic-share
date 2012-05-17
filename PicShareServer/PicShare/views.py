@@ -5,6 +5,15 @@ from PicShare.models import *
 
 def theIndex(request):
 	pictures = PictureStatus.objects.all()
-	return render_to_response('test.html', {
-            'pictures':pictures
-            },context_instance=RequestContext(request))
+	pictureInfoList = list()
+	host = request.get_host()
+	for aPicture in pictures:
+		print 'aaaa'
+		theDynamicUrl = aPicture.picture.image
+		pathList = theDynamicUrl.split('/')
+		fileName = pathList[-1]
+		print 'bbbb'
+		print fileName
+		static_path = 'http://'+host+'/local_media/picture/X640/'+fileName
+		pictureInfoList.append(static_path)
+	return render_to_response('test.html', {'pictureInfoList':pictureInfoList},context_instance=RequestContext(request))
