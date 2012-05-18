@@ -6,6 +6,8 @@
 //  Copyright (c) 2012年 Shanghai University. All rights reserved.
 //
 
+// SDWebImage的基础功能的另类实现
+
 #import <UIKit/UIKit.h>
 #import "ASIHTTPRequest.h"
 @protocol PSThumbnailImageViewEventsDelegate <NSObject>

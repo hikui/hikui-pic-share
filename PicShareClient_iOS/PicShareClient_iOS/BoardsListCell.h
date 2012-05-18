@@ -30,10 +30,12 @@
 @property (nonatomic,retain) UILabel *picCountLabel;
 @property (nonatomic,retain) UIScrollView *scrollView;
 
+//当内容为某board时，cell的高度计算，用于heightForCellAtIndexPath排版
 + (CGFloat)getBoardsListCellHeight:(Board *)board withSpecifiedOrientation:(UIDeviceOrientation *)orientation;
 
 - (void) addPictureWithUrlStr:(NSString *)urlStr;
 - (void) clearCurrentPictures;
+//计算某个图片相对于本board的序号，用于点击事件中判断图片id
 - (NSInteger) offsetOfaThumbnail:(PSThumbnailImageView *)thumbnailImageView;
 - (void) cancelImageLoading;
 - (void) resumeImageLoading;

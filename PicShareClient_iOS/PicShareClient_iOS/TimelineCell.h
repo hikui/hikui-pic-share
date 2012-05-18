@@ -41,6 +41,7 @@
 - (void)layout;
 - (void)clearImage;
 - (void)setPicture:(UIImage *)image WillAnimated:(BOOL)animated;
+//计算特定内容下CELL的高度，用于table view delegate
 + (CGFloat)calculateCellHeightWithPictureStatus:(PictureStatus *)aPictureStatus;
 
 @end

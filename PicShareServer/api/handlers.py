@@ -182,6 +182,7 @@ class GetBoardsOfCategoryHandler(BaseHandler):
         page = int(request.GET.get('page',1))
         count = int(request.GET.get('count',3))
         category = Category.objects.get(pk=categoryId)
+        
         boards = category.boards.all()[(page-1)*count:page*count]
         resultDict = {}
         total_count = category.boards.count()

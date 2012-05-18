@@ -19,6 +19,9 @@ static bool isRetina()
 
 static inline double radians (double degrees) {return degrees * M_PI/180;}
 
+/**
+ 将图片等比地缩放到[指定尺寸]，并将不能显示的部分裁剪。使用core graphics
+ */
 + (UIImage*)imageWithImage:(UIImage*)sourceImage scaledToSizeWithSameAspectRatio:(CGSize)targetSize
 {
     if (isRetina()) {
@@ -81,6 +84,7 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
     return newImage; 
 }
 
+//将图片等比例地缩放到某个固定的高度，使用ui image
 + (UIImage*)imageWithImage:(UIImage*)sourceImage scaledToSizeWithTargetHeight:(CGFloat)targetHeight
 {
     CGSize imageSize = sourceImage.size;
@@ -142,6 +146,7 @@ static inline double radians (double degrees) {return degrees * M_PI/180;}
     
 }
 
+//计算当以等比例缩放到某个宽度之后，其高度是多少，在排版计算中用。
 + (CGFloat)heightWithSpecificWidth:(CGFloat)targetWidth ofAnImage:(UIImage *)sourceImage
 {
     CGFloat width = sourceImage.size.width;

@@ -89,6 +89,9 @@ static bool isRetina()
     // e.g. self.myOutlet = nil;
     self.timeline = nil;
     self.pictures = nil;
+    for (ASIHTTPRequest *aRequest in aliveRequest) {
+        [aRequest clearDelegatesAndCancel];
+    }
     self.progressViews = nil;
 }
 

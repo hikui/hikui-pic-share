@@ -28,6 +28,7 @@ typedef void (^BoardIsSelectedBlock)(Board *b);
 @property (nonatomic,retain) PicShareEngine *engine;
 @property (nonatomic,retain) NSIndexPath *indexSelected;
 
+//just ignore it. it's useless.
 - (void)setBoardIsSelectedBlock:(BoardIsSelectedBlock)_isSelectedBlock;
 
 @end
