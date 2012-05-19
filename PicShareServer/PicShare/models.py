@@ -2,7 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-
+from PicShareServer import settings
 '''
 每个用户维护自己的一组Board，
 每张图片一旦被上传，则与用户无关，每个用户上传图片，或者repin图片之后，都有自己的
@@ -70,9 +70,15 @@ class PictureStatus(models.Model):
     via         = models.ForeignKey(User, null=True, blank=True) #从哪个用户得到此图片，只在status_type=2时才出现
     status_type = models.IntegerField(choices=STATUS_TYPE_CHOICES,default=1)
 
-    def get_status_type(self):
-        return self.get_status_type_display()
-
+    def get_thumbnail_url(self):
+        host = settings.HOST
+        theDynamicUrl = self.picture.image
+        pathList = theDynamicUrl.split('/')
+        fileName = pathList[-1]
+        static_path = 'http://'+host+'/local_media/picture/X120/'+fileName
+        return '<img src="%s">' % static_path
+    get_thumbnail_url.allow_tags = True
+    get_thumbnail_url.short_description = 'Thumbnail'
     def __unicode__(self):
         return self.description
 

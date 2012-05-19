@@ -50,7 +50,6 @@
 -(NSArray *)getCommentsOfPictureStatus:(NSInteger)psId page:(NSInteger)page;
 -(NSArray *)getCommentsOfPictureStatus:(NSInteger)psId page:(NSInteger)page countPerPage:(NSInteger)count;
 -(NSArray *)getCommentsOfPictureStatus:(NSInteger)psId page:(NSInteger)page countPerPage:(NSInteger)count max:(NSInteger)maxId since:(NSInteger)sinceId;
--(NSArray *)getUserPictures:(NSInteger)userId count:(NSInteger)maxPictureCount;
 -(ErrorMessage *)reportPictureStatus:(NSInteger)psId;
 
 
