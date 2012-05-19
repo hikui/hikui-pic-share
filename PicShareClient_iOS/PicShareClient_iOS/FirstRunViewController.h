@@ -17,10 +17,13 @@
 @property (nonatomic,retain) IBOutlet UITextField *regPasswordConfirm;
 @property (nonatomic,retain) IBOutlet UITextField *regEmail;
 @property (nonatomic,retain) IBOutlet UIView *regView;
+@property (nonatomic,retain) IBOutlet UIView *loginView;
 
 - (IBAction)regNewButtonPressed:(id)sender;
 - (IBAction)loginButtonPressed:(id)sender;
 - (IBAction)regButtonPressed:(id)sender;
 - (IBAction)cancelButtonPressed:(id)sender;
+- (IBAction)coverRegButtonPressed:(id)sender;
+- (IBAction)coverLoginButtonPressed:(id)sender;
 
 @end
