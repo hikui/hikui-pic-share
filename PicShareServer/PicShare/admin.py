@@ -14,7 +14,7 @@ class BoardAdmin(admin.ModelAdmin):
 
 class PictureStatusAdmin(admin.ModelAdmin):
 	list_filter=('status_type',)
-
+	list_display=('description','get_thumbnail_url')
 	actions = ['mark_as_banned']
 	def mark_as_banned(self,request,queryset):
 		queryset.update(status_type=4)
