@@ -24,13 +24,16 @@ Follow逻辑：一个用户可以关注一个Board，或者另一个用户。关
 class Category(models.Model):
     name = models.CharField(max_length=10, unique=True)
 
+    def __unicode__(self):
+        return self.name
+
 class Board(models.Model):
     name      = models.TextField(max_length=140)
     owner     = models.ForeignKey(User, related_name='my_boards') #User自己建的
     followers = models.ManyToManyField(User,related_name='following_boards',null=True,blank=True) #关注的用户
     category  = models.ForeignKey(Category, null=True,blank=True, related_name='boards') #在Explore中使用
     def __unicode__(self):
-        return "board-name:"+self.name
+        return self.name
 
 class Picture(models.Model):
     timestamp = models.DateTimeField()
@@ -67,8 +70,11 @@ class PictureStatus(models.Model):
     via         = models.ForeignKey(User, null=True, blank=True) #从哪个用户得到此图片，只在status_type=2时才出现
     status_type = models.IntegerField(choices=STATUS_TYPE_CHOICES,default=1)
 
+    def get_status_type(self):
+        return self.get_status_type_display()
+
     def __unicode__(self):
-        return "picture:"+unicode(self.picture)
+        return self.description
 
 class UserAddition(models.Model):
     user         = models.OneToOneField(User,related_name='addition')
