@@ -24,7 +24,7 @@
 @end
 
 @implementation FirstRunViewController
-@synthesize loginPassword,loginUsername,regEmail,regPassword,regUsername,regPasswordConfirm,regView;
+@synthesize loginPassword,loginUsername,regEmail,regPassword,regUsername,regPasswordConfirm,regView,loginView;
 
 - (void)dealloc
 {
@@ -35,6 +35,7 @@
     [regUsername release];
     [regPasswordConfirm release];
     [regView release];
+    [loginView release];
     [super dealloc];
 }
 
@@ -164,7 +165,24 @@
     [UIView beginAnimations:nil context:nil];
 	[UIView setAnimationDuration:0.75];
 	[UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.view cache:YES];
-	[regView removeFromSuperview];
+	[[[self.view subviews]lastObject]removeFromSuperview];
+	[UIView commitAnimations];
+}
+
+- (IBAction)coverRegButtonPressed:(id)sender
+{
+    [UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDuration:0.75];
+	[UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:self.view cache:YES];
+	[self.view addSubview:regView];
+	[UIView commitAnimations];
+}
+- (IBAction)coverLoginButtonPressed:(id)sender
+{
+    [UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDuration:0.75];
+	[UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:self.view cache:YES];
+	[self.view addSubview:loginView];
 	[UIView commitAnimations];
 }
 
@@ -178,6 +196,13 @@
         [nextResponder becomeFirstResponder];
     }else {
         [textField resignFirstResponder];
+        if (tag == loginPasswordTag) {
+            [self loginButtonPressed:nil];
+            [self.loginView removeFromSuperview];
+        }else {
+            [self regButtonPressed:nil];
+            [self.regView removeFromSuperview];
+        }
     }
     return NO;
 }
