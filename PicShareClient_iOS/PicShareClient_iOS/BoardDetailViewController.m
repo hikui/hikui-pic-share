@@ -87,7 +87,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    int count = self.board.picturesCount;
+    int count = self.board.pictureStatuses.count;
     int result = (count%4==0)?count/4:(count/4+1);
     return result;
 }
@@ -133,22 +133,22 @@
         imgView3 = (PSThumbnailImageView *)[cell.contentView viewWithTag:THIRD_IMGVIEW_TAG];
         imgView4 = (PSThumbnailImageView *)[cell.contentView viewWithTag:FORTH_IMGVIEW_TAG];
     }
-    if (indexPath.row*4<self.board.picturesCount) {
+    if (indexPath.row*4<self.board.pictureStatuses.count) {
         PictureStatus *ps = [self.board.pictureStatuses objectAtIndex:(indexPath.row*4)];
         NSURL *url = [NSURL URLWithString:[ps.pictureUrl stringByAppendingString:@"?size=120"]];
         [imgView1 setImageWithUrl:url placeholderImage:[UIImage imageNamed:@"PicturePlaceHolder.png"]];
     }
-    if (indexPath.row*4+1<self.board.picturesCount) {
+    if (indexPath.row*4+1<self.board.pictureStatuses.count) {
         PictureStatus *ps = [self.board.pictureStatuses objectAtIndex:(indexPath.row*4+1)];
         NSURL *url = [NSURL URLWithString:[ps.pictureUrl stringByAppendingString:@"?size=120"]];
         [imgView2 setImageWithUrl:url placeholderImage:[UIImage imageNamed:@"PicturePlaceHolder.png"]];
     }
-    if (indexPath.row*4+2<self.board.picturesCount) {
+    if (indexPath.row*4+2<self.board.pictureStatuses.count) {
         PictureStatus *ps = [self.board.pictureStatuses objectAtIndex:(indexPath.row*4+2)];
         NSURL *url = [NSURL URLWithString:[ps.pictureUrl stringByAppendingString:@"?size=120"]];
         [imgView3 setImageWithUrl:url placeholderImage:[UIImage imageNamed:@"PicturePlaceHolder.png"]];
     }
-    if (indexPath.row*4+3<self.board.picturesCount) {
+    if (indexPath.row*4+3<self.board.pictureStatuses.count) {
         PictureStatus *ps = [self.board.pictureStatuses objectAtIndex:(indexPath.row*4+3)];
         NSURL *url = [NSURL URLWithString:[ps.pictureUrl stringByAppendingString:@"?size=120"]];
         [imgView4 setImageWithUrl:url placeholderImage:[UIImage imageNamed:@"PicturePlaceHolder.png"]];

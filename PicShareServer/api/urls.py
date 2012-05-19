@@ -31,6 +31,7 @@ reg_user_handler                  = Resource(RegNewUserHandler)
 login_handler                     = Resource(LoginHandler,authentication=auth)
 mark_read_handler                 = Resource(MarkMsgReadHandler,authentication=auth)
 report_handler                    = Resource(ReportHandler,authentication=auth)
+delete_board_handler              = Resource(DeleteBoardHandler,authentication=auth)
 
 urlpatterns = patterns('',
 
@@ -41,6 +42,7 @@ urlpatterns = patterns('',
     (r'^board/get_user_boards.json$',get_boards_of_user_handler),
     (r'^board/update.json$',update_board_handler),
     (r'^board/create.json$',create_board_handler),
+    (r'^board/delete.json$',delete_board_handler),
     
     (r'^picture/get.json$',get_picture_handler),
     (r'^picture/upload.json$',upload_picture_handler),

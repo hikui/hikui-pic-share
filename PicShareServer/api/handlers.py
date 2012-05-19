@@ -683,7 +683,7 @@ class GetMessagesHandler(BaseHandler):
         return resultDict
 
 class GetUnreadMessagesCountHandler(BaseHandler):
-    allowed_methods=('GET')
+    allowed_methods=('GET',)
     def read(self,request):
         count = request.user.messages_to_me.filter(mark_read=0).count()
         return {'count':count}
@@ -709,7 +709,7 @@ class RegNewUserForm(forms.Form):
     password = forms.CharField()
     email = forms.CharField()
 class RegNewUserHandler(BaseHandler):
-    allowed_methods = ('POST')
+    allowed_methods = ('POST',)
     @validate(RegNewUserForm)
     def create(self,request):
         _username = request.form.cleaned_data['username']
@@ -723,13 +723,13 @@ class RegNewUserHandler(BaseHandler):
         return getUserDict(request,newUser)
 
 class LoginHandler(BaseHandler):
-    allowed_methods = ('POST')
+    allowed_methods = ('POST',)
     def create(self,request):
         #use authentication framework.
         return getUserDict(request,request.user)
 
 class MarkMsgReadHandler(BaseHandler):
-    allowed_methods = ('GET')
+    allowed_methods = ('GET',)
     def read(self,request):
         user = request.user
         messages = user.messages_to_me.filter(mark_read=0)
@@ -740,7 +740,7 @@ class MarkMsgReadHandler(BaseHandler):
 
 
 class ReportHandler(BaseHandler):
-    allowed_methods = ('GET')
+    allowed_methods = ('GET',)
     def read(self,request):
         reported_ps_id = request.GET.get('ps_id')
         if reported_ps_id != None:

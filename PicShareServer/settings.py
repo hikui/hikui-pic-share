@@ -1,7 +1,7 @@
 import os
 # Django settings for PicShareServer project.
 HERE = os.path.dirname(os.path.abspath(__file__))
-HOST = 'picshare.herkuang.info:8080'
+HOST = 'picshare.herkuang.info:8000'
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
