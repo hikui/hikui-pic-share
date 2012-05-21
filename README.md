@@ -10,3 +10,4 @@
     - MySQL-Python
 * 客户端依赖：
     - iOS 4.3以上
+    - GPUImage

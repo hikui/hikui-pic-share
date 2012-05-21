@@ -14,7 +14,7 @@
 
 #define UPLOAD_IMAGE 0
 
-NSString *picshareDomain = @"http://picshare.herkuang.info:8000/";
+NSString *picshareDomain = @"http://192.168.31.3:8000/";
 
 @interface PicShareEngine ()
 
@@ -824,7 +824,7 @@ static PicShareEngine *instance = NULL;
         NSArray *messagesDataArray = [dataDict objectForKey:@"messages"];
         NSValue *hasnext = [dataDict objectForKey:@"hasnext"];
         if (messagesDataArray != nil) {
-            NSMutableArray *resultArray = [[NSMutableArray alloc]init];
+            NSMutableArray *resultArray = [[[NSMutableArray alloc]init]autorelease];
             for (NSDictionary *aMessageDict in messagesDataArray) {
                 PSMessage *msg = [[PSMessage alloc]initWithJSONDict:aMessageDict];
                 [resultArray addObject:msg];

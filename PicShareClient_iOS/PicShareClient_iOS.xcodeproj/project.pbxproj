@@ -141,7 +141,41 @@
 		E6DCC02E153D130F0025F70A /* UserInfoEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DCC02C153D130E0025F70A /* UserInfoEditorViewController.m */; };
 		E6DCC02F153D130F0025F70A /* UserInfoEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6DCC02D153D130E0025F70A /* UserInfoEditorViewController.xib */; };
 		E6E6180215401586005AC1B0 /* CommentLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E6180115401586005AC1B0 /* CommentLabel.m */; };
+		ECE81005156A13EF005127B8 /* button_cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = ECE80FF7156A13EF005127B8 /* button_cancel.png */; };
+		ECE81007156A13EF005127B8 /* PSCaptureCore.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECE80FFA156A13EF005127B8 /* PSCaptureCore.xib */; };
+		ECE81009156A13EF005127B8 /* PSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE80FFE156A13EF005127B8 /* PSAppDelegate.m */; };
+		ECE8100A156A13EF005127B8 /* PSCaptureCore.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE81000156A13EF005127B8 /* PSCaptureCore.m */; };
+		ECE8100C156A13EF005127B8 /* PSFilteredImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE81004156A13EF005127B8 /* PSFilteredImagePicker.m */; };
+		ECE8100D156A1421005127B8 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECE80FF2156A13B9005127B8 /* libGPUImage.a */; };
+		ECE8100F156A1455005127B8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECE8100E156A1455005127B8 /* CoreMedia.framework */; };
+		ECE81011156A145C005127B8 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECE81010156A145C005127B8 /* CoreVideo.framework */; };
+		ECE81013156A1461005127B8 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECE81012156A1461005127B8 /* OpenGLES.framework */; };
+		ECE81015156A1466005127B8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECE81014156A1466005127B8 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ECE80FF1156A13B9005127B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECE80FE8156A13B9005127B8 /* GPUImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCF1A33414DDB1EC00852800;
+			remoteInfo = GPUImage;
+		};
+		ECE80FF3156A13B9005127B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECE80FE8156A13B9005127B8 /* GPUImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCF1A34414DDB1EC00852800;
+			remoteInfo = GPUImageTests;
+		};
+		ECE81016156A147F005127B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECE80FE8156A13B9005127B8 /* GPUImage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BCF1A33314DDB1EC00852800;
+			remoteInfo = GPUImage;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		A40B56ED15032CBF0045C9B1 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -350,6 +384,19 @@
 		E6DCC02D153D130E0025F70A /* UserInfoEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoEditorViewController.xib; sourceTree = "<group>"; };
 		E6E6180015401586005AC1B0 /* CommentLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentLabel.h; sourceTree = "<group>"; };
 		E6E6180115401586005AC1B0 /* CommentLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentLabel.m; sourceTree = "<group>"; };
+		ECE80FE8156A13B9005127B8 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = GPUImage/GPUImage.xcodeproj; sourceTree = "<group>"; };
+		ECE80FF7156A13EF005127B8 /* button_cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_cancel.png; sourceTree = "<group>"; };
+		ECE80FFB156A13EF005127B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PSCaptureCore.xib; sourceTree = "<group>"; };
+		ECE80FFD156A13EF005127B8 /* PSAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSAppDelegate.h; sourceTree = "<group>"; };
+		ECE80FFE156A13EF005127B8 /* PSAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSAppDelegate.m; sourceTree = "<group>"; };
+		ECE80FFF156A13EF005127B8 /* PSCaptureCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSCaptureCore.h; sourceTree = "<group>"; };
+		ECE81000156A13EF005127B8 /* PSCaptureCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSCaptureCore.m; sourceTree = "<group>"; };
+		ECE81003156A13EF005127B8 /* PSFilteredImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSFilteredImagePicker.h; sourceTree = "<group>"; };
+		ECE81004156A13EF005127B8 /* PSFilteredImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSFilteredImagePicker.m; sourceTree = "<group>"; };
+		ECE8100E156A1455005127B8 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		ECE81010156A145C005127B8 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		ECE81012156A1461005127B8 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		ECE81014156A1466005127B8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -357,6 +404,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECE81015156A1466005127B8 /* AVFoundation.framework in Frameworks */,
+				ECE81013156A1461005127B8 /* OpenGLES.framework in Frameworks */,
+				ECE81011156A145C005127B8 /* CoreVideo.framework in Frameworks */,
+				ECE8100F156A1455005127B8 /* CoreMedia.framework in Frameworks */,
+				ECE8100D156A1421005127B8 /* libGPUImage.a in Frameworks */,
 				A40B573F150477600045C9B1 /* libz.dylib in Frameworks */,
 				A44E235A14F7746600A73307 /* CoreGraphics.framework in Frameworks */,
 				A40B573D150477240045C9B1 /* MobileCoreServices.framework in Frameworks */,
@@ -565,6 +617,10 @@
 		A44E234614F7746600A73307 = {
 			isa = PBXGroup;
 			children = (
+				ECE81014156A1466005127B8 /* AVFoundation.framework */,
+				ECE81012156A1461005127B8 /* OpenGLES.framework */,
+				ECE81010156A145C005127B8 /* CoreVideo.framework */,
+				ECE8100E156A1455005127B8 /* CoreMedia.framework */,
 				A48FD2C015271131003F0BDD /* icon.png */,
 				A40B573E150477600045C9B1 /* libz.dylib */,
 				A40B573C150477240045C9B1 /* MobileCoreServices.framework */,
@@ -588,6 +644,8 @@
 		A44E235414F7746600A73307 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ECE80FF6156A13EF005127B8 /* PSFilteredCamera */,
+				ECE80FE8156A13B9005127B8 /* GPUImage.xcodeproj */,
 				A44E235514F7746600A73307 /* UIKit.framework */,
 				A44E235714F7746600A73307 /* Foundation.framework */,
 				A44E235914F7746600A73307 /* CoreGraphics.framework */,
@@ -760,6 +818,30 @@
 			name = SDWebImage;
 			sourceTree = "<group>";
 		};
+		ECE80FE9156A13B9005127B8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ECE80FF2156A13B9005127B8 /* libGPUImage.a */,
+				ECE80FF4156A13B9005127B8 /* GPUImageTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ECE80FF6156A13EF005127B8 /* PSFilteredCamera */ = {
+			isa = PBXGroup;
+			children = (
+				ECE80FF7156A13EF005127B8 /* button_cancel.png */,
+				ECE80FFA156A13EF005127B8 /* PSCaptureCore.xib */,
+				ECE80FFD156A13EF005127B8 /* PSAppDelegate.h */,
+				ECE80FFE156A13EF005127B8 /* PSAppDelegate.m */,
+				ECE80FFF156A13EF005127B8 /* PSCaptureCore.h */,
+				ECE81000156A13EF005127B8 /* PSCaptureCore.m */,
+				ECE81003156A13EF005127B8 /* PSFilteredImagePicker.h */,
+				ECE81004156A13EF005127B8 /* PSFilteredImagePicker.m */,
+			);
+			path = PSFilteredCamera;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -774,6 +856,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				ECE81017156A147F005127B8 /* PBXTargetDependency */,
 			);
 			name = PicShareClient_iOS;
 			productName = PicShareClient_iOS;
@@ -799,12 +882,35 @@
 			mainGroup = A44E234614F7746600A73307;
 			productRefGroup = A44E235214F7746600A73307 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = ECE80FE9156A13B9005127B8 /* Products */;
+					ProjectRef = ECE80FE8156A13B9005127B8 /* GPUImage.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				A44E235014F7746600A73307 /* PicShareClient_iOS */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		ECE80FF2156A13B9005127B8 /* libGPUImage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGPUImage.a;
+			remoteRef = ECE80FF1156A13B9005127B8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		ECE80FF4156A13B9005127B8 /* GPUImageTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GPUImageTests.octest;
+			remoteRef = ECE80FF3156A13B9005127B8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A44E234F14F7746600A73307 /* Resources */ = {
@@ -876,6 +982,8 @@
 				A41DC94F156683CC001AB71C /* sign_up.png in Resources */,
 				A41DC950156683CC001AB71C /* sign_up@2x.png in Resources */,
 				A41DC95315668431001AB71C /* first_run_bg.png in Resources */,
+				ECE81005156A13EF005127B8 /* button_cancel.png in Resources */,
+				ECE81007156A13EF005127B8 /* PSCaptureCore.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -947,10 +1055,21 @@
 				E65EC76115452ABE00158EA6 /* MessagesListViewController.m in Sources */,
 				E65EC76615452B5200158EA6 /* PSMessage.m in Sources */,
 				A464D83D155A4F3A002D5CC7 /* FirstRunViewController.m in Sources */,
+				ECE81009156A13EF005127B8 /* PSAppDelegate.m in Sources */,
+				ECE8100A156A13EF005127B8 /* PSCaptureCore.m in Sources */,
+				ECE8100C156A13EF005127B8 /* PSFilteredImagePicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ECE81017156A147F005127B8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GPUImage;
+			targetProxy = ECE81016156A147F005127B8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A44E235E14F7746600A73307 /* InfoPlist.strings */ = {
@@ -969,6 +1088,14 @@
 			name = MainWindow.xib;
 			sourceTree = "<group>";
 		};
+		ECE80FFA156A13EF005127B8 /* PSCaptureCore.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ECE80FFB156A13EF005127B8 /* en */,
+			);
+			name = PSCaptureCore.xib;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -977,7 +1104,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xiongxiong Wang (42RW26FPHA)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -991,8 +1118,10 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "./GPUImage/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				PROVISIONING_PROFILE = "E2100D4D-CDCA-4429-B390-63E401370478";
+				OTHER_LDFLAGS = "-ObjC";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1003,16 +1132,18 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xiongxiong Wang (42RW26FPHA)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "./GPUImage/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "E2100D4D-CDCA-4429-B390-63E401370478";
+				OTHER_LDFLAGS = "-ObjC";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
