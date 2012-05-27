@@ -29,6 +29,7 @@
 #import "UIImageView+Resize.h"
 #import "PictureInfoEditViewController.h"
 
+
 @interface CustomTabBarController ()
 
 - (void)cameraButtonOnTouch:(id)sender;
@@ -91,20 +92,27 @@
 
 - (void)cameraButtonOnTouch:(id)sender
 {
-    UIImagePickerController *picker = [[UIImagePickerController alloc]init];
-    picker.allowsEditing = NO;
+    
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        //picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        PSFilteredImagePicker *picker = [[PSFilteredImagePicker alloc]init];
+        picker.delegate = self;
+        [self presentModalViewController:picker animated:YES];
+        [picker release];
+        
     }else {
+        UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+        picker.allowsEditing = NO;
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        picker.delegate = self;
+        [self presentModalViewController:picker animated:YES];
+        [picker release];
     }
-    picker.delegate = self;
-    [self presentModalViewController:picker animated:YES];
-    [picker release];
+    
     
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+- (void)imagePickerController:(id)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     UIImage *editedImage = nil;
@@ -117,12 +125,12 @@
     
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+- (void)imagePickerControllerDidCancel:(id) picker
 {
-    [picker dismissModalViewControllerAnimated:YES];
     if ([UIApplication sharedApplication].statusBarHidden) {
         [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     }
+    [(UIViewController *)picker dismissModalViewControllerAnimated:YES];
 }
 
 -(void)dealloc

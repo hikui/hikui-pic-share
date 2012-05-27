@@ -16,6 +16,7 @@
 #import "BoardDetailViewController.h"
 #import "PictureInfoEditViewController.h"
 #import "Common.h"
+#import "PSKeySets.h"
 
 @interface TimelineViewController ()
  
@@ -31,6 +32,8 @@
 - (void)boardButtonOnTouch:(id)sender;
 - (void)repinButtonOnTouch:(id)sender;
 - (void)receiveDeletePicNotification:(NSNotification *)notification;
+- (void)receiveUploadImageNotification:(NSNotification *)notification;
+- (void)receiveFinishUploadImageNotification:(NSNotification *)notification;
 
 @end
 
@@ -78,7 +81,10 @@ static bool isRetina()
 {
     [super viewDidLoad];
     aliveRequest = [[NSMutableArray alloc]init];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveDeletePicNotification:) name:@"DeletedPic" object:nil];
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self selector:@selector(receiveDeletePicNotification:) name:@"DeletedPic" object:nil];
+    [notificationCenter addObserver:self selector:@selector(receiveUploadImageNotification:) name:kNotificationBeginUpload object:nil];
+    [notificationCenter addObserver:self selector:@selector(receiveFinishUploadImageNotification:) name:kNotificationFinishUpload object:nil];
     [self startLoading];
 }
 
@@ -434,5 +440,14 @@ static bool isRetina()
     [self.tableView deleteRowsAtIndexPaths:indexPathsToDelete withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView endUpdates];
     [indexPathsToDelete release];
+}
+
+- (void)receiveUploadImageNotification:(NSNotification *)notification
+{
+
+}
+- (void)receiveFinishUploadImageNotification:(NSNotification *)notification
+{
+    
 }
 @end

@@ -75,10 +75,12 @@ def getPictureStatusDict(request,ps):
         commentDict = getCommentDict(request,comment)
         commentsArray.append(commentDict)
     comments_count = ps.comments.count()
+    host = request.get_host()
+    imgUrl = 'http://'+host+ps.picture.image
     psResultDict = {
         "ps_id":ps.id,
         "timestamp":ps.picture.timestamp,
-        "image":ps.picture.image,
+        "image":imgUrl,
         "location":ps.picture.location,
         "description":ps.description,
         "status_type":ps.status_type,
@@ -305,8 +307,7 @@ class UploadPictureHandler(BaseHandler):
                 return errorResponse(1,0,'请求错误',rc.BAD_REQUEST)
     
             filename = UploadImage.handle_upload_image(request.FILES['pic'],UploadImage.ImgType.PICTURE)
-            host = request.get_host()
-            imageUrl = 'http://'+host+'/media/pictures/'+filename
+            imageUrl = '/media/pictures/'+filename
             thePicture = Picture.objects.create(image=imageUrl,timestamp = datetime.datetime.now())
             print thePicture
             pictureStatus = PictureStatus.objects.create(picture=thePicture,description = upload_description,board = theBoard)
