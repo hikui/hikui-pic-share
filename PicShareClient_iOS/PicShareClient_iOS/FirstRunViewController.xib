@@ -628,7 +628,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">first_run_bg.png</string>
+							<string key="NSResourceName">first-run-bg4.png</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="1027336726">
@@ -1237,7 +1237,7 @@ AAgACAAIAAEAAQABAAE</bytes>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="first_run_bg.png">{320, 480}</string>
+			<string key="first-run-bg4.png">{320, 480}</string>
 			<string key="rounded_table_cell.png">{302, 46}</string>
 			<string key="rounded_table_cell_bottom.png">{302, 46}</string>
 			<string key="rounded_table_cell_top.png">{302, 46}</string>
