@@ -83,7 +83,7 @@
 - (IBAction)loginButtonPressed:(id)sender
 {
     if (![loginUsername.text length] || ![loginPassword.text length]) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"必须填写用户名和密码" delegate:nil cancelButtonTitle:@"奴才知罪" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"必须填写用户名和密码" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
         [alert show];
         [alert release];
         return;
@@ -104,7 +104,7 @@
                 [[NSUserDefaults standardUserDefaults]synchronize];
                 [[UIApplication sharedApplication].delegate performSelector:@selector(prepareToMainViewControllerWithAnimate:) withObject:[NSNumber numberWithBool:YES]];
             }else {
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"登录失败，请检查用户名和密码" delegate:nil cancelButtonTitle:@"奴才知罪" otherButtonTitles:nil];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"登录失败，请检查用户名和密码" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
                 [alert show];
                 [alert release];
             }
@@ -116,13 +116,13 @@
 - (IBAction)regButtonPressed:(id)sender
 {
     if (![regUsername.text length] || ![regPassword.text length] || ![regPasswordConfirm.text length] || ![regEmail.text length]) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"必须填写所有字段" delegate:nil cancelButtonTitle:@"奴才知罪" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"必须填写所有字段" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
         [alert show];
         [alert release];
         return;
     }
     if (![regPassword.text isEqualToString:regPasswordConfirm.text]){
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"两次密码输入不一致" delegate:nil cancelButtonTitle:@"奴才知罪" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"两次密码输入不一致" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
         [alert show];
         [alert release];
         return;
@@ -138,13 +138,13 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUDForView:self.regView animated:YES];
             if (returnedUser == nil) {
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"注册失败" delegate:nil cancelButtonTitle:@"奴才知罪" otherButtonTitles:nil];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"注册失败" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
                 [alert show];
                 [alert release];
             }else if ([returnedUser isKindOfClass:[ErrorMessage class]]) {
                 ErrorMessage *em = (ErrorMessage *)returnedUser;
                 if (em.errorcode == 3) {
-                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"此用户名已被他人注册" delegate:nil cancelButtonTitle:@"奴才知罪" otherButtonTitles:nil];
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"此用户名已被他人注册" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
                     [alert show];
                     [alert release];
                 }

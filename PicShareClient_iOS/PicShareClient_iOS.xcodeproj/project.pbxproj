@@ -110,6 +110,12 @@
 		A48FD2CE15272E67003F0BDD /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A48FD2CD15272E67003F0BDD /* MBProgressHUD.m */; };
 		A496A1931543E61D004169D1 /* CommentsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A496A1911543E61D004169D1 /* CommentsListViewController.m */; };
 		A496A1941543E61D004169D1 /* CommentsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A496A1921543E61D004169D1 /* CommentsListViewController.xib */; };
+		A4AE1791156A762B00C93BEC /* first-run-bg2.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AE178B156A762B00C93BEC /* first-run-bg2.png */; };
+		A4AE1792156A762B00C93BEC /* first-run-bg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AE178C156A762B00C93BEC /* first-run-bg2@2x.png */; };
+		A4AE1793156A762B00C93BEC /* first-run-bg3.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AE178D156A762B00C93BEC /* first-run-bg3.png */; };
+		A4AE1794156A762B00C93BEC /* first-run-bg3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AE178E156A762B00C93BEC /* first-run-bg3@2x.png */; };
+		A4AE1795156A762B00C93BEC /* first-run-bg4.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AE178F156A762B00C93BEC /* first-run-bg4.png */; };
+		A4AE1796156A762B00C93BEC /* first-run-bg4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AE1790156A762B00C93BEC /* first-run-bg4@2x.png */; };
 		A4BAB7D914FDE67500E51402 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7D614FDE67500E51402 /* arrow.png */; };
 		A4BAB7DA14FDE67500E51402 /* PullRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BAB7D814FDE67500E51402 /* PullRefreshTableViewController.m */; };
 		A4BAB7E414FDE7B800E51402 /* capture-button.png in Resources */ = {isa = PBXBuildFile; fileRef = A4BAB7E214FDE7B800E51402 /* capture-button.png */; };
@@ -330,6 +336,12 @@
 		A496A1901543E61D004169D1 /* CommentsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsListViewController.h; sourceTree = "<group>"; };
 		A496A1911543E61D004169D1 /* CommentsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsListViewController.m; sourceTree = "<group>"; };
 		A496A1921543E61D004169D1 /* CommentsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsListViewController.xib; sourceTree = "<group>"; };
+		A4AE178B156A762B00C93BEC /* first-run-bg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first-run-bg2.png"; sourceTree = "<group>"; };
+		A4AE178C156A762B00C93BEC /* first-run-bg2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first-run-bg2@2x.png"; sourceTree = "<group>"; };
+		A4AE178D156A762B00C93BEC /* first-run-bg3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first-run-bg3.png"; sourceTree = "<group>"; };
+		A4AE178E156A762B00C93BEC /* first-run-bg3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first-run-bg3@2x.png"; sourceTree = "<group>"; };
+		A4AE178F156A762B00C93BEC /* first-run-bg4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first-run-bg4.png"; sourceTree = "<group>"; };
+		A4AE1790156A762B00C93BEC /* first-run-bg4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first-run-bg4@2x.png"; sourceTree = "<group>"; };
 		A4BAB7D614FDE67500E51402 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		A4BAB7D714FDE67500E51402 /* PullRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullRefreshTableViewController.h; sourceTree = "<group>"; };
 		A4BAB7D814FDE67500E51402 /* PullRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullRefreshTableViewController.m; sourceTree = "<group>"; };
@@ -590,6 +602,12 @@
 		A44DEBDC1519CE3900EAC9C7 /* others */ = {
 			isa = PBXGroup;
 			children = (
+				A4AE178B156A762B00C93BEC /* first-run-bg2.png */,
+				A4AE178C156A762B00C93BEC /* first-run-bg2@2x.png */,
+				A4AE178D156A762B00C93BEC /* first-run-bg3.png */,
+				A4AE178E156A762B00C93BEC /* first-run-bg3@2x.png */,
+				A4AE178F156A762B00C93BEC /* first-run-bg4.png */,
+				A4AE1790156A762B00C93BEC /* first-run-bg4@2x.png */,
 				A41DC95215668431001AB71C /* first_run_bg.png */,
 				A41DC946156683CC001AB71C /* first_run_bg@2x.png */,
 				A41DC947156683CC001AB71C /* sign_in.png */,
@@ -984,6 +1002,12 @@
 				A41DC95315668431001AB71C /* first_run_bg.png in Resources */,
 				ECE81005156A13EF005127B8 /* button_cancel.png in Resources */,
 				ECE81007156A13EF005127B8 /* PSCaptureCore.xib in Resources */,
+				A4AE1791156A762B00C93BEC /* first-run-bg2.png in Resources */,
+				A4AE1792156A762B00C93BEC /* first-run-bg2@2x.png in Resources */,
+				A4AE1793156A762B00C93BEC /* first-run-bg3.png in Resources */,
+				A4AE1794156A762B00C93BEC /* first-run-bg3@2x.png in Resources */,
+				A4AE1795156A762B00C93BEC /* first-run-bg4.png in Resources */,
+				A4AE1796156A762B00C93BEC /* first-run-bg4@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,5 +13,7 @@
 #define kUserDefaultsUsername @"username"
 #define kUserDefaultsPassword @"password"
 #define kNotificationMessageRead @"msgread"
+#define kNotificationBeginUpload @"begin upload"
+#define kNotificationFinishUpload @"finish upload"
 
 #endif
