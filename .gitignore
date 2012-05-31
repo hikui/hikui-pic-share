@@ -4,6 +4,7 @@ Icon?
 Thumbs.db
 static_sample/
 PicShareClient_iOS/GPUImage/
+PicShareClient_iOS/lib/
 PicShareServer/testMedia/
 PicShareServer/data.db
 *.pyc

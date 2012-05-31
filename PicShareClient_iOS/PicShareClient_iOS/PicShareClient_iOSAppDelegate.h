@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomTabBarController.h"
-#import "ViewController1.h"
-#import "ViewController2.h"
 #import "PictureWallViewController.h"
 #import "CategoriesViewController.h"
 #import "UserDetailViewController.h"
