@@ -55,7 +55,6 @@
 		A4462BF9151714B1003E5F9F /* glass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BF5151714B1003E5F9F /* glass@2x.png */; };
 		A4462BFA151714B1003E5F9F /* mail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BF6151714B1003E5F9F /* mail@2x.png */; };
 		A4462BFB151714B1003E5F9F /* man@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4462BF7151714B1003E5F9F /* man@2x.png */; };
-		A44B656914FFCABF005D6588 /* PictureWallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A44B656814FFCABF005D6588 /* PictureWallViewController.m */; };
 		A44DE73D1515960F0048681E /* button-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = A44DE7391515960F0048681E /* button-hover.png */; };
 		A44DE73E1515960F0048681E /* button-hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A44DE73A1515960F0048681E /* button-hover@2x.png */; };
 		A44DE73F1515960F0048681E /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = A44DE73B1515960F0048681E /* button.png */; };
@@ -66,7 +65,6 @@
 		A44DEBE21519CE5800EAC9C7 /* rc-2.png in Resources */ = {isa = PBXBuildFile; fileRef = A44DEBDE1519CE5800EAC9C7 /* rc-2.png */; };
 		A44DEBE31519CE5800EAC9C7 /* rc-3.png in Resources */ = {isa = PBXBuildFile; fileRef = A44DEBDF1519CE5800EAC9C7 /* rc-3.png */; };
 		A44DEBE41519CE5800EAC9C7 /* rc-4.png in Resources */ = {isa = PBXBuildFile; fileRef = A44DEBE01519CE5800EAC9C7 /* rc-4.png */; };
-		A44DEBEB1519CFF100EAC9C7 /* DraggableImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A44DEBEA1519CFF100EAC9C7 /* DraggableImageView.m */; };
 		A44E235614F7746600A73307 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44E235514F7746600A73307 /* UIKit.framework */; };
 		A44E235814F7746600A73307 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44E235714F7746600A73307 /* Foundation.framework */; };
 		A44E235A14F7746600A73307 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44E235914F7746600A73307 /* CoreGraphics.framework */; };
@@ -269,8 +267,6 @@
 		A4462BF5151714B1003E5F9F /* glass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "glass@2x.png"; sourceTree = "<group>"; };
 		A4462BF6151714B1003E5F9F /* mail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mail@2x.png"; sourceTree = "<group>"; };
 		A4462BF7151714B1003E5F9F /* man@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "man@2x.png"; sourceTree = "<group>"; };
-		A44B656714FFCABF005D6588 /* PictureWallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureWallViewController.h; sourceTree = "<group>"; };
-		A44B656814FFCABF005D6588 /* PictureWallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureWallViewController.m; sourceTree = "<group>"; };
 		A44DE7391515960F0048681E /* button-hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-hover.png"; sourceTree = "<group>"; };
 		A44DE73A1515960F0048681E /* button-hover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-hover@2x.png"; sourceTree = "<group>"; };
 		A44DE73B1515960F0048681E /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
@@ -282,8 +278,6 @@
 		A44DEBDE1519CE5800EAC9C7 /* rc-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rc-2.png"; sourceTree = "<group>"; };
 		A44DEBDF1519CE5800EAC9C7 /* rc-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rc-3.png"; sourceTree = "<group>"; };
 		A44DEBE01519CE5800EAC9C7 /* rc-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rc-4.png"; sourceTree = "<group>"; };
-		A44DEBE91519CFF100EAC9C7 /* DraggableImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraggableImageView.h; sourceTree = "<group>"; };
-		A44DEBEA1519CFF100EAC9C7 /* DraggableImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraggableImageView.m; sourceTree = "<group>"; };
 		A44E235114F7746600A73307 /* PicShareClient_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PicShareClient_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44E235514F7746600A73307 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A44E235714F7746600A73307 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -519,8 +513,6 @@
 				A4FDB345151F05E30048C199 /* SingleTextInputViewController.m */,
 				A4203CE1151D8477008B29A9 /* PictureInfoEditViewController.h */,
 				A4203CE2151D8477008B29A9 /* PictureInfoEditViewController.m */,
-				A44B656714FFCABF005D6588 /* PictureWallViewController.h */,
-				A44B656814FFCABF005D6588 /* PictureWallViewController.m */,
 				A47D9C99152308A700ADACF6 /* TimelineViewController.h */,
 				A47D9C9A152308A900ADACF6 /* TimelineViewController.m */,
 				A45702B21514809F005BC6FF /* UserDetailViewController.h */,
@@ -679,8 +671,6 @@
 				A46DA5F81505C00600EA9D8B /* UIImageView+AsyncImageContainer.m */,
 				A457024B1511ADDC005BC6FF /* UIImageView+Resize.h */,
 				A457024C1511ADDC005BC6FF /* UIImageView+Resize.m */,
-				A44DEBE91519CFF100EAC9C7 /* DraggableImageView.h */,
-				A44DEBEA1519CFF100EAC9C7 /* DraggableImageView.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1047,7 +1037,6 @@
 				A44E236214F7746600A73307 /* main.m in Sources */,
 				A44E236614F7746600A73307 /* PicShareClient_iOSAppDelegate.m in Sources */,
 				A4BAB7E814FDE7E500E51402 /* CustomTabBarController.m in Sources */,
-				A44B656914FFCABF005D6588 /* PictureWallViewController.m in Sources */,
 				A40B56EF15032CBF0045C9B1 /* User.m in Sources */,
 				A40B56F215032CDE0045C9B1 /* PictureStatus.m in Sources */,
 				A40B56F515032CFF0045C9B1 /* Board.m in Sources */,
@@ -1065,7 +1054,6 @@
 				A457024D1511ADDC005BC6FF /* UIImageView+Resize.m in Sources */,
 				A45702B51514809F005BC6FF /* UserDetailViewController.m in Sources */,
 				A44DE7811515F1AE0048681E /* UsersListViewController.m in Sources */,
-				A44DEBEB1519CFF100EAC9C7 /* DraggableImageView.m in Sources */,
 				A4203CE4151D8477008B29A9 /* PictureInfoEditViewController.m in Sources */,
 				A4FDB342151F01660048C199 /* BoardPickerViewController.m in Sources */,
 				A4FDB347151F05E30048C199 /* SingleTextInputViewController.m in Sources */,

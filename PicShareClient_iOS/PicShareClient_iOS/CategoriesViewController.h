@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "PicShareEngine.h"
 
+/**
+ 探索界面
+ */
 @interface CategoriesViewController : UITableViewController
 {
     PicShareEngine *_engine;

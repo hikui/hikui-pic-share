@@ -18,6 +18,9 @@ typedef void (^BoardIsSelectedBlock)(Board *b);
 
 @end
 
+/**
+ 在PictureInfoEdit中使用，用于选择Picture所属的Board。
+ */
 @interface BoardPickerViewController : PullRefreshTableViewController
 {
     BoardIsSelectedBlock isSelectedBlock;
@@ -28,7 +31,7 @@ typedef void (^BoardIsSelectedBlock)(Board *b);
 @property (nonatomic,retain) PicShareEngine *engine;
 @property (nonatomic,retain) NSIndexPath *indexSelected;
 
-//just ignore it. it's useless.
+/**just ignore it. it's useless.*/
 - (void)setBoardIsSelectedBlock:(BoardIsSelectedBlock)_isSelectedBlock;
 
 @end

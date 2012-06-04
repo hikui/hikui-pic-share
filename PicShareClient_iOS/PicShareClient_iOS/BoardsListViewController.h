@@ -16,7 +16,9 @@ typedef enum TheType{
     userBoards
 } TheType;
 
-
+/**
+ 本类用于浏览用户的所有Boards或者用于浏览某Category的所有boards
+ */
 @interface BoardsListViewController : PullRefreshTableViewController
     <PSThumbnailImageViewEventsDelegate>
 {
@@ -32,6 +34,10 @@ typedef enum TheType{
 @property (readwrite) TheType type;
 @property (readwrite) NSInteger contentId;
 
+/**
+ @param[in] TheType 可能的type，@see TheType
+ @param[in] andId 可能是category id 或者是 user id，取决于type
+ */
 - (id)initWithType:(TheType) aType AndId:(NSInteger)anId;
 
 @end
