@@ -19,9 +19,9 @@
 
 @interface AsyncImageDownloader : NSObject <ASIHTTPRequestDelegate>
 {
-    NSOperationQueue *_downloadQ;
-    NSMutableDictionary *_downloadInfo;
-    NSMutableDictionary *_thumbnailCache;
+    NSOperationQueue *_downloadQ; //!<异步下载队列
+    NSMutableDictionary *_downloadInfo; //!<图片异步下载时要保存的信息
+    NSMutableDictionary *_thumbnailCache; //!<缩略图缓存
 }
 
 @property (nonatomic,assign) id<AsyncImageContainer> asyncImageContainer;
@@ -29,8 +29,16 @@
 + (id)sharedAsyncImageDownloader;
 
 - (void)loadImageWithUrl:(NSURL *)url AndDelegate:(id)delegate;
+/**
+ 下载图片并缩放
+ */
 - (void)loadImageWithUrl:(NSURL *)url Delegate:(id)delegate scaleSize:(CGSize)size;
+/**
+ 取消某图片的下载
+ */
 - (void)cancelLoadImageWithUrl:(NSURL *)url andDelegate:(id)delegate;
-//should be called when receive memory warning
+/**
+ 清除缩略图缓存，在memory warning时必须调用
+ */
 - (void)cleanThumbnailCache;
 @end

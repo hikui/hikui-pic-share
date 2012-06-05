@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Board.h"
 
-
+/**
+ Board详细内容
+ */
 @interface BoardDetailViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,retain) IBOutlet UIButton *avatarButton;

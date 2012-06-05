@@ -16,14 +16,17 @@
 @property (nonatomic,copy) NSString *location;
 @property (nonatomic,copy) NSString *introduction;
 @property (nonatomic,copy) NSString *avatarUrl;
-@property (nonatomic,retain) UIImage *avatar; //async get
-@property (readwrite) BOOL isFollowing;
-@property (readonly) NSInteger followingCount;
-@property (readonly) NSInteger followersCount;
+@property (nonatomic,retain) UIImage *avatar; //!<未用
+@property (readwrite) BOOL isFollowing; //!< 某用户是否被当前用户关注
+@property (readonly) NSInteger followingCount; //!<该用户关注的人数
+@property (readonly) NSInteger followersCount; //!<关注该用户的人数
 @property (readonly) NSInteger picturesCount;
-@property (nonatomic,copy) NSString *password; //this property won't exist in json
+@property (nonatomic,copy) NSString *password; //!this property won't exist in json
 @property (nonatomic,copy) NSString *email;
 
+/**
+ 从JSON解析，并生成一个User对象
+ */
 -(id)initWithJSONDict:(NSDictionary *)data;
 
 @end

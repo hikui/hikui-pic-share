@@ -18,6 +18,9 @@
 -(void)loadDataDidFinish:(NSArray *)data;
 -(void)pageData;
 -(void)pageDataDidFinish:(NSArray *)data;
+/**
+ 清除PictureView的点击事件监听
+ */
 -(void)clearDelegate;
 
 @end

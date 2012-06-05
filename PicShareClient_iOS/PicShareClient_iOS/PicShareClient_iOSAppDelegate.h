@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomTabBarController.h"
-#import "PictureWallViewController.h"
 #import "CategoriesViewController.h"
 #import "UserDetailViewController.h"
 #import "TimelineViewController.h"

@@ -22,6 +22,9 @@
 
 - (void)loadData;
 - (void)loadDataDidFinish:(PictureStatus *)returnedStatus;
+/**
+ 举报
+ */
 - (void)report;
 - (void)deletePicture;
 

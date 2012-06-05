@@ -11,6 +11,9 @@
 
 @interface BoardPickerViewController ()
 
+/**
+ 载入当前用户的所有Boards
+ */
 -(void)loadData;
 -(void)loadDataDidFinish:(NSArray *)data;
 -(void)cancelButtonOnTouch;
