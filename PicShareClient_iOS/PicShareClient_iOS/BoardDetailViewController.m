@@ -17,6 +17,9 @@
 @interface BoardDetailViewController ()
 
 - (void)loadData;
+/**
+ 检测被点图是哪个PictureStatus
+ */
 - (void)picOnTouch:(id)sender;
 
 @end

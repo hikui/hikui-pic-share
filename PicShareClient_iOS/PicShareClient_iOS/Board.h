@@ -13,11 +13,11 @@
 
 @property (readonly) NSInteger boardId;
 @property (nonatomic,retain) User *owner;
-@property (nonatomic,copy) NSMutableArray *pictureStatuses;
+@property (nonatomic,copy) NSMutableArray *pictureStatuses; //!<图片集
 @property (nonatomic,copy) NSString *name;
-@property (readwrite) NSInteger picturesCount;
-@property (readwrite) NSInteger categoryId;//所属的category
-@property BOOL isFollowing;
+@property (readwrite) NSInteger picturesCount; //!<相册拥有的图片数
+@property (readwrite) NSInteger categoryId;//!<所属的category
+@property BOOL isFollowing; //!<当前用户是否关注此相册
 
 -(id)initWithJSONDict:(NSDictionary *)data;
 

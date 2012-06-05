@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "PictureStatus.h"
 
-
+/**
+ 图片详情界面
+ */
 @interface PicDetailViewController : UIViewController <UIActionSheetDelegate>
 {
     UIView *loadingView;

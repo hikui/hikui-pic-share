@@ -20,6 +20,9 @@ typedef enum _presentType{
 
 @end
 
+/**
+ 单个TextView，用于输入PictureInfo的详细信息
+ */
 @interface SingleTextInputViewController : UIViewController
 
 @property (nonatomic,retain) IBOutlet UITextView *descriptionTextView;

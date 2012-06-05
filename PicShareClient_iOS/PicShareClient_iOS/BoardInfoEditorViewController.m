@@ -12,6 +12,9 @@
 
 @interface BoardInfoEditorViewController ()
 
+/**
+ 在修改board信息中使用，载入服务器中此board已有信息
+ */
 -(void) loadBoard;
 -(void) loadCategories;
 -(void) deleteBoard;

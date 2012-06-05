@@ -14,6 +14,9 @@ typedef enum Type{
     UPDATE,
 }Type;
 
+/**
+ 本类可以新建或修改一个Board
+ */
 @interface BoardInfoEditorViewController : UITableViewController <UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 
 @property (nonatomic) NSInteger boardId;  //if new a board, this value should less than 0

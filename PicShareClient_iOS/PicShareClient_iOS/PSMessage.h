@@ -22,7 +22,7 @@ typedef enum {
 @property (nonatomic,retain) NSString *text;
 @property (nonatomic,retain) NSString *extra;
 @property (nonatomic) PSMessageType type;
-@property (nonatomic) BOOL isRead;
+@property (nonatomic) BOOL isRead; //!<判断该信息时候已读
 
 -(id)initWithJSONDict:(NSDictionary *)data;
 

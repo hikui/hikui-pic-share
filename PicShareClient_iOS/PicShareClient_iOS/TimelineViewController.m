@@ -160,7 +160,7 @@ static bool isRetina()
     if ([self.pictures objectAtIndex:indexPath.row]==[NSNull null]){
         if ([self.progressViews objectAtIndex:indexPath.row]!=[NSNull null]) { // is already start loading
             [cell.mainImageView addSubview:[self.progressViews objectAtIndex:indexPath.row]];
-        }else if(self.tableView.dragging == NO && self.tableView.decelerating == NO){
+        }else if(self.tableView.dragging == NO && self.tableView.decelerating == NO){ //只有scrollview没有滑动时才加载（节省流量）
             UIProgressView *progressView = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleBar];
             CGSize mainImageViewSize = cell.mainImageView.frame.size;
             progressView.frame = CGRectMake((mainImageViewSize.width-100)/2, mainImageViewSize.height/2, 100, 20);
@@ -219,7 +219,9 @@ static bool isRetina()
     [self performSelectorInBackground:@selector(loadData) withObject:nil];
 }
 
-
+/**
+ 当tableview不再滚动时，下载当前处于屏幕可见范围的图片
+ */
 - (void)loadImagesForOnscreenRows
 {
     NSArray *visiblePaths = [self.tableView indexPathsForVisibleRows];
