@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<title>图话-搜索</title>
 	<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css">
 	<link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css">
 	<script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.6.2.min.js"></script>
@@ -25,6 +25,9 @@
       <div class="fill">
         <div class="container">
           <a class="brand" href="#">图话</a>
+          <form class="navbar-search pull-left" action="./">
+          	<input type="text" name="keyword" id="keyword" placeholder="搜索">
+          </form>
           <form action="" class="pull-right">
             <input class="input-small" type="text" placeholder="用户名">
             <input class="input-small" type="password" placeholder="密码">

@@ -14,7 +14,7 @@
 
 #define UPLOAD_IMAGE 0
 
-NSString *picshareDomain = @"http://127.0.0.1:8000/";
+NSString *picshareDomain = @"http://192.168.1.101:8000/";
 
 @interface PicShareEngine ()
 

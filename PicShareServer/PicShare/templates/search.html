@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>图话-搜索</title>
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css">
+	<style type="text/css">
+		.form-search{
+			margin: 0 auto;
+			width: 350px;
+			margin-top:30px;
+		}
+		#container{
+			text-align:center;
+		}
+		#logo{
+			margin-top:100px;
+		}
+	</style>
+</head>
+<body>
+	<div id="container" class="container clearfix">
+			<img src="{{ STATIC_URL }}img/logo.png" alt="logo" id="logo">
+			<form class="form-search" action="./">
+			  <input type="text" class="input-large search-query" name="keyword">
+			  <button type="submit" class="btn">搜索</button>
+			</form>
+	</div>
+</body>
+</html>
