@@ -47,7 +47,7 @@
     [avatarImageView release];
     [followButton release];
     [editProfileButton release];
-    [userId release];
+    //[userId release];
     [logoutButton release];
     [super dealloc];
 }
