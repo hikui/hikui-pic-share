@@ -193,7 +193,9 @@
         [self deleteComment:commnetToDelete];
         NSArray *paths = [[NSArray alloc]initWithObjects:indexPath, nil];
         [self.comments removeObjectAtIndex:indexPath.row];
-        self.flagId = ((Comment *)[self.comments objectAtIndex:0]).commentId;
+        if (comments.count>0) {
+            self.flagId = ((Comment *)[self.comments objectAtIndex:0]).commentId;
+        }
         [self.tableView deleteRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationLeft];
         [paths release];
     }
